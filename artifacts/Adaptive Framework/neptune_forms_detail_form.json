@@ -1,0 +1,204 @@
+{
+	"id": "ab34d0f6-ff00-429e-9838-703092fa1323",
+	"createdAt": "2023-02-21T11:07:23.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"properties": {
+			"report": {
+				"showIcon": true,
+				"actionButtonLeft": false,
+				"iconButtonClose": "",
+				"textButtonClose": "Close",
+				"typeButtonClose": "Transparent",
+				"iconButtonSave": "",
+				"textButtonSave": "Save",
+				"textToastSave": "Saved",
+				"typeButtonSave": "Emphasized",
+				"iconButtonDraft": "",
+				"textButtonDraft": "Save as draft",
+				"textToastDraft": "Saved as draft",
+				"typeButtonDraft": "Attention",
+				"iconButtonDelete": "",
+				"textButtonDelete": "Delete",
+				"textToastDelete": "Deleted",
+				"typeButtonDelete": "Reject",
+				"iconButtonAttachment": "",
+				"textButtonAttachment": "Add Attachment",
+				"typeButtonAttachment": "Transparent",
+				"tabFText": "FORM",
+				"tab0Text": "General",
+				"tabAText": "Attachment",
+				"tab1Text": "Tab 1",
+				"tab2Text": "Tab 2",
+				"tab3Text": "Tab 3",
+				"tab4Text": "Tab 4",
+				"tab5Text": "Tab 5",
+				"enableClose": true,
+				"enableDraft": false,
+				"enableSave": false,
+				"enableDelete": false,
+				"enableAttachment": false,
+				"enableTabF": true,
+				"enableTab1": false,
+				"enableTab2": false,
+				"enableTab3": false,
+				"enableTab4": false,
+				"enableTab5": false,
+				"enableUppercase": false,
+				"enablePadding": true,
+				"title": "Report Content",
+				"avatarBackgroundColor": "Accent7",
+				"fieldFormId": "formid",
+				"fieldFormData": "data",
+				"avatarIcon": "sap-icon://trip-report"
+			},
+			"form": {
+				"enableCompact": false,
+				"enableCentered": true,
+				"labelSpanL": "12",
+				"labelSpanM": "12"
+			},
+			"table": {}
+		},
+		"fieldCatalog": [
+			{
+				"name": "formid",
+				"label": "FORM ID",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "sessionid",
+				"label": "Session ID",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "completed",
+				"label": "Status: Completed",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "valid",
+				"label": "Status: Valid",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "data",
+				"label": "FORM Data",
+				"type": "json",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedAt",
+				"label": "Updated At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedBy",
+				"label": "Updated By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			}
+		],
+		"fieldsSel": [
+			{
+				"editable": false,
+				"visible": true,
+				"name": "updatedAt",
+				"text": "Updated At",
+				"fieldPos": 1,
+				"type": "DateTimePicker",
+				"columnLabel": "General"
+			},
+			{
+				"editable": false,
+				"visible": true,
+				"name": "updatedBy",
+				"text": "Updated By",
+				"fieldPos": 2
+			},
+			{
+				"editable": false,
+				"visible": true,
+				"name": "valid",
+				"text": "Valid",
+				"fieldPos": 3,
+				"columnLabel": "Status",
+				"type": "CheckBox"
+			},
+			{
+				"editable": false,
+				"visible": true,
+				"name": "completed",
+				"text": "Completed",
+				"fieldPos": 4,
+				"type": "CheckBox"
+			},
+			{
+				"editable": true,
+				"visible": false,
+				"name": "formid",
+				"text": "FORM ID",
+				"fieldPos": 5
+			},
+			{
+				"editable": true,
+				"visible": false,
+				"name": "sessionid",
+				"text": "Session ID",
+				"fieldPos": 6
+			},
+			{
+				"editable": true,
+				"visible": false,
+				"name": "data",
+				"text": "FORM Data",
+				"fieldPos": 7
+			}
+		],
+		"fieldsRun": [],
+		"defaultVariant": {
+			"id": "3c1db7df-861d-4772-f978-de16ec02cf59",
+			"colOrder": "key_a_to_z",
+			"rowOrder": "key_a_to_z",
+			"row": [],
+			"column": [],
+			"val": [],
+			"inclusions": {},
+			"exclusions": {}
+		}
+	},
+	"name": "neptune_forms_detail_form",
+	"description": "",
+	"group": "",
+	"type": "C",
+	"connectorid": "eff69025-ed3b-4393-96aa-f68647e513ee",
+	"scriptSel": null,
+	"scriptRun": null,
+	"tableid": null,
+	"ver": "23.2.21.1249",
+	"disabled": false,
+	"appType": "A",
+	"application": "planet9_adaptive_forms",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": [],
+	"scriptSelObj": null,
+	"scriptRunObj": null,
+	"tableObj": null
+}

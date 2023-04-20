@@ -1,0 +1,22 @@
+let oDraggedControl = oEvent.getParameter("draggedControl");
+let oDroppedControl = oEvent.getParameter("droppedControl");
+
+let oDraggedContext = oDraggedControl.getBindingContext();
+let oDroppedContext = oDroppedControl.getBindingContext();
+
+if (!oDraggedContext && !oDroppedContext) return;
+
+let oDraggedData = oDraggedContext.getObject();
+let oDroppedData = oDroppedContext.getObject();
+
+let indexDrag = 0;
+let indexDrop = 0;
+
+modelpanTopProperties.oData.items.forEach(function (data, i) {
+    if (data.id === oDraggedData.id) indexDrag = i;
+    if (data.id === oDroppedData.id) indexDrop = i;
+});
+
+Utils.arrayMove(modelpanTopProperties.oData.items, indexDrag, indexDrop);
+
+modelpanTopProperties.refresh();

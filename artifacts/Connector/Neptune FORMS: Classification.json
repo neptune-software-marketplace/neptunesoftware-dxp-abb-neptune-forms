@@ -1,0 +1,17 @@
+{
+	"id": "2e11d750-fd5f-40d4-b8cc-9df7a0ca3c0b",
+	"createdAt": "2023-02-21T08:38:59.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"tableid": "4a9e3232-70e5-4f49-9b63-4104044f5642",
+		"hasDocumentation": false
+	},
+	"documentation": {},
+	"name": "Neptune FORMS: Classification",
+	"description": "Neptune FORMS: Classification",
+	"group": null,
+	"type": "T",
+	"ver": "23.2.21.938",
+	"disabled": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

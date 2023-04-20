@@ -1,0 +1,248 @@
+{
+	"id": "c44d98ad-fdb8-40a7-9476-cab348d55a2b",
+	"createdAt": "2023-02-21T10:34:10.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"properties": {
+			"report": {
+				"showIcon": true,
+				"actionButtonLeft": false,
+				"iconButtonClose": "",
+				"textButtonClose": "Close",
+				"typeButtonClose": "Transparent",
+				"iconButtonCreate": "",
+				"textButtonCreate": "Create",
+				"typeButtonCreate": "Emphasized",
+				"iconButtonExport": "sap-icon://excel-attachment",
+				"textButtonExport": "",
+				"typeButtonExport": "Transparent",
+				"iconButtonImport": "sap-icon://fa-solid/file-import",
+				"textButtonImport": "",
+				"typeButtonImport": "Transparent",
+				"iconButtonMultiSelect": "",
+				"textButtonMultiSelect": "MultiSelect",
+				"typeButtonMultiSelect": "Emphasized",
+				"iconButtonRun": "",
+				"textButtonRun": "Update",
+				"typeButtonRun": "Transparent",
+				"enableRun": true,
+				"enableCreate": false,
+				"enableClose": true,
+				"enableDelete": false,
+				"enableExport": false,
+				"enableImport": false,
+				"enableMultiSelect": false,
+				"enableVariant": false,
+				"hideHeader": false,
+				"autoRun": true,
+				"autoRunFocus": true,
+				"searchLabel": "Search",
+				"searchPlaceholder": "",
+				"title": "Reports",
+				"avatarIcon": "sap-icon://trip-report",
+				"avatarBackgroundColor": "Accent7",
+				"_navigationItemPress": {
+					"destinationType": "F",
+					"openAs": "P",
+					"butType": "Accept",
+					"destinationTargetF": "ab34d0f6-ff00-429e-9838-703092fa1323",
+					"keyField": []
+				}
+			},
+			"form": {
+				"enableCompact": false,
+				"headerExpanded": true
+			},
+			"table": {
+				"enablePagination": true,
+				"paginationShowSelection": true,
+				"paginationRows": 25,
+				"showSeparators": "All",
+				"alternateRowColors": false,
+				"fixedLayout": true,
+				"inset": false,
+				"enableCompact": false,
+				"enableAction1": false,
+				"enableAction2": false,
+				"enableAction3": false,
+				"enableAction4": false,
+				"enableAction5": false,
+				"action1Text": "",
+				"action1Type": "Transparent",
+				"action2Text": "",
+				"action2Type": "Transparent",
+				"action3Text": "",
+				"action3Type": "Transparent",
+				"action4Text": "",
+				"action4Type": "Transparent",
+				"action5Text": "",
+				"action5Type": "Transparent",
+				"initialSortField": "updatedAt",
+				"initialSortOrder": "DESC"
+			}
+		},
+		"fieldCatalog": [
+			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "data",
+				"label": "FORM Data",
+				"type": "json",
+				"usage": "BOTH"
+			},
+			{
+				"name": "formid",
+				"label": "FORM ID",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "sessionid",
+				"label": "Session ID",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "completed",
+				"label": "Status: Completed",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "valid",
+				"label": "Status: Valid",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedAt",
+				"label": "Updated At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedBy",
+				"label": "Updated By",
+				"type": "text",
+				"usage": "BOTH"
+			}
+		],
+		"fieldsSel": [
+			{
+				"visible": true,
+				"name": "updatedAt",
+				"text": "Updated At",
+				"fieldPos": 1,
+				"type": "DateRange",
+				"sysvarValue": "LAST_30"
+			},
+			{
+				"visible": true,
+				"name": "updatedBy",
+				"text": "Updated By",
+				"fieldPos": 2
+			},
+			{
+				"visible": false,
+				"name": "formid",
+				"text": "FORM ID",
+				"fieldPos": 3,
+				"required": true
+			}
+		],
+		"fieldsRun": [
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": false,
+				"enableSort": true,
+				"visible": true,
+				"name": "updatedAt",
+				"text": "Updated At",
+				"fieldPos": 4,
+				"formatter": "date00"
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "updatedBy",
+				"text": "Updated By",
+				"fieldPos": 5
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": false,
+				"enableSort": true,
+				"visible": true,
+				"name": "completed",
+				"text": " Completed",
+				"fieldPos": 6,
+				"type": "ObjectStatus",
+				"width": "150px",
+				"statusStateType": "Rule",
+				"statusStateRule": "af618c32-dc24-4c40-a4fa-03b7bc3d90d6",
+				"valueType": "Rule",
+				"valueRule": "ed17eb91-2e7a-4cf0-a98f-41fbcc5fda00"
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": false,
+				"enableSort": true,
+				"visible": true,
+				"name": "valid",
+				"text": "Valid",
+				"fieldPos": 7,
+				"type": "ObjectStatus",
+				"statusStateType": "Rule",
+				"statusStateRule": "e086e9e0-1fef-4006-96e2-b508a2d33d75",
+				"statusTitleType": "",
+				"statusTitleRule": "e086e9e0-1fef-4006-96e2-b508a2d33d75",
+				"valueType": "Rule",
+				"valueRule": "154a03b5-6ce5-4a99-94dc-4999d534ed01",
+				"width": "150px"
+			}
+		],
+		"defaultVariant": {
+			"id": "c962d901-b946-4b02-e57f-138ff19496f8",
+			"colOrder": "key_a_to_z",
+			"rowOrder": "key_a_to_z",
+			"row": [],
+			"column": [],
+			"val": [],
+			"inclusions": {},
+			"exclusions": {}
+		}
+	},
+	"name": "neptune_forms_report_list",
+	"description": "",
+	"group": "",
+	"type": "C",
+	"connectorid": "eff69025-ed3b-4393-96aa-f68647e513ee",
+	"scriptSel": null,
+	"scriptRun": null,
+	"tableid": null,
+	"ver": "23.3.3.820",
+	"disabled": false,
+	"appType": "A",
+	"application": "planet9_adaptive_list",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": [],
+	"scriptSelObj": null,
+	"scriptRunObj": null,
+	"tableObj": null
+}

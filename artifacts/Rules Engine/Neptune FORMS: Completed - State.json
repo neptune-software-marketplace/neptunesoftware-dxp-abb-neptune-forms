@@ -1,0 +1,46 @@
+{
+	"id": "af618c32-dc24-4c40-a4fa-03b7bc3d90d6",
+	"createdAt": "2023-02-21T11:47:27.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"interface": [
+		{
+			"id": "7e1db26f-6e2d-446e-a24e-497ebe46ea6f",
+			"parent": "",
+			"name": "completed",
+			"objectType": "boolean",
+			"description": ""
+		}
+	],
+	"rules": [
+		{
+			"id": "6f9cd266-ff79-4907-ca83-3d888b31fa85",
+			"result": "Error",
+			"items": [
+				{
+					"id": "58dd1736-8507-4ae8-f1f8-0dca01645fed",
+					"field": "7e1db26f-6e2d-446e-a24e-497ebe46ea6f",
+					"operator": "equal",
+					"value": false
+				}
+			]
+		},
+		{
+			"id": "914acdf7-704c-4d87-eced-b615027f7297",
+			"result": "Success",
+			"items": [
+				{
+					"id": "fdb6b5c0-8446-4db7-efe6-ee4ace1c6946",
+					"field": "7e1db26f-6e2d-446e-a24e-497ebe46ea6f",
+					"operator": "equal",
+					"value": true,
+					"valuebool": true
+				}
+			]
+		}
+	],
+	"name": "Neptune FORMS: Completed - State",
+	"description": "",
+	"ver": "23.2.21.1248",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": []
+}

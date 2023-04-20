@@ -1,0 +1,168 @@
+{
+	"id": "b86ddb45-614b-4b14-9a3c-81b8d180770c",
+	"createdAt": "2023-02-28T12:49:26.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"properties": {
+			"report": {
+				"showIcon": false,
+				"actionButtonLeft": false,
+				"iconButtonClose": "",
+				"textButtonClose": "Close",
+				"typeButtonClose": "Transparent",
+				"iconButtonSave": "",
+				"textButtonSave": "Save",
+				"textToastSave": "Saved",
+				"typeButtonSave": "Emphasized",
+				"iconButtonDelete": "sap-icon://delete",
+				"textButtonDelete": "",
+				"textToastDelete": "Deleted",
+				"typeButtonDelete": "Reject",
+				"iconButtonAttachment": "",
+				"textButtonAttachment": "Add Attachment",
+				"typeButtonAttachment": "Transparent",
+				"tab0Text": "General",
+				"tabAText": "Attachment",
+				"tab1Text": "Tab 1",
+				"tab2Text": "Tab 2",
+				"tab3Text": "Tab 3",
+				"tab4Text": "Tab 4",
+				"tab5Text": "Tab 5",
+				"enableClose": true,
+				"enableSave": true,
+				"enableDelete": true,
+				"enableAttachment": false,
+				"enableTab1": false,
+				"enableTab2": false,
+				"enableTab3": false,
+				"enableTab4": false,
+				"enableTab5": false,
+				"enableUppercase": false,
+				"enablePadding": true,
+				"title": "Attribute Field",
+				"subTitle": "",
+				"avatarIcon": "sap-icon://tnt/map-all-fields"
+			},
+			"form": {
+				"enableCompact": false,
+				"enableCentered": true,
+				"labelSpanL": "12",
+				"labelSpanM": "12"
+			},
+			"table": {}
+		},
+		"fieldCatalog": [
+			{
+				"name": "groupid",
+				"label": "Attribute Group",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "name",
+				"label": "Name",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "description",
+				"label": "Description",
+				"type": "mediumtext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedAt",
+				"label": "Updated At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedBy",
+				"label": "Updated By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			}
+		],
+		"fieldsSel": [
+			{
+				"editable": true,
+				"visible": false,
+				"name": "groupid",
+				"text": "Attribute Group",
+				"fieldPos": 1,
+				"columnLabel": "General"
+			},
+			{
+				"editable": false,
+				"visible": true,
+				"name": "name",
+				"text": "Name",
+				"fieldPos": 2,
+				"required": true
+			},
+			{
+				"editable": true,
+				"visible": true,
+				"name": "description",
+				"text": "Description",
+				"fieldPos": 3
+			},
+			{
+				"editable": false,
+				"visible": true,
+				"name": "updatedAt",
+				"text": "Updated At",
+				"fieldPos": 4,
+				"columnLabel": "Updated",
+				"type": "DateTimePicker"
+			},
+			{
+				"editable": false,
+				"visible": true,
+				"name": "updatedBy",
+				"text": "Updated By",
+				"fieldPos": 5
+			}
+		],
+		"fieldsRun": [],
+		"defaultVariant": {
+			"id": "5f59ac90-485c-4e1f-d52d-d96cce513d92",
+			"colOrder": "key_a_to_z",
+			"rowOrder": "key_a_to_z",
+			"row": [],
+			"column": [],
+			"val": [],
+			"inclusions": {},
+			"exclusions": {}
+		}
+	},
+	"name": "neptune_forms_attribute_field_detail",
+	"description": "",
+	"group": "",
+	"type": "C",
+	"connectorid": "2d4b433b-be45-40c0-952d-a9776c9de99c",
+	"scriptSel": null,
+	"scriptRun": null,
+	"tableid": null,
+	"ver": "23.2.28.2039",
+	"disabled": false,
+	"appType": "A",
+	"application": "planet9_adaptive_edit",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": [],
+	"scriptSelObj": null,
+	"scriptRunObj": null,
+	"tableObj": null
+}

@@ -1,0 +1,13 @@
+const parent = controller.getParentFromId(modelpanTopProperties.oData.id);
+const binding = listTypes.getBinding("items");
+const filterArr = [];
+
+filterArr.push(new sap.ui.model.Filter("parent", "EQ", false));
+
+if (parent.type === "Table") {
+    filterArr.push(new sap.ui.model.Filter("table", "EQ", true));
+}
+
+filterArr.push(new sap.ui.model.Filter("text", "Contains", this.getValue()));
+
+binding.filter(filterArr);

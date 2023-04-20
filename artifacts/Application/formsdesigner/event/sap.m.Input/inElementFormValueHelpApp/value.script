@@ -1,0 +1,7 @@
+if (typeof adaptiveApp === "undefined" || adaptiveApp === null || adaptiveApp === "") {
+    return;
+}
+
+const app = ModelData.FindFirst(modelappData.oData.adaptiveApps, "id", adaptiveApp);
+if (app) return app.name;
+return adaptiveApp;

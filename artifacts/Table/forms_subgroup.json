@@ -1,0 +1,41 @@
+{
+	"id": "78f60bae-e2ca-4d4a-ae6e-170ac0f67296",
+	"createdAt": "2023-02-20T22:47:26.000Z",
+	"createdBy": "admin",
+	"fields": [
+		{
+			"id": "409677cc-43da-4a49-ad19-2582ca8f34f4",
+			"fieldName": "groupid",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Group",
+			"isNullable": true
+		},
+		{
+			"id": "ba103077-0806-4e95-fc62-6e01236d33e7",
+			"fieldName": "name",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Name",
+			"isNullable": true
+		},
+		{
+			"id": "1131fbcf-ac9f-4d81-c1b5-2a6aee4fcc84",
+			"fieldName": "description",
+			"fieldType": "mediumtext",
+			"isUnique": false,
+			"description": "Description",
+			"isNullable": true
+		}
+	],
+	"indices": [],
+	"foreignKeys": [],
+	"name": "forms_subgroup",
+	"description": "FORMS: Classification - Sub Group",
+	"ver": "23.2.20.2347",
+	"enableAudit": false,
+	"includeDataInPackage": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"rolesRead": [],
+	"rolesWrite": []
+}

@@ -1,0 +1,46 @@
+{
+	"id": "e086e9e0-1fef-4006-96e2-b508a2d33d75",
+	"createdAt": "2023-02-21T11:34:22.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"interface": [
+		{
+			"id": "f4c74609-3c29-4d5a-fb93-bedc6c783fa2",
+			"parent": "",
+			"name": "valid",
+			"objectType": "boolean",
+			"description": ""
+		}
+	],
+	"rules": [
+		{
+			"id": "1cc0a3cd-01d7-4335-efb7-aefc6cfd7d39",
+			"result": "Error",
+			"items": [
+				{
+					"id": "a9a1ee21-ef91-4b4f-f188-90a0609383c9",
+					"field": "f4c74609-3c29-4d5a-fb93-bedc6c783fa2",
+					"operator": "equal",
+					"value": false
+				}
+			]
+		},
+		{
+			"id": "b50e99af-f6e9-4f7e-8b13-0b1b41252ee8",
+			"result": "Success",
+			"items": [
+				{
+					"id": "dc36eef6-2fc1-47ab-84c1-1849830e1773",
+					"field": "f4c74609-3c29-4d5a-fb93-bedc6c783fa2",
+					"operator": "equal",
+					"value": true,
+					"valuebool": true
+				}
+			]
+		}
+	],
+	"name": "Neptune FORMS: Valid - State",
+	"description": "",
+	"ver": "23.2.21.1244",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": []
+}

@@ -1,0 +1,7 @@
+const workspacePackages = localStorage.getItem("p9_workspace_packages");
+if (workspacePackages) toolAppsPackage.setSelectedKeys(JSON.parse(workspacePackages));
+
+loadAdaptiveAppsOpenCols();
+
+filterApps.setValue();
+filterApps.fireLiveChange();

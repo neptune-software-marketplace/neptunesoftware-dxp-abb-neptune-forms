@@ -1,0 +1,11 @@
+if (typeof groupid === "undefined" || groupid === null || groupid === "") {
+    return;
+}
+
+const group = ModelData.FindFirst(modelappData.oData.group, "id", groupid);
+
+if (group) {
+    return group.name;
+} else {
+    return groupid;
+}

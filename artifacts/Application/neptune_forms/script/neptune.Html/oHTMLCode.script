@@ -1,0 +1,2 @@
+<input type="file" name="imageUploader" id="imageUploader" accept="image/jpg, image/jpeg, image/png" onchange='importImage(event)'/>
+<input type="file" name="pictureUploader" id="pictureUploader" accept="image/jpg, image/jpeg, image/png" onchange='importPicture(event)'/>

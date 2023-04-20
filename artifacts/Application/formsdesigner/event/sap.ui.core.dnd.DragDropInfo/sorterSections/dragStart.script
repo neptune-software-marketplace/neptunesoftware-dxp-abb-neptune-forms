@@ -1,0 +1,2 @@
+const targetContext = oEvent.mParameters.target.getBindingContext();
+controller.dragElement = targetContext.getObject();

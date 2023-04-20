@@ -1,0 +1,10 @@
+if (typeof package === "undefined" || package === null || package === "") {
+    return;
+}
+
+if (modelappData.oData && modelappData.oData.package) {
+    const devPackage = ModelData.FindFirst(modelappData.oData.package, "id", package);
+    if (devPackage) return devPackage.name;
+}
+
+return package;

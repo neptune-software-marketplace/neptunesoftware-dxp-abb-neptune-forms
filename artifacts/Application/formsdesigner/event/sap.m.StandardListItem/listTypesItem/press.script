@@ -1,0 +1,23 @@
+const context = oEvent.oSource.getBindingContext();
+const data = context.getObject();
+
+const typesIncludeItems = ["SingleSelect", "SingleChoice", "MultipleSelect", "MultipleChoice"];
+let changeItems = false;
+
+if (typesIncludeItems.includes(modelpanTopProperties.oData.type) && typesIncludeItems.includes(data.type)) {
+    changeItems = true;
+}
+
+modelpanTopProperties.oData.type = data.type;
+
+let newObject = controller.addElement(modelpanTopProperties.oData, true);
+newObject.id = modelpanTopProperties.oData.id;
+newObject.title = modelpanTopProperties.oData.title;
+if (changeItems) newObject.items = modelpanTopProperties.oData.items;
+modelpanTopProperties.setData(newObject);
+
+modelpanTopProperties.refresh();
+
+controller.pressOutlineItem();
+
+diaChangeType.close();

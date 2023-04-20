@@ -1,0 +1,34 @@
+var context = oEvent.oSource.getBindingContext();
+var file = context.getObject();
+
+$.ajax({
+    type: "POST",
+    contentType: "application/json",
+    url: "/api/functions/Gos/Get",
+    data: JSON.stringify(file),
+    success: function (data) {
+
+        // Mobile 
+        if (isCordova()) {
+            var fileData = data.content.split(",");
+            attachmentNativeOpen(fileData[1], file.fileType, file.name);
+        } else {
+            // Download Browser
+            if (window.navigator.msSaveOrOpenBlob) {
+                var fileData = [data.content];
+                var blobObject = new Blob(fileData);
+                window.navigator.msSaveOrOpenBlob(blobObject, file.name);
+            } else {
+                a = document.createElement('a');
+                a.setAttribute("href", data.content);
+                a.setAttribute("download", file.name);
+                a.click();
+            }
+
+        }
+
+    },
+    error: function (data) {
+        console.log(data);
+    }
+});

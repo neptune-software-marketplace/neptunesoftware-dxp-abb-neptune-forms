@@ -1,0 +1,17 @@
+{
+	"id": "2d4b433b-be45-40c0-952d-a9776c9de99c",
+	"createdAt": "2023-02-28T12:48:06.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"tableid": "2e3d2b75-db26-438a-8bff-ba72399fead8",
+		"hasDocumentation": false
+	},
+	"documentation": {},
+	"name": "Neptune FORMS: Attribute Fields",
+	"description": "Neptune FORMS: Attribute Fields",
+	"group": null,
+	"type": "T",
+	"ver": "23.2.28.1348",
+	"disabled": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

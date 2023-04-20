@@ -1,0 +1,17 @@
+{
+	"id": "1bd658c2-7535-4513-bad5-80e029b3511d",
+	"createdAt": "2023-02-21T08:39:16.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"tableid": "78f60bae-e2ca-4d4a-ae6e-170ac0f67296",
+		"hasDocumentation": false
+	},
+	"documentation": {},
+	"name": "Neptune FORMS: Sub Classification",
+	"description": "Neptune FORMS: Sub Classification",
+	"group": null,
+	"type": "T",
+	"ver": "23.2.21.939",
+	"disabled": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

@@ -1,0 +1,13 @@
+const selectedItem = this.getSelectedItem();
+
+if (selectedItem) {
+    const context = selectedItem.getBindingContext();
+    const data = context.getObject();
+
+    modelpanTopProperties.setData(data);
+    modelpanTopProperties.refresh();
+
+    controller.pressOutlineItem();
+}
+
+

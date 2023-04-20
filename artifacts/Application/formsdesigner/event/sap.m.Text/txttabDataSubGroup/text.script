@@ -1,0 +1,11 @@
+if (typeof subgroupid === "undefined" || subgroupid === null || subgroupid === "") {
+    return;
+}
+
+const subgroup = ModelData.FindFirst(modelappData.oData.subgroup, "id", subgroupid);
+
+if (subgroup) {
+    return subgroup.name;
+} else {
+    return subgroupid;
+}

@@ -1,0 +1,219 @@
+{
+	"id": "ed5ee798-cb24-407f-8ef2-c4a1bd9e4811",
+	"createdAt": "2023-02-21T08:53:20.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"properties": {
+			"report": {
+				"paginationRows": "1000",
+				"updateTime": 0,
+				"iconButtonCreate": "",
+				"textButtonCreate": "Add",
+				"typeButtonCreate": "Transparent",
+				"iconButtonRun": "",
+				"textButtonRun": "Update",
+				"typeButtonRun": "Emphasized",
+				"searchLabel": "Search",
+				"searchPlaceholder": "",
+				"enableRun": false,
+				"enableCreate": true,
+				"enableDelete": true,
+				"title": "Sub Classification",
+				"_navigationItemPress": {
+					"destinationType": "F",
+					"openAs": "D",
+					"butType": "Accept",
+					"destinationTargetF": "aad32fc1-f284-44e4-b6ab-3e49fb9c8809",
+					"keyField": [],
+					"dialogHeight": "600px",
+					"dialogWidth": "900px"
+				},
+				"_navigationCreate": {
+					"destinationType": "F",
+					"openAs": "D",
+					"butType": "Accept",
+					"destinationTargetF": "aad32fc1-f284-44e4-b6ab-3e49fb9c8809",
+					"keyField": [
+						{
+							"fieldName": "groupid",
+							"key": "id",
+							"value": ""
+						}
+					],
+					"dialogHeight": "600px",
+					"dialogWidth": "900px"
+				},
+				"showIcon": false,
+				"actionButtonLeft": false,
+				"iconButtonClose": "",
+				"textButtonClose": "Close",
+				"typeButtonClose": "Transparent",
+				"iconButtonExport": "sap-icon://excel-attachment",
+				"textButtonExport": "",
+				"typeButtonExport": "Transparent",
+				"iconButtonImport": "sap-icon://fa-solid/file-import",
+				"textButtonImport": "",
+				"typeButtonImport": "Transparent",
+				"iconButtonMultiSelect": "",
+				"textButtonMultiSelect": "MultiSelect",
+				"typeButtonMultiSelect": "Emphasized",
+				"enableClose": false,
+				"enableExport": false,
+				"enableImport": false,
+				"enableMultiSelect": false,
+				"enableVariant": false,
+				"hideHeader": false,
+				"autoRun": true,
+				"autoRunFocus": true
+			},
+			"form": {
+				"enableCompact": false,
+				"filterExpandable": true,
+				"headerExpanded": true,
+				"showFilter": true
+			},
+			"table": {
+				"showSeparators": "All",
+				"alternateRowColors": false,
+				"enableCompact": false,
+				"fixedLayout": true,
+				"inset": false,
+				"enablePagination": true,
+				"paginationShowSelection": true,
+				"paginationRows": 25,
+				"enableAction1": false,
+				"enableAction2": false,
+				"enableAction3": false,
+				"enableAction4": false,
+				"enableAction5": false,
+				"action1Text": "",
+				"action1Type": "Transparent",
+				"action2Text": "",
+				"action2Type": "Transparent",
+				"action3Text": "",
+				"action3Type": "Transparent",
+				"action4Text": "",
+				"action4Type": "Transparent",
+				"action5Text": "",
+				"action5Type": "Transparent"
+			}
+		},
+		"fieldCatalog": [
+			{
+				"name": "groupid",
+				"label": "Group",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "name",
+				"label": "Name",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "description",
+				"label": "Description",
+				"type": "mediumtext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedAt",
+				"label": "Updated At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedBy",
+				"label": "Updated By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			}
+		],
+		"fieldsSel": [
+			{
+				"visible": false,
+				"name": "groupid",
+				"text": "Group",
+				"fieldPos": 1
+			}
+		],
+		"fieldsRun": [
+			{
+				"visible": true,
+				"name": "name",
+				"text": "Name",
+				"fieldPos": 2,
+				"enableSort": true
+			},
+			{
+				"visible": true,
+				"name": "description",
+				"text": "Description",
+				"fieldPos": 3,
+				"enableSort": true
+			},
+			{
+				"visible": true,
+				"name": "updatedAt",
+				"text": "Updated At",
+				"enableFilter": false,
+				"fieldPos": 4,
+				"formatter": "date00",
+				"enableSort": true
+			},
+			{
+				"visible": true,
+				"name": "updatedBy",
+				"text": "Updated By",
+				"fieldPos": 5,
+				"enableSort": true
+			},
+			{
+				"visible": false,
+				"name": "groupid",
+				"text": "Group",
+				"fieldPos": 6
+			}
+		],
+		"defaultVariant": {
+			"id": "7562edaf-6a12-40f1-b0d9-e415ed5d72d6",
+			"colOrder": "key_a_to_z",
+			"rowOrder": "key_a_to_z",
+			"row": [],
+			"column": [],
+			"val": [],
+			"inclusions": {},
+			"exclusions": {}
+		}
+	},
+	"name": "neptune_forms_subclassification_list",
+	"description": "",
+	"group": "",
+	"type": "C",
+	"connectorid": "1bd658c2-7535-4513-bad5-80e029b3511d",
+	"scriptSel": null,
+	"scriptRun": null,
+	"tableid": null,
+	"ver": "23.2.21.1035",
+	"disabled": false,
+	"appType": "A",
+	"application": "planet9_adaptive_list",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": [],
+	"scriptSelObj": null,
+	"scriptRunObj": null,
+	"tableObj": null
+}

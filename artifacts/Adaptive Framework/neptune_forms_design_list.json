@@ -1,0 +1,314 @@
+{
+	"id": "21c58eaa-cc42-4ab4-b60b-89b38bc99825",
+	"createdAt": "2023-02-21T10:23:30.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"properties": {
+			"report": {
+				"showIcon": true,
+				"actionButtonLeft": false,
+				"iconButtonClose": "",
+				"textButtonClose": "Close",
+				"typeButtonClose": "Transparent",
+				"iconButtonCreate": "",
+				"textButtonCreate": "Create",
+				"typeButtonCreate": "Emphasized",
+				"iconButtonExport": "sap-icon://excel-attachment",
+				"textButtonExport": "",
+				"typeButtonExport": "Transparent",
+				"iconButtonImport": "sap-icon://fa-solid/file-import",
+				"textButtonImport": "",
+				"typeButtonImport": "Transparent",
+				"iconButtonMultiSelect": "",
+				"textButtonMultiSelect": "MultiSelect",
+				"typeButtonMultiSelect": "Emphasized",
+				"iconButtonRun": "",
+				"textButtonRun": "Update",
+				"typeButtonRun": "Transparent",
+				"enableRun": true,
+				"enableCreate": false,
+				"enableClose": false,
+				"enableDelete": false,
+				"enableExport": false,
+				"enableImport": false,
+				"enableMultiSelect": false,
+				"enableVariant": true,
+				"hideHeader": false,
+				"autoRun": true,
+				"autoRunFocus": true,
+				"searchLabel": "Search",
+				"searchPlaceholder": "",
+				"title": "Neptune FORMS",
+				"subTitle": "FORMS with reporting enabled",
+				"_navigationItemPress": {
+					"destinationType": "F",
+					"openAs": "P",
+					"butType": "Accept",
+					"destinationTargetF": "c44d98ad-fdb8-40a7-9476-cab348d55a2b",
+					"keyField": [
+						{
+							"fieldName": "formid",
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"avatarBackgroundColor": "Accent7",
+				"avatarIcon": "sap-icon://trip-report"
+			},
+			"form": {
+				"enableCompact": false,
+				"headerExpanded": true
+			},
+			"table": {
+				"enablePagination": true,
+				"paginationShowSelection": true,
+				"paginationRows": 25,
+				"showSeparators": "All",
+				"alternateRowColors": false,
+				"fixedLayout": true,
+				"inset": false,
+				"enableCompact": false,
+				"enableAction1": false,
+				"enableAction2": false,
+				"enableAction3": false,
+				"enableAction4": false,
+				"enableAction5": false,
+				"action1Text": "",
+				"action1Type": "Transparent",
+				"action2Text": "",
+				"action2Type": "Transparent",
+				"action3Text": "",
+				"action3Type": "Transparent",
+				"action4Text": "",
+				"action4Type": "Transparent",
+				"action5Text": "",
+				"action5Type": "Transparent"
+			}
+		},
+		"fieldCatalog": [
+			{
+				"name": "name",
+				"label": "Name",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "description",
+				"label": "Description",
+				"type": "mediumtext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "setup",
+				"label": "Setup in JSON",
+				"type": "json",
+				"usage": "BOTH"
+			},
+			{
+				"name": "released",
+				"label": "Is FORM Released",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "groupid",
+				"label": "Classification Group",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "subgroupid",
+				"label": "Classification Sub Group",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "savedata",
+				"label": "Enable Reporting",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedAt",
+				"label": "Updated At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedBy",
+				"label": "Updated By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			}
+		],
+		"fieldsSel": [
+			{
+				"visible": true,
+				"name": "name",
+				"text": "Name",
+				"fieldPos": 1
+			},
+			{
+				"visible": true,
+				"name": "groupid",
+				"text": "Classification",
+				"fieldPos": 2,
+				"type": "MultiSelectLookup",
+				"lookupTable": "forms_group",
+				"lookupFieldKey": "id",
+				"lookupFieldText": "name",
+				"lookupShowOnlyText": true
+			},
+			{
+				"visible": true,
+				"name": "subgroupid",
+				"text": "Sub Classification",
+				"fieldPos": 3,
+				"type": "MultiSelectLookup",
+				"lookupTable": "forms_subgroup",
+				"lookupFieldKey": "id",
+				"lookupFieldText": "name",
+				"lookupShowOnlyText": true
+			},
+			{
+				"visible": false,
+				"name": "savedata",
+				"text": "Enable Reporting",
+				"fieldPos": 4,
+				"type": "Switch",
+				"default": "true"
+			}
+		],
+		"fieldsRun": [
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "name",
+				"text": "Name",
+				"fieldPos": 5
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "description",
+				"text": "Description",
+				"fieldPos": 6
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "groupid",
+				"text": "Classification",
+				"fieldPos": 7,
+				"valueType": "Lookup",
+				"valueLookup": {
+					"table": "forms_group",
+					"textField": "name",
+					"keyField": [
+						{
+							"fieldName": "id",
+							"key": "groupid",
+							"value": ""
+						}
+					],
+					"hideKey": true,
+					"butType": "Accept"
+				}
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "subgroupid",
+				"text": "Sub Classification",
+				"fieldPos": 8,
+				"valueType": "Lookup",
+				"valueLookup": {
+					"table": "forms_subgroup",
+					"textField": "name",
+					"keyField": [
+						{
+							"fieldName": "id",
+							"key": "subgroupid",
+							"value": ""
+						}
+					],
+					"hideKey": true,
+					"butType": "Accept"
+				}
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": false,
+				"enableSort": true,
+				"visible": true,
+				"name": "updatedAt",
+				"text": "Updated At",
+				"fieldPos": 9,
+				"formatter": "date00"
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Block",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "updatedBy",
+				"text": "Updated By",
+				"fieldPos": 10
+			}
+		],
+		"defaultVariant": {
+			"id": "d5cd3948-250d-42ea-9faf-b3d9fa00dc51",
+			"colOrder": "key_a_to_z",
+			"rowOrder": "key_a_to_z",
+			"row": [],
+			"column": [],
+			"val": [],
+			"inclusions": {},
+			"exclusions": {}
+		}
+	},
+	"name": "neptune_forms_design_list",
+	"description": "",
+	"group": "",
+	"type": "C",
+	"connectorid": "a47d931d-3a18-4a66-b183-98d85399c432",
+	"scriptSel": null,
+	"scriptRun": null,
+	"tableid": null,
+	"ver": "23.2.21.1211",
+	"disabled": false,
+	"appType": "A",
+	"application": "planet9_adaptive_list",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": [],
+	"scriptSelObj": null,
+	"scriptRunObj": null,
+	"tableObj": null
+}

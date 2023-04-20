@@ -1,0 +1,30 @@
+.sapUiTheme-sap_horizon_dark .notValid {
+    border-left: 4px solid #fa6161;
+}
+
+.sapUiTheme-sap_fiori_3 .notValid {
+    border-left: 4px solid #b00;
+}
+
+.sapUiTheme-sap_fiori_3_dark .notValid {
+    border-left: 4px solid #f88;
+}
+
+.notValid {
+    border-left: 4px solid #f53232;
+}
+
+.noBorderRadius {
+    border-radius: 0 !important;
+}
+
+.noOverflow .sapMPanelContent {
+    overflow: hidden !important;
+}
+
+.sapUiRespGridMedia-Std-Phone.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanS12) > .nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-Tablet.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanM12) > .nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-Desktop.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanL12) > .nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-LargeDesktop.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanXL12) > .nepLabelLeftAlign {
+    text-align: left !important;
+}

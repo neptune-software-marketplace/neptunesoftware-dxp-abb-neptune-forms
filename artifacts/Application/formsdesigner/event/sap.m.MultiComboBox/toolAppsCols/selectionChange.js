@@ -1,0 +1,1 @@
+saveAdaptiveAppsOpenCols(this.getSelectedKeys());

@@ -1,0 +1,33 @@
+{
+	"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
+	"createdAt": "2023-02-28T12:46:16.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"fields": [
+		{
+			"id": "2307e5c3-c61b-4f44-89dd-0973d068f8b2",
+			"fieldName": "name",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Name",
+			"isNullable": true
+		},
+		{
+			"id": "54baa362-4ffe-4bce-92b7-c01ab953406f",
+			"fieldName": "description",
+			"fieldType": "mediumtext",
+			"isUnique": false,
+			"isNullable": true,
+			"description": "Description"
+		}
+	],
+	"indices": [],
+	"foreignKeys": [],
+	"name": "forms_attribute_group",
+	"description": "FORMS: Object Attribute Group",
+	"ver": "23.2.28.1346",
+	"enableAudit": false,
+	"includeDataInPackage": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"rolesRead": [],
+	"rolesWrite": []
+}

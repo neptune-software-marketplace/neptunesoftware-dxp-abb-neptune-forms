@@ -1,0 +1,10 @@
+const binding = tabFields.getBinding("items");
+
+const filter = new sap.ui.model.Filter({
+    filters: [new sap.ui.model.Filter("name", "Contains", this.getValue()), new sap.ui.model.Filter("description", "Contains", this.getValue())],
+    and: false,
+});
+
+const filterGroup = new sap.ui.model.Filter("groupid", "EQ", controller.filterGroupid);
+
+binding.filter([filter,filterGroup]);

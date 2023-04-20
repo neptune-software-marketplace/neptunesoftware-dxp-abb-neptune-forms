@@ -1,0 +1,17 @@
+{
+	"id": "eff69025-ed3b-4393-96aa-f68647e513ee",
+	"createdAt": "2023-02-21T08:39:33.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"tableid": "7c35f34a-4a8d-498d-8366-684cdf4c791f",
+		"hasDocumentation": false
+	},
+	"documentation": {},
+	"name": "Neptune FORMS: Report",
+	"description": "Neptune FORMS: Report",
+	"group": null,
+	"type": "T",
+	"ver": "23.2.21.939",
+	"disabled": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

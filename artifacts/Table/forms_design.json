@@ -1,0 +1,73 @@
+{
+	"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+	"createdAt": "2023-01-10T16:38:06.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"fields": [
+		{
+			"id": "0b123282-c378-4b9a-c675-3d1efbc28a35",
+			"fieldName": "name",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Name",
+			"isNullable": true
+		},
+		{
+			"id": "a908e288-9c88-4b9e-b5ee-76f7c595e677",
+			"fieldName": "description",
+			"fieldType": "mediumtext",
+			"isUnique": false,
+			"description": "Description",
+			"isNullable": true
+		},
+		{
+			"id": "b494c08f-33e4-43a3-b98e-4171913440a6",
+			"fieldName": "setup",
+			"fieldType": "json",
+			"isUnique": false,
+			"description": "Setup in JSON",
+			"isNullable": true
+		},
+		{
+			"id": "c9ed32fe-ed1d-4d36-a33b-cbec977efe29",
+			"fieldName": "released",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Is FORM Released",
+			"isNullable": true
+		},
+		{
+			"id": "bc67111e-a433-4a57-eee9-22e18b7263d1",
+			"fieldName": "groupid",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Classification Group",
+			"isNullable": true
+		},
+		{
+			"id": "5305aafd-0ca9-43dd-c19e-41f99c20de0d",
+			"fieldName": "subgroupid",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"isNullable": true,
+			"description": "Classification Sub Group"
+		},
+		{
+			"id": "e3cde399-0bd1-475d-f679-ee957650c67f",
+			"fieldName": "savedata",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Enable Reporting",
+			"isNullable": true
+		}
+	],
+	"indices": [],
+	"foreignKeys": [],
+	"name": "forms_design",
+	"description": "FORMS: Design",
+	"ver": "23.2.20.2352",
+	"enableAudit": false,
+	"includeDataInPackage": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"rolesRead": [],
+	"rolesWrite": []
+}

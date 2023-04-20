@@ -1,0 +1,60 @@
+.nepDynamicPageNoPadding .sapMIBar-CTX.sapMFooter-CTX {
+  border-radius: 8px;
+  bottom: 20px;
+}
+
+.nepDynamicPage .sapFDynamicPageTitle {
+  padding: 0.5rem 0.8rem !important;
+}
+
+.nepDynamicPage .sapFDynamicPageHeader.sapFDynamicPageHeaderWithContent {
+  padding: 0 !important;
+}
+
+.nepDynamicPage .sapMITBContent {
+  border-bottom: none !important;
+}
+
+.nepRadiusTop .sapMListHdr {
+  border-top-left-radius: 0.75rem !important;
+  border-top-right-radius: 0.75rem !important;
+}
+
+.nepNoRadiusTop {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.nepNoRadiusTop .sapMListHdr {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.nepNoRadius {
+  border-radius: 0;
+}
+
+.nepInputDescription {
+  color: #475566;
+}
+
+.nepFlexWrap .sapFDynamicPageTitleMain {
+  flex-wrap: wrap !important;
+}
+
+.nepFlexLeft .sapFDynamicPageTitleMainInner {
+  width: 100% !important;
+}
+
+.sapMDialog > .sapMDialogTitle .sapMDialogTitleGroup:focus::after {
+  border: none;
+}
+
+.nepTitleZero .sapUiFormContainerTitle > .sapUiFormTitleH1,
+.nepTitleZero .sapUiFormContainerTitle > .sapUiFormTitleH2,
+.nepTitleZero .sapUiFormContainerTitle > .sapUiFormTitleH3,
+.nepTitleZero .sapUiFormContainerTitle > .sapUiFormTitleH4,
+.nepTitleZero .sapUiFormContainerTitle > .sapUiFormTitleH5,
+.nepTitleZero .sapUiFormContainerTitle > .sapUiFormTitleH6 {
+  height: 0 !important;
+}

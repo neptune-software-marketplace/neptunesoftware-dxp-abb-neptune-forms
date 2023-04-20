@@ -1,0 +1,109 @@
+{
+	"id": "ca28178b-556e-486c-afa4-b9cd4ecab385",
+	"createdAt": "2023-01-23T19:10:59.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"translation": [],
+	"tilesOrder": [
+		"538e3ef8-0493-4f9e-a738-a231db3e8c01",
+		"59f26a1a-f9d5-403b-ad96-4ba203ccbf13",
+		"d832bb94-ec3a-4f59-8f1a-bab662c6a4d6",
+		"b5d4a055-2df2-4ae1-976d-3e41d2d1ce3c",
+		"ab45363e-4ca1-46cc-949c-267a20059ff7"
+	],
+	"tilegroupsOrder": [],
+	"configMessage": {
+		"type": "None"
+	},
+	"title": "Neptune FORMS",
+	"subTitle": null,
+	"description": null,
+	"titleAlignment": null,
+	"enableFullScreen": null,
+	"hideHeader": null,
+	"backgroundType": "cards",
+	"backgroundColor": "",
+	"backgroundShade": null,
+	"type": null,
+	"image": null,
+	"icon": null,
+	"sort": null,
+	"inclFav": false,
+	"styleClass": null,
+	"enableScroll": false,
+	"enableShadeCalc": false,
+	"numTiles": null,
+	"enableMessage": false,
+	"ver": "23.3.5.759",
+	"headColor": null,
+	"headTxtClr": null,
+	"subheadTxtClr": null,
+	"headBorderClr": null,
+	"headBorderWidth": null,
+	"imageTablet": null,
+	"imageMobile": null,
+	"imageCover": false,
+	"imageTabletCover": false,
+	"imageMobileCover": false,
+	"imageMobileHeight": null,
+	"imageTabletHeight": null,
+	"imageHeight": null,
+	"name": "Neptune FORMS",
+	"cardContentWidth": null,
+	"cardContentAlign": null,
+	"cardPerRow": null,
+	"cardStyle": null,
+	"cardHeightFit": false,
+	"imagePlacement": null,
+	"imageRepeat": null,
+	"imageSize": null,
+	"imageTabletPlacement": null,
+	"imageTabletRepeat": null,
+	"imageTabletSize": null,
+	"imageMobilePlacement": null,
+	"imageMobileRepeat": null,
+	"imageMobileSize": null,
+	"hideFromMenu": false,
+	"roleTag": null,
+	"cockpitTileGroup": true,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": [
+		{
+			"id": "edbb8b4a-757f-4eaf-b8dc-11b7cfe0f77e",
+			"name": "neptunesoftware-forms",
+			"ver": "23.2.21.916"
+		}
+	],
+	"tiles": [
+		{
+			"id": "d832bb94-ec3a-4f59-8f1a-bab662c6a4d6",
+			"name": "FORMS Attributes",
+			"title": "Attributes",
+			"ver": "23.3.5.759"
+		},
+		{
+			"id": "b5d4a055-2df2-4ae1-976d-3e41d2d1ce3c",
+			"name": "FORMS Reports",
+			"title": "Reports",
+			"ver": "23.3.5.759"
+		},
+		{
+			"id": "ab45363e-4ca1-46cc-949c-267a20059ff7",
+			"name": "FORMS Deployment",
+			"title": "Deployment",
+			"ver": "23.3.5.758"
+		},
+		{
+			"id": "59f26a1a-f9d5-403b-ad96-4ba203ccbf13",
+			"name": "FORMS Classification",
+			"title": "Classification",
+			"ver": "23.3.5.759"
+		},
+		{
+			"id": "538e3ef8-0493-4f9e-a738-a231db3e8c01",
+			"name": "FORMS Designer",
+			"title": "Forms Designer",
+			"ver": "23.4.20.1242"
+		}
+	],
+	"tilegroups": []
+}

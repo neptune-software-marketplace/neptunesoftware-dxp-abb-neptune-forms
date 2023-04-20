@@ -1,0 +1,9 @@
+var context = oEvent.oSource.getBindingContext();
+var data = context.getObject();
+
+modelpanTopProperties.oData.adaptiveApp = data.id;
+modelpanTopProperties.refresh();
+
+controller.buildAdaptiveFields();
+
+diaApps.close();

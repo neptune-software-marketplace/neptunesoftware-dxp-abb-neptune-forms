@@ -1,0 +1,350 @@
+{
+	"id": "a313322e-f024-45f1-960f-b90081757b85",
+	"createdAt": "2023-01-10T16:11:06.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"git": {
+		"remote": "https://github.com/neptune-software-marketplace/neptunesoftware-dxp-abb-neptune-forms"
+	},
+	"name": "neptunesoftware-forms",
+	"description": "Neptune FORMS Solution",
+	"ver": "23.4.20.1328",
+	"enableCICD": true,
+	"apps": [
+		{
+			"id": "bbdfe2ca-c704-487a-bb87-b1656d571f3a",
+			"application": "neptune_forms_deployment",
+			"title": "FORMS Deployment",
+			"description": "FORMS Deployment"
+		},
+		{
+			"id": "98b64f81-1c34-4221-9746-71750cd376ef",
+			"application": "neptune_forms_build",
+			"title": "",
+			"description": ""
+		},
+		{
+			"id": "937aeefc-e1c5-44f2-b723-4065af58f03b",
+			"application": "neptune_forms",
+			"title": "Neptune FORMS",
+			"description": "Neptune FORMS"
+		},
+		{
+			"id": "74bff3f5-b8ae-4250-aed3-6ebfe904b23e",
+			"application": "formsdesigner",
+			"title": "Neptune FORMS",
+			"description": "Neptune FORMS"
+		},
+		{
+			"id": "4b507eda-02d6-4b00-ab00-c730a27c7ffd",
+			"application": "planet9_adaptive_forms",
+			"title": "Adaptive FORMS",
+			"description": "Adaptive FORMS"
+		}
+	],
+	"api": [
+		{
+			"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
+			"name": "FormsClient",
+			"description": "Neptune FORMS",
+			"apiGroup": "d3596a74-a10f-46d9-9d3d-f5462c65031a"
+		}
+	],
+	"odataSource": [],
+	"odataMock": [],
+	"dictionary": [
+		{
+			"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
+			"name": "forms_attribute_group",
+			"description": "FORMS: Object Attribute Group"
+		},
+		{
+			"id": "7c35f34a-4a8d-498d-8366-684cdf4c791f",
+			"name": "forms_data",
+			"description": "FORMS: Data"
+		},
+		{
+			"id": "78f60bae-e2ca-4d4a-ae6e-170ac0f67296",
+			"name": "forms_subgroup",
+			"description": "FORMS: Classification - Sub Group"
+		},
+		{
+			"id": "4a9e3232-70e5-4f49-9b63-4104044f5642",
+			"name": "forms_group",
+			"description": "FORMS: Classification - Group"
+		},
+		{
+			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
+			"name": "forms_attribute_fields",
+			"description": "FORMS: Object Attribute Fields"
+		},
+		{
+			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+			"name": "forms_design",
+			"description": "FORMS: Design"
+		}
+	],
+	"jsclass": [
+		{
+			"id": "dd272da2-5e6a-40e9-a9e6-117337fa68ee",
+			"name": "formSaveLog",
+			"description": null
+		},
+		{
+			"id": "ad295417-bab7-49c6-afa6-2a1a8ffa4539",
+			"name": "formGet",
+			"description": null
+		},
+		{
+			"id": "abaf7108-29fa-424f-ab1f-61c698a599b4",
+			"name": "formDelete",
+			"description": null
+		},
+		{
+			"id": "8451fdc0-46ea-4f35-bcf9-e3ebcdd0c79b",
+			"name": "formList",
+			"description": null
+		},
+		{
+			"id": "78d72deb-d762-4fde-81f4-01843540d627",
+			"name": "deploymentSave",
+			"description": null
+		},
+		{
+			"id": "7341be77-5379-4c38-a6c5-01b4cb553199",
+			"name": "formSave",
+			"description": null
+		},
+		{
+			"id": "65546019-2d1a-483a-970b-e5a4a165dd01",
+			"name": "formGetLog",
+			"description": null
+		},
+		{
+			"id": "0ffd1154-b693-44e0-9019-75c95e4bffc0",
+			"name": "deploymentList",
+			"description": null
+		}
+	],
+	"jsscript_group": [
+		{
+			"id": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
+			"name": "Forms",
+			"description": null
+		}
+	],
+	"theme": [],
+	"pdf": [],
+	"rulesengine": [
+		{
+			"id": "ed17eb91-2e7a-4cf0-a98f-41fbcc5fda00",
+			"name": "Neptune FORMS: Completed - Text",
+			"description": ""
+		},
+		{
+			"id": "e086e9e0-1fef-4006-96e2-b508a2d33d75",
+			"name": "Neptune FORMS: Valid - State",
+			"description": ""
+		},
+		{
+			"id": "af618c32-dc24-4c40-a4fa-03b7bc3d90d6",
+			"name": "Neptune FORMS: Completed - State",
+			"description": ""
+		},
+		{
+			"id": "154a03b5-6ce5-4a99-94dc-4999d534ed01",
+			"name": "Neptune FORMS: Valid - Text",
+			"description": ""
+		}
+	],
+	"reports": [
+		{
+			"id": "ed5ee798-cb24-407f-8ef2-c4a1bd9e4811",
+			"name": "neptune_forms_subclassification_list",
+			"description": "",
+			"application": "planet9_adaptive_list"
+		},
+		{
+			"id": "e83a706d-3f77-4536-9c17-67e6cc67942a",
+			"name": "neptune_forms_attribute_group_list",
+			"description": "",
+			"application": "planet9_adaptive_list"
+		},
+		{
+			"id": "c5376245-bc88-4d7e-9e9b-4b60044eea14",
+			"name": "neptune_forms_classification_detail",
+			"description": "",
+			"application": "planet9_adaptive_edit"
+		},
+		{
+			"id": "c44d98ad-fdb8-40a7-9476-cab348d55a2b",
+			"name": "neptune_forms_report_list",
+			"description": "",
+			"application": "planet9_adaptive_list"
+		},
+		{
+			"id": "b86ddb45-614b-4b14-9a3c-81b8d180770c",
+			"name": "neptune_forms_attribute_field_detail",
+			"description": "",
+			"application": "planet9_adaptive_edit"
+		},
+		{
+			"id": "ab34d0f6-ff00-429e-9838-703092fa1323",
+			"name": "neptune_forms_detail_form",
+			"description": "",
+			"application": "planet9_adaptive_forms"
+		},
+		{
+			"id": "aad32fc1-f284-44e4-b6ab-3e49fb9c8809",
+			"name": "neptune_forms_subclassification_detail",
+			"description": "",
+			"application": "planet9_adaptive_edit"
+		},
+		{
+			"id": "95f1287d-b3a8-45b4-b880-28aa297033d5",
+			"name": "neptune_forms_attribute_group_detail",
+			"description": "",
+			"application": "planet9_adaptive_edit"
+		},
+		{
+			"id": "95522c9f-3c92-4be4-9375-445d1da47e68",
+			"name": "neptune_forms_attribute_field_create",
+			"description": "",
+			"application": "planet9_adaptive_edit"
+		},
+		{
+			"id": "89ea0eb8-fc55-42ff-9a04-d8d0b9d05ded",
+			"name": "neptune_forms_attribute_field_list",
+			"description": "",
+			"application": "planet9_adaptive_list"
+		},
+		{
+			"id": "44e04b91-df79-49be-955e-3a27cb6aeb2c",
+			"name": "neptune_forms_classification_list",
+			"description": "",
+			"application": "planet9_adaptive_list"
+		},
+		{
+			"id": "21c58eaa-cc42-4ab4-b60b-89b38bc99825",
+			"name": "neptune_forms_design_list",
+			"description": "",
+			"application": "planet9_adaptive_list"
+		},
+		{
+			"id": "18e87cdd-a920-4b72-8ed0-8146a62ce210",
+			"name": "neptune_forms_classification_create",
+			"description": "",
+			"application": "planet9_adaptive_edit"
+		},
+		{
+			"id": "024a4eb3-e205-4f8a-a36c-56a39a1bbb6d",
+			"name": "neptune_forms_attribute_group_create",
+			"description": "",
+			"application": "planet9_adaptive_edit"
+		}
+	],
+	"api_authentication": [],
+	"api_group": [
+		{
+			"id": "d3596a74-a10f-46d9-9d3d-f5462c65031a",
+			"name": "Forms",
+			"description": "Neptune FORMS"
+		}
+	],
+	"tile": [
+		{
+			"id": "d832bb94-ec3a-4f59-8f1a-bab662c6a4d6",
+			"description": "Create FORMS Object Attributes",
+			"name": "FORMS Attributes"
+		},
+		{
+			"id": "ccaf3f0d-37f9-4423-abff-d1c8ed5b6e13",
+			"description": "Create Forms with No-Code",
+			"name": "FORMS Designer - Copy"
+		},
+		{
+			"id": "b5d4a055-2df2-4ae1-976d-3e41d2d1ce3c",
+			"description": "View FORMS submitted reports",
+			"name": "FORMS Reports"
+		},
+		{
+			"id": "ab45363e-4ca1-46cc-949c-267a20059ff7",
+			"description": "Deploy FORMS to other Open Edition systems",
+			"name": "FORMS Deployment"
+		},
+		{
+			"id": "59f26a1a-f9d5-403b-ad96-4ba203ccbf13",
+			"description": "Create FORMS Classifications",
+			"name": "FORMS Classification"
+		},
+		{
+			"id": "538e3ef8-0493-4f9e-a738-a231db3e8c01",
+			"description": "Create Forms with No-Code",
+			"name": "FORMS Designer"
+		}
+	],
+	"category": [
+		{
+			"id": "ca28178b-556e-486c-afa4-b9cd4ecab385",
+			"description": null,
+			"name": "Neptune FORMS"
+		}
+	],
+	"launchpad": [],
+	"certificates": [],
+	"role": [
+		{
+			"id": "edbb8b4a-757f-4eaf-b8dc-11b7cfe0f77e",
+			"name": "neptunesoftware-forms",
+			"description": "Neptune FORMS"
+		}
+	],
+	"systems": [],
+	"doc": [],
+	"wf_notifications": [],
+	"department": [],
+	"script_scheduler": [],
+	"wf_definition": [],
+	"connector": [
+		{
+			"id": "eff69025-ed3b-4393-96aa-f68647e513ee",
+			"name": "Neptune FORMS: Report",
+			"description": "Neptune FORMS: Report"
+		},
+		{
+			"id": "d2616192-861a-4fef-8970-ad4fbf9e9066",
+			"name": "Neptune FORMS: Attribute Group",
+			"description": "Neptune FORMS: Attribute Group"
+		},
+		{
+			"id": "a47d931d-3a18-4a66-b183-98d85399c432",
+			"name": "Neptune FORMS: Design",
+			"description": "Neptune FORMS: Design"
+		},
+		{
+			"id": "2e11d750-fd5f-40d4-b8cc-9df7a0ca3c0b",
+			"name": "Neptune FORMS: Classification",
+			"description": "Neptune FORMS: Classification"
+		},
+		{
+			"id": "2d4b433b-be45-40c0-952d-a9776c9de99c",
+			"name": "Neptune FORMS: Attribute Fields",
+			"description": "Neptune FORMS: Attribute Fields"
+		},
+		{
+			"id": "1bd658c2-7535-4513-bad5-80e029b3511d",
+			"name": "Neptune FORMS: Sub Classification",
+			"description": "Neptune FORMS: Sub Classification"
+		}
+	],
+	"events": [],
+	"media_library": [],
+	"code_snippets": [
+		{
+			"id": "a8ee936a-9bd1-4cba-8292-5520de285ad1",
+			"name": "Usage in your own App",
+			"description": null
+		}
+	],
+	"wf_determination": [],
+	"wf_taskaction": []
+}

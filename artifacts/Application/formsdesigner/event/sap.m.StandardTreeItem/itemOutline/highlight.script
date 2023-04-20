@@ -1,0 +1,3 @@
+if (typeof disabled === "undefined" || disabled === null || disabled === "") { return; }  
+
+if (disabled) return "Error";

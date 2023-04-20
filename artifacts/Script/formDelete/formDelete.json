@@ -1,0 +1,26 @@
+{
+	"id": "abaf7108-29fa-424f-ab1f-61c698a599b4",
+	"createdAt": "2023-01-13T06:44:21.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"globalScripts": [],
+	"externalModules": [],
+	"entitySets": [
+		{
+			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+			"name": "forms_design",
+			"contextname": "forms_design"
+		}
+	],
+	"apis": [],
+	"name": "formDelete",
+	"ver": "23.1.13.820",
+	"description": null,
+	"content": "file:///content.js",
+	"useAsGlobalScript": false,
+	"transpiledContent": null,
+	"lastRunSuccessful": false,
+	"isTypescript": false,
+	"language": "javascript",
+	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

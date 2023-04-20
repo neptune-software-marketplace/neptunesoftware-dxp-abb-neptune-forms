@@ -1,0 +1,57 @@
+{
+	"id": "7c35f34a-4a8d-498d-8366-684cdf4c791f",
+	"createdAt": "2023-02-20T22:49:47.000Z",
+	"createdBy": "admin",
+	"fields": [
+		{
+			"id": "b50a3f92-9c44-4e72-b6d4-3478563d8fe9",
+			"fieldName": "formid",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "FORM ID",
+			"isNullable": true
+		},
+		{
+			"id": "f5b9fbcc-e000-453d-c97f-a339b7bf69cb",
+			"fieldName": "sessionid",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Session ID",
+			"isNullable": true
+		},
+		{
+			"id": "697e1d14-d817-4d19-fd30-bbdb3f674061",
+			"fieldName": "completed",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Status: Completed",
+			"isNullable": true
+		},
+		{
+			"id": "d80b295f-33c1-4a82-80b5-39e64bf57a5b",
+			"fieldName": "valid",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Status: Valid",
+			"isNullable": true
+		},
+		{
+			"id": "7ac579ec-811b-461f-dcba-1eb5f50ba9c6",
+			"fieldName": "data",
+			"fieldType": "json",
+			"isUnique": false,
+			"description": "FORM Data",
+			"isNullable": true
+		}
+	],
+	"indices": [],
+	"foreignKeys": [],
+	"name": "forms_data",
+	"description": "FORMS: Data",
+	"ver": "23.2.21.125",
+	"enableAudit": false,
+	"includeDataInPackage": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"rolesRead": [],
+	"rolesWrite": []
+}

@@ -1,0 +1,14 @@
+if (typeof fieldId === "undefined" || fieldId === null || fieldId === "") {
+    return;
+}
+
+let field = ModelData.FindFirst(modelappData.oData.attributefields, "id", fieldId);
+if (!field) field = ModelData.FindFirst(modelappData.oData.attributefields, "id", fieldId.toUpperCase());
+
+if (field) {
+    let group = ModelData.FindFirst(modelappData.oData.attributegroup, "id", field.groupid);
+    if (!group) group = ModelData.FindFirst(modelappData.oData.attributegroup, "id", field.groupid.toUpperCase());
+    return "(" + group.name + ") " + field.name;
+} else {
+    return fieldId;
+}

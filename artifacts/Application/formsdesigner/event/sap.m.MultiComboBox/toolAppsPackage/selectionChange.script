@@ -1,0 +1,2 @@
+localStorage.setItem("p9_workspace_packages", JSON.stringify(this.getSelectedKeys()));
+filterApps.fireLiveChange();

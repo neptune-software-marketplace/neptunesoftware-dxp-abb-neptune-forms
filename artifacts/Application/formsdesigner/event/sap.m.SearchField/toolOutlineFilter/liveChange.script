@@ -1,0 +1,4 @@
+const binding = treeOutline.getBinding("items");
+const filter1 = new sap.ui.model.Filter("option", "NE", "I");
+const filter2 = new sap.ui.model.Filter("title", "Contains", this.getValue());
+binding.filter([filter1, filter2]);

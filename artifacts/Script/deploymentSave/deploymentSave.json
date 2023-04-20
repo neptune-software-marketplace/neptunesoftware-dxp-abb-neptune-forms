@@ -1,0 +1,20 @@
+{
+	"id": "78d72deb-d762-4fde-81f4-01843540d627",
+	"createdAt": "2023-03-05T08:26:00.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"globalScripts": [],
+	"externalModules": [],
+	"entitySets": [],
+	"apis": [],
+	"name": "deploymentSave",
+	"ver": "23.3.5.926",
+	"description": null,
+	"content": "file:///content.js",
+	"useAsGlobalScript": false,
+	"transpiledContent": null,
+	"lastRunSuccessful": false,
+	"isTypescript": false,
+	"language": "javascript",
+	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

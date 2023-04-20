@@ -1,0 +1,11 @@
+if (typeof type === "undefined" || type === null || type === "") {
+    return;
+}
+
+const meta = ModelData.FindFirst(controller.elementTypes, "type", type);
+
+if (meta) {
+    return meta.icon;
+} else {
+    return null;
+}

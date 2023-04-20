@@ -1,0 +1,274 @@
+{
+	"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
+	"createdAt": "2023-01-13T06:47:00.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"auth": [],
+	"endpoints": [],
+	"paths": [
+		{
+			"id": "1322cc6a-42e0-400d-f336-2053deab521c",
+			"method": "GET",
+			"path": "/list",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [
+				{
+					"id": "de3add87-819d-4821-be11-a6e5ac3dbdd6",
+					"status": "200",
+					"description": "OK",
+					"headers": [],
+					"content": [
+						{
+							"id": "5685cfd4-14a5-493b-9d7e-5d3d730c4fb1",
+							"name": "forms",
+							"objectType": "array"
+						}
+					]
+				}
+			],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"tags": "Form",
+			"serverScript": "8451fdc0-46ea-4f35-bcf9-e3ebcdd0c79b"
+		},
+		{
+			"id": "7fe44f4d-aed7-48ae-9371-ad853143479e",
+			"method": "POST",
+			"path": "/save",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"serverScript": "7341be77-5379-4c38-a6c5-01b4cb553199",
+			"tags": "Form"
+		},
+		{
+			"id": "c9da3e63-10e7-4b8f-9202-bbd81b670446",
+			"method": "DELETE",
+			"path": "/delete",
+			"description": "",
+			"parameters": [
+				{
+					"name": "id",
+					"description": "",
+					"required": true,
+					"inPath": false,
+					"value": "",
+					"default": "",
+					"example": ""
+				}
+			],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"serverScript": "abaf7108-29fa-424f-ab1f-61c698a599b4",
+			"tags": "Form"
+		},
+		{
+			"id": "c22228e3-9009-46c3-a8d6-422801e973a5",
+			"method": "GET",
+			"path": "/get",
+			"description": "",
+			"parameters": [
+				{
+					"name": "id",
+					"description": "",
+					"required": true,
+					"inPath": false,
+					"value": "",
+					"default": "",
+					"example": ""
+				}
+			],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"serverScript": "ad295417-bab7-49c6-afa6-2a1a8ffa4539",
+			"tags": "Form"
+		},
+		{
+			"id": "08c92d62-e0e6-4de7-c457-fc4d4c9474cc",
+			"method": "POST",
+			"path": "/savelog",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"tags": "Log",
+			"serverScript": "dd272da2-5e6a-40e9-a9e6-117337fa68ee"
+		},
+		{
+			"id": "e0043ec0-2e7c-4fbe-e585-bd08869690fe",
+			"method": "GET",
+			"path": "/getelementlog",
+			"description": "",
+			"parameters": [
+				{
+					"name": "formid",
+					"description": "",
+					"required": true,
+					"inPath": false,
+					"value": "",
+					"default": "FORM ID",
+					"example": ""
+				},
+				{
+					"name": "elementid",
+					"description": "",
+					"required": true,
+					"inPath": false,
+					"value": "",
+					"default": "Element ID",
+					"example": ""
+				}
+			],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"serverScript": "65546019-2d1a-483a-970b-e5a4a165dd01",
+			"tags": "Log"
+		},
+		{
+			"id": "3334d942-e284-4a10-fc8e-07f4086beaff",
+			"method": "GET",
+			"path": "/deployment-list",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"serverScript": "0ffd1154-b693-44e0-9019-75c95e4bffc0",
+			"tags": "Deployment"
+		},
+		{
+			"id": "8c561a7e-490a-4d42-8cfd-429726a96de0",
+			"method": "POST",
+			"path": "/deployment-save",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"serverScript": "78d72deb-d762-4fde-81f4-01843540d627",
+			"tags": "Deployment"
+		}
+	],
+	"definitions": [
+		{
+			"id": "0c217f61-1724-4a1c-e58f-c0d420514eaf",
+			"name": "forms",
+			"description": "",
+			"isInclude": false,
+			"properties": [
+				{
+					"id": "363a1b14-d3cd-4e85-9d94-8d5d209dfe9c",
+					"name": "id",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "9fccbbe0-7700-4346-8b5d-7a70c5454e58",
+					"name": "updatedAt",
+					"parent": "",
+					"description": "",
+					"objectType": "number",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "d866cf9a-7767-4483-e9c5-4bf7d663caaa",
+					"name": "updatedBy",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "adf972d6-83c1-4896-f2e8-c8819e5b4531",
+					"name": "name",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "68e73849-ff19-4718-e9d1-731589f79287",
+					"name": "description",
+					"parent": "",
+					"description": "",
+					"objectType": "object",
+					"objectName": "description",
+					"isParent": true,
+					"enableValueHelp": false,
+					"canAddSubNode": true,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				}
+			]
+		}
+	],
+	"documentation": [],
+	"name": "FormsClient",
+	"endpoint": "/api/serverscript/formsclient",
+	"ver": "23.3.5.926",
+	"version": "1.0",
+	"description": "Neptune FORMS",
+	"mediaType": null,
+	"securitySchemes": null,
+	"swaggerURI": null,
+	"swaggerSystem": null,
+	"apiType": "script",
+	"about": null,
+	"enableProxy": false,
+	"restrictAccess": false,
+	"enableTrace": false,
+	"enableIDE": true,
+	"internalAPI": false,
+	"isPublic": false,
+	"tlsAllowUntrusted": false,
+	"useOwnProcess": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"apiGroup": "d3596a74-a10f-46d9-9d3d-f5462c65031a",
+	"apiFormat": 0,
+	"roles": []
+}

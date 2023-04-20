@@ -1,0 +1,8 @@
+const context = oEvent.oSource.getBindingContext("appData");  
+const data = context.getObject();
+
+modelpanTopProperties.oData.fieldId = data.id;
+modelpanTopProperties.oData.fieldName = data.name;
+
+modelpanTopProperties.refresh();
+diaAttributes.close();

@@ -1,0 +1,17 @@
+{
+	"id": "a47d931d-3a18-4a66-b183-98d85399c432",
+	"createdAt": "2023-01-17T13:52:54.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"settings": {
+		"tableid": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+		"hasDocumentation": false
+	},
+	"documentation": {},
+	"name": "Neptune FORMS: Design",
+	"description": "Neptune FORMS: Design",
+	"group": null,
+	"type": "T",
+	"ver": "23.2.21.938",
+	"disabled": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

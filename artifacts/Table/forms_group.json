@@ -1,0 +1,33 @@
+{
+	"id": "4a9e3232-70e5-4f49-9b63-4104044f5642",
+	"createdAt": "2023-02-20T22:46:29.000Z",
+	"createdBy": "admin",
+	"fields": [
+		{
+			"id": "87b1bd20-7916-415e-d418-72ca9725bba8",
+			"fieldName": "name",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Name",
+			"isNullable": true
+		},
+		{
+			"id": "e78e2be7-1b6a-47d7-9589-9397b3ece3b7",
+			"fieldName": "description",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Description",
+			"isNullable": true
+		}
+	],
+	"indices": [],
+	"foreignKeys": [],
+	"name": "forms_group",
+	"description": "FORMS: Classification - Group",
+	"ver": "23.2.20.2346",
+	"enableAudit": false,
+	"includeDataInPackage": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"rolesRead": [],
+	"rolesWrite": []
+}
