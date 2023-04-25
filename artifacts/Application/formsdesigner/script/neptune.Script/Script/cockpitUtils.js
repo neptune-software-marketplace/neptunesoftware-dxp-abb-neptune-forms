@@ -134,11 +134,6 @@ const cockpitUtils = {
     },
 
     back: function () {
-        if (!cockpitUtils.isCockpit) {
-            oApp.back();
-            return;
-        }
-
         var processFunction = function () {
             if (modelappControl.oData.enableEdit) {
                 sap.n.Planet9.function({

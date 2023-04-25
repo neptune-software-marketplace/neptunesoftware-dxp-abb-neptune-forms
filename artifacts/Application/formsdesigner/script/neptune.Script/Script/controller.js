@@ -794,8 +794,8 @@ const controller = {
                 case "MultipleChoice":
                 case "MultipleSelect":
                 case "MessageStrip":
-                case "TextArea":
-                case "Input":
+                // case "TextArea":
+                // case "Input":
                 case "Text":
                 case "FormTitle":
                 case "Date":
@@ -858,6 +858,10 @@ const controller = {
                 inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: true, text: "true" }));
                 break;
 
+            case "Input":
+                inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: "empty", text: "Empty" }));
+                break;
+
             default:
                 if (visibleField.items) {
                     visibleField.items.forEach(function (item, i) {
@@ -912,8 +916,44 @@ const controller = {
             });
         });
     },
+
+    exportForm: function () {
+        var exportData = modeloPageDetail.getJSON();
+        a = document.createElement("a");
+        a.setAttribute("href", "data:application/text;charset=utf-8," + exportData);
+        a.setAttribute("target", "_blank");
+        a.setAttribute("download", modeloPageDetail.oData.name + ".forms");
+        a.click();
+    },
+
+    importForm: function (event) {
+        $.each(event.target.files, function (i, file) {
+            try {
+                var fileReader = new FileReader();
+                fileReader.onload = function (event) {
+                    var appData = event.target.result.split(",")[1];
+                    appData = Base64.decode(appData);
+
+                    var appJSON = JSON.parse(appData);
+                    appJSON.id = modeloPageDetail.oData.id;
+
+                    modeloPageDetail.setData(appJSON);
+                    modeloPageDetail.refresh();
+
+                    controller.preview();
+
+                    document.getElementById("formsUploader").value = "";
+                };
+                fileReader.readAsDataURL(file);
+            } catch (e) {
+                try {
+                } catch (e) {}
+            }
+        });
+    },
 };
 
 controller.init();
 
 window.importPicture = controller.importPicture;
+window.importForm = controller.importForm;

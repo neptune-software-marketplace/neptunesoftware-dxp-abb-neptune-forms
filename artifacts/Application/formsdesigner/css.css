@@ -2,10 +2,6 @@
     outline: none !important;
 }
 
-// .sapMTreeItemBaseChildren {
-//     background-color: transparent;
-// }
-
 .previewMarked {
     border: 3px dashed var(--nepBrandYellow);
     border-radius: 8px;

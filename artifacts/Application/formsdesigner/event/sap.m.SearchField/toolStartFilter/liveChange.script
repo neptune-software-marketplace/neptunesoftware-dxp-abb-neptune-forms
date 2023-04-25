@@ -9,6 +9,8 @@ filterArr.push(
             new sap.ui.model.Filter("name", "Contains", toolStartFilter.getValue()),
             new sap.ui.model.Filter("description", "Contains", toolStartFilter.getValue()),
             new sap.ui.model.Filter("updatedBy", "Contains", toolStartFilter.getValue()),
+            new sap.ui.model.Filter("groupname", "Contains", toolStartFilter.getValue()),
+            new sap.ui.model.Filter("subgroupname", "Contains", toolStartFilter.getValue()),
         ],
         and: false,
     })

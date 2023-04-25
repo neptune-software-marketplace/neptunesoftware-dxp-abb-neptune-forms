@@ -50,8 +50,9 @@
 				}
 			},
 			"form": {
-				"enableCompact": false,
-				"headerExpanded": true
+				"enableCompact": true,
+				"headerExpanded": true,
+				"headerPreserveState": false
 			},
 			"table": {
 				"enablePagination": true,
@@ -61,7 +62,7 @@
 				"alternateRowColors": false,
 				"fixedLayout": true,
 				"inset": false,
-				"enableCompact": false,
+				"enableCompact": true,
 				"enableAction1": false,
 				"enableAction2": false,
 				"enableAction3": false,
@@ -236,7 +237,7 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.3.3.820",
+	"ver": "23.4.5.934",
 	"disabled": false,
 	"appType": "A",
 	"application": "planet9_adaptive_list",

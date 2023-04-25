@@ -956,15 +956,8 @@
 												{
 													"attribute": "text",
 													"grouping": "Properties",
-													"value": "{appData>groupid}",
+													"value": "{appData>groupname}",
 													"script": "",
-													"translation": []
-												},
-												{
-													"attribute": "text",
-													"grouping": "Formatter",
-													"value": "Anonymous Function",
-													"script": "file://event/sap.m.Text/txttabDataGroup/text.script",
 													"translation": []
 												}
 											],
@@ -1011,15 +1004,8 @@
 												{
 													"attribute": "text",
 													"grouping": "Properties",
-													"value": "{appData>subgroupid}",
+													"value": "{appData>subgroupname}",
 													"script": "",
-													"translation": []
-												},
-												{
-													"attribute": "text",
-													"grouping": "Formatter",
-													"value": "Anonymous Function",
-													"script": "file://event/sap.m.Text/txttabDataSubGroup/text.script",
 													"translation": []
 												}
 											],
@@ -1644,6 +1630,95 @@
 													"grouping": "Events",
 													"value": "controller.copy();",
 													"script": "controller.copy();",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "37bf202d-a3b1-43d5-ac31-4a487624864a",
+											"fieldName": "butDetailExport",
+											"fieldParent": "ad225645-b1d6-454e-bfbb-df715f38e363",
+											"fieldType": "sap.m.Button",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "type",
+													"grouping": "Properties",
+													"value": "Transparent",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Export",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "enableCompactMode",
+													"grouping": "Properties",
+													"value": "true",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "controller.exportForm();",
+													"script": "controller.exportForm();",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "5a1d047c-6955-4ffa-aae0-6363027348f9",
+											"fieldName": "butDetailImport",
+											"fieldParent": "ad225645-b1d6-454e-bfbb-df715f38e363",
+											"fieldType": "sap.m.Button",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "visible",
+													"grouping": "Properties",
+													"value": "{appControl>/enableEdit}",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "type",
+													"grouping": "Properties",
+													"value": "Transparent",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Import",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "enableCompactMode",
+													"grouping": "Properties",
+													"value": "true",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "$(\"#formsUploader\").click();",
+													"script": "$(\"#formsUploader\").click();",
 													"translation": []
 												}
 											],
@@ -3959,41 +4034,6 @@
 																			"data": []
 																		},
 																		{
-																			"fieldNo": "2c426e9b-b8db-4767-d849-ee5f68312122",
-																			"fieldName": "elementToolbarType",
-																			"fieldParent": "baecf3dc-f617-4da5-f73f-f9f31c560845",
-																			"fieldType": "sap.m.Select",
-																			"script": "",
-																			"customComponent": false,
-																			"disabled": true,
-																			"request": [],
-																			"response": [],
-																			"attributes": [
-																				{
-																					"attribute": "width",
-																					"grouping": "Properties",
-																					"value": "200px",
-																					"script": "",
-																					"translation": []
-																				},
-																				{
-																					"attribute": "selectedKey",
-																					"grouping": "Properties",
-																					"value": "{/type}",
-																					"script": "",
-																					"translation": []
-																				},
-																				{
-																					"attribute": "editable",
-																					"grouping": "Properties",
-																					"value": "{appControl>/enableEdit}",
-																					"script": "",
-																					"translation": []
-																				}
-																			],
-																			"data": []
-																		},
-																		{
 																			"fieldNo": "6a11f96a-2c61-4c68-e902-77f826476c09",
 																			"fieldName": "elementToolbarChangeType",
 																			"fieldParent": "baecf3dc-f617-4da5-f73f-f9f31c560845",
@@ -4941,83 +4981,6 @@
 																									"attributes": [],
 																									"data": [
 																										{
-																											"fieldNo": "5ec1f48c-16e3-4f4e-a270-0d57887efcc4",
-																											"fieldName": "insectionTableExpandable",
-																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
-																											"fieldType": "sap.m.CheckBox",
-																											"script": "",
-																											"customComponent": false,
-																											"disabled": true,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "text",
-																													"grouping": "Properties",
-																													"value": "Expandable",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selected",
-																													"grouping": "Properties",
-																													"value": "{/expandable}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "1fc73cea-9896-4422-aafe-305b8dc296ca",
-																											"fieldName": "insectionTableExpanded",
-																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
-																											"fieldType": "sap.m.CheckBox",
-																											"script": "",
-																											"customComponent": false,
-																											"disabled": true,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/expandable} ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "text",
-																													"grouping": "Properties",
-																													"value": "Expanded",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selected",
-																													"grouping": "Properties",
-																													"value": "{/expanded}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
 																											"fieldNo": "d286cf36-2073-4af5-e529-681976e61d1d",
 																											"fieldName": "insectionTableCompact",
 																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
@@ -5072,6 +5035,74 @@
 																													"attribute": "selected",
 																													"grouping": "Properties",
 																													"value": "{/enableSeparators}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "2e51a37a-8287-4333-b5ea-453c3a7205a0",
+																											"fieldName": "insectionTableNumber",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Show Row Number",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableRowNumber}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "563386e4-ca0b-4057-8827-45bcc834956f",
+																											"fieldName": "insectionTableFilter",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Enable Filter",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableFilter}",
 																													"script": "",
 																													"translation": []
 																												},
@@ -20960,6 +20991,31 @@
 							]
 						}
 					]
+				},
+				{
+					"fieldNo": "fefa4c16-62e8-43ea-8cdf-1fee2a249279",
+					"fieldName": "oHTMLUpload",
+					"fieldParent": "21f758ec-26a2-4351-97d2-1efd03f2d6a6",
+					"fieldType": "sap.ui.core.HTML",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "f38ca05f-6847-45d0-a02b-91ac05a1d88c",
+							"fieldName": "oHTMLCode",
+							"fieldParent": "fefa4c16-62e8-43ea-8cdf-1fee2a249279",
+							"fieldType": "neptune.Html",
+							"script": "file://script/neptune.Html/oHTMLCode.script",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
 				}
 			]
 		},
@@ -23305,7 +23361,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "23.3.31.1550",
+	"ver": "23.4.25.926",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

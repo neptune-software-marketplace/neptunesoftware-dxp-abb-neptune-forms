@@ -64,8 +64,9 @@
 				"subTitle": ""
 			},
 			"form": {
-				"enableCompact": false,
-				"headerExpanded": true
+				"enableCompact": true,
+				"headerExpanded": true,
+				"headerPreserveState": false
 			},
 			"table": {
 				"enablePagination": true,
@@ -75,7 +76,7 @@
 				"alternateRowColors": false,
 				"fixedLayout": true,
 				"inset": false,
-				"enableCompact": false,
+				"enableCompact": true,
 				"enableAction1": false,
 				"enableAction2": false,
 				"enableAction3": false,
@@ -101,9 +102,15 @@
 				"usage": "BOTH"
 			},
 			{
-				"name": "name",
-				"label": "Name",
-				"type": "smalltext",
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
 				"usage": "BOTH"
 			},
 			{
@@ -113,26 +120,20 @@
 				"usage": "BOTH"
 			},
 			{
+				"name": "name",
+				"label": "Name",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
 				"name": "updatedAt",
 				"label": "Updated At",
 				"type": "timestamp",
 				"usage": "BOTH"
 			},
 			{
-				"name": "createdAt",
-				"label": "Created At",
-				"type": "timestamp",
-				"usage": "BOTH"
-			},
-			{
 				"name": "updatedBy",
 				"label": "Updated By",
-				"type": "text",
-				"usage": "BOTH"
-			},
-			{
-				"name": "createdBy",
-				"label": "Created By",
 				"type": "text",
 				"usage": "BOTH"
 			}
@@ -175,7 +176,8 @@
 				"name": "updatedAt",
 				"text": "Updated At",
 				"fieldPos": 4,
-				"formatter": "date00"
+				"formatter": "date00",
+				"width": "200px"
 			},
 			{
 				"buttonType": "Transparent",
@@ -185,7 +187,8 @@
 				"visible": true,
 				"name": "updatedBy",
 				"text": "Updated By",
-				"fieldPos": 5
+				"fieldPos": 5,
+				"width": "300px"
 			},
 			{
 				"buttonType": "Transparent",
@@ -217,7 +220,7 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.2.28.1415",
+	"ver": "23.4.5.935",
 	"disabled": false,
 	"appType": "A",
 	"application": "planet9_adaptive_list",

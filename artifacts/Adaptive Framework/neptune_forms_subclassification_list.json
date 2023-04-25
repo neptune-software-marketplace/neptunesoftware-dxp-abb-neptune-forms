@@ -67,15 +67,16 @@
 				"autoRunFocus": true
 			},
 			"form": {
-				"enableCompact": false,
+				"enableCompact": true,
 				"filterExpandable": true,
 				"headerExpanded": true,
-				"showFilter": true
+				"showFilter": true,
+				"headerPreserveState": false
 			},
 			"table": {
 				"showSeparators": "All",
 				"alternateRowColors": false,
-				"enableCompact": false,
+				"enableCompact": true,
 				"fixedLayout": true,
 				"inset": false,
 				"enablePagination": true,
@@ -100,6 +101,24 @@
 		},
 		"fieldCatalog": [
 			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "description",
+				"label": "Description",
+				"type": "mediumtext",
+				"usage": "BOTH"
+			},
+			{
 				"name": "groupid",
 				"label": "Group",
 				"type": "smalltext",
@@ -112,32 +131,14 @@
 				"usage": "BOTH"
 			},
 			{
-				"name": "description",
-				"label": "Description",
-				"type": "mediumtext",
-				"usage": "BOTH"
-			},
-			{
 				"name": "updatedAt",
 				"label": "Updated At",
 				"type": "timestamp",
 				"usage": "BOTH"
 			},
 			{
-				"name": "createdAt",
-				"label": "Created At",
-				"type": "timestamp",
-				"usage": "BOTH"
-			},
-			{
 				"name": "updatedBy",
 				"label": "Updated By",
-				"type": "text",
-				"usage": "BOTH"
-			},
-			{
-				"name": "createdBy",
-				"label": "Created By",
 				"type": "text",
 				"usage": "BOTH"
 			}
@@ -172,14 +173,16 @@
 				"enableFilter": false,
 				"fieldPos": 4,
 				"formatter": "date00",
-				"enableSort": true
+				"enableSort": true,
+				"width": "200px"
 			},
 			{
 				"visible": true,
 				"name": "updatedBy",
 				"text": "Updated By",
 				"fieldPos": 5,
-				"enableSort": true
+				"enableSort": true,
+				"width": "300px"
 			},
 			{
 				"visible": false,
@@ -207,7 +210,7 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.2.21.1035",
+	"ver": "23.4.5.933",
 	"disabled": false,
 	"appType": "A",
 	"application": "planet9_adaptive_list",

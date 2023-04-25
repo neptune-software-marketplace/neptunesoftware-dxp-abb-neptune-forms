@@ -57,8 +57,9 @@
 				"avatarIcon": "sap-icon://trip-report"
 			},
 			"form": {
-				"enableCompact": false,
-				"headerExpanded": true
+				"enableCompact": true,
+				"headerExpanded": true,
+				"headerPreserveState": false
 			},
 			"table": {
 				"enablePagination": true,
@@ -68,7 +69,7 @@
 				"alternateRowColors": false,
 				"fixedLayout": true,
 				"inset": false,
-				"enableCompact": false,
+				"enableCompact": true,
 				"enableAction1": false,
 				"enableAction2": false,
 				"enableAction3": false,
@@ -88,30 +89,6 @@
 		},
 		"fieldCatalog": [
 			{
-				"name": "name",
-				"label": "Name",
-				"type": "smalltext",
-				"usage": "BOTH"
-			},
-			{
-				"name": "description",
-				"label": "Description",
-				"type": "mediumtext",
-				"usage": "BOTH"
-			},
-			{
-				"name": "setup",
-				"label": "Setup in JSON",
-				"type": "json",
-				"usage": "BOTH"
-			},
-			{
-				"name": "released",
-				"label": "Is FORM Released",
-				"type": "boolean",
-				"usage": "BOTH"
-			},
-			{
 				"name": "groupid",
 				"label": "Classification Group",
 				"type": "smalltext",
@@ -124,9 +101,45 @@
 				"usage": "BOTH"
 			},
 			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "description",
+				"label": "Description",
+				"type": "mediumtext",
+				"usage": "BOTH"
+			},
+			{
 				"name": "savedata",
 				"label": "Enable Reporting",
 				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "released",
+				"label": "Is FORM Released",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "name",
+				"label": "Name",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "setup",
+				"label": "Setup in JSON",
+				"type": "json",
 				"usage": "BOTH"
 			},
 			{
@@ -136,20 +149,8 @@
 				"usage": "BOTH"
 			},
 			{
-				"name": "createdAt",
-				"label": "Created At",
-				"type": "timestamp",
-				"usage": "BOTH"
-			},
-			{
 				"name": "updatedBy",
 				"label": "Updated By",
-				"type": "text",
-				"usage": "BOTH"
-			},
-			{
-				"name": "createdBy",
-				"label": "Created By",
 				"type": "text",
 				"usage": "BOTH"
 			}
@@ -270,7 +271,8 @@
 				"name": "updatedAt",
 				"text": "Updated At",
 				"fieldPos": 9,
-				"formatter": "date00"
+				"formatter": "date00",
+				"width": "200px"
 			},
 			{
 				"buttonType": "Transparent",
@@ -280,7 +282,8 @@
 				"visible": true,
 				"name": "updatedBy",
 				"text": "Updated By",
-				"fieldPos": 10
+				"fieldPos": 10,
+				"width": "300px"
 			}
 		],
 		"defaultVariant": {
@@ -302,7 +305,7 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.2.21.1211",
+	"ver": "23.4.5.934",
 	"disabled": false,
 	"appType": "A",
 	"application": "planet9_adaptive_list",

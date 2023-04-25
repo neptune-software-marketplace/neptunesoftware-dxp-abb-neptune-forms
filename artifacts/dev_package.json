@@ -7,7 +7,7 @@
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "23.4.20.1328",
+	"ver": "23.4.25.109",
 	"enableCICD": true,
 	"apps": [
 		{
@@ -257,11 +257,6 @@
 			"name": "FORMS Attributes"
 		},
 		{
-			"id": "ccaf3f0d-37f9-4423-abff-d1c8ed5b6e13",
-			"description": "Create Forms with No-Code",
-			"name": "FORMS Designer - Copy"
-		},
-		{
 			"id": "b5d4a055-2df2-4ae1-976d-3e41d2d1ce3c",
 			"description": "View FORMS submitted reports",
 			"name": "FORMS Reports"
@@ -278,7 +273,7 @@
 		},
 		{
 			"id": "538e3ef8-0493-4f9e-a738-a231db3e8c01",
-			"description": "Create Forms with No-Code",
+			"description": "Create FORMS easily with our no-code FORMS Designer",
 			"name": "FORMS Designer"
 		}
 	],

@@ -1,0 +1,3 @@
+<div id='oHTMLUpload' style='display:none'>
+    <input name='formsUploader' accept='.forms' id='formsUploader' type='file' onchange='importForm(event)' style='display:none;' value='' />
+</div>

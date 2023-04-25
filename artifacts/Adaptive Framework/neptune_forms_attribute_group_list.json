@@ -58,8 +58,9 @@
 				"avatarBackgroundColor": "Accent7"
 			},
 			"form": {
-				"enableCompact": false,
-				"headerExpanded": true
+				"enableCompact": true,
+				"headerExpanded": true,
+				"headerPreserveState": false
 			},
 			"table": {
 				"enablePagination": true,
@@ -69,7 +70,7 @@
 				"alternateRowColors": false,
 				"fixedLayout": true,
 				"inset": false,
-				"enableCompact": false,
+				"enableCompact": true,
 				"enableAction1": false,
 				"enableAction2": false,
 				"enableAction3": false,
@@ -89,9 +90,15 @@
 		},
 		"fieldCatalog": [
 			{
-				"name": "name",
-				"label": "Name",
-				"type": "smalltext",
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
 				"usage": "BOTH"
 			},
 			{
@@ -101,26 +108,20 @@
 				"usage": "BOTH"
 			},
 			{
+				"name": "name",
+				"label": "Name",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
 				"name": "updatedAt",
 				"label": "Updated At",
 				"type": "timestamp",
 				"usage": "BOTH"
 			},
 			{
-				"name": "createdAt",
-				"label": "Created At",
-				"type": "timestamp",
-				"usage": "BOTH"
-			},
-			{
 				"name": "updatedBy",
 				"label": "Updated By",
-				"type": "text",
-				"usage": "BOTH"
-			},
-			{
-				"name": "createdBy",
-				"label": "Created By",
 				"type": "text",
 				"usage": "BOTH"
 			}
@@ -169,7 +170,8 @@
 				"name": "updatedAt",
 				"text": "Updated At",
 				"fieldPos": 5,
-				"formatter": "date00"
+				"formatter": "date00",
+				"width": "200px"
 			},
 			{
 				"buttonType": "Transparent",
@@ -179,7 +181,8 @@
 				"visible": true,
 				"name": "updatedBy",
 				"text": "Updated By",
-				"fieldPos": 6
+				"fieldPos": 6,
+				"width": "300px"
 			}
 		],
 		"defaultVariant": {
@@ -201,7 +204,7 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.2.28.1413",
+	"ver": "23.4.5.934",
 	"disabled": false,
 	"appType": "A",
 	"application": "planet9_adaptive_list",

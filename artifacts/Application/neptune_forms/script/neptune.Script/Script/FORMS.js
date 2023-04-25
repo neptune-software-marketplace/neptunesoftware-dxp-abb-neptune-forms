@@ -13,6 +13,8 @@ const FORMS = {
     validationCheck: false,
     signatures: {},
     uploadObject: null,
+    colHeaders: {},
+    colSorting: {},
 
     build: function (parent, options) {
         let formOptions;
@@ -55,6 +57,8 @@ const FORMS = {
         FORMS.editable = true;
         FORMS.formTitleHide = [];
         FORMS.signatures = {};
+        FORMS.colHeaders = {};
+        FORMS.colSorting = {};
         FORMS.config = options.config;
         FORMS.sessionid = options.sessionid;
 
@@ -163,6 +167,9 @@ const FORMS = {
                         tabModel.setData(modelData);
                     }
 
+                    // Row Number
+                    if (section.enableRowNumber) FORMS.tableAddRowNumber(tabModel.oData);
+
                     sectionParent.bindAggregation("items", { path: "/", template: FORMS.columnTemplate, templateShareable: false });
                     break;
             }
@@ -170,6 +177,14 @@ const FORMS = {
 
         if (parent.addContent) parent.addContent(FORMS.formParent);
         if (parent.addItem) parent.addItem(FORMS.formParent);
+    },
+
+    tableAddRowNumber: function (modelData) {
+        for (let i = 0; i < modelData.length; i++) {
+            modelData[i].rowNumber = i + 1;
+        }
+
+        return modelData;
     },
 
     buildParentForm: function (section) {
@@ -190,6 +205,8 @@ const FORMS = {
         });
 
         if (section.enableCompact) sectionForm.addStyleClass("sapUiSizeCompact");
+
+        sectionForm.addStyleClass("FormsSimpleForm");
 
         sectionPanel.addContent(sectionForm);
 
@@ -318,19 +335,29 @@ const FORMS = {
         let visibleStatement = element.visibleInverse ? "false:true" : "true:false";
         let visibleValueSep = element.visibleValue === "true" || element.visibleValue === "false" ? "" : "'";
         let visibleFieldName = element.visibleFieldName;
+        let visibleCond;
 
         // Check if field have object attributes
         const checkElement = FORMS.getElementFromId(element.visibleFieldName);
         if (checkElement.fieldName) visibleFieldName = checkElement.fieldName;
 
-        let visibleCond = "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + " ? " + visibleStatement + " }";
+        if (checkElement.type === "Input" || checkElement.type === "TextArea") {
+            if (element.visibleValue === "empty") {
+                if (element.visibleCondition === "===") {
+                    visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? false:true }";
+                } else {
+                    visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? true:false }";
+                }
+            }
+        } else {
+            visibleCond = "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + " ? " + visibleStatement + " }";
+        }
 
         return visibleCond;
     },
 
     buildParentTable: function (section) {
         const sectionTable = new sap.m.Table(FORMS.buildElementFieldID(section), {
-            autoPopinMode: false,
             showSeparators: sap.m.ListSeparators.None,
             backgroundDesign: "Transparent",
             contextualWidth: "Auto",
@@ -340,14 +367,15 @@ const FORMS = {
                 const context = oEvent.mParameters.listItem.getBindingContext();
                 const data = context.getObject();
                 ModelData.Delete(model, "id", data.id);
+                FORMS.tableAddRowNumber(model.oData);
             },
         });
 
+        sectionTable.addStyleClass("FormsTable");
+
         // Popin
-        if (section.popin) {
+        if (section.popin && sectionTable.setAutoPopinMode) {
             sectionTable.setAutoPopinMode(true);
-        } else {
-            sectionTable.setAutoPopinMode(false);
         }
 
         // Show Separators
@@ -359,7 +387,7 @@ const FORMS = {
             visible: FORMS.buildVisibleCond(section),
         }).addStyleClass("sapUiSmallMarginTopBottom");
 
-        const sectionToolbar = new sap.m.Toolbar();
+        const sectionToolbar = new sap.m.Toolbar().addStyleClass("sapUiSizeCompact");
 
         sectionToolbar.addContent(
             new sap.m.Title({
@@ -368,6 +396,19 @@ const FORMS = {
         );
 
         sectionToolbar.addContent(new sap.m.ToolbarSpacer());
+
+        // Search Bar
+        if (section.enableFilter) {
+            sectionToolbar.addContent(
+                new sap.m.SearchField({
+                    width: "230px",
+                    liveChange: function (oEvent) {
+                        FORMS.handleTableFilter(sectionTable, this.getValue());
+                    },
+                })
+            );
+            sectionToolbar.addContent(new sap.m.ToolbarSeparator());
+        }
 
         // Enable Add
         if (section.enableCreate && FORMS.editable) {
@@ -378,6 +419,7 @@ const FORMS = {
                     press: function (oEvent) {
                         const model = sectionTable.getModel();
                         model.oData.push({ id: ModelData.genID() });
+                        FORMS.tableAddRowNumber(model.oData);
                         model.refresh();
                     },
                 })
@@ -461,7 +503,7 @@ const FORMS = {
 
         // Enable Copy
         if (section.enableCopy && FORMS.editable) {
-            const newColumn = new sap.m.Column({ width: "50px" });
+            const newColumn = new sap.m.Column({ width: "40px" });
 
             sectionTable.addColumn(newColumn);
 
@@ -478,12 +520,103 @@ const FORMS = {
             );
         }
 
+        // Show Row Number
+        if (section.enableRowNumber) {
+            const colRowNumber = new sap.m.Column({ width: "40px", sortIndicator: "Ascending" });
+
+            colRowNumber.setHeader(new sap.m.Label({ text: "" }));
+
+            FORMS.setColumnSorting(sectionTable, colRowNumber, { id: "rowNumber" });
+            sectionTable.addColumn(colRowNumber);
+
+            columListItem.addCell(new sap.m.Input({ value: "{rowNumber}", enabled: false }));
+        }
+
         sectionPanel.addContent(sectionTable);
 
         FORMS.formParent.addContent(sectionPanel);
         FORMS.columnTemplate = columListItem;
 
+        // Enable Add
+        if (section.enableCreate && FORMS.editable) {
+            FORMS.formParent.addContent(
+                new sap.m.Button({
+                    text: "Add",
+                    type: "Transparent",
+                    press: function (oEvent) {
+                        const model = sectionTable.getModel();
+                        model.oData.push({ id: ModelData.genID() });
+                        FORMS.tableAddRowNumber(model.oData);
+                        model.refresh();
+                    },
+                }).addStyleClass("sapUiSizeCompact")
+            );
+        }
+
         return sectionTable;
+    },
+
+    setColumnSorting: function (table, column, element) {
+        var _column_delegate = {
+            onclick: function (e) {
+                FORMS.handleColumnSorting(table, column, element);
+            },
+        };
+
+        column.addEventDelegate(_column_delegate);
+
+        column.exit = function () {
+            column.removeEventDelegate(_column_delegate);
+        };
+
+        column.setStyleClass("nepMTableSortCell");
+
+        if (!FORMS.colHeaders[table.sId]) FORMS.colHeaders[table.sId] = {};
+        FORMS.colHeaders[table.sId][column.sId] = column;
+    },
+
+    handleColumnSorting: function (table, column, element) {
+        const bindingField = element.fieldName ? element.fieldName : element.id;
+        const sortIndicatorOrder = column.getSortIndicator();
+        let sortModelOrder;
+
+        // Clear All
+        const keys = Object.keys(FORMS.colHeaders[table.sId]);
+
+        keys.forEach(function (key) {
+            FORMS.colHeaders[table.sId][key].setSortIndicator("None");
+        });
+
+        if (sortIndicatorOrder === "Ascending") {
+            column.setSortIndicator("Descending");
+            sortModelOrder = true;
+        } else {
+            column.setSortIndicator("Ascending");
+            sortModelOrder = false;
+        }
+
+        const oSorter = new sap.ui.model.Sorter(bindingField, sortModelOrder, false);
+        const binding = table.getBinding("items");
+        binding.sort(oSorter);
+    },
+
+    handleTableFilter: function (table, value) {
+        const binding = table.getBinding("items");
+        const filters = [];
+
+        if (FORMS.colSorting[table.sId] && FORMS.colSorting[table.sId].forEach) {
+            FORMS.colSorting[table.sId].forEach(function (element) {
+                const bindingField = element.fieldName ? element.fieldName : element.id;
+                filters.push(new sap.ui.model.Filter(bindingField, "Contains", value));
+            });
+        }
+
+        const filter = new sap.ui.model.Filter({
+            filters: filters,
+            and: false,
+        });
+
+        binding.filter([filter]);
     },
 
     buildCopyDialog: function (columListItem, tableId, rowId) {
@@ -527,7 +660,10 @@ const FORMS = {
                         tableData.push(newRow);
                     }
 
-                    table.getModel().refresh();
+                    let model = table.getModel();
+                    FORMS.tableAddRowNumber(model.oData);
+                    model.refresh();
+
                     diaCopy.close();
                 },
             }).addStyleClass("sapUiSizeCompact")
@@ -556,10 +692,13 @@ const FORMS = {
         tabCopy.addColumn(new sap.m.Column({ width: "100%" }).setHeader(new sap.m.Label({ text: "Content", design: "Bold" })));
 
         for (let i = 1; i < cells.length; i++) {
+            const fieldId = cells[i].sId.split("field")[1];
+
+            if (!fieldId) continue;
+
             const columListItem = new sap.m.ColumnListItem();
             tabCopy.addItem(columListItem);
 
-            const fieldId = cells[i].sId.split("field")[1];
             const clone = cells[i].clone();
             const element = FORMS.getObjectFromId(fieldId);
 
@@ -668,16 +807,6 @@ const FORMS = {
             delete element.config.enableLog;
             const updatedAt = oDateFormat.format(new Date(element.updatedAt));
 
-            // formParent.addContent(new sap.ui.core.Title({}));
-            // formParent.addContent(new sap.m.Label({ text: "Updated" }));
-            // const vBox = new sap.m.VBox();
-
-            // vBox.addItem(new sap.m.Text({ text: updatedAt }));
-            // vBox.addItem(new sap.m.Text({ text: element.updatedBy }));
-            // formParent.addContent(vBox);
-
-            // formParent.addContent(new sap.ui.core.Title({}));
-
             FORMS.formParent = formParent;
             FORMS.buildElement(formParent, element.config, { type: "Form" }, i);
 
@@ -697,17 +826,12 @@ const FORMS = {
     },
 
     buildParentTableChildren: function (parent, element, section, index, elementField) {
-        const newColumn = new sap.m.Column({
-            // visible: FORMS.buildVisibleCond(element)
-        });
+        const newColumn = new sap.m.Column({});
 
         if (section.popin) {
             newColumn.setDemandPopin(true);
             newColumn.setPopinDisplay("Block");
-            newColumn.setImportance("Medium");
         }
-
-        // elementField.bindProperty("visible", FORMS.buildVisibleCond(element));
 
         // Column Width
         if (section.widths) {
@@ -720,15 +844,10 @@ const FORMS = {
                         newColumn.setWidth(widths.width + "px");
                     }
                 }
-
-                // if (widths.minSize) {
-                //     newColumn.setDemandPopin(true);
-                //     newColumn.setPopinDisplay("Block");
-                //     newColumn.setMinScreenWidth(widths.minSize);
-                // }
             }
         }
 
+        // Column Header
         newColumn.setHeader(
             new sap.m.Label(FORMS.buildElementFieldID(element), {
                 text: element.title,
@@ -739,6 +858,21 @@ const FORMS = {
 
         parent.addColumn(newColumn);
 
+        // Filter
+        switch (element.type) {
+            case "CheckBox":
+            case "Switch":
+            case "SegmentedButton":
+            case "Image":
+                break;
+
+            default:
+                if (!FORMS.colSorting[parent.sId]) FORMS.colSorting[parent.sId] = [];
+                FORMS.colSorting[parent.sId].push(element);
+                break;
+        }
+
+        FORMS.setColumnSorting(parent, newColumn, element);
         FORMS.columnTemplate.addCell(elementField);
     },
 
@@ -845,6 +979,9 @@ const FORMS = {
         }
 
         if (!elementField) return;
+
+        // Custom CSS
+        if (elementField.addStyleClass) elementField.addStyleClass("FormsInput");
 
         switch (section.type) {
             case "Form":
@@ -1135,7 +1272,7 @@ const FORMS = {
             selectedKey: "{" + FORMS.bindingPath + bindingField + "}",
             width: "100%",
             editable: FORMS.editable,
-            showIcon: true,
+            // showIcon: true,
         });
 
         // Override externally or combine
@@ -1354,7 +1491,23 @@ const FORMS = {
             }
         }
 
-        newField.addItem(elementUploader);
+        const elementHBox = new sap.m.HBox();
+        elementHBox.addItem(elementUploader);
+
+        elementHBox.addItem(
+            new sap.m.Button({
+                type: "Transparent",
+                enabled: FORMS.editable,
+                icon: "sap-icon://clear-all",
+                tooltip: "Delete Image",
+                visible: "{= ${" + FORMS.bindingPath + bindingField + "} ? true:false}",
+                press: function (oEvent) {
+                    elementImage.setSrc();
+                },
+            }).addStyleClass("sapUiSizeCompact")
+        );
+
+        newField.addItem(elementHBox);
         newField.addItem(elementImage);
 
         return newField;
@@ -1377,8 +1530,11 @@ const FORMS = {
             showSeparators: sap.m.ListSeparators.None,
             backgroundDesign: "Transparent",
             contextualWidth: "Auto",
-            autoPopinMode: true,
         });
+
+        if (tabCheckList.setAutoPopinMode) {
+            tabCheckList.setAutoPopinMode(true);
+        }
 
         // Columns
         const colQuestion = new sap.m.Column();
@@ -1489,21 +1645,6 @@ const FORMS = {
 
         FORMS.config.setup.forEach(function (section) {
             if (!section) return;
-            if (section.type === "Table") {
-                const tabObject = sap.ui.getCore().byId("field" + section.id);
-                const tabModel = tabObject.getModel();
-                if (tabModel) {
-                    outputData[section.id] = tabModel.oData;
-
-                    // Cleanup validation fields
-                    if (outputData[section.id].forEach) {
-                        outputData[section.id].forEach(function (data) {
-                            delete data.highlight;
-                        });
-                    }
-                }
-                return;
-            }
 
             section.elements.forEach(function (element) {
                 getElementData(element);
@@ -1516,10 +1657,31 @@ const FORMS = {
         });
 
         const process = complete ? "" : "OnlyCheck";
-
         const valid = FORMS.validate(process);
 
         if (complete && valid) completed = true;
+
+        // Cleanup fields
+        FORMS.config.setup.forEach(function (section) {
+            if (!section) return;
+
+            if (section.type === "Table") {
+                const tabObject = sap.ui.getCore().byId("field" + section.id);
+                const tabModel = tabObject.getModel();
+
+                if (tabModel) {
+                    outputData[section.id] = tabModel.oData;
+
+                    if (outputData[section.id] && outputData[section.id].forEach) {
+                        outputData[section.id].forEach(function (data) {
+                            delete data.highlight;
+                            delete data.rowNumber;
+                        });
+                    }
+                }
+                return;
+            }
+        });
 
         const formData = {
             data: outputData,
@@ -1614,13 +1776,14 @@ const FORMS = {
 
         const validateElement = function (element) {
             const field = sap.ui.getCore().byId("field" + element.id);
+            const bindingField = element.fieldName ? element.fieldName : element.id;
 
             if (element.required && !element.disabled && field.getDomRef()) {
-                const bindingField = element.fieldName ? element.fieldName : element.id;
-
                 fieldCompleted = formModel.oData[bindingField] ? true : false;
                 if (validForm) validForm = fieldCompleted;
                 FORMS.validateMarkField(element.id, fieldCompleted, process);
+            } else {
+                delete formModel.oData[bindingField];
             }
 
             // MultipleSelect/MultipleChoice
