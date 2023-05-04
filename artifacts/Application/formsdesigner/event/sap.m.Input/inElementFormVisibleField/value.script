@@ -1,0 +1,7 @@
+if (typeof visibleFieldName === "undefined" || visibleFieldName === null || visibleFieldName === "") { return; }  
+
+
+const element = controller.getObjectFromId(visibleFieldName);
+const parent = controller.getParentFromId(visibleFieldName);
+
+return `(${parent.title}) ${element.title}`;

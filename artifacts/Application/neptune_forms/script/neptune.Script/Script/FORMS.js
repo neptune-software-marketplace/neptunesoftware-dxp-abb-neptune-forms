@@ -9,12 +9,14 @@ const FORMS = {
     editable: true,
     bindingPath: "",
     columnTemplate: null,
+    formTemplate: null,
     sessionid: null,
     validationCheck: false,
     signatures: {},
     uploadObject: null,
     colHeaders: {},
     colSorting: {},
+    paginationSetup: {},
 
     build: function (parent, options) {
         let formOptions;
@@ -54,11 +56,24 @@ const FORMS = {
             return;
         }
 
+        // Cleanup if Something is wrong
+        if (options.config.setup && options.config.setup.forEach) {
+            options.config.setup.forEach(function (section, i) {
+                section.elements = section.elements.filter((obj) => obj && Object.keys(obj).length !== 0);
+                section.elements.forEach(function (element, i) {
+                    if (element.elements) {
+                        element.elements = element.elements.filter((obj) => obj && Object.keys(obj).length !== 0);
+                    }
+                });
+            });
+        }
+
         FORMS.editable = true;
         FORMS.formTitleHide = [];
         FORMS.signatures = {};
         FORMS.colHeaders = {};
         FORMS.colSorting = {};
+        FORMS.paginationSetup = {};
         FORMS.config = options.config;
         FORMS.sessionid = options.sessionid;
 
@@ -125,7 +140,9 @@ const FORMS = {
 
                 if (element.elements) {
                     element.elements.forEach(function (subElement, iSub) {
-                        FORMS.buildElement(sectionParent, subElement, section, iSub);
+                        if (subElement) {
+                            FORMS.buildElement(sectionParent, subElement, section, iSub);
+                        }
                     });
                 }
             });
@@ -134,41 +151,39 @@ const FORMS = {
             switch (section.type) {
                 case "Table":
                     const tabModel = new sap.ui.model.json.JSONModel();
+                    let modelData = [];
+
                     sectionParent.setModel(tabModel);
 
                     if (options.data && options.data[section.id] && options.data[section.id].length) {
-                        tabModel.setData(options.data[section.id]);
+                        modelData = options.data[section.id];
                     } else {
-                        let modelData = [];
                         let rows = section.rows || 1;
 
                         for (let i = 0; i < rows; i++) {
-                            let newRec = { id: ModelData.genID() };
-
-                            // Default Data
-                            section.elements.forEach(function (element, i) {
-                                switch (element.type) {
-                                    case "SingleChoice":
-                                    case "SegmentedButton":
-                                        if (element.items) {
-                                            const firstItem = element.items[0];
-                                            newRec[element.id] = firstItem.key;
-                                        }
-                                        break;
-
-                                    default:
-                                        break;
-                                }
-                            });
-
-                            modelData.push(newRec);
+                            modelData.push(FORMS.buildRowTemplate(section.elements));
                         }
-
-                        tabModel.setData(modelData);
                     }
 
                     // Row Number
-                    if (section.enableRowNumber) FORMS.tableAddRowNumber(tabModel.oData);
+                    if (section.enableRowNumber) FORMS.tableAddRowNumber(modelData);
+
+                    // Pagination
+                    if (section.enablePagination) {
+                        FORMS.paginationSetup[section.id] = {
+                            take: section.paginationTake || 2,
+                            index: 0,
+                            count: 0,
+                            filter: "",
+                            sortOrder: "Ascending",
+                            sortField: "",
+                            data: modelData,
+                        };
+
+                        FORMS.paginationHandle(section);
+                    } else {
+                        tabModel.setData(modelData);
+                    }
 
                     sectionParent.bindAggregation("items", { path: "/", template: FORMS.columnTemplate, templateShareable: false });
                     break;
@@ -177,6 +192,139 @@ const FORMS = {
 
         if (parent.addContent) parent.addContent(FORMS.formParent);
         if (parent.addItem) parent.addItem(FORMS.formParent);
+    },
+
+    buildRowTemplate: function (elements) {
+        let newRec = { id: ModelData.genID() };
+
+        elements.forEach(function (element, i) {
+            const bindingField = element.fieldName ? element.fieldName : element.id;
+
+            switch (element.type) {
+                case "SingleChoice":
+                case "SegmentedButton":
+                    if (element.items) {
+                        const firstItem = element.items[0];
+                        newRec[bindingField] = firstItem.key;
+                    }
+                    break;
+
+                case "CheckBox":
+                case "Switch":
+                    newRec[bindingField] = false;
+                    break;
+
+                case "StepInput":
+                    newRec[bindingField] = element.min ? parseInt(element.min) : 0;
+                    break;
+
+                default:
+                    newRec[bindingField] = "";
+                    break;
+            }
+        });
+
+        return newRec;
+    },
+
+    paginationHandle: function (section) {
+        const tabObject = sap.ui.getCore().byId("field" + section.id);
+        const tabModel = tabObject.getModel();
+        const take = parseInt(FORMS.paginationSetup[section.id].take);
+
+        const tableData = FORMS.paginationSetup[section.id].data;
+        let filterData = FORMS.paginationSetup[section.id].filter ? FORMS.filterArray(tableData, FORMS.paginationSetup[section.id].filter) : tableData;
+
+        // Sorting
+        if (FORMS.paginationSetup[section.id].sortField) {
+            filterData = FORMS.sortArray(filterData, FORMS.paginationSetup[section.id].sortField, FORMS.paginationSetup[section.id].sortOrder);
+        }
+
+        // Add RowNumber
+        FORMS.tableAddRowNumber(filterData);
+
+        // Total Number of Entries
+        FORMS.paginationSetup[section.id].count = filterData.length;
+
+        const counter = sap.ui.getCore().byId("counter" + section.id);
+        if (counter) counter.setNumber("(" + FORMS.paginationSetup[section.id].count + ")");
+
+        // Set Table Data
+        let startIndex = take * FORMS.paginationSetup[section.id].index;
+
+        if (startIndex === FORMS.paginationSetup[section.id].count) {
+            startIndex = startIndex - take;
+            FORMS.paginationSetup[section.id].index--;
+        }
+
+        tabModel.setData(filterData.slice(startIndex, startIndex + take));
+        tabModel.refresh();
+
+        // UI Setup
+        let maxIndex = filterData.length / take;
+        maxIndex = Math.ceil(maxIndex);
+
+        if (filterData.length <= take) maxIndex = 1;
+
+        toolPaginationFirst = sap.ui.getCore().byId("paginationFirst" + section.id);
+        toolPaginationPrev = sap.ui.getCore().byId("paginationPrev" + section.id);
+        toolPaginationNext = sap.ui.getCore().byId("paginationNext" + section.id);
+        toolPaginationLast = sap.ui.getCore().byId("paginationLast" + section.id);
+        toolPaginationPages = sap.ui.getCore().byId("paginationPages" + section.id);
+        toolPaginationTitle = sap.ui.getCore().byId("paginationTitle" + section.id);
+
+        toolPaginationFirst.setEnabled(true);
+        toolPaginationPrev.setEnabled(true);
+        toolPaginationNext.setEnabled(true);
+        toolPaginationLast.setEnabled(true);
+
+        if (FORMS.paginationSetup[section.id].index < 0) FORMS.paginationSetup[section.id].index = 0;
+
+        if (FORMS.paginationSetup[section.id].index === 0) {
+            toolPaginationFirst.setEnabled(false);
+            toolPaginationPrev.setEnabled(false);
+        }
+
+        if (FORMS.paginationSetup[section.id].index + 1 >= maxIndex) {
+            toolPaginationNext.setEnabled(false);
+            toolPaginationLast.setEnabled(false);
+        }
+
+        toolPaginationPages.destroyItems();
+
+        let numItems = 0;
+        let maxItems = 6;
+        let startItem = FORMS.paginationSetup[section.id].index - maxItems / 2;
+
+        if (startItem < 0) startItem = 0;
+
+        for (i = startItem; i < maxIndex; i++) {
+            if (numItems <= maxItems) toolPaginationPages.addItem(new sap.m.SegmentedButtonItem({ text: i + 1, key: i }));
+            numItems++;
+        }
+
+        toolPaginationPages.setSelectedKey(FORMS.paginationSetup[section.id].index);
+        toolPaginationTitle.setNumber(FORMS.paginationSetup[section.id].index + 1 + "/" + maxIndex);
+    },
+
+    filterArray: function (jsonArray, filter) {
+        const result = jsonArray.filter((item) => {
+            return Object.entries(item).some(([key, value]) => {
+                return key !== "id" && key !== "rowNumber" && String(value).toLowerCase().includes(filter.toLowerCase());
+            });
+        });
+        return result;
+    },
+
+    sortArray: function (jsonArray, field, sortOrder = "Ascending") {
+        const sortedArray = jsonArray.sort((a, b) => {
+            if (sortOrder === "Ascending") {
+                return a[field] > b[field] ? 1 : -1;
+            } else {
+                return a[field] < b[field] ? 1 : -1;
+            }
+        });
+        return sortedArray;
     },
 
     tableAddRowNumber: function (modelData) {
@@ -192,7 +340,7 @@ const FORMS = {
             headerText: section.title,
             backgroundDesign: "Solid",
             visible: FORMS.buildVisibleCond(section),
-        }).addStyleClass("sapUiSmallMarginTopBottom");
+        }).addStyleClass("sapUiSmallMarginTopBottom sapUiNoContentPadding");
 
         const sectionForm = new sap.ui.layout.form.SimpleForm({
             layout: "ResponsiveGridLayout",
@@ -201,8 +349,8 @@ const FORMS = {
             labelSpanM: parseInt(section.labelSpan) || 4,
             labelSpanS: 12,
             columnsL: parseInt(section.columns) || 2,
-            columnsM: parseInt(section.columns) || 2,
-        });
+            columnsM: 2,
+        }).addStyleClass("sapUiNoContentPadding");
 
         if (section.enableCompact) sectionForm.addStyleClass("sapUiSizeCompact");
 
@@ -285,8 +433,8 @@ const FORMS = {
                             let data = FORMS.getData();
                             data.completed = false;
 
-                            let parentData = ModelData.FindFirst(data.config.setup, "id", section.id);
-                            if (parentData) parentData.elements.splice(index, 1);
+                            let parent = FORMS.getDuplicateParentFromId(element.id, data);
+                            parent.elements.splice(index, 1);
 
                             FORMS.build(FORMS.customerParent, data);
                         },
@@ -312,8 +460,8 @@ const FORMS = {
                                 });
                             }
 
-                            let parentData = ModelData.FindFirst(data.config.setup, "id", section.id);
-                            if (parentData) parentData.elements.splice(index + 1, 0, newElement);
+                            let parent = FORMS.getDuplicateParentFromId(element.id, data);
+                            parent.elements.splice(index + 1, 0, newElement);
 
                             FORMS.build(FORMS.customerParent, data);
                         },
@@ -326,12 +474,14 @@ const FORMS = {
     },
 
     buildVisibleCond: function (element) {
+        if (!element) return;
         if (!element.enableVisibleCond) return;
         if (!element.visibleFieldName) return;
         if (!element.visibleCondition) return;
         if (!element.visibleValue) return;
 
-        let bindingPath = "/"; //element.type === "Table" ? "/" : FORMS.bindingPath;
+        let bindingPath = element.type === "Table" ? "/" : FORMS.bindingPath;
+
         let visibleStatement = element.visibleInverse ? "false:true" : "true:false";
         let visibleValueSep = element.visibleValue === "true" || element.visibleValue === "false" ? "" : "'";
         let visibleFieldName = element.visibleFieldName;
@@ -339,6 +489,8 @@ const FORMS = {
 
         // Check if field have object attributes
         const checkElement = FORMS.getElementFromId(element.visibleFieldName);
+
+        if (!checkElement) return;
         if (checkElement.fieldName) visibleFieldName = checkElement.fieldName;
 
         if (checkElement.type === "Input" || checkElement.type === "TextArea") {
@@ -359,33 +511,53 @@ const FORMS = {
     buildParentTable: function (section) {
         const sectionTable = new sap.m.Table(FORMS.buildElementFieldID(section), {
             showSeparators: sap.m.ListSeparators.None,
-            backgroundDesign: "Transparent",
+            backgroundDesign: "Solid",
             contextualWidth: "Auto",
             showNoData: false,
             delete: function (oEvent) {
-                const model = this.getModel();
                 const context = oEvent.mParameters.listItem.getBindingContext();
                 const data = context.getObject();
-                ModelData.Delete(model, "id", data.id);
-                FORMS.tableAddRowNumber(model.oData);
+
+                if (section.enablePagination) {
+                    const model = FORMS.paginationSetup[section.id].data;
+                    ModelData.Delete(model, "id", data.id);
+                    FORMS.paginationHandle(section);
+                } else {
+                    const model = this.getModel();
+                    ModelData.Delete(model, "id", data.id);
+                    FORMS.tableAddRowNumber(model.oData);
+                }
+            },
+            updateFinished: function (oEvent) {
+                const counter = sap.ui.getCore().byId("counter" + section.id);
+                if (counter) {
+                    let length = 0;
+                    if (section.enablePagination) {
+                        length = FORMS.paginationSetup[section.id].data.length;
+                    } else {
+                        length = this.getModel().oData.length;
+                    }
+                    counter.setNumber("(" + length + ")");
+                }
             },
         });
 
         sectionTable.addStyleClass("FormsTable");
-
-        // Popin
-        if (section.popin && sectionTable.setAutoPopinMode) {
-            sectionTable.setAutoPopinMode(true);
-        }
 
         // Show Separators
         if (section.enableSeparators) {
             sectionTable.setShowSeparators(sap.m.ListSeparators.Inner);
         }
 
+        // Show Alternate Row Colors
+        if (section.enableAlternate) {
+            sectionTable.setAlternateRowColors(true);
+        }
+
+        // Table Parent
         const sectionPanel = new sap.m.Panel("section" + section.id, {
             visible: FORMS.buildVisibleCond(section),
-        }).addStyleClass("sapUiSmallMarginTopBottom");
+        }).addStyleClass("sapUiNoContentPadding sapUiSmallMarginTopBottom");
 
         const sectionToolbar = new sap.m.Toolbar().addStyleClass("sapUiSizeCompact");
 
@@ -395,19 +567,23 @@ const FORMS = {
             })
         );
 
+        sectionToolbar.addContent(
+            new sap.m.ObjectNumber("counter" + section.id, {
+                number: "(0)",
+            })
+        );
+
         sectionToolbar.addContent(new sap.m.ToolbarSpacer());
 
         // Search Bar
         if (section.enableFilter) {
             sectionToolbar.addContent(
                 new sap.m.SearchField({
-                    width: "230px",
                     liveChange: function (oEvent) {
-                        FORMS.handleTableFilter(sectionTable, this.getValue());
+                        FORMS.handleTableFilter(section, sectionTable, this.getValue());
                     },
-                })
+                }).addStyleClass("maxWidth")
             );
-            sectionToolbar.addContent(new sap.m.ToolbarSeparator());
         }
 
         // Enable Add
@@ -415,12 +591,18 @@ const FORMS = {
             sectionToolbar.addContent(
                 new sap.m.Button({
                     text: "Add",
-                    type: "Transparent",
+                    type: "Emphasized",
                     press: function (oEvent) {
-                        const model = sectionTable.getModel();
-                        model.oData.push({ id: ModelData.genID() });
-                        FORMS.tableAddRowNumber(model.oData);
-                        model.refresh();
+                        if (section.enablePagination) {
+                            const model = FORMS.paginationSetup[section.id].data;
+                            model.push(FORMS.buildRowTemplate(section.elements));
+                            FORMS.paginationHandle(section);
+                        } else {
+                            const model = sectionTable.getModel();
+                            model.oData.push(FORMS.buildRowTemplate(section.elements));
+                            FORMS.tableAddRowNumber(model.oData);
+                            model.refresh();
+                        }
                     },
                 })
             );
@@ -452,20 +634,28 @@ const FORMS = {
         }).addStyleClass("sapUiSizeCompact");
 
         const butMultiDelete = new sap.m.Button({
-            text: "Delete Selected",
+            icon: "sap-icon://delete",
             type: "Reject",
             visible: false,
             press: function (oEvent) {
-                const tabModel = sectionTable.getModel();
+                const tabData = section.enablePagination ? FORMS.paginationSetup[section.id].data : sectionTable.getModel().oData;
                 const selectedItems = sectionTable.getSelectedItems();
 
                 if (selectedItems) {
                     selectedItems.forEach(function (item) {
                         const context = item.getBindingContext();
-                        const data = context.getObject();
-                        data.delete = true;
+                        if (context) {
+                            const data = context.getObject();
+                            data.delete = true;
+                        }
                     });
-                    ModelData.Delete(tabModel, "delete", true);
+                    ModelData.Delete(tabData, "delete", true);
+                }
+
+                if (section.enablePagination) {
+                    FORMS.paginationHandle(section);
+                } else {
+                    sectionTable.getModel().refresh();
                 }
 
                 sectionTable.removeSelections();
@@ -477,8 +667,8 @@ const FORMS = {
         // Enable Delete
         if (section.enableDelete && FORMS.editable) {
             sectionTable.setMode("Delete");
-            sectionToolbar.addContent(butMultiDelete);
             sectionToolbar.addContent(new sap.m.ToolbarSeparator());
+            sectionToolbar.addContent(butMultiDelete);
             sectionToolbar.addContent(butMultiSwitch);
             sectionToolbar.addContent(butSingleSwitch);
         }
@@ -503,7 +693,7 @@ const FORMS = {
 
         // Enable Copy
         if (section.enableCopy && FORMS.editable) {
-            const newColumn = new sap.m.Column({ width: "40px" });
+            const newColumn = new sap.m.Column({ width: "50px" });
 
             sectionTable.addColumn(newColumn);
 
@@ -514,7 +704,7 @@ const FORMS = {
                     press: function (oEvent) {
                         const context = oEvent.oSource.getBindingContext();
                         const data = context.getObject();
-                        FORMS.buildCopyDialog(columListItem, section.id, data.id);
+                        FORMS.buildCopyDialog(section, columListItem, section.id, data.id);
                     },
                 })
             );
@@ -522,14 +712,15 @@ const FORMS = {
 
         // Show Row Number
         if (section.enableRowNumber) {
-            const colRowNumber = new sap.m.Column({ width: "40px", sortIndicator: "Ascending" });
+            const colRowNumber = new sap.m.Column({ width: "30px", sortIndicator: "Ascending", hAlign: "Center" });
 
-            colRowNumber.setHeader(new sap.m.Label({ text: "" }));
+            if (!section.enablePagination) {
+                colRowNumber.setHeader(new sap.m.Label({ text: "" }));
+                FORMS.setColumnSorting(section, sectionTable, colRowNumber, { id: "rowNumber" });
+            }
 
-            FORMS.setColumnSorting(sectionTable, colRowNumber, { id: "rowNumber" });
             sectionTable.addColumn(colRowNumber);
-
-            columListItem.addCell(new sap.m.Input({ value: "{rowNumber}", enabled: false }));
+            columListItem.addCell(new sap.m.ObjectNumber({ number: "{rowNumber}" }));
         }
 
         sectionPanel.addContent(sectionTable);
@@ -537,29 +728,186 @@ const FORMS = {
         FORMS.formParent.addContent(sectionPanel);
         FORMS.columnTemplate = columListItem;
 
+        // Table Layout
+        if (section.layout === "form") {
+            FORMS.formTemplate = new sap.ui.layout.form.SimpleForm({
+                layout: "ResponsiveGridLayout",
+                backgroundDesign: "Transparent",
+                editable: true,
+                labelSpanL: parseInt(section.labelSpan) || 4,
+                labelSpanM: parseInt(section.labelSpan) || 4,
+                labelSpanS: 12,
+                columnsL: parseInt(section.columns) || 2,
+                columnsM: 2,
+            }).addStyleClass("sapUiNoContentPadding");
+
+            const colForm = new sap.m.Column();
+            sectionTable.addColumn(colForm);
+            columListItem.addCell(FORMS.formTemplate);
+        } else {
+            // Popin
+            if (section.popin && sectionTable.setAutoPopinMode) {
+                sectionTable.setAutoPopinMode(true);
+            }
+        }
+
+        // Pagination
+        if (section.enablePagination) {
+            const toolPagination = new sap.m.Toolbar({ width: "100%", design: "Transparent" }).addStyleClass("sapUiSizeCompact ");
+
+            toolPagination.addContent(
+                new sap.m.Text({
+                    textAlign: "Center",
+                    text: "Items per page",
+                }).addStyleClass("sapUiHideOnPhone")
+            );
+
+            var toolPaginationShowItems = new sap.m.Select({
+                width: "100px",
+                selectedKey: "",
+                change: function (oEvent) {
+                    FORMS.paginationSetup[section.id].take = this.getSelectedKey();
+                    FORMS.paginationSetup[section.id].index = 0;
+                    FORMS.paginationHandle(section);
+                },
+            }).addStyleClass("sapUiHideOnPhone");
+
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: "Default", key: section.paginationTake || 2 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 1, key: 1 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 5, key: 5 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 10, key: 10 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 15, key: 15 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 20, key: 20 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 30, key: 30 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 40, key: 40 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 50, key: 50 }));
+            toolPaginationShowItems.addItem(new sap.ui.core.ListItem({ text: 100, key: 100 }));
+
+            toolPagination.addContent(toolPaginationShowItems);
+
+            toolPagination.addContent(new sap.m.ToolbarSpacer());
+
+            toolPagination.addContent(
+                new sap.m.Button("paginationFirst" + section.id, {
+                    icon: "sap-icon://fa-solid/angle-double-left",
+                    press: function (oEvent) {
+                        FORMS.paginationSetup[section.id].index = 0;
+                        FORMS.paginationHandle(section);
+                    },
+                })
+            );
+
+            toolPagination.addContent(
+                new sap.m.Button("paginationPrev" + section.id, {
+                    icon: "sap-icon://fa-solid/angle-left",
+                    press: function (oEvent) {
+                        FORMS.paginationSetup[section.id].index--;
+                        FORMS.paginationHandle(section);
+                    },
+                })
+            );
+
+            const toolPaginationPages = new sap.m.SegmentedButton("paginationPages" + section.id, {
+                selectionChange: function (oEvent) {
+                    FORMS.paginationSetup[section.id].index = parseInt(this.getSelectedKey());
+                    FORMS.paginationHandle(section);
+                },
+            });
+
+            toolPagination.addContent(toolPaginationPages);
+
+            const toolPaginationText = new sap.m.Text({ visible: false, textAlign: "Center", text: "0/0" });
+
+            toolPagination.addContent(toolPaginationText);
+
+            toolPagination.addContent(
+                new sap.m.Button("paginationNext" + section.id, {
+                    icon: "sap-icon://fa-solid/angle-right",
+                    press: function (oEvent) {
+                        FORMS.paginationSetup[section.id].index++;
+                        FORMS.paginationHandle(section);
+                    },
+                })
+            );
+
+            toolPagination.addContent(
+                new sap.m.Button("paginationLast" + section.id, {
+                    icon: "sap-icon://fa-solid/angle-double-right",
+                    press: function (oEvent) {
+                        let maxIndex = FORMS.paginationSetup[section.id].count / parseInt(FORMS.paginationSetup[section.id].take);
+                        maxIndex = Math.ceil(maxIndex);
+
+                        FORMS.paginationSetup[section.id].index = maxIndex - 1;
+                        FORMS.paginationHandle(section);
+                    },
+                })
+            );
+
+            toolPagination.addContent(new sap.m.ToolbarSeparator());
+
+            const toolPaginationTitle = new sap.m.ObjectNumber("paginationTitle" + section.id, {});
+
+            toolPagination.addContent(toolPaginationTitle);
+
+            sectionPanel.setInfoToolbar(toolPagination);
+        }
+
         // Enable Add
         if (section.enableCreate && FORMS.editable) {
-            FORMS.formParent.addContent(
+            sectionPanel.addContent(
                 new sap.m.Button({
                     text: "Add",
-                    type: "Transparent",
+                    type: "Emphasized",
                     press: function (oEvent) {
-                        const model = sectionTable.getModel();
-                        model.oData.push({ id: ModelData.genID() });
-                        FORMS.tableAddRowNumber(model.oData);
-                        model.refresh();
+                        if (section.enablePagination) {
+                            const model = FORMS.paginationSetup[section.id].data;
+                            model.push({ id: ModelData.genID() });
+                            FORMS.paginationHandle(section);
+                        } else {
+                            const model = sectionTable.getModel();
+                            model.oData.push({ id: ModelData.genID() });
+                            FORMS.tableAddRowNumber(model.oData);
+                            model.refresh();
+                        }
                     },
-                }).addStyleClass("sapUiSizeCompact")
+                }).addStyleClass("sapUiSizeCompact sapUiSmallMargin")
             );
         }
 
         return sectionTable;
     },
 
-    setColumnSorting: function (table, column, element) {
+    setColumnSorting: function (section, table, column, element) {
         var _column_delegate = {
             onclick: function (e) {
-                FORMS.handleColumnSorting(table, column, element);
+                const sortIndicatorOrder = column.getSortIndicator();
+                let sortModelOrder;
+
+                // Clear All
+                const keys = Object.keys(FORMS.colHeaders[section.id]);
+
+                keys.forEach(function (key) {
+                    FORMS.colHeaders[section.id][key].setSortIndicator("None");
+                });
+
+                if (sortIndicatorOrder === "Ascending") {
+                    column.setSortIndicator("Descending");
+                    sortModelOrder = true;
+                } else {
+                    column.setSortIndicator("Ascending");
+                    sortModelOrder = false;
+                }
+
+                const bindingField = element.fieldName ? element.fieldName : element.id;
+
+                if (section.enablePagination) {
+                    FORMS.paginationSetup[section.id].sortOrder = column.getSortIndicator();
+                    FORMS.paginationSetup[section.id].sortField = bindingField;
+
+                    FORMS.paginationHandle(section);
+                } else {
+                    FORMS.handleColumnSorting(table, bindingField, sortModelOrder);
+                }
             },
         };
 
@@ -571,59 +919,57 @@ const FORMS = {
 
         column.setStyleClass("nepMTableSortCell");
 
-        if (!FORMS.colHeaders[table.sId]) FORMS.colHeaders[table.sId] = {};
-        FORMS.colHeaders[table.sId][column.sId] = column;
+        if (!FORMS.colHeaders[section.id]) FORMS.colHeaders[section.id] = {};
+        FORMS.colHeaders[section.id][column.sId] = column;
     },
 
-    handleColumnSorting: function (table, column, element) {
-        const bindingField = element.fieldName ? element.fieldName : element.id;
-        const sortIndicatorOrder = column.getSortIndicator();
-        let sortModelOrder;
-
-        // Clear All
-        const keys = Object.keys(FORMS.colHeaders[table.sId]);
-
-        keys.forEach(function (key) {
-            FORMS.colHeaders[table.sId][key].setSortIndicator("None");
-        });
-
-        if (sortIndicatorOrder === "Ascending") {
-            column.setSortIndicator("Descending");
-            sortModelOrder = true;
-        } else {
-            column.setSortIndicator("Ascending");
-            sortModelOrder = false;
-        }
-
+    handleColumnSorting: function (table, bindingField, sortModelOrder) {
         const oSorter = new sap.ui.model.Sorter(bindingField, sortModelOrder, false);
         const binding = table.getBinding("items");
         binding.sort(oSorter);
     },
 
-    handleTableFilter: function (table, value) {
-        const binding = table.getBinding("items");
-        const filters = [];
+    handleTableFilter: function (section, table, value) {
+        if (section.enablePagination) {
+            FORMS.paginationSetup[section.id].filter = value;
+            FORMS.paginationHandle(section);
+        } else {
+            const binding = table.getBinding("items");
+            const filters = [];
 
-        if (FORMS.colSorting[table.sId] && FORMS.colSorting[table.sId].forEach) {
-            FORMS.colSorting[table.sId].forEach(function (element) {
-                const bindingField = element.fieldName ? element.fieldName : element.id;
-                filters.push(new sap.ui.model.Filter(bindingField, "Contains", value));
+            if (FORMS.colSorting[table.sId] && FORMS.colSorting[table.sId].forEach) {
+                FORMS.colSorting[table.sId].forEach(function (element) {
+                    const bindingField = element.fieldName ? element.fieldName : element.id;
+
+                    switch (element.type) {
+                        case "CheckBox":
+                        case "Switch":
+                        case "StepInput":
+                        case "Image":
+                            break;
+
+                        default:
+                            filters.push(new sap.ui.model.Filter(bindingField, "Contains", value));
+                            break;
+                    }
+                });
+            }
+
+            const filter = new sap.ui.model.Filter({
+                filters: filters,
+                and: false,
             });
+
+            binding.filter([filter]);
         }
-
-        const filter = new sap.ui.model.Filter({
-            filters: filters,
-            and: false,
-        });
-
-        binding.filter([filter]);
     },
 
-    buildCopyDialog: function (columListItem, tableId, rowId) {
+    buildCopyDialog: function (section, columListItem, tableId, rowId) {
         const diaCopy = new sap.m.Dialog({
             draggable: true,
             contentHeight: "800px",
             contentWidth: "800px",
+            stretch: sap.ui.Device.system.phone,
             title: "Copy Data",
         }).addStyleClass("sapUiContentPadding");
 
@@ -642,6 +988,8 @@ const FORMS = {
                 type: "Emphasized",
                 text: "OK",
                 press: function (oEvent) {
+                    let newData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tableData;
+
                     for (let i = 0; i < numCopy.getValue(); i++) {
                         let newRow = {
                             id: ModelData.genID(),
@@ -657,12 +1005,16 @@ const FORMS = {
                             }
                         }
 
-                        tableData.push(newRow);
+                        newData.push(newRow);
                     }
 
-                    let model = table.getModel();
-                    FORMS.tableAddRowNumber(model.oData);
-                    model.refresh();
+                    if (section.enablePagination) {
+                        FORMS.paginationHandle(section);
+                    } else {
+                        let model = table.getModel();
+                        FORMS.tableAddRowNumber(model.oData);
+                        model.refresh();
+                    }
 
                     diaCopy.close();
                 },
@@ -685,7 +1037,11 @@ const FORMS = {
             backgroundDesign: "Transparent",
         });
 
-        const cells = columListItem.getCells();
+        if (tabCopy.setAutoPopinMode) {
+            tabCopy.setAutoPopinMode(true);
+        }
+
+        const cells = section.layout === "form" ? columListItem.getCells()[1].getContent() : columListItem.getCells();
 
         tabCopy.addColumn(new sap.m.Column({ width: "100px" }).setHeader(new sap.m.Label({ text: "Include", design: "Bold" })));
         tabCopy.addColumn(new sap.m.Column({ width: "200px" }).setHeader(new sap.m.Label({ text: "Field", design: "Bold" })));
@@ -738,6 +1094,12 @@ const FORMS = {
 
                 case "Switch":
                     clone.setState(rowData[fieldId]);
+                    break;
+
+                case "Image":
+                    clone.getItems()[1].setVisible(false);
+                    clone.getItems()[0].getItems()[0].setEnabled(false);
+                    clone.getItems()[0].getItems()[1].setVisible(false);
                     break;
 
                 case "CheckBox":
@@ -826,37 +1188,58 @@ const FORMS = {
     },
 
     buildParentTableChildren: function (parent, element, section, index, elementField) {
-        const newColumn = new sap.m.Column({});
+        if (section.layout === "form") {
+            // Column Title
+            if (section.widths) {
+                const widths = section.widths[index];
+                if (widths && widths.columnTitle) {
+                    FORMS.formTemplate.addContent(new sap.ui.core.Title({ text: widths.columnTitle }));
+                }
+            }
 
-        if (section.popin) {
-            newColumn.setDemandPopin(true);
-            newColumn.setPopinDisplay("Block");
-        }
+            const elementLabel = new sap.m.Label({ text: element.title });
+            if (section.labelLeftAlign) elementLabel.addStyleClass("nepLabelLeftAlign");
 
-        // Column Width
-        if (section.widths) {
-            const widths = section.widths[index];
-            if (widths) {
-                if (widths.width) {
-                    if (widths.widthMetric) {
-                        newColumn.setWidth(widths.width + "%");
+            FORMS.formTemplate.addContent(elementLabel);
+            FORMS.formTemplate.addContent(elementField);
+        } else {
+            const newColumn = new sap.m.Column({});
+
+            if (section.popin) {
+                newColumn.setDemandPopin(true);
+                newColumn.setPopinDisplay("Block");
+            }
+
+            // Column Width
+            if (section.widths) {
+                const widths = section.widths[index];
+                if (widths) {
+                    if (widths.width) {
+                        if (widths.widthMetric) {
+                            newColumn.setWidth(widths.width + "%");
+                        } else {
+                            newColumn.setWidth(widths.width + "px");
+                        }
                     } else {
-                        newColumn.setWidth(widths.width + "px");
+                        newColumn.setWidth("150px");
                     }
                 }
             }
+
+            // Column Header
+            newColumn.setHeader(
+                new sap.m.Label(FORMS.buildElementFieldID(element), {
+                    text: element.title,
+                    required: element.required,
+                    design: "Bold",
+                })
+            );
+
+            parent.addColumn(newColumn);
+            FORMS.columnTemplate.addCell(elementField);
+
+            FORMS.setColumnSorting(section, parent, newColumn, element);
         }
-
-        // Column Header
-        newColumn.setHeader(
-            new sap.m.Label(FORMS.buildElementFieldID(element), {
-                text: element.title,
-                required: element.required,
-                design: "Bold",
-            })
-        );
-
-        parent.addColumn(newColumn);
 
         // Filter
         switch (element.type) {
@@ -871,9 +1254,6 @@ const FORMS = {
                 FORMS.colSorting[parent.sId].push(element);
                 break;
         }
-
-        FORMS.setColumnSorting(parent, newColumn, element);
-        FORMS.columnTemplate.addCell(elementField);
     },
 
     buildElement: function (parent, element, section, index) {
@@ -1006,6 +1386,7 @@ const FORMS = {
             text: element.text,
             showIcon: element.messageIcon,
             type: element.messageType || "Information",
+            visible: FORMS.buildVisibleCond(element),
         });
     },
 
@@ -1028,6 +1409,7 @@ const FORMS = {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             editable: FORMS.editable,
             placeholder: element.placeholder,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         return newField;
@@ -1042,6 +1424,7 @@ const FORMS = {
             placeholder: element.placeholder,
             valueHelpOnly: true,
             showValueHelp: true,
+            visible: FORMS.buildVisibleCond(element),
             valueHelpRequest: function (oEvent) {
                 if (!element.adaptiveApp) return;
 
@@ -1074,7 +1457,19 @@ const FORMS = {
     buildElementPicture: function (element) {
         const newField = new sap.m.Image(FORMS.buildElementFieldID(element), {
             src: element.imageSrc,
+            visible: FORMS.buildVisibleCond(element),
         });
+
+        const elementImageLightBox = new sap.m.LightBox();
+
+        elementImageLightBox.addImageContent(
+            new sap.m.LightBoxItem({
+                imageSrc: element.imageSrc,
+                title: element.title,
+            })
+        );
+
+        newField.setDetailBox(elementImageLightBox);
 
         if (element.width) {
             if (element.widthMetric) {
@@ -1136,6 +1531,7 @@ const FORMS = {
             text: element.text,
             titleStyle: element.titleStyle,
             wrapping: true,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         return newField;
@@ -1151,6 +1547,7 @@ const FORMS = {
             growing: element.growing,
             rows: parseInt(element.rows),
             width: "100%",
+            visible: FORMS.buildVisibleCond(element),
         });
         if (element.rows) newField.setRows(parseInt(element.rows));
 
@@ -1164,6 +1561,7 @@ const FORMS = {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             editable: FORMS.editable,
             maxValue: element.maxValue,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         if (element.iconSelected) {
@@ -1187,6 +1585,7 @@ const FORMS = {
             change: function (oEvent) {
                 this.setValue(parseFloat(this.getValue()).toFixed(element.decimals));
             },
+            visible: FORMS.buildVisibleCond(element),
         });
 
         return newField;
@@ -1199,6 +1598,7 @@ const FORMS = {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             placeholder: element.placeholder,
             editable: FORMS.editable,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         if (element.min) newField.setMin(parseInt(element.min));
@@ -1215,6 +1615,7 @@ const FORMS = {
             enabled: FORMS.editable,
             customTextOff: element.customTextOff,
             customTextOn: element.customTextOn,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         if (element.approveSwitch) {
@@ -1231,6 +1632,7 @@ const FORMS = {
             selected: "{" + FORMS.bindingPath + bindingField + "}",
             editable: FORMS.editable,
             text: element.text,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         return newField;
@@ -1242,6 +1644,7 @@ const FORMS = {
         const newField = new sap.m.SegmentedButton(FORMS.buildElementFieldID(element), {
             selectedKey: "{" + FORMS.bindingPath + bindingField + "}",
             enabled: FORMS.editable,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         if (element.width) {
@@ -1272,7 +1675,7 @@ const FORMS = {
             selectedKey: "{" + FORMS.bindingPath + bindingField + "}",
             width: "100%",
             editable: FORMS.editable,
-            // showIcon: true,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         // Override externally or combine
@@ -1296,6 +1699,7 @@ const FORMS = {
             selectedKey: "{" + FORMS.bindingPath + bindingField + "}",
             width: "100%",
             editable: FORMS.editable,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         // Override externally or combine
@@ -1319,6 +1723,7 @@ const FORMS = {
 
         newField = new sap.m.RadioButtonGroup(FORMS.buildElementFieldID(element), {
             selectedIndex: null,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         if (element.horizontal) newField.setColumns(10);
@@ -1370,6 +1775,7 @@ const FORMS = {
             width: "100%",
             editable: FORMS.editable,
             showSelectAll: true,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         element.items.forEach(function (item, i) {
@@ -1388,11 +1794,13 @@ const FORMS = {
             newField = new sap.m.HBox(FORMS.buildElementFieldID(element), {
                 wrap: "Wrap",
                 renderType: "Bare",
+                visible: FORMS.buildVisibleCond(element),
             });
         } else {
             newField = new sap.m.VBox(FORMS.buildElementFieldID(element), {
                 wrap: "Wrap",
                 renderType: "Bare",
+                visible: FORMS.buildVisibleCond(element),
             });
         }
 
@@ -1437,6 +1845,7 @@ const FORMS = {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             displayFormat: element.displayFormat ? element.displayFormat : "dd.MM.yyyy",
             editable: FORMS.editable,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         return newField;
@@ -1448,6 +1857,7 @@ const FORMS = {
 
         const newField = new sap.m.VBox(FORMS.buildElementFieldID(element), {
             width: "100%",
+            visible: FORMS.buildVisibleCond(element),
         });
 
         const elementUploader = new sap.m.Button({
@@ -1473,7 +1883,19 @@ const FORMS = {
 
         const elementImage = new sap.m.Image({
             src: "{" + FORMS.bindingPath + bindingField + "}",
+            visible: "{= ${" + FORMS.bindingPath + bindingField + "} ? true: false }",
         });
+
+        const elementImageLightBox = new sap.m.LightBox();
+
+        elementImageLightBox.addImageContent(
+            new sap.m.LightBoxItem({
+                imageSrc: "{" + FORMS.bindingPath + bindingField + "}",
+                title: element.title,
+            })
+        );
+
+        elementImage.setDetailBox(elementImageLightBox);
 
         if (element.width) {
             if (element.widthMetric) {
@@ -1496,15 +1918,23 @@ const FORMS = {
 
         elementHBox.addItem(
             new sap.m.Button({
-                type: "Transparent",
+                type: "Reject",
                 enabled: FORMS.editable,
-                icon: "sap-icon://clear-all",
+                icon: "sap-icon://delete",
                 tooltip: "Delete Image",
                 visible: "{= ${" + FORMS.bindingPath + bindingField + "} ? true:false}",
                 press: function (oEvent) {
-                    elementImage.setSrc();
+                    const context = oEvent.oSource.getBindingContext();
+
+                    if (context) {
+                        const data = context.getObject();
+                        data[bindingField] = "";
+                        this.getModel().refresh();
+                    } else {
+                        elementImage.setSrc();
+                    }
                 },
-            }).addStyleClass("sapUiSizeCompact")
+            }).addStyleClass("sapUiSizeCompact sapUiTinyMarginBegin")
         );
 
         newField.addItem(elementHBox);
@@ -1520,6 +1950,7 @@ const FORMS = {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             displayFormat: element.displayFormat ? element.displayFormat : "dd.MM.yyyy HH:mm",
             editable: FORMS.editable,
+            visible: FORMS.buildVisibleCond(element),
         });
 
         return newField;
@@ -1530,6 +1961,7 @@ const FORMS = {
             showSeparators: sap.m.ListSeparators.None,
             backgroundDesign: "Transparent",
             contextualWidth: "Auto",
+            visible: FORMS.buildVisibleCond(element),
         });
 
         if (tabCheckList.setAutoPopinMode) {
@@ -1638,7 +2070,6 @@ const FORMS = {
                     } else {
                         if (formModel.oData[element.id]) outputData[element.id] = formModel.oData[element.id];
                     }
-
                     break;
             }
         };
@@ -1667,10 +2098,10 @@ const FORMS = {
 
             if (section.type === "Table") {
                 const tabObject = sap.ui.getCore().byId("field" + section.id);
-                const tabModel = tabObject.getModel();
+                const tabData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tabObject.getModel().oData;
 
-                if (tabModel) {
-                    outputData[section.id] = tabModel.oData;
+                if (tabData) {
+                    outputData[section.id] = tabData;
 
                     if (outputData[section.id] && outputData[section.id].forEach) {
                         outputData[section.id].forEach(function (data) {
@@ -1917,6 +2348,27 @@ const FORMS = {
         });
 
         return elementFound;
+    },
+
+    getDuplicateParentFromId: function (id, data) {
+        let parentData = null;
+
+        data.config.setup.forEach(function (section) {
+            if (section.id === id) parentData = section;
+
+            section.elements.forEach(function (element) {
+                if (element.id === id) parentData = section;
+
+                if (element.elements) {
+                    if (!parentData && element.id === id) parentData = element;
+                    element.elements.forEach(function (subElement) {
+                        if (subElement.id === id) parentData = element;
+                    });
+                }
+            });
+        });
+
+        return parentData;
     },
 
     apiGetForm: function (id) {

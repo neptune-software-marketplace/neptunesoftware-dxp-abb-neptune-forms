@@ -11,6 +11,7 @@ const controller = {
     },
     pressedPreview: false,
     dragElement: null,
+    tableReset: false,
 
     elementTypes: [
         { icon: "sap-icon://form", text: "Form", type: "Form", parent: true, descripton: "Present the data in Form layout" },
@@ -318,6 +319,18 @@ const controller = {
                 id: id,
             },
         }).then(function (req) {
+            // Check for undefined elements
+            if (req.setup && req.setup.forEach) {
+                req.setup.forEach(function (section, i) {
+                    section.elements = section.elements.filter((obj) => obj && Object.keys(obj).length !== 0);
+                    section.elements.forEach(function (element, i) {
+                        if (element.elements) {
+                            element.elements = element.elements.filter((obj) => obj && Object.keys(obj).length !== 0);
+                        }
+                    });
+                });
+            }
+
             modeloPageDetail.setData(req);
             modelpanTopProperties.setData({});
             controller.preview();
@@ -342,6 +355,18 @@ const controller = {
         // Check Required Fields
         if (!sap.n.Planet9.requiredFieldsCheck(cockpitUtils.requiredFields)) {
             return;
+        }
+
+        // Cleanup if Something is wrong
+        if (modeloPageDetail.oData.setup && modeloPageDetail.oData.setup.forEach) {
+            modeloPageDetail.oData.setup.forEach(function (section, i) {
+                section.elements = section.elements.filter((obj) => obj && Object.keys(obj).length !== 0);
+                section.elements.forEach(function (element, i) {
+                    if (element.elements) {
+                        element.elements = element.elements.filter((obj) => obj && Object.keys(obj).length !== 0);
+                    }
+                });
+            });
         }
 
         apiSave({
@@ -515,12 +540,19 @@ const controller = {
         controller.previewData = modeloPageDetail.getJSON();
 
         const formData = FORMS.getData(null, true);
+        let previewData = null;
+
+        if (!controller.tableReset) {
+            previewData = formData ? formData.data : null;
+        }
 
         FORMS.build(panPreview, {
             id: modeloPageDetail.oData.id,
-            data: formData ? formData.data : null,
+            data: previewData,
             config: modeloPageDetail.oData,
         });
+
+        controller.tableReset = false;
 
         panPreview.onAfterRendering = function (oEvent) {
             controller.markElement();
@@ -555,6 +587,7 @@ const controller = {
                 newElement.elements = [];
                 newElement.widths = [];
                 newElement.rows = 5;
+                newElement.paginationTake = 2;
                 break;
 
             case "Form":
@@ -592,6 +625,8 @@ const controller = {
             case "Image":
                 newElement.text = "Upload";
                 newElement.buttonType = "Emphasized";
+                newElement.width = "200";
+                newElement.widthMetric = "";
                 break;
 
             case "CheckList":
@@ -759,6 +794,9 @@ const controller = {
 
     pressOutlineItem: function () {
         const element = modelpanTopProperties.oData;
+        let elementParent = controller.getParentFromId(element.id);
+
+        if (element.id === elementParent.id) elementParent = {};
 
         controller.markElement();
 
@@ -780,6 +818,7 @@ const controller = {
                 if (existingWidth && existingWidth.width) newWidth.width = existingWidth.width;
                 if (existingWidth && existingWidth.widthMetric) newWidth.widthMetric = existingWidth.widthMetric;
                 if (existingWidth && existingWidth.minSize) newWidth.minSize = existingWidth.minSize;
+                if (existingWidth && existingWidth.columnTitle) newWidth.columnTitle = existingWidth.columnTitle;
 
                 newWidths.push(newWidth);
             });
@@ -788,26 +827,41 @@ const controller = {
             modelpanTopProperties.refresh();
         }
 
+        let visibilityFields = [];
+
         const addConditionalField = function (element) {
+            if (element.id === modelpanTopProperties.oData.id) return;
+
             switch (element.type) {
                 case "Image":
                 case "MultipleChoice":
                 case "MultipleSelect":
                 case "MessageStrip":
-                // case "TextArea":
-                // case "Input":
                 case "Text":
                 case "FormTitle":
                 case "Date":
                     break;
 
                 default:
-                    inElementFormVisibleField.addItem(
-                        new sap.ui.core.Item({
-                            key: element.id,
-                            text: element.title,
-                        })
-                    );
+                    const parent = controller.getParentFromId(element.id);
+
+                    switch (elementParent.type) {
+                        case "Table":
+                            if (elementParent.id !== parent.id) return;
+                            break;
+
+                        default:
+                            if (parent.type === "Table") return;
+                            break;
+                    }
+
+                    visibilityFields.push({
+                        id: element.id,
+                        text: element.title,
+                        parent: parent.title,
+                        index: visibilityFields.length + 1,
+                    });
+
                     break;
             }
         };
@@ -819,14 +873,12 @@ const controller = {
             elementToolbarChangeType.setVisible(true);
         }
 
+        // ValueHelp -> Get Adaptive Fields
         if (element.type === "ValueHelp") {
             controller.buildAdaptiveFields();
         }
 
         // Conditional Access
-        inElementFormVisibleField.destroyItems();
-        inElementFormVisibleField.addItem(new sap.ui.core.Item());
-
         modeloPageDetail.oData.setup.forEach(function (section) {
             section.elements.forEach(function (element) {
                 addConditionalField(element);
@@ -838,17 +890,19 @@ const controller = {
             });
         });
 
+        modellistVisibility.setData(visibilityFields);
+
         controller.visibleCondValue();
     },
 
     visibleCondValue: function () {
-        if (!inElementFormVisibleField.getSelectedKey()) return;
+        if (!inElementFormVisibleField.getValue()) return;
 
         inElementFormVisibleValue.destroyItems();
         inElementFormVisibleValue.addItem(new sap.ui.core.Item());
 
         // Get visibleField
-        const visibleField = controller.getObjectFromId(inElementFormVisibleField.getSelectedKey());
+        const visibleField = controller.getObjectFromId(modelpanTopProperties.oData.visibleFieldName);
 
         if (!visibleField) return;
 
@@ -919,6 +973,7 @@ const controller = {
 
     exportForm: function () {
         var exportData = modeloPageDetail.getJSON();
+        exportData = encodeURIComponent(exportData);
         a = document.createElement("a");
         a.setAttribute("href", "data:application/text;charset=utf-8," + exportData);
         a.setAttribute("target", "_blank");

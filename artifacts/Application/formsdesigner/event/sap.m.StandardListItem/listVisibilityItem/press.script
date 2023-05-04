@@ -1,0 +1,11 @@
+const context = oEvent.oSource.getBindingContext();
+const data = context.getObject();
+
+modelpanTopProperties.oData.visibleFieldName = data.id;
+modelpanTopProperties.oData.visibleCondition = "";
+modelpanTopProperties.oData.visibleValue = "";
+modelpanTopProperties.refresh();
+
+controller.visibleCondValue();
+
+diaVisibility.close();

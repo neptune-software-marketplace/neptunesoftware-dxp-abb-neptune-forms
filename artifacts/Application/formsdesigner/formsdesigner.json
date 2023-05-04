@@ -1024,6 +1024,13 @@
 									"response": [],
 									"attributes": [
 										{
+											"attribute": "width",
+											"grouping": "Properties",
+											"value": "120px",
+											"script": "",
+											"translation": []
+										},
+										{
 											"attribute": "label",
 											"grouping": "Properties",
 											"value": "Released",
@@ -4694,83 +4701,6 @@
 																									"attributes": [],
 																									"data": [
 																										{
-																											"fieldNo": "74448c02-9dc7-446e-aa42-46edd77f79a3",
-																											"fieldName": "insectionFormExpandable",
-																											"fieldParent": "1dc74891-dfea-480e-8b39-ff8b5b53deac",
-																											"fieldType": "sap.m.CheckBox",
-																											"script": "",
-																											"customComponent": false,
-																											"disabled": true,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "text",
-																													"grouping": "Properties",
-																													"value": "Expandable",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selected",
-																													"grouping": "Properties",
-																													"value": "{/expandable}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "bef5ca5a-b4ee-4aa1-d7f9-33cd03a28ed2",
-																											"fieldName": "insectionFormExpanded",
-																											"fieldParent": "1dc74891-dfea-480e-8b39-ff8b5b53deac",
-																											"fieldType": "sap.m.CheckBox",
-																											"script": "",
-																											"customComponent": false,
-																											"disabled": true,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/expandable} ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "text",
-																													"grouping": "Properties",
-																													"value": "Expanded",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selected",
-																													"grouping": "Properties",
-																													"value": "{/expanded}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
 																											"fieldNo": "f69b18fd-6048-4005-c677-1102da045313",
 																											"fieldName": "insectionFormCompact",
 																											"fieldParent": "1dc74891-dfea-480e-8b39-ff8b5b53deac",
@@ -4958,6 +4888,101 @@
 																									"data": []
 																								},
 																								{
+																									"fieldNo": "4e7a20dc-6e77-41aa-f76b-3c6ab2ae7883",
+																									"fieldName": "lblElementTableLayout",
+																									"fieldParent": "d746b866-2a2a-477f-8fb4-d4f502f9768d",
+																									"fieldType": "sap.m.Label",
+																									"script": "",
+																									"customComponent": false,
+																									"request": [],
+																									"response": [],
+																									"attributes": [
+																										{
+																											"attribute": "text",
+																											"grouping": "Properties",
+																											"value": "Table Layout",
+																											"script": "",
+																											"translation": []
+																										}
+																									],
+																									"data": []
+																								},
+																								{
+																									"fieldNo": "737fec6d-3278-4a03-c20e-43fa747d60d2",
+																									"fieldName": "inElementTableLayout",
+																									"fieldParent": "d746b866-2a2a-477f-8fb4-d4f502f9768d",
+																									"fieldType": "sap.m.Select",
+																									"script": "",
+																									"customComponent": false,
+																									"request": [],
+																									"response": [],
+																									"attributes": [
+																										{
+																											"attribute": "selectedKey",
+																											"grouping": "Properties",
+																											"value": "{/layout}",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "editable",
+																											"grouping": "Properties",
+																											"value": "{appControl>/enableEdit}",
+																											"script": "",
+																											"translation": []
+																										}
+																									],
+																									"data": [
+																										{
+																											"fieldNo": "8528fa96-5123-449d-ba54-a826b9857f60",
+																											"fieldName": "inElementTableLayoutDefault",
+																											"fieldParent": "737fec6d-3278-4a03-c20e-43fa747d60d2",
+																											"fieldType": "sap.ui.core.Item",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Default",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "63161d2e-b286-4e75-e924-ddb832dee555",
+																											"fieldName": "inElementTableLayoutForm",
+																											"fieldParent": "737fec6d-3278-4a03-c20e-43fa747d60d2",
+																											"fieldType": "sap.ui.core.Item",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Form",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "key",
+																													"grouping": "Properties",
+																													"value": "form",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										}
+																									]
+																								},
+																								{
 																									"fieldNo": "63340b83-f3e2-428d-9d34-8c2198744d79",
 																									"fieldName": "elemenSettingsTableLabel",
 																									"fieldParent": "d746b866-2a2a-477f-8fb4-d4f502f9768d",
@@ -5015,6 +5040,47 @@
 																											"data": []
 																										},
 																										{
+																											"fieldNo": "e7061859-cf42-47db-d7b9-9d2a50ab1809",
+																											"fieldName": "insectionTableFormLeftAlign",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/layout} === 'form' ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Label Left Align",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/labelLeftAlign}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
 																											"fieldNo": "914b8aef-14d8-4721-8a5b-aa92e383e507",
 																											"fieldName": "insectionTableLines",
 																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
@@ -5035,6 +5101,40 @@
 																													"attribute": "selected",
 																													"grouping": "Properties",
 																													"value": "{/enableSeparators}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "bc20f540-dc33-4467-81fc-5a6d752e0083",
+																											"fieldName": "insectionTableAlternate",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Show Alternate Row Colors",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableAlternate}",
 																													"script": "",
 																													"translation": []
 																												},
@@ -5103,6 +5203,40 @@
 																													"attribute": "selected",
 																													"grouping": "Properties",
 																													"value": "{/enableFilter}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "5b47d4d8-54fc-4a4b-fcfa-b134cd458876",
+																											"fieldName": "insectionTablePagination",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Enable Pagination",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enablePagination}",
 																													"script": "",
 																													"translation": []
 																												},
@@ -5262,6 +5396,13 @@
 																											"request": [],
 																											"response": [],
 																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/layout} === 'form' ? false:true}",
+																													"script": "",
+																													"translation": []
+																												},
 																												{
 																													"attribute": "text",
 																													"grouping": "Properties",
@@ -10676,7 +10817,7 @@
 																										{
 																											"attribute": "visible",
 																											"grouping": "Properties",
-																											"value": "{= ${/type} === 'Table' || ${/type} === 'Form' || ${/type} === 'FormTitle' ? false:true }",
+																											"value": "{= ${/type} === 'Table' || ${/type} === 'Form' || ${/type} === 'FormTitle' || ${/type} === 'MessageStrip' ? false:true }",
 																											"script": "",
 																											"translation": []
 																										},
@@ -12714,6 +12855,741 @@
 																													"data": []
 																												}
 																											]
+																										},
+																										{
+																											"fieldNo": "413e4db9-3b90-44e0-a61a-93a47edb7cb8",
+																											"fieldName": "lblElementTablePagination",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Items per Page",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "932fe5ee-d108-476f-e33e-7ded1537d53f",
+																											"fieldName": "inElementTablePagination",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.StepInput",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/enablePagination} ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "value",
+																													"grouping": "Properties",
+																													"value": "{/paginationTake}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "min",
+																													"grouping": "Properties",
+																													"value": "2",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "max",
+																													"grouping": "Properties",
+																													"value": "50",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "change",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.m.StepInput/inElementTablePagination/change.script",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "ae389337-1860-44c0-9af3-9b751e1f5f2f",
+																											"fieldName": "lblElementTableSpan",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Label Span",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																											"fieldName": "inElementTableSpan",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.Select",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "selectedKey",
+																													"grouping": "Properties",
+																													"value": "{/labelSpan}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": [
+																												{
+																													"fieldNo": "0d90f21e-68c9-4438-9a1f-29ad3565ad80",
+																													"fieldName": "informElementTableSpanEmpty",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "d7907245-df56-4c1d-9215-32171da8c2d4",
+																													"fieldName": "informElementTableSpan1",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "1",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "1",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "ae96708c-bad4-48d7-f9ee-1aefe71e60ab",
+																													"fieldName": "informElementTableSpan2",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "2",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "2",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "d3ea8b72-ef52-43d6-d148-6bbf2dd7e758",
+																													"fieldName": "informElementTableSpan3",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "3",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "3",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "1652c33d-e64f-4899-fa6e-5ccdf6ea3361",
+																													"fieldName": "informElementTableSpan4",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "4",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "4",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "3205d5fd-a974-46c3-9e68-693f9ea33ccb",
+																													"fieldName": "informElementTableSpan5",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "5",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "5",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "f3ff61f4-19e8-4f74-bc40-e540a4a9926f",
+																													"fieldName": "informElementTableSpan6",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "6",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "6",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "208d391e-6c33-43b2-cee6-30a91ae2845e",
+																													"fieldName": "informElementTableSpan7",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "7",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "7",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "839c708c-2120-4d17-ca37-3c185aae2576",
+																													"fieldName": "informElementTableSpan8",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "8",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "8",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "75d6e5fb-6993-4b94-efd1-ae93e5c502d5",
+																													"fieldName": "informElementTableSpan9",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "9",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "9",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "fb0baa85-5cdc-4a02-8151-773299570ef2",
+																													"fieldName": "informElementTableSpan10",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "10",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "10",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "c6ab7a6b-7ed8-4468-8ea5-c07a17fa63ad",
+																													"fieldName": "informElementTableSpan11",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "11",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "11",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "610749de-0f99-4531-97b9-5b2e17027498",
+																													"fieldName": "informElementTableSpan12",
+																													"fieldParent": "f7bc7afc-e4a6-45a8-9a5e-7ea855e81cff",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "12",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "12",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												}
+																											]
+																										},
+																										{
+																											"fieldNo": "b149b656-c9de-4603-9321-b7ae88e53ad1",
+																											"fieldName": "lblElementTableColumns",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Columns",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																											"fieldName": "inElementTableColumns",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.Select",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "selectedKey",
+																													"grouping": "Properties",
+																													"value": "{/columns}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": [
+																												{
+																													"fieldNo": "37414108-c383-4cc9-fb69-7525f8c50731",
+																													"fieldName": "informinElementtableColumns",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "40a11f41-bf79-408d-9a28-302b8e94ea3c",
+																													"fieldName": "informinElementtableColumns1",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "1",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "1",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "59ed2281-723f-4935-df8f-1346e6dd8070",
+																													"fieldName": "informinElementtableColumns2",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "2",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "2",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "fabd8c54-ea2a-41bd-8077-94b99b653978",
+																													"fieldName": "informinElementtableColumns3",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "3",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "3",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "50023e77-6700-46bc-951d-565acfc24994",
+																													"fieldName": "informinElementtableColumns4",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "4",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "4",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "13318068-0c23-4999-94fe-07915f02879f",
+																													"fieldName": "informinElementtableColumns5",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "5",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "5",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "a94ebb17-0b90-4e15-f944-8b296f0ec138",
+																													"fieldName": "informinElementtableColumns6",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "6",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "6",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "c46622a2-77a8-489c-a16b-677532a17260",
+																													"fieldName": "informinElementtableColumns7",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "7",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "7",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "e139f7b9-37c5-4e33-d5b3-067ce6d36bff",
+																													"fieldName": "informinElementtableColumns8",
+																													"fieldParent": "8ffde27d-f4fc-491d-8495-02e60c989bd5",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "8",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "8",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												}
+																											]
 																										}
 																									]
 																								},
@@ -12820,6 +13696,40 @@
 																											"data": []
 																										},
 																										{
+																											"fieldNo": "5d7b0ad6-1c2f-4bd2-fa4e-a5ca76978b81",
+																											"fieldName": "colWidthsColumn",
+																											"fieldParent": "392373a1-7d92-47c7-cd53-f2d155a7b24c",
+																											"fieldType": "sap.m.Column",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/layout} === 'form' ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "demandPopin",
+																													"grouping": "Properties",
+																													"value": "true",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "importance",
+																													"grouping": "Properties",
+																													"value": "Medium",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
 																											"fieldNo": "017a3244-628d-4c67-f6f4-93b45c797556",
 																											"fieldName": "colWidthsValue",
 																											"fieldParent": "392373a1-7d92-47c7-cd53-f2d155a7b24c",
@@ -12829,6 +13739,13 @@
 																											"request": [],
 																											"response": [],
 																											"attributes": [
+																												{
+																													"attribute": "width",
+																													"grouping": "Properties",
+																													"value": "110px",
+																													"script": "",
+																													"translation": []
+																												},
 																												{
 																													"attribute": "demandPopin",
 																													"grouping": "Properties",
@@ -12857,33 +13774,12 @@
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "demandPopin",
+																													"attribute": "width",
 																													"grouping": "Properties",
-																													"value": "true",
+																													"value": "100px",
 																													"script": "",
 																													"translation": []
 																												},
-																												{
-																													"attribute": "importance",
-																													"grouping": "Properties",
-																													"value": "Medium",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "fd28075d-9b36-4522-ea3d-e23221827255",
-																											"fieldName": "colWidthsMinSize",
-																											"fieldParent": "392373a1-7d92-47c7-cd53-f2d155a7b24c",
-																											"fieldType": "sap.m.Column",
-																											"script": "",
-																											"customComponent": false,
-																											"disabled": true,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
 																												{
 																													"attribute": "demandPopin",
 																													"grouping": "Properties",
@@ -12933,6 +13829,40 @@
 																															"attribute": "editable",
 																															"grouping": "Properties",
 																															"value": "false",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "bcd58b78-36e0-47d3-87db-4fe5fcf6154b",
+																													"fieldName": "itemWidthsColumn",
+																													"fieldParent": "a37f479a-2574-4097-a988-dc7b5c442a6b",
+																													"fieldType": "sap.m.Input",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/layout} === 'form' ? true:false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "value",
+																															"grouping": "Properties",
+																															"value": "{columnTitle}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "placeholder",
+																															"grouping": "Properties",
+																															"value": "Column Title",
 																															"script": "",
 																															"translation": []
 																														}
@@ -13061,34 +13991,6 @@
 																															"data": []
 																														}
 																													]
-																												},
-																												{
-																													"fieldNo": "683fd13b-9602-4dde-d886-90a19934111f",
-																													"fieldName": "itemWidthsMinSize",
-																													"fieldParent": "a37f479a-2574-4097-a988-dc7b5c442a6b",
-																													"fieldType": "sap.m.Input",
-																													"script": "",
-																													"customComponent": false,
-																													"disabled": true,
-																													"request": [],
-																													"response": [],
-																													"attributes": [
-																														{
-																															"attribute": "value",
-																															"grouping": "Properties",
-																															"value": "{minSize}",
-																															"script": "",
-																															"translation": []
-																														},
-																														{
-																															"attribute": "editable",
-																															"grouping": "Properties",
-																															"value": "{appControl>/enableEdit}",
-																															"script": "",
-																															"translation": []
-																														}
-																													],
-																													"data": []
 																												}
 																											]
 																										}
@@ -13109,7 +14011,7 @@
 																								{
 																									"attribute": "visible",
 																									"grouping": "Properties",
-																									"value": "{= ${type} === 'FormTitle' ? true:false }",
+																									"value": "{= ${/type} === 'FormTitle' ? true:false }",
 																									"script": "",
 																									"translation": []
 																								},
@@ -15824,86 +16726,59 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "7b8864d4-4bae-4e91-eb68-96cafe2b76d3",
-																											"fieldName": "inElementFormImageWidth",
+																											"fieldNo": "adef3038-853c-4e2c-baef-3f0dfaf6d43c",
+																											"fieldName": "hBoxImageWidth",
 																											"fieldParent": "40606624-1dec-468b-e6e7-2db1b9f3a78f",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "value",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{/width}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "dc740108-8e87-44bd-e93a-c86f30c5ee6d",
-																											"fieldName": "inElementFormImageWidthMetric",
-																											"fieldParent": "40606624-1dec-468b-e6e7-2db1b9f3a78f",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "b351f259-7c4e-4d11-c644-f80c70df961f",
-																													"fieldName": "inElementFormImageWidthPixels",
-																													"fieldParent": "dc740108-8e87-44bd-e93a-c86f30c5ee6d",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "7b8864d4-4bae-4e91-eb68-96cafe2b76d3",
+																													"fieldName": "inElementFormImageWidth",
+																													"fieldParent": "adef3038-853c-4e2c-baef-3f0dfaf6d43c",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "value",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{/width}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -15911,31 +16786,93 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "09ce994b-bc57-4d58-e303-dba80f3b4628",
-																													"fieldName": "inElementFormImageWidthPercent",
-																													"fieldParent": "dc740108-8e87-44bd-e93a-c86f30c5ee6d",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "dc740108-8e87-44bd-e93a-c86f30c5ee6d",
+																													"fieldName": "inElementFormImageWidthMetric",
+																													"fieldParent": "adef3038-853c-4e2c-baef-3f0dfaf6d43c",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "styleClassMargin",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "b351f259-7c4e-4d11-c644-f80c70df961f",
+																															"fieldName": "inElementFormImageWidthPixels",
+																															"fieldParent": "dc740108-8e87-44bd-e93a-c86f30c5ee6d",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "09ce994b-bc57-4d58-e303-dba80f3b4628",
+																															"fieldName": "inElementFormImageWidthPercent",
+																															"fieldParent": "dc740108-8e87-44bd-e93a-c86f30c5ee6d",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										},
@@ -15960,86 +16897,59 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "b1322d10-48c7-4f56-9c82-f2a7213c1cf0",
-																											"fieldName": "inElementFormImageheight",
+																											"fieldNo": "bde711c0-49a5-420c-e0fa-5f0df778d6e6",
+																											"fieldName": "hBoxImageHeight",
 																											"fieldParent": "40606624-1dec-468b-e6e7-2db1b9f3a78f",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "value",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{/height}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "293082f8-8b24-4952-d0cd-51ee4359d03c",
-																											"fieldName": "inElementFormImageHeightMetric",
-																											"fieldParent": "40606624-1dec-468b-e6e7-2db1b9f3a78f",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "3215eb9a-5cee-4e0e-c543-7de694153ee0",
-																													"fieldName": "inElementFormImageHeightPixels",
-																													"fieldParent": "293082f8-8b24-4952-d0cd-51ee4359d03c",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "b1322d10-48c7-4f56-9c82-f2a7213c1cf0",
+																													"fieldName": "inElementFormImageheight",
+																													"fieldParent": "bde711c0-49a5-420c-e0fa-5f0df778d6e6",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "value",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{/height}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -16047,31 +16957,93 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "def12c32-718b-4844-f7aa-3fab8d12cfad",
-																													"fieldName": "inElementFormImageHeightPercent",
-																													"fieldParent": "293082f8-8b24-4952-d0cd-51ee4359d03c",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "293082f8-8b24-4952-d0cd-51ee4359d03c",
+																													"fieldName": "inElementFormImageHeightMetric",
+																													"fieldParent": "bde711c0-49a5-420c-e0fa-5f0df778d6e6",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "styleClassMargin",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "3215eb9a-5cee-4e0e-c543-7de694153ee0",
+																															"fieldName": "inElementFormImageHeightPixels",
+																															"fieldParent": "293082f8-8b24-4952-d0cd-51ee4359d03c",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "def12c32-718b-4844-f7aa-3fab8d12cfad",
+																															"fieldName": "inElementFormImageHeightPercent",
+																															"fieldParent": "293082f8-8b24-4952-d0cd-51ee4359d03c",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										}
@@ -16728,86 +17700,59 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "e3402225-3e5d-4dba-9175-d5b040d57267",
-																											"fieldName": "inElementFormPictureWidth",
+																											"fieldNo": "8af564c0-c219-4f75-afbd-31d83e54bfc9",
+																											"fieldName": "hBoxPictureWidth",
 																											"fieldParent": "3e939b32-8ecb-48fd-a542-39c3e1ab764d",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "value",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{/width}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "93f3575e-2cf3-4df3-8a93-1f293fb395fc",
-																											"fieldName": "inElementFormPictureWidthMetric",
-																											"fieldParent": "3e939b32-8ecb-48fd-a542-39c3e1ab764d",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "bc7b208d-95b8-4981-f7a6-a37d130fdbb2",
-																													"fieldName": "inElementFormPictureWidthPixels",
-																													"fieldParent": "93f3575e-2cf3-4df3-8a93-1f293fb395fc",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "e3402225-3e5d-4dba-9175-d5b040d57267",
+																													"fieldName": "inElementFormPictureWidth",
+																													"fieldParent": "8af564c0-c219-4f75-afbd-31d83e54bfc9",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "value",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{/width}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -16815,31 +17760,93 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "8340053c-47d5-4bc3-ddab-4d558d7e405d",
-																													"fieldName": "inElementFormPictureWidthPercent",
-																													"fieldParent": "93f3575e-2cf3-4df3-8a93-1f293fb395fc",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "93f3575e-2cf3-4df3-8a93-1f293fb395fc",
+																													"fieldName": "inElementFormPictureWidthMetric",
+																													"fieldParent": "8af564c0-c219-4f75-afbd-31d83e54bfc9",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "styleClassMargin",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "bc7b208d-95b8-4981-f7a6-a37d130fdbb2",
+																															"fieldName": "inElementFormPictureWidthPixels",
+																															"fieldParent": "93f3575e-2cf3-4df3-8a93-1f293fb395fc",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "8340053c-47d5-4bc3-ddab-4d558d7e405d",
+																															"fieldName": "inElementFormPictureWidthPercent",
+																															"fieldParent": "93f3575e-2cf3-4df3-8a93-1f293fb395fc",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										},
@@ -16864,86 +17871,59 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "79a4139a-e3e0-4405-9fcd-fa0dbb335f31",
-																											"fieldName": "inElementFormPictureheight",
+																											"fieldNo": "7f56d253-6ace-4035-cc87-bf75b74345e5",
+																											"fieldName": "hBoxPictureHeight",
 																											"fieldParent": "3e939b32-8ecb-48fd-a542-39c3e1ab764d",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "value",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{/height}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "f0e1434f-11a4-4413-965e-7707a7f561bd",
-																											"fieldName": "inElementFormPictureHeightMetric",
-																											"fieldParent": "3e939b32-8ecb-48fd-a542-39c3e1ab764d",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "d675c89d-7853-4e0c-9a93-0f79eccd80fa",
-																													"fieldName": "inElementFormPictureHeightPixels",
-																													"fieldParent": "f0e1434f-11a4-4413-965e-7707a7f561bd",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "79a4139a-e3e0-4405-9fcd-fa0dbb335f31",
+																													"fieldName": "inElementFormPictureheight",
+																													"fieldParent": "7f56d253-6ace-4035-cc87-bf75b74345e5",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "value",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{/height}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -16951,31 +17931,93 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "e6fced93-4694-4098-ea5c-fa10f5ec5f92",
-																													"fieldName": "inElementFormPictureHeightPercent",
-																													"fieldParent": "f0e1434f-11a4-4413-965e-7707a7f561bd",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "f0e1434f-11a4-4413-965e-7707a7f561bd",
+																													"fieldName": "inElementFormPictureHeightMetric",
+																													"fieldParent": "7f56d253-6ace-4035-cc87-bf75b74345e5",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "styleClassMargin",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "d675c89d-7853-4e0c-9a93-0f79eccd80fa",
+																															"fieldName": "inElementFormPictureHeightPixels",
+																															"fieldParent": "f0e1434f-11a4-4413-965e-7707a7f561bd",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "e6fced93-4694-4098-ea5c-fa10f5ec5f92",
+																															"fieldName": "inElementFormPictureHeightPercent",
+																															"fieldParent": "f0e1434f-11a4-4413-965e-7707a7f561bd",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										},
@@ -17206,107 +18248,66 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "2547d148-1e53-4aa5-a048-ec0c01bf9cfb",
-																											"fieldName": "inElementFormSingleSelectWidth",
+																											"fieldNo": "405e1c0f-03d7-414f-ca65-f2b88fc8038d",
+																											"fieldName": "hBoxSingleSelectWidth",
 																											"fieldParent": "c2108d12-3fb5-4e34-8142-0e96442265a2",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "visible",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{= ${/enableWidth} ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "value",
-																													"grouping": "Properties",
-																													"value": "{/width}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "85603254-2c44-42d9-e73e-12989bb2eede",
-																											"fieldName": "inElementFormSingleSelectMetric",
-																											"fieldParent": "c2108d12-3fb5-4e34-8142-0e96442265a2",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/enableWidth} ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "enabled",
-																													"grouping": "Properties",
-																													"value": "false",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "53a3808f-46f7-4031-f76a-243a4979497d",
-																													"fieldName": "itemWidthsPixels1",
-																													"fieldParent": "85603254-2c44-42d9-e73e-12989bb2eede",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "2547d148-1e53-4aa5-a048-ec0c01bf9cfb",
+																													"fieldName": "inElementFormSingleSelectWidth",
+																													"fieldParent": "405e1c0f-03d7-414f-ca65-f2b88fc8038d",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{= ${/enableWidth} ? true:false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "value",
+																															"grouping": "Properties",
+																															"value": "{/width}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -17314,32 +18315,108 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "35e0f66c-4663-4151-ccd7-1024d6b2af0d",
-																													"fieldName": "itemWidthsPercent1",
-																													"fieldParent": "85603254-2c44-42d9-e73e-12989bb2eede",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "85603254-2c44-42d9-e73e-12989bb2eede",
+																													"fieldName": "inElementFormSingleSelectMetric",
+																													"fieldParent": "405e1c0f-03d7-414f-ca65-f2b88fc8038d",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
-																													"disabled": true,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "{= ${/enableWidth} ? true:false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "enabled",
+																															"grouping": "Properties",
+																															"value": "false",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "53a3808f-46f7-4031-f76a-243a4979497d",
+																															"fieldName": "itemWidthsPixels1",
+																															"fieldParent": "85603254-2c44-42d9-e73e-12989bb2eede",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "35e0f66c-4663-4151-ccd7-1024d6b2af0d",
+																															"fieldName": "itemWidthsPercent1",
+																															"fieldParent": "85603254-2c44-42d9-e73e-12989bb2eede",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"disabled": true,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										}
@@ -17809,107 +18886,66 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "1ef640ed-fab2-478a-afb4-12a6f070e1ec",
-																											"fieldName": "inElementFormSingleSelectIconWidth",
+																											"fieldNo": "0d1cc9ac-734b-4b02-bef4-bac8bb4c05f9",
+																											"fieldName": "hBoxSingleSelectIconWidth",
 																											"fieldParent": "fff562ec-66b5-457a-a7df-370fd021852e",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "visible",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{= ${/enableWidth} ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "value",
-																													"grouping": "Properties",
-																													"value": "{/width}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "83ef398e-6f05-4d73-bf93-97c9b79c0f99",
-																											"fieldName": "inElementFormSingleSelectIconMetric",
-																											"fieldParent": "fff562ec-66b5-457a-a7df-370fd021852e",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/enableWidth} ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "enabled",
-																													"grouping": "Properties",
-																													"value": "false",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "9ae42832-b602-485e-d3f2-a6178854277d",
-																													"fieldName": "itemWidthsPixels3",
-																													"fieldParent": "83ef398e-6f05-4d73-bf93-97c9b79c0f99",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "1ef640ed-fab2-478a-afb4-12a6f070e1ec",
+																													"fieldName": "inElementFormSingleSelectIconWidth",
+																													"fieldParent": "0d1cc9ac-734b-4b02-bef4-bac8bb4c05f9",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{= ${/enableWidth} ? true:false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "value",
+																															"grouping": "Properties",
+																															"value": "{/width}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -17917,32 +18953,108 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "9908c0d3-1853-4ba6-9a24-2243f2ebb2a1",
-																													"fieldName": "itemWidthsPercent3",
-																													"fieldParent": "83ef398e-6f05-4d73-bf93-97c9b79c0f99",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "83ef398e-6f05-4d73-bf93-97c9b79c0f99",
+																													"fieldName": "inElementFormSingleSelectIconMetric",
+																													"fieldParent": "0d1cc9ac-734b-4b02-bef4-bac8bb4c05f9",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
-																													"disabled": true,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "{= ${/enableWidth} ? true:false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "enabled",
+																															"grouping": "Properties",
+																															"value": "false",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "9ae42832-b602-485e-d3f2-a6178854277d",
+																															"fieldName": "itemWidthsPixels3",
+																															"fieldParent": "83ef398e-6f05-4d73-bf93-97c9b79c0f99",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "9908c0d3-1853-4ba6-9a24-2243f2ebb2a1",
+																															"fieldName": "itemWidthsPercent3",
+																															"fieldParent": "83ef398e-6f05-4d73-bf93-97c9b79c0f99",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"disabled": true,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										}
@@ -18479,10 +19591,10 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "028bda1a-fad0-49f4-a1d1-6b07144ab350",
-																											"fieldName": "inElementFormMultipleSelectWidth",
+																											"fieldNo": "a015b6c0-7fd5-4ebe-9035-6a7f3890022f",
+																											"fieldName": "hBoxMultipleSelectWidth",
 																											"fieldParent": "1e0ee765-5dc3-4eab-fe5b-c58ccafac691",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
@@ -18496,83 +19608,49 @@
 																													"translation": []
 																												},
 																												{
-																													"attribute": "value",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{/width}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "0ebfea25-ee32-4423-b8e2-0e2afc2c1bc6",
-																											"fieldName": "inElementFormMultipleSelectMetric",
-																											"fieldParent": "1e0ee765-5dc3-4eab-fe5b-c58ccafac691",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/enableWidth} ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "enabled",
-																													"grouping": "Properties",
-																													"value": "false",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "bb51622f-9da9-4623-9d12-172a5b7a6442",
-																													"fieldName": "itemWidthsPixels2",
-																													"fieldParent": "0ebfea25-ee32-4423-b8e2-0e2afc2c1bc6",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "028bda1a-fad0-49f4-a1d1-6b07144ab350",
+																													"fieldName": "inElementFormMultipleSelectWidth",
+																													"fieldParent": "a015b6c0-7fd5-4ebe-9035-6a7f3890022f",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{= ${/enableWidth} ? true:false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "value",
+																															"grouping": "Properties",
+																															"value": "{/width}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
 																															"script": "",
 																															"translation": []
 																														}
@@ -18580,32 +19658,108 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "0509ef69-1920-4c3a-9288-2453e6190cf9",
-																													"fieldName": "itemWidthsPercent2",
-																													"fieldParent": "0ebfea25-ee32-4423-b8e2-0e2afc2c1bc6",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "0ebfea25-ee32-4423-b8e2-0e2afc2c1bc6",
+																													"fieldName": "inElementFormMultipleSelectMetric",
+																													"fieldParent": "a015b6c0-7fd5-4ebe-9035-6a7f3890022f",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
-																													"disabled": true,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "{= ${/enableWidth} ? true:false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "enabled",
+																															"grouping": "Properties",
+																															"value": "false",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "bb51622f-9da9-4623-9d12-172a5b7a6442",
+																															"fieldName": "itemWidthsPixels2",
+																															"fieldParent": "0ebfea25-ee32-4423-b8e2-0e2afc2c1bc6",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "0509ef69-1920-4c3a-9288-2453e6190cf9",
+																															"fieldName": "itemWidthsPercent2",
+																															"fieldParent": "0ebfea25-ee32-4423-b8e2-0e2afc2c1bc6",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"disabled": true,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										},
@@ -18630,10 +19784,10 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
-																											"fieldName": "inElementFormMultipleSelectValidationType",
+																											"fieldNo": "6ecf4095-f8d7-47a4-d6f8-a4cc6f617926",
+																											"fieldName": "hBoxMultipleSelectValidation",
 																											"fieldParent": "1e0ee765-5dc3-4eab-fe5b-c58ccafac691",
-																											"fieldType": "sap.m.Select",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
@@ -18647,116 +19801,192 @@
 																													"translation": []
 																												},
 																												{
-																													"attribute": "selectedKey",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{/validationType}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "9e51ef46-b82f-4db9-9825-cf996b9ef66a",
-																													"fieldName": "itemNoLimit",
-																													"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
-																													"fieldType": "sap.ui.core.ListItem",
+																													"fieldNo": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
+																													"fieldName": "inElementFormMultipleSelectValidationType",
+																													"fieldParent": "6ecf4095-f8d7-47a4-d6f8-a4cc6f617926",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "No limit",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "noLimit",
+																															"value": "{= ${/required} ? true: false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/validationType}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
-																												},
-																												{
-																													"fieldNo": "917b3aa4-c43d-4d85-b783-f06526cfad03",
-																													"fieldName": "itemEqualTo",
-																													"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
-																													"fieldType": "sap.ui.core.ListItem",
-																													"script": "",
-																													"customComponent": false,
-																													"request": [],
-																													"response": [],
-																													"attributes": [
+																													"data": [
 																														{
-																															"attribute": "text",
-																															"grouping": "Properties",
-																															"value": "Equal to",
+																															"fieldNo": "9e51ef46-b82f-4db9-9825-cf996b9ef66a",
+																															"fieldName": "itemNoLimit",
+																															"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
+																															"fieldType": "sap.ui.core.ListItem",
 																															"script": "",
-																															"translation": []
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "No limit",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "noLimit",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
 																														},
 																														{
-																															"attribute": "key",
-																															"grouping": "Properties",
-																															"value": "equalTo",
+																															"fieldNo": "917b3aa4-c43d-4d85-b783-f06526cfad03",
+																															"fieldName": "itemEqualTo",
+																															"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
+																															"fieldType": "sap.ui.core.ListItem",
 																															"script": "",
-																															"translation": []
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Equal to",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "equalTo",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "7b63d3f5-bedd-47f0-e784-76ecf2a1869d",
+																															"fieldName": "itemAtMost",
+																															"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
+																															"fieldType": "sap.ui.core.ListItem",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "At most",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "atMost",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "be3c4aa6-8633-428c-85ac-34cdc8b9b74c",
+																															"fieldName": "itemMinimum",
+																															"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
+																															"fieldType": "sap.ui.core.ListItem",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "At least",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "atLeast",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
 																														}
-																													],
-																													"data": []
+																													]
 																												},
 																												{
-																													"fieldNo": "7b63d3f5-bedd-47f0-e784-76ecf2a1869d",
-																													"fieldName": "itemAtMost",
-																													"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
-																													"fieldType": "sap.ui.core.ListItem",
+																													"fieldNo": "0178350c-4f37-4522-8c13-7beac8e0d391",
+																													"fieldName": "inElementFormMultipleSelectValidationParam",
+																													"fieldParent": "6ecf4095-f8d7-47a4-d6f8-a4cc6f617926",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "At most",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "visible",
 																															"grouping": "Properties",
-																															"value": "atMost",
-																															"script": "",
-																															"translation": []
-																														}
-																													],
-																													"data": []
-																												},
-																												{
-																													"fieldNo": "be3c4aa6-8633-428c-85ac-34cdc8b9b74c",
-																													"fieldName": "itemMinimum",
-																													"fieldParent": "64e423bc-bb95-4b30-f735-2f6740e0dc79",
-																													"fieldType": "sap.ui.core.ListItem",
-																													"script": "",
-																													"customComponent": false,
-																													"request": [],
-																													"response": [],
-																													"attributes": [
-																														{
-																															"attribute": "text",
-																															"grouping": "Properties",
-																															"value": "At least",
+																															"value": "{= ${/validationType} !== 'noLimit'  && ${/required} ? true : false }",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "styleClassMargin",
 																															"grouping": "Properties",
-																															"value": "atLeast",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/validationParam}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -18764,33 +19994,6 @@
 																													"data": []
 																												}
 																											]
-																										},
-																										{
-																											"fieldNo": "0178350c-4f37-4522-8c13-7beac8e0d391",
-																											"fieldName": "inElementFormMultipleSelectValidationParam",
-																											"fieldParent": "1e0ee765-5dc3-4eab-fe5b-c58ccafac691",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/validationType} !== 'noLimit'  && ${/required} ? true : false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/validationParam}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
 																										}
 																									]
 																								},
@@ -19306,86 +20509,59 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "c12cfe5f-95c4-4c06-89de-7c7b8354af09",
-																											"fieldName": "inElementFormSegmentedButtonWidth",
+																											"fieldNo": "1e16c1b2-26e0-452a-b10d-48b90a0fafd2",
+																											"fieldName": "hBoxSegmentedButtonWidth",
 																											"fieldParent": "f4d3484a-9981-442d-b925-15654a0cf9e3",
-																											"fieldType": "sap.m.StepInput",
+																											"fieldType": "sap.m.HBox",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "value",
+																													"attribute": "renderType",
 																													"grouping": "Properties",
-																													"value": "{/width}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "min",
-																													"grouping": "Properties",
-																													"value": "0",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "max",
-																													"grouping": "Properties",
-																													"value": "1000",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "d02db413-d00d-4c6e-b540-ec1d3b28a357",
-																											"fieldName": "inElementFormSegmentedButtonWidthMetric",
-																											"fieldParent": "f4d3484a-9981-442d-b925-15654a0cf9e3",
-																											"fieldType": "sap.m.Select",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "selectedKey",
-																													"grouping": "Properties",
-																													"value": "{/widthMetric}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
+																													"value": "Bare",
 																													"script": "",
 																													"translation": []
 																												}
 																											],
 																											"data": [
 																												{
-																													"fieldNo": "aea5e62f-6ea0-42bb-abfa-4091223b87e0",
-																													"fieldName": "inElementFormSegmentedButtonWidthPixels",
-																													"fieldParent": "d02db413-d00d-4c6e-b540-ec1d3b28a357",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "c12cfe5f-95c4-4c06-89de-7c7b8354af09",
+																													"fieldName": "inElementFormSegmentedButtonWidth",
+																													"fieldParent": "1e16c1b2-26e0-452a-b10d-48b90a0fafd2",
+																													"fieldType": "sap.m.StepInput",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "value",
 																															"grouping": "Properties",
-																															"value": "Pixels",
+																															"value": "{/width}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "min",
+																															"grouping": "Properties",
+																															"value": "0",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "max",
+																															"grouping": "Properties",
+																															"value": "1000",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -19393,31 +20569,93 @@
 																													"data": []
 																												},
 																												{
-																													"fieldNo": "6758fc51-877b-4882-d8a2-923bc23f4640",
-																													"fieldName": "inElementFormSegmentedButtonWidthPercent",
-																													"fieldParent": "d02db413-d00d-4c6e-b540-ec1d3b28a357",
-																													"fieldType": "sap.ui.core.Item",
+																													"fieldNo": "d02db413-d00d-4c6e-b540-ec1d3b28a357",
+																													"fieldName": "inElementFormSegmentedButtonWidthMetric",
+																													"fieldParent": "1e16c1b2-26e0-452a-b10d-48b90a0fafd2",
+																													"fieldType": "sap.m.Select",
 																													"script": "",
 																													"customComponent": false,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
 																														{
-																															"attribute": "text",
+																															"attribute": "width",
 																															"grouping": "Properties",
-																															"value": "Percent",
+																															"value": "100%",
 																															"script": "",
 																															"translation": []
 																														},
 																														{
-																															"attribute": "key",
+																															"attribute": "styleClassMargin",
 																															"grouping": "Properties",
-																															"value": "per",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "selectedKey",
+																															"grouping": "Properties",
+																															"value": "{/widthMetric}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
 																															"script": "",
 																															"translation": []
 																														}
 																													],
-																													"data": []
+																													"data": [
+																														{
+																															"fieldNo": "aea5e62f-6ea0-42bb-abfa-4091223b87e0",
+																															"fieldName": "inElementFormSegmentedButtonWidthPixels",
+																															"fieldParent": "d02db413-d00d-4c6e-b540-ec1d3b28a357",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Pixels",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "6758fc51-877b-4882-d8a2-923bc23f4640",
+																															"fieldName": "inElementFormSegmentedButtonWidthPercent",
+																															"fieldParent": "d02db413-d00d-4c6e-b540-ec1d3b28a357",
+																															"fieldType": "sap.ui.core.Item",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Percent",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "key",
+																																	"grouping": "Properties",
+																																	"value": "per",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
 																												}
 																											]
 																										}
@@ -20722,27 +21960,34 @@
 																									"data": []
 																								},
 																								{
-																									"fieldNo": "e7de51f3-28f7-42f3-803a-dc647c06eac2",
+																									"fieldNo": "99e12f0e-e26f-464b-81a6-58ca9d1d969e",
 																									"fieldName": "inElementFormVisibleField",
 																									"fieldParent": "411706a4-5046-4f1e-8a9a-bd24d66e9ed5",
-																									"fieldType": "sap.m.Select",
+																									"fieldType": "sap.m.Input",
 																									"script": "",
 																									"customComponent": false,
 																									"request": [],
 																									"response": [],
 																									"attributes": [
 																										{
-																											"attribute": "selectedKey",
+																											"attribute": "valueHelpOnly",
+																											"grouping": "Properties",
+																											"value": "true",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "value",
 																											"grouping": "Properties",
 																											"value": "{/visibleFieldName}",
 																											"script": "",
 																											"translation": []
 																										},
 																										{
-																											"attribute": "change",
-																											"grouping": "Events",
-																											"value": "controller.visibleCondValue();",
-																											"script": "controller.visibleCondValue();",
+																											"attribute": "showValueHelp",
+																											"grouping": "Properties",
+																											"value": "true",
+																											"script": "",
 																											"translation": []
 																										},
 																										{
@@ -20750,6 +21995,20 @@
 																											"grouping": "Properties",
 																											"value": "{appControl>/enableEdit}",
 																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "value",
+																											"grouping": "Formatter",
+																											"value": "Anonymous Function",
+																											"script": "file://event/sap.m.Input/inElementFormVisibleField/value.script",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "valueHelpRequest",
+																											"grouping": "Events",
+																											"value": "diaVisibility.open();",
+																											"script": "diaVisibility.open();",
 																											"translation": []
 																										}
 																									],
@@ -21095,6 +22354,259 @@
 					"attributes": [],
 					"data": [
 						{
+							"fieldNo": "3e617615-03f1-498c-9db2-bf36db3fc045",
+							"fieldName": "diaVisibilityClear",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "type",
+									"grouping": "Properties",
+									"value": "Emphasized",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Clear",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableCompactMode",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Button/diaVisibilityClear/press.js",
+									"language": "javascript",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "c95a3f59-b33c-4449-bb6f-33bc694e00c8",
+							"fieldName": "diaVisibilityClose",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "type",
+									"grouping": "Properties",
+									"value": "Transparent",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Close",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableCompactMode",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "diaVisibility.close();",
+									"script": "diaVisibility.close();",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "0e8cdd6e-2e85-4f8a-985d-149c685151ef",
+							"fieldName": "diaVisibility",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "sap.m.Dialog",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "title",
+									"grouping": "Properties",
+									"value": "Conditional Visibility",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "draggable",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "contentWidth",
+									"grouping": "Properties",
+									"value": "400px",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "contentHeight",
+									"grouping": "Properties",
+									"value": "600px",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "beforeOpen",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Dialog/diaVisibility/beforeOpen.js",
+									"language": "javascript",
+									"translation": []
+								},
+								{
+									"attribute": "afterOpen",
+									"grouping": "Events",
+									"value": "listVisibilityFilter.focus();",
+									"script": "listVisibilityFilter.focus();",
+									"translation": []
+								},
+								{
+									"attribute": "endButton",
+									"grouping": "Associations",
+									"value": "diaVisibilityClose",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "beginButton",
+									"grouping": "Associations",
+									"value": "diaVisibilityClear",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": [
+								{
+									"fieldNo": "b10c34c5-ef37-493f-b9fa-88947b507d64",
+									"fieldName": "listVisibility",
+									"fieldParent": "0e8cdd6e-2e85-4f8a-985d-149c685151ef",
+									"fieldType": "sap.m.List",
+									"script": "",
+									"customComponent": false,
+									"bindingValue": "Generic Array",
+									"bindingType": "h",
+									"bindingSource": "P9",
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "sticky",
+											"grouping": "Properties",
+											"value": "[\"ColumnHeaders\",\"HeaderToolbar\"]",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "f36ac197-9ccc-4c5f-fed6-10cb6fdbdcd6",
+											"fieldName": "listVisibilityToolbar",
+											"fieldParent": "b10c34c5-ef37-493f-b9fa-88947b507d64",
+											"fieldType": "sap.m.Toolbar",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "position",
+													"grouping": "Parent",
+													"value": "HeaderToolbar",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": [
+												{
+													"fieldNo": "b7356a65-2557-4360-d8ce-655b5a079413",
+													"fieldName": "listVisibilityFilter",
+													"fieldParent": "f36ac197-9ccc-4c5f-fed6-10cb6fdbdcd6",
+													"fieldType": "sap.m.SearchField",
+													"script": "",
+													"customComponent": false,
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "liveChange",
+															"grouping": "Events",
+															"value": "Anonymous Function",
+															"script": "file://event/sap.m.SearchField/listVisibilityFilter/liveChange.script",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										},
+										{
+											"fieldNo": "5fcffb9c-92b7-4f2c-9bf7-663614bde78d",
+											"fieldName": "listVisibilityItem",
+											"fieldParent": "b10c34c5-ef37-493f-b9fa-88947b507d64",
+											"fieldType": "sap.m.StandardListItem",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "type",
+													"grouping": "Properties",
+													"value": "Active",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "title",
+													"grouping": "Properties",
+													"value": "{text}",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.StandardListItem/listVisibilityItem/press.script",
+													"translation": []
+												}
+											],
+											"data": []
+										}
+									]
+								}
+							]
+						},
+						{
 							"fieldNo": "debfb0ae-ead1-44c6-b63d-4cb703c48004",
 							"fieldName": "diaChangeTypeClose",
 							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
@@ -21201,7 +22713,15 @@
 									"bindingSource": "P9",
 									"request": [],
 									"response": [],
-									"attributes": [],
+									"attributes": [
+										{
+											"attribute": "sticky",
+											"grouping": "Properties",
+											"value": "[\"ColumnHeaders\",\"HeaderToolbar\"]",
+											"script": "",
+											"translation": []
+										}
+									],
 									"data": [
 										{
 											"fieldNo": "ca5fbdd9-b63b-42d8-8c90-45b9cf09320f",
@@ -23293,7 +24813,7 @@
 					"data": [
 						{
 							"fieldNo": "44fd8d64-f069-4ba3-8e81-91e0bcf61052",
-							"fieldName": "oforms",
+							"fieldName": "formsHandler",
 							"fieldParent": "9a908f5d-5422-474e-adc2-0b14d7e5d638",
 							"fieldType": "neptune_forms",
 							"script": "",
@@ -23361,7 +24881,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "23.4.25.926",
+	"ver": "23.5.3.725",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

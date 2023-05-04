@@ -35,7 +35,7 @@ const library = ModelData.FindFirst(controller.elementTypes, "type", controller.
 
 if (oDroppedParent.type === "Table" && !library.table) {
     sap.m.MessageToast.show("Element not allowed in parent Table");
-    return ;
+    return;
 }
 
 const rootType = ["Form", "Table"];
@@ -63,8 +63,15 @@ if (!rootType.includes(oDraggedData.type) && !rootType.includes(oDroppedData.typ
     if (oDraggedParent.id === oDroppedParent.id) {
         Utils.arrayMove(oDroppedParent.elements, indexDrag, indexDrop);
     } else {
-        oDroppedParent.elements.splice(indexDrop, 0, oDraggedData);
-        ModelData.Delete(oDraggedParent.elements, "id", oDraggedData.id);
+        if (oDroppedParent.type === "FormTitle" && oDraggedData.type === "FormTitle") {
+            ModelData.Delete(oDraggedParent.elements, "id", oDraggedData.id);
+            const parent = controller.getParentFromId(oDroppedParent.id);
+            indexDrop++;
+            parent.elements.splice(indexDrop, 0, oDraggedData);
+        } else {
+            oDroppedParent.elements.splice(indexDrop, 0, oDraggedData);
+            ModelData.Delete(oDraggedParent.elements, "id", oDraggedData.id);
+        }
     }
 }
 
