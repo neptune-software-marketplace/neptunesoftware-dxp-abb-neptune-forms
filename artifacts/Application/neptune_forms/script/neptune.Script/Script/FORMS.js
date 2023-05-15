@@ -2098,6 +2098,9 @@ const FORMS = {
 
             if (section.type === "Table") {
                 const tabObject = sap.ui.getCore().byId("field" + section.id);
+
+                if (!tabObject) return;
+                
                 const tabData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tabObject.getModel().oData;
 
                 if (tabData) {
@@ -2277,6 +2280,9 @@ const FORMS = {
 
     validateTableContentRequired: function (section, process) {
         const table = sap.ui.getCore().byId("field" + section.id);
+
+        if (!table) return false;
+
         const model = table.getModel();
 
         let validTable = true;

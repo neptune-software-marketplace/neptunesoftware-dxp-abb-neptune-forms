@@ -22304,7 +22304,15 @@
 							"bindingSource": "P9",
 							"request": [],
 							"response": [],
-							"attributes": [],
+							"attributes": [
+								{
+									"attribute": "setSizeLimit",
+									"grouping": "Model",
+									"value": "10000",
+									"script": "",
+									"translation": []
+								}
+							],
 							"data": []
 						},
 						{
@@ -24881,7 +24889,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "23.5.3.725",
+	"ver": "23.5.12.2157",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

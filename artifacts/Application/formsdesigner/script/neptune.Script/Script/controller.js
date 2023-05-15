@@ -108,6 +108,8 @@ const controller = {
             toolAppsCols.addItem(new sap.ui.core.ListItem({ key: k, text: item.text }));
         });
 
+        modeloPageDetail.setSizeLimit(10000);
+
         // Get FORMS
         this.list();
     },
