@@ -287,18 +287,41 @@ const controller = {
     },
 
     objectDelete: function () {
-        const parent = controller.getParentFromId(modelpanTopProperties.oData.id);
+        const id = modelpanTopProperties.oData.id;
+        const parent = controller.getParentFromId(id);
 
-        if (parent.id === modelpanTopProperties.oData.id) {
-            ModelData.Delete(modeloPageDetail.oData.setup, "id", modelpanTopProperties.oData.id);
+        if (parent.id === id) {
+            ModelData.Delete(modeloPageDetail.oData.setup, "id", id);
         } else {
-            ModelData.Delete(parent.elements, "id", modelpanTopProperties.oData.id);
+            ModelData.Delete(parent.elements, "id", id);
         }
+
+        // Remove field if used in conditional visibility
+        modeloPageDetail.oData.setup.forEach(function (section, i) {
+            if (section.visibleFieldName === id) controller.clearVisibleCondition(section);
+            
+            section.elements.forEach(function (element, i) {
+                if (element.visibleFieldName === id) controller.clearVisibleCondition(element);
+
+                if (element.elements) {
+                    element.elements.forEach(function (element, i) {
+                       if (element.visibleFieldName === id) controller.clearVisibleCondition(element);
+                    });
+                }
+            });
+        });
 
         modelpanTopProperties.setData({});
         modelpanTopProperties.refresh();
 
         modeloPageDetail.refresh();
+    },
+
+    clearVisibleCondition: function (element) {
+        element.visibleFieldName = "";
+        element.visibleCondition = "";
+        element.visibleValue = "";
+        console.log("Cleared")
     },
 
     list: function () {
@@ -910,6 +933,7 @@ const controller = {
 
         switch (visibleField.type) {
             case "Switch":
+            case "CheckBox":
                 inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: false, text: "false" }));
                 inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: true, text: "true" }));
                 break;

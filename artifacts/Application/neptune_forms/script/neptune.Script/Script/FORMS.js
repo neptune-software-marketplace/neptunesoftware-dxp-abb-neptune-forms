@@ -2047,6 +2047,10 @@ const FORMS = {
         const outputData = {};
 
         let completed = false;
+        const process = complete ? "" : "OnlyCheck";
+        const valid = FORMS.validate(process);
+
+        if (complete && valid) completed = true;
 
         const getElementData = function (element) {
             switch (element.type) {
@@ -2087,11 +2091,6 @@ const FORMS = {
             });
         });
 
-        const process = complete ? "" : "OnlyCheck";
-        const valid = FORMS.validate(process);
-
-        if (complete && valid) completed = true;
-
         // Cleanup fields
         FORMS.config.setup.forEach(function (section) {
             if (!section) return;
@@ -2100,7 +2099,7 @@ const FORMS = {
                 const tabObject = sap.ui.getCore().byId("field" + section.id);
 
                 if (!tabObject) return;
-                
+
                 const tabData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tabObject.getModel().oData;
 
                 if (tabData) {
@@ -2212,12 +2211,22 @@ const FORMS = {
             const field = sap.ui.getCore().byId("field" + element.id);
             const bindingField = element.fieldName ? element.fieldName : element.id;
 
-            if (element.required && !element.disabled && field.getDomRef()) {
+            // Disabled Field
+            if (element.disabled) {
+                return;
+            }
+
+            // Field not visible -> Do not show value
+            if (!field.getDomRef()) {
+                delete formModel.oData[bindingField];
+                return;
+            }
+
+            // If field is required, check value and mark if not valid
+            if (element.required) {
                 fieldCompleted = formModel.oData[bindingField] ? true : false;
                 if (validForm) validForm = fieldCompleted;
                 FORMS.validateMarkField(element.id, fieldCompleted, process);
-            } else {
-                delete formModel.oData[bindingField];
             }
 
             // MultipleSelect/MultipleChoice

@@ -1,7 +1,18 @@
-if (typeof visibleFieldName === "undefined" || visibleFieldName === null || visibleFieldName === "") { return; }  
-
+if (typeof visibleFieldName === "undefined" || visibleFieldName === null || visibleFieldName === "") {
+    return;
+}
 
 const element = controller.getObjectFromId(visibleFieldName);
+
+if (!element) {
+    sap.m.MessageToast.show("Conditional Visibility Field Not Found");
+    return visibleFieldName;
+}
+
 const parent = controller.getParentFromId(visibleFieldName);
 
-return `(${parent.title}) ${element.title}`;
+if (parent) {
+    return `(${parent.title}) ${element.title}`;
+} else {
+    return `${element.title}`;
+}
