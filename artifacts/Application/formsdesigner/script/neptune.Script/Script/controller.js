@@ -299,13 +299,13 @@ const controller = {
         // Remove field if used in conditional visibility
         modeloPageDetail.oData.setup.forEach(function (section, i) {
             if (section.visibleFieldName === id) controller.clearVisibleCondition(section);
-            
+
             section.elements.forEach(function (element, i) {
                 if (element.visibleFieldName === id) controller.clearVisibleCondition(element);
 
                 if (element.elements) {
                     element.elements.forEach(function (element, i) {
-                       if (element.visibleFieldName === id) controller.clearVisibleCondition(element);
+                        if (element.visibleFieldName === id) controller.clearVisibleCondition(element);
                     });
                 }
             });
@@ -321,7 +321,6 @@ const controller = {
         element.visibleFieldName = "";
         element.visibleCondition = "";
         element.visibleValue = "";
-        console.log("Cleared")
     },
 
     list: function () {
@@ -957,8 +956,8 @@ const controller = {
             const file = oEvent.target.files[0];
             const fileReader = new FileReader();
 
-            fileReader.onload = function (fileLoadedEvent) {
-                modelpanTopProperties.oData.imageSrc = fileLoadedEvent.target.result;
+            fileReader.onload = async function (fileLoadedEvent) {
+                modelpanTopProperties.oData.imageSrc = await FORMS.imageResize(fileLoadedEvent.target.result, modelpanTopProperties.oData);
                 modelpanTopProperties.refresh();
                 document.getElementById("pictureUploader").value = "";
             };

@@ -26,7 +26,7 @@
 	"backgroundColor": null,
 	"backgroundShade": null,
 	"tileApplication": null,
-	"hideHeaderL": false,
+	"hideHeaderL": null,
 	"hideHeaderM": false,
 	"hideHeaderS": false,
 	"hideTileDesktop": false,

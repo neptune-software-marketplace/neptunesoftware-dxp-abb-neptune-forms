@@ -4,7 +4,7 @@ const elementData = [];
 
 const logs = await entities.forms_data.find({
     where: { formid: formId },
-    order: { updatedAt: "DESC" }
+    order: { updatedAt: "DESC" },
 });
 
 for (i = 0; i < logs.length; i++) {
@@ -14,11 +14,9 @@ for (i = 0; i < logs.length; i++) {
 
     // Get Config
     for (iSetup = 0; iSetup < log.data.config.setup.length; iSetup++) {
-
         const section = log.data.config.setup[iSetup];
 
         for (iElement = 0; iElement < section.elements.length; iElement++) {
-
             const elementConfig = section.elements[iElement];
             if (elementConfig.id === elementId) config = elementConfig;
 
@@ -28,14 +26,11 @@ for (i = 0; i < logs.length; i++) {
                     if (elementSubConfig.id === elementId) config = elementSubConfig;
                 }
             }
-
         }
-
     }
 
     if (config) {
-
-        let content = {}
+        let content = {};
 
         switch (config.type) {
             case "CheckList":
@@ -46,7 +41,11 @@ for (i = 0; i < logs.length; i++) {
                 break;
 
             default:
-                content[elementId] = log.data.data[elementId];
+                if (config.fieldName) {
+                    content[config.fieldName] = log.data.data[config.fieldName];
+                } else {
+                    content[elementId] = log.data.data[elementId];
+                }
                 break;
         }
 
@@ -55,14 +54,11 @@ for (i = 0; i < logs.length; i++) {
             updatedBy: log.updatedBy,
             updatedAt: log.updatedAt,
             config: config,
-            data: content
+            data: content,
         });
         // }
-
     }
-
 }
 
 result.data = elementData;
 complete();
-

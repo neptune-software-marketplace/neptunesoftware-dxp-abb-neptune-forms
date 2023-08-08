@@ -1,0 +1,7 @@
+const table = sap.ui.getCore().byId("field" + modelpanTopProperties.oData.id);
+const model = table.getModel();
+
+model.setData([]);
+model.refresh();
+
+controller.tableReset = true;

@@ -4511,8 +4511,8 @@
 																											"data": []
 																										},
 																										{
-																											"fieldNo": "f4b99a65-c6b2-4f1c-a7c3-64d8ea9360e8",
-																											"fieldName": "inElementSegmentedButtonHorizontal",
+																											"fieldNo": "97c89036-f2d6-40d0-f481-2f34108425ab",
+																											"fieldName": "inElementSegmentedButtonNoDefault",
 																											"fieldParent": "7f37128f-e32e-42d7-eeec-fed007228bc2",
 																											"fieldType": "sap.m.CheckBox",
 																											"script": "",
@@ -4521,64 +4521,16 @@
 																											"response": [],
 																											"attributes": [
 																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/type} === 'SingleChoice' ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
 																													"attribute": "text",
 																													"grouping": "Properties",
-																													"value": "Horizontal Layout",
+																													"value": "No Default Selection",
 																													"script": "",
 																													"translation": []
 																												},
 																												{
 																													"attribute": "selected",
 																													"grouping": "Properties",
-																													"value": "{/horizontal}",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "editable",
-																													"grouping": "Properties",
-																													"value": "{appControl>/enableEdit}",
-																													"script": "",
-																													"translation": []
-																												}
-																											],
-																											"data": []
-																										},
-																										{
-																											"fieldNo": "8242f546-007e-4f22-f9f5-78af3a76949b",
-																											"fieldName": "inElementSegmentedButtonCustomWidth",
-																											"fieldParent": "7f37128f-e32e-42d7-eeec-fed007228bc2",
-																											"fieldType": "sap.m.CheckBox",
-																											"script": "",
-																											"customComponent": false,
-																											"request": [],
-																											"response": [],
-																											"attributes": [
-																												{
-																													"attribute": "visible",
-																													"grouping": "Properties",
-																													"value": "{= ${/type} === 'SingleChoice' ? true:false }",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "text",
-																													"grouping": "Properties",
-																													"value": "Custom Width",
-																													"script": "",
-																													"translation": []
-																												},
-																												{
-																													"attribute": "selected",
-																													"grouping": "Properties",
-																													"value": "{/enableWidth}",
+																													"value": "{/noDefault}",
 																													"script": "",
 																													"translation": []
 																												},
@@ -8410,6 +8362,40 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "083f2586-d315-4c63-9ef7-b78153325f30",
+																											"fieldName": "inElementImageEnableResize",
+																											"fieldParent": "01ea8586-f321-4e12-ae38-ba89b4916dcd",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Enable Image Resize",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableResize}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -9544,6 +9530,40 @@
 																													"attribute": "selected",
 																													"grouping": "Properties",
 																													"value": "{/enableVisibleCond}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "2f0c9762-6d86-4e1a-d6e8-7ae3d0bbe3ee",
+																											"fieldName": "inElementPictureEnableResize1",
+																											"fieldParent": "b1303c18-cad6-4a41-be01-a6b920a78285",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Enable Image Resize",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableResize}",
 																													"script": "",
 																													"translation": []
 																												},
@@ -10817,7 +10837,7 @@
 																										{
 																											"attribute": "visible",
 																											"grouping": "Properties",
-																											"value": "{= ${/type} === 'Table' || ${/type} === 'Form' || ${/type} === 'FormTitle' || ${/type} === 'MessageStrip' ? false:true }",
+																											"value": "{= ${/type} === 'Form' || ${/type} === 'FormTitle' || ${/type} === 'MessageStrip' ? false:true }",
 																											"script": "",
 																											"translation": []
 																										},
@@ -11455,7 +11475,7 @@
 																										{
 																											"attribute": "placeholder",
 																											"grouping": "Properties",
-																											"value": "Text",
+																											"value": "Log",
 																											"script": "",
 																											"translation": []
 																										},
@@ -12666,6 +12686,74 @@
 																										}
 																									],
 																									"data": [
+																										{
+																											"fieldNo": "2544ea31-97b4-4aaf-999e-3fc8b6262b15",
+																											"fieldName": "lblElementTableHeight",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Height",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "66d13ee1-f531-40f9-c522-56bff1548de0",
+																											"fieldName": "inElementTableHeight",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.StepInput",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "value",
+																													"grouping": "Properties",
+																													"value": "{/height}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "min",
+																													"grouping": "Properties",
+																													"value": "0",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "max",
+																													"grouping": "Properties",
+																													"value": "2000",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "change",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.m.StepInput/inElementTableHeight/change.script",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
 																										{
 																											"fieldNo": "4697d095-10e4-4a09-ce0c-31057239d695",
 																											"fieldName": "lblElementTableRows",
@@ -18257,6 +18345,13 @@
 																											"request": [],
 																											"response": [],
 																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/enableWidth} ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
 																												{
 																													"attribute": "renderType",
 																													"grouping": "Properties",
@@ -24889,7 +24984,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "23.5.15.1740",
+	"ver": "23.8.7.811",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

@@ -7,7 +7,7 @@
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "23.5.22.856",
+	"ver": "23.8.8.1526",
 	"enableCICD": true,
 	"apps": [
 		{
@@ -336,7 +336,7 @@
 	"code_snippets": [
 		{
 			"id": "a8ee936a-9bd1-4cba-8292-5520de285ad1",
-			"name": "Usage in your own App",
+			"name": "Documentation",
 			"description": null
 		}
 	],
