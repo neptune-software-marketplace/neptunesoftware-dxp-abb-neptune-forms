@@ -1,17 +1,17 @@
 {
-	"id": "b5d4a055-2df2-4ae1-976d-3e41d2d1ce3c",
-	"createdAt": "2023-02-21T11:11:49.000Z",
+	"id": "59f26a1a-f9d5-403b-ad96-4ba203ccbf13",
+	"createdAt": "2023-02-21T08:47:29.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
 	"translation": [],
 	"storeItem": {},
 	"settings": {
 		"adaptive": {
-			"id": "21c58eaa-cc42-4ab4-b60b-89b38bc99825"
+			"id": "44e04b91-df79-49be-955e-3a27cb6aeb2c"
 		}
 	},
-	"title": "Reports",
+	"title": "Classification",
 	"subTitle": null,
-	"description": "View FORMS submitted reports",
+	"description": "Create Form Classifications",
 	"categoryID": null,
 	"sort": null,
 	"urlApplication": null,
@@ -25,7 +25,7 @@
 	"frameType": null,
 	"type": "",
 	"image": null,
-	"icon": "sap-icon://trip-report",
+	"icon": "sap-icon://fa-solid/layer-group",
 	"backgroundType": null,
 	"backgroundColor": null,
 	"backgroundShade": null,
@@ -38,7 +38,7 @@
 	"hideTileTablet": false,
 	"enableDocumentation": false,
 	"navObject": "forms",
-	"navAction": "reports",
+	"navAction": "classification",
 	"dialogWidth": null,
 	"dialogHeight": null,
 	"tileApplicationStyleClass": null,
@@ -60,9 +60,9 @@
 	"helpText": null,
 	"helpEnabled": false,
 	"openClickTile": false,
-	"ver": "23.3.5.759",
+	"ver": "23.8.31.164",
 	"actionWebApp": "",
-	"name": "FORMS Reports",
+	"name": "Form Classification",
 	"cardWidth": null,
 	"cardHeight": null,
 	"cardHeightFit": false,
