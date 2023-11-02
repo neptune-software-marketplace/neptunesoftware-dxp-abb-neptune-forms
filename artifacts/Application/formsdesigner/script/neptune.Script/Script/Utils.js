@@ -27,4 +27,7 @@ const Utils = {
             i--;
         }
     },
+
+    dateFormats: [{ title: "dd.MM.yyyy" }, { title: "MM/dd/yyyy" }, { title: "MM.yyyy" }, { title: "dd MMM" }],
+    dateTimeFormats: [{ title: "dd.MM.yyyy HH:mm" }, { title: "MM/dd/yyyy HH:mm" }, { title: "dd MMM HH:mm" }],
 };

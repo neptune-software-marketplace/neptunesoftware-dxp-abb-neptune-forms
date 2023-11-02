@@ -1,0 +1,3 @@
+controller.currentObject = this;
+modellistFormatTypes.setData(Utils.dateTimeFormats);
+popFormat.openBy(this);

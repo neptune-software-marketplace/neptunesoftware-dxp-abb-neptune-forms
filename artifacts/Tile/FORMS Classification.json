@@ -1,17 +1,17 @@
 {
-	"id": "d832bb94-ec3a-4f59-8f1a-bab662c6a4d6",
-	"createdAt": "2023-02-28T13:12:21.000Z",
+	"id": "59f26a1a-f9d5-403b-ad96-4ba203ccbf13",
+	"createdAt": "2023-02-21T08:47:29.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
 	"translation": [],
 	"storeItem": {},
 	"settings": {
 		"adaptive": {
-			"id": "e83a706d-3f77-4536-9c17-67e6cc67942a"
+			"id": "44e04b91-df79-49be-955e-3a27cb6aeb2c"
 		}
 	},
-	"title": "Attributes",
+	"title": "Classification",
 	"subTitle": null,
-	"description": "Create Forms Object Attributes",
+	"description": "Create FORMS Classifications",
 	"categoryID": null,
 	"sort": null,
 	"urlApplication": null,
@@ -25,7 +25,7 @@
 	"frameType": null,
 	"type": "",
 	"image": null,
-	"icon": "sap-icon://group-2",
+	"icon": "sap-icon://fa-solid/layer-group",
 	"backgroundType": null,
 	"backgroundColor": null,
 	"backgroundShade": null,
@@ -38,7 +38,7 @@
 	"hideTileTablet": false,
 	"enableDocumentation": false,
 	"navObject": "forms",
-	"navAction": "attribute",
+	"navAction": "classification",
 	"dialogWidth": null,
 	"dialogHeight": null,
 	"tileApplicationStyleClass": null,
@@ -60,9 +60,9 @@
 	"helpText": null,
 	"helpEnabled": false,
 	"openClickTile": false,
-	"ver": "23.8.31.164",
+	"ver": "23.3.5.759",
 	"actionWebApp": "",
-	"name": "Forms Attributes",
+	"name": "FORMS Classification",
 	"cardWidth": null,
 	"cardHeight": null,
 	"cardHeightFit": false,

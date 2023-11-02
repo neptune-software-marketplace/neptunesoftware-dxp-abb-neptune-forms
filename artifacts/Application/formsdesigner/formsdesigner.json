@@ -4653,6 +4653,81 @@
 																									"attributes": [],
 																									"data": [
 																										{
+																											"fieldNo": "cac067d2-a222-4902-8ea2-a087fb36e09f",
+																											"fieldName": "insectionFormExpandable",
+																											"fieldParent": "1dc74891-dfea-480e-8b39-ff8b5b53deac",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Expandable",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/expandable}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "5c066a17-71ec-44c1-c294-ac679446a334",
+																											"fieldName": "insectionFormExpanded",
+																											"fieldParent": "1dc74891-dfea-480e-8b39-ff8b5b53deac",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/expandable} ? true:false}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Expanded",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/expanded}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
 																											"fieldNo": "f69b18fd-6048-4005-c677-1102da045313",
 																											"fieldName": "insectionFormCompact",
 																											"fieldParent": "1dc74891-dfea-480e-8b39-ff8b5b53deac",
@@ -4957,6 +5032,76 @@
 																									"response": [],
 																									"attributes": [],
 																									"data": [
+																										{
+																											"fieldNo": "9c942522-6882-4aa1-e09c-fc0c38070c3e",
+																											"fieldName": "insectionTableExpanded",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"disabled": true,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Expanded",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/expanded}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "6f863f4a-364d-481e-c3a8-8ea88f79b376",
+																											"fieldName": "insectionTableExpandable",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"disabled": true,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Expandable",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/expandable}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
 																										{
 																											"fieldNo": "d286cf36-2073-4af5-e529-681976e61d1d",
 																											"fieldName": "insectionTableCompact",
@@ -8396,6 +8541,40 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "94359240-ba46-4fdb-b20d-41f670307fee",
+																											"fieldName": "inElementImageEnableMulti",
+																											"fieldParent": "01ea8586-f321-4e12-ae38-ba89b4916dcd",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Enable Multi Images",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableMulti}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -10870,17 +11049,17 @@
 																											"translation": []
 																										},
 																										{
-																											"attribute": "value",
-																											"grouping": "Formatter",
-																											"value": "Anonymous Function",
-																											"script": "file://event/sap.m.Input/inElementFormAttribute/value.script",
-																											"translation": []
-																										},
-																										{
 																											"attribute": "valueHelpRequest",
 																											"grouping": "Events",
 																											"value": "diaAttributes.open();",
 																											"script": "diaAttributes.open();",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "value",
+																											"grouping": "Formatter",
+																											"value": "Anonymous Function",
+																											"script": "file://event/sap.m.Input/inElementFormAttribute/value.script",
 																											"translation": []
 																										}
 																									],
@@ -14533,6 +14712,13 @@
 																													"translation": []
 																												},
 																												{
+																													"attribute": "showValueHelp",
+																													"grouping": "Properties",
+																													"value": "true",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
 																													"attribute": "placeholder",
 																													"grouping": "Properties",
 																													"value": "dd.MM.yyyy",
@@ -14544,6 +14730,14 @@
 																													"grouping": "Properties",
 																													"value": "{appControl>/enableEdit}",
 																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "valueHelpRequest",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.m.Input/inElementFormDatePickerFormat/valueHelpRequest.js",
+																													"language": "javascript",
 																													"translation": []
 																												}
 																											],
@@ -14678,6 +14872,13 @@
 																													"translation": []
 																												},
 																												{
+																													"attribute": "showValueHelp",
+																													"grouping": "Properties",
+																													"value": "true",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
 																													"attribute": "placeholder",
 																													"grouping": "Properties",
 																													"value": "dd.MM.yyyy HH:mm",
@@ -14689,6 +14890,13 @@
 																													"grouping": "Properties",
 																													"value": "{appControl>/enableEdit}",
 																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "valueHelpRequest",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.m.Input/inElementFormDateTimePickerFormat/valueHelpRequest.script",
 																													"translation": []
 																												}
 																											],
@@ -15489,17 +15697,17 @@
 																													"translation": []
 																												},
 																												{
-																													"attribute": "value",
-																													"grouping": "Formatter",
-																													"value": "Anonymous Function",
-																													"script": "file://event/sap.m.Input/inElementFormValueHelpApp/value.script",
-																													"translation": []
-																												},
-																												{
 																													"attribute": "valueHelpRequest",
 																													"grouping": "Events",
 																													"value": "diaApps.open();",
 																													"script": "diaApps.open();",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "value",
+																													"grouping": "Formatter",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.m.Input/inElementFormValueHelpApp/value.script",
 																													"translation": []
 																												}
 																											],
@@ -22093,17 +22301,17 @@
 																											"translation": []
 																										},
 																										{
-																											"attribute": "value",
-																											"grouping": "Formatter",
-																											"value": "Anonymous Function",
-																											"script": "file://event/sap.m.Input/inElementFormVisibleField/value.script",
-																											"translation": []
-																										},
-																										{
 																											"attribute": "valueHelpRequest",
 																											"grouping": "Events",
 																											"value": "diaVisibility.open();",
 																											"script": "diaVisibility.open();",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "value",
+																											"grouping": "Formatter",
+																											"value": "Anonymous Function",
+																											"script": "file://event/sap.m.Input/inElementFormVisibleField/value.script",
 																											"translation": []
 																										}
 																									],
@@ -24825,6 +25033,91 @@
 									]
 								}
 							]
+						},
+						{
+							"fieldNo": "451fb1ee-206c-4108-b21b-93468e98b35f",
+							"fieldName": "popFormat",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "sap.m.Popover",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "showHeader",
+									"grouping": "Properties",
+									"value": "false",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "placement",
+									"grouping": "Properties",
+									"value": "PreferredBottomOrFlip",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "contentWidth",
+									"grouping": "Properties",
+									"value": "400px",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": [
+								{
+									"fieldNo": "a2cb68fa-54a0-4f93-8c98-9358629c2e22",
+									"fieldName": "listFormatTypes",
+									"fieldParent": "451fb1ee-206c-4108-b21b-93468e98b35f",
+									"fieldType": "sap.m.List",
+									"script": "",
+									"customComponent": false,
+									"bindingValue": "Generic Array",
+									"bindingType": "h",
+									"bindingSource": "P9",
+									"request": [],
+									"response": [],
+									"attributes": [],
+									"data": [
+										{
+											"fieldNo": "b530256f-ad78-4324-902a-b6812aa1d477",
+											"fieldName": "itemFormatTypes",
+											"fieldParent": "a2cb68fa-54a0-4f93-8c98-9358629c2e22",
+											"fieldType": "sap.m.StandardListItem",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "type",
+													"grouping": "Properties",
+													"value": "Active",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "title",
+													"grouping": "Properties",
+													"value": "{title}",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.StandardListItem/itemFormatTypes/press.script",
+													"translation": []
+												}
+											],
+											"data": []
+										}
+									]
+								}
+							]
 						}
 					]
 				},
@@ -24984,7 +25277,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "23.8.7.811",
+	"ver": "23.11.2.716",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

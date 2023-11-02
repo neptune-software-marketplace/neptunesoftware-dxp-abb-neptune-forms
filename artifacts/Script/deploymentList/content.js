@@ -1,9 +1,9 @@
-const manager = modules.typeorm.getConnection().manager;
+const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
 
-const systems = await manager.find('systems', {
+const systems = await manager.find("systems", {
     where: { type: "" },
     select: ["name", "description", "id", "updatedAt", "changedBy", "url"],
-    order: { name: "ASC" }
+    order: { name: "ASC" },
 });
 
 const forms = await entities.forms_design.find({ order: { name: "ASC" } });
@@ -18,7 +18,7 @@ result.data = {
     subgroup,
     attributegroup,
     attributefields,
-    systems
-}
+    systems,
+};
 
 complete();

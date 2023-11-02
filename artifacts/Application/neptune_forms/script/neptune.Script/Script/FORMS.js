@@ -17,6 +17,7 @@ const FORMS = {
     colHeaders: {},
     colSorting: {},
     paginationSetup: {},
+    enhancement: {},
 
     build: function (parent, options) {
         let formOptions;
@@ -113,6 +114,7 @@ const FORMS = {
         }
 
         FORMS.formParent.setModel(formModel);
+        if (!options.data) FORMS.setDefaultValues();
         formModel.refresh(true);
 
         let sectionParent;
@@ -155,8 +157,10 @@ const FORMS = {
 
                     sectionParent.setModel(tabModel);
 
-                    if (options.data && options.data[section.id] && options.data[section.id].length) {
-                        modelData = options.data[section.id];
+                    const bindingField = section.fieldName ? section.fieldName : section.id;
+
+                    if (options.data && options.data[bindingField] && options.data[bindingField].length) {
+                        modelData = options.data[bindingField];
                     } else {
                         let rows = section.rows || 1;
 
@@ -192,6 +196,37 @@ const FORMS = {
 
         if (parent.addContent) parent.addContent(FORMS.formParent);
         if (parent.addItem) parent.addItem(FORMS.formParent);
+    },
+
+    setDefaultValues: function () {
+        const formModel = FORMS.formParent.getModel();
+
+        const setValue = function (element) {
+            const bindingField = element.fieldName ? element.fieldName : element.id;
+
+            switch (element.type) {
+                case "CheckBox":
+                case "Switch":
+                    formModel.oData[bindingField] = false;
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        // Set Default Values
+        FORMS.config.setup.forEach(function (section) {
+            setValue(section);
+            section.elements.forEach(function (element) {
+                setValue(element);
+                if (element.elements) {
+                    element.elements.forEach(function (subElement) {
+                        setValue(subElement);
+                    });
+                }
+            });
+        });
     },
 
     buildRowTemplate: function (elements) {
@@ -340,6 +375,8 @@ const FORMS = {
             headerText: section.title,
             backgroundDesign: "Solid",
             visible: FORMS.buildVisibleCond(section),
+            expandable: section.expandable || false,
+            expanded: section.expanded || false,
         }).addStyleClass("sapUiSmallMarginTopBottom sapUiNoContentPadding");
 
         const sectionForm = new sap.ui.layout.form.SimpleForm({
@@ -642,6 +679,8 @@ const FORMS = {
             },
         }).addStyleClass("sapUiSizeCompact");
 
+        const fieldID = section.fieldName ? section.fieldName : section.id;
+
         const butMultiDelete = new sap.m.Button({
             icon: "sap-icon://delete",
             type: "Reject",
@@ -649,15 +688,22 @@ const FORMS = {
             press: function (oEvent) {
                 const tabData = section.enablePagination ? FORMS.paginationSetup[section.id].data : sectionTable.getModel().oData;
                 const selectedItems = sectionTable.getSelectedItems();
+                const items = [];
 
                 if (selectedItems) {
                     selectedItems.forEach(function (item) {
                         const context = item.getBindingContext();
                         if (context) {
                             const data = context.getObject();
+                            items.push(data);
                             data.delete = true;
                         }
                     });
+
+                    if (FORMS.enhancement.multiDelete) {
+                        FORMS.enhancement.multiDelete(fieldID, items);
+                    }
+
                     ModelData.Delete(tabData, "delete", true);
                 }
 
@@ -1000,14 +1046,27 @@ const FORMS = {
             }).addStyleClass("sapUiSizeCompact")
         );
 
+        const bindingField = section.fieldName ? section.fieldName : section.id;
+        const table = sap.ui.getCore().byId("field" + tableId);
+        const tableData = FORMS.getData().data[bindingField];
+        const rowData = ModelData.FindFirst(tableData, "id", rowId);
+
+        const maxEntries = 1000;
+        const newData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tableData;
+        const maxCopyEntries = maxEntries - newData.length;
+
         diaCopy.setBeginButton(
             new sap.m.Button({
                 type: "Emphasized",
                 text: "OK",
                 press: function (oEvent) {
-                    let newData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tableData;
+                    let numEntriesCopy = numCopy.getValue();
 
-                    for (let i = 0; i < numCopy.getValue(); i++) {
+                    if (numEntriesCopy > maxCopyEntries) {
+                        numEntriesCopy = maxCopyEntries;
+                    }
+
+                    for (let i = 0; i < numEntriesCopy; i++) {
                         let newRow = {
                             id: ModelData.genID(),
                         };
@@ -1040,7 +1099,8 @@ const FORMS = {
 
         const panCopies = new sap.m.Panel();
         panCopies.addContent(new sap.m.Title({ text: "Number of copies" }));
-        const numCopy = new sap.m.StepInput({ width: "100%", min: 1, max: 1000 }).addStyleClass("sapUiSmallMarginBottom");
+        const numCopy = new sap.m.StepInput({ width: "100%", min: 1, max: maxCopyEntries, value: 1 }).addStyleClass("sapUiSmallMarginBottom");
+        const numInfo = new sap.m.MessageStrip({ text: "Max entries to copy is: " + maxCopyEntries });
 
         numCopy.onAfterRendering = function () {
             let elem = this.getDomRef();
@@ -1051,12 +1111,8 @@ const FORMS = {
         };
 
         panCopies.addContent(numCopy);
+        panCopies.addContent(numInfo);
         diaCopy.addContent(panCopies);
-
-        const table = sap.ui.getCore().byId("field" + tableId);
-
-        const tableData = FORMS.getData().data[tableId];
-        const rowData = ModelData.FindFirst(tableData, "id", rowId);
 
         const tabCopy = new sap.m.Table({
             showSeparators: sap.m.ListSeparators.Inner,
@@ -1080,8 +1136,7 @@ const FORMS = {
         tabCopy.addColumn(new sap.m.Column({ width: "100%" }).setHeader(new sap.m.Label({ text: "Content", design: "Bold" })));
 
         for (let i = 1; i < cells.length; i++) {
-            const fieldId = cells[i].sId.split("field")[1];
-
+            let fieldId = cells[i].sId.split("field")[1];
             if (!fieldId) continue;
 
             const columListItem = new sap.m.ColumnListItem();
@@ -1095,6 +1150,9 @@ const FORMS = {
             } else if (clone.setEnabled) {
                 clone.setEnabled(false);
             }
+
+            // If Object Attribute -> Change to fieldname
+            if (element.fieldName) fieldId = element.fieldName;
 
             columListItem.addCell(new sap.m.CheckBox("include-" + fieldId, { selected: true }));
             columListItem.addCell(new sap.m.Text({ text: element.title }));
@@ -1129,9 +1187,13 @@ const FORMS = {
                     break;
 
                 case "Image":
-                    clone.getItems()[1].setVisible(false);
-                    clone.getItems()[0].getItems()[0].setEnabled(false);
-                    clone.getItems()[0].getItems()[1].setVisible(false);
+                    if (element.enableMulti) {
+                        clone.getItems()[0].getHeaderToolbar().getContent()[0].setEnabled(false);
+                    } else {
+                        clone.getItems()[1].setVisible(false);
+                        clone.getItems()[0].getItems()[0].setEnabled(false);
+                        clone.getItems()[0].getItems()[1].setVisible(false);
+                    }
                     break;
 
                 case "CheckBox":
@@ -1461,6 +1523,9 @@ const FORMS = {
             editable: FORMS.editable,
             placeholder: element.placeholder,
             visible: FORMS.buildVisibleCond(element),
+            liveChange: function (oEvent) {
+                this.setValueState();
+            },
         });
 
         return newField;
@@ -1599,6 +1664,9 @@ const FORMS = {
             rows: parseInt(element.rows),
             width: "100%",
             visible: FORMS.buildVisibleCond(element),
+            liveChange: function (oEvent) {
+                this.setValueState();
+            },
         });
         if (element.rows) newField.setRows(parseInt(element.rows));
 
@@ -1613,6 +1681,9 @@ const FORMS = {
             editable: FORMS.editable,
             maxValue: element.maxValue,
             visible: FORMS.buildVisibleCond(element),
+            change: function (oEvent) {
+                this.removeStyleClass("notValid");
+            },
         });
 
         if (element.iconSelected) {
@@ -1636,6 +1707,9 @@ const FORMS = {
             change: function (oEvent) {
                 this.setValue(parseFloat(this.getValue()).toFixed(element.decimals));
             },
+            liveChange: function (oEvent) {
+                this.setValueState();
+            },
             visible: FORMS.buildVisibleCond(element),
         });
 
@@ -1650,6 +1724,9 @@ const FORMS = {
             placeholder: element.placeholder,
             editable: FORMS.editable,
             visible: FORMS.buildVisibleCond(element),
+            change: function (oEvent) {
+                this.setValueState();
+            },
         });
 
         newField.onAfterRendering = function () {
@@ -1675,6 +1752,9 @@ const FORMS = {
             customTextOff: element.customTextOff,
             customTextOn: element.customTextOn,
             visible: FORMS.buildVisibleCond(element),
+            change: function (oEvent) {
+                this.removeStyleClass("notValid");
+            },
         });
 
         if (element.approveSwitch) {
@@ -1692,6 +1772,9 @@ const FORMS = {
             editable: FORMS.editable,
             text: element.text,
             visible: FORMS.buildVisibleCond(element),
+            select: function (oEvent) {
+                this.setValueState();
+            },
         });
 
         return newField;
@@ -1754,6 +1837,9 @@ const FORMS = {
             width: "100%",
             editable: FORMS.editable,
             visible: FORMS.buildVisibleCond(element),
+            change: function (oEvent) {
+                this.setValueState();
+            },
         });
 
         // Override externally or combine
@@ -1778,6 +1864,9 @@ const FORMS = {
             width: "100%",
             editable: FORMS.editable,
             visible: FORMS.buildVisibleCond(element),
+            change: function (oEvent) {
+                this.setValueState();
+            },
         });
 
         // Override externally or combine
@@ -1854,6 +1943,9 @@ const FORMS = {
             editable: FORMS.editable,
             showSelectAll: true,
             visible: FORMS.buildVisibleCond(element),
+            change: function (oEvent) {
+                this.setValueState();
+            },
         });
 
         element.items.forEach(function (item, i) {
@@ -1889,6 +1981,8 @@ const FORMS = {
                 text: item.title,
                 editable: FORMS.editable,
                 select: function (oEvent) {
+                    this.getParent().removeStyleClass("notValid");
+
                     if (!formModel.oData[bindingField]) formModel.oData[bindingField] = [];
 
                     if (this.getSelected()) {
@@ -1924,6 +2018,30 @@ const FORMS = {
             displayFormat: element.displayFormat ? element.displayFormat : "dd.MM.yyyy",
             editable: FORMS.editable,
             visible: FORMS.buildVisibleCond(element),
+            liveChange: function (oEvent) {
+                this.setValueState();
+            },
+            change: function (oEvent) {
+                this.setValueState();
+            },
+        });
+
+        const fieldName = FORMS.bindingPath + bindingField;
+
+        newField.bindProperty("dateValue", {
+            parts: [fieldName],
+            formatter: function (fieldName) {
+                if (typeof fieldName === "undefined" || fieldName === "" || fieldName === null) {
+                    return null;
+                }
+
+                if (fieldName.indexOf("/") > -1) {
+                    return new Date(fieldName);
+                } else {
+                    const [day, month, year] = fieldName.split(".");
+                    return new Date(year, month - 1, day);
+                }
+            },
         });
 
         return newField;
@@ -1932,6 +2050,7 @@ const FORMS = {
     buildElementImage: function (element, parent) {
         const meta = parent.getMetadata();
         const bindingField = element.fieldName ? element.fieldName : element.id;
+        const bindingPath = element.enableMulti ? "" : FORMS.bindingPath;
 
         const newField = new sap.m.VBox(FORMS.buildElementFieldID(element), {
             width: "100%",
@@ -1956,20 +2075,24 @@ const FORMS = {
                     FORMS.uploadObject.model = parent.getModel();
                 }
 
-                $("#imageUploader").click();
+                if (element.enableMulti) {
+                    $("#imagesUploader").click();
+                } else {
+                    $("#imageUploader").click();
+                }
             },
         }).addStyleClass("sapUiSizeCompact");
 
         const elementImage = new sap.m.Image({
-            src: "{" + FORMS.bindingPath + bindingField + "}",
-            visible: "{= ${" + FORMS.bindingPath + bindingField + "} ? true: false }",
+            src: "{" + bindingPath + bindingField + "}",
+            visible: "{= ${" + bindingPath + bindingField + "} ? true: false }",
         });
 
         const elementImageLightBox = new sap.m.LightBox();
 
         elementImageLightBox.addImageContent(
             new sap.m.LightBoxItem({
-                imageSrc: "{" + FORMS.bindingPath + bindingField + "}",
+                imageSrc: "{" + bindingPath + bindingField + "}",
                 title: element.title,
             })
         );
@@ -1995,29 +2118,72 @@ const FORMS = {
         const elementHBox = new sap.m.HBox();
         elementHBox.addItem(elementUploader);
 
-        elementHBox.addItem(
-            new sap.m.Button({
-                type: "Reject",
-                enabled: FORMS.editable,
-                icon: "sap-icon://delete",
-                tooltip: "Delete Image",
-                visible: "{= ${" + FORMS.bindingPath + bindingField + "} ? true:false}",
-                press: function (oEvent) {
-                    const context = oEvent.oSource.getBindingContext();
-
-                    if (context) {
-                        const data = context.getObject();
-                        data[bindingField] = "";
-                        this.getModel().refresh();
+        if (element.enableMulti) {
+            const tabImages = new sap.f.GridList({
+                mode: "Delete",
+                showSeparators: "None",
+                showNoData: false,
+                delete: function (oEvent) {
+                    const deleteItem = oEvent.getParameter("listItem");
+                    const context = deleteItem.getBindingContext();
+                    const data = context.getObject();
+                    if (meta._sClassName === "sap.m.Table") {
+                        const tabData = oEvent.oSource.getBindingContext().getObject()[bindingField];
+                        ModelData.Delete(tabData, "id", data.id);
                     } else {
-                        elementImage.setSrc();
+                        const rowData = this.getModel().oData[bindingField];
+                        ModelData.Delete(rowData, "id", data.id);
                     }
+                    this.getModel().refresh();
                 },
-            }).addStyleClass("sapUiSizeCompact sapUiTinyMarginBegin")
-        );
+            }).addStyleClass("sapUiSizeCompact");
 
-        newField.addItem(elementHBox);
-        newField.addItem(elementImage);
+            const GridListItem = new sap.f.GridListItem();
+            const imagePanel = new sap.m.Panel();
+            GridListItem.addContent(imagePanel);
+            imagePanel.addContent(elementImage);
+
+            if (meta._sClassName === "sap.m.Table") {
+                tabImages.bindAggregation("items", { path: bindingField + "/", template: GridListItem, templateShareable: false });
+            } else {
+                tabImages.bindAggregation("items", { path: "/" + bindingField, template: GridListItem, templateShareable: false });
+            }
+
+            // Toolbar
+            const Toolbar = new sap.m.Toolbar({
+                design: "Transparent",
+                height: "2rem",
+            }).addStyleClass("sapUiSizeCompact noBorder");
+
+            tabImages.setHeaderToolbar(Toolbar);
+            Toolbar.addContent(elementUploader);
+
+            newField.addItem(tabImages);
+        } else {
+            newField.addItem(elementHBox);
+            newField.addItem(elementImage);
+
+            elementHBox.addItem(
+                new sap.m.Button({
+                    type: "Reject",
+                    enabled: FORMS.editable,
+                    icon: "sap-icon://delete",
+                    tooltip: "Delete Image",
+                    visible: "{= ${" + FORMS.bindingPath + bindingField + "} ? true:false}",
+                    press: function (oEvent) {
+                        const context = oEvent.oSource.getBindingContext();
+
+                        if (context) {
+                            const data = context.getObject();
+                            data[bindingField] = "";
+                            this.getModel().refresh();
+                        } else {
+                            elementImage.setSrc();
+                        }
+                    },
+                }).addStyleClass("sapUiSizeCompact sapUiTinyMarginBegin")
+            );
+        }
 
         return newField;
     },
@@ -2030,6 +2196,12 @@ const FORMS = {
             displayFormat: element.displayFormat ? element.displayFormat : "dd.MM.yyyy HH:mm",
             editable: FORMS.editable,
             visible: FORMS.buildVisibleCond(element),
+            liveChange: function (oEvent) {
+                this.setValueState();
+            },
+            change: function (oEvent) {
+                this.setValueState();
+            },
         });
 
         return newField;
@@ -2192,14 +2364,6 @@ const FORMS = {
                             delete data.rowNumber;
                         });
                     }
-                    // outputData[section.id] = tabData;
-
-                    // if (outputData[section.id] && outputData[section.id].forEach) {
-                    //     outputData[section.id].forEach(function (data) {
-                    //         delete data.highlight;
-                    //         delete data.rowNumber;
-                    //     });
-                    // }
                 }
                 return;
             }
@@ -2231,7 +2395,6 @@ const FORMS = {
         // Model
         const formModel = FORMS.formParent.getModel();
         formModel.setData({});
-        formModel.refresh();
 
         // Fields
         FORMS.validate("Reset");
@@ -2263,9 +2426,11 @@ const FORMS = {
                     const newData = [];
 
                     for (let i = 0; i < oldData.length; i++) {
-                        newData.push({
+                        let newRow = {
                             id: oldData[i].id,
-                        });
+                        };
+
+                        newData.push(newRow);
                     }
 
                     model.setData(newData);
@@ -2289,6 +2454,9 @@ const FORMS = {
                 }
             });
         });
+
+        FORMS.setDefaultValues();
+        formModel.refresh();
     },
 
     validate: function (process) {
@@ -2490,34 +2658,57 @@ const FORMS = {
         });
     },
 
-    importImage: function (oEvent) {
+    importImages: function (oEvent) {
         try {
-            const file = oEvent.target.files[0];
-            const fileReader = new FileReader();
+            for (let i = 0; i < oEvent.target.files.length; i++) {
+                const file = oEvent.target.files[i];
+                const fileReader = new FileReader();
 
-            fileReader.onload = async function (fileLoadedEvent) {
-                let formModel;
-                let imageData = await FORMS.imageResize(fileLoadedEvent.target.result, FORMS.uploadObject.element);
+                fileReader.onload = async function (fileLoadedEvent) {
+                    let formModel;
+                    let imageData = await FORMS.imageResize(fileLoadedEvent.target.result, FORMS.uploadObject.element);
 
-                if (!FORMS.formParent) {
-                    const formParent = sap.ui.getCore().byId("_nepFormParent");
-                    formModel = formParent.getModel();
-                } else {
-                    formModel = FORMS.formParent.getModel();
-                }
+                    if (!FORMS.formParent) {
+                        const formParent = sap.ui.getCore().byId("_nepFormParent");
+                        formModel = formParent.getModel();
+                    } else {
+                        formModel = FORMS.formParent.getModel();
+                    }
 
-                if (FORMS.uploadObject.context) {
-                    FORMS.uploadObject.context[FORMS.uploadObject.bindingField] = imageData;
-                    FORMS.uploadObject.model.refresh();
-                } else {
-                    formModel.oData[FORMS.uploadObject.bindingField] = imageData;
-                    formModel.refresh();
-                }
+                    if (FORMS.uploadObject.context) {
+                        if (FORMS.uploadObject.element.enableMulti) {
+                            if (!FORMS.uploadObject.context[FORMS.uploadObject.bindingField]) FORMS.uploadObject.context[FORMS.uploadObject.bindingField] = [];
+                            let newImageRow = {
+                                id: ModelData.genID(),
+                            };
+                            newImageRow[FORMS.uploadObject.bindingField] = imageData;
+                            FORMS.uploadObject.context[FORMS.uploadObject.bindingField].push(newImageRow);
+                        } else {
+                            FORMS.uploadObject.context[FORMS.uploadObject.bindingField] = imageData;
+                        }
 
-                document.getElementById("imageUploader").value = "";
-            };
+                        FORMS.uploadObject.model.refresh();
+                    } else {
+                        if (FORMS.uploadObject.element.enableMulti) {
+                            if (!formModel.oData[FORMS.uploadObject.bindingField]) formModel.oData[FORMS.uploadObject.bindingField] = [];
+                            let newImageRow = {
+                                id: ModelData.genID(),
+                            };
+                            newImageRow[FORMS.uploadObject.bindingField] = imageData;
+                            formModel.oData[FORMS.uploadObject.bindingField].push(newImageRow);
+                            formModel.refresh();
+                        } else {
+                            formModel.oData[FORMS.uploadObject.bindingField] = imageData;
+                            formModel.refresh();
+                        }
+                    }
 
-            fileReader.readAsDataURL(file);
+                    document.getElementById("imageUploader").value = "";
+                    document.getElementById("imagesUploader").value = "";
+                };
+
+                fileReader.readAsDataURL(file);
+            }
         } catch (e) {
             console.log(e);
         }
@@ -2540,7 +2731,7 @@ const FORMS = {
                     canvas.width = image.width / resizeRate;
                     canvas.height = image.height / resizeRate;
                     context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
-                    
+
                     const resizedImage = canvas.toDataURL();
                     resolve(resizedImage);
                 };
@@ -2574,3 +2765,4 @@ const FORMS = {
 };
 
 window.importImage = FORMS.importImage;
+window.importImages = FORMS.importImages;

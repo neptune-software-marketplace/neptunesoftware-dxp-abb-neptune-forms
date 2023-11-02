@@ -355,9 +355,9 @@ const controller = {
                 });
             }
 
+            controller.tableReset = true;
             modeloPageDetail.setData(req);
             modelpanTopProperties.setData({});
-            controller.preview();
 
             if (oApp.getCurrentPage() === oPageStart) {
                 tabDetail.setSelectedItem(tabDetailInfo);
@@ -955,6 +955,11 @@ const controller = {
         try {
             const file = oEvent.target.files[0];
             const fileReader = new FileReader();
+
+            if (file.size > 100000) {
+                sap.m.MessageToast.show("File size is larger than max 100k");
+                return;
+            }
 
             fileReader.onload = async function (fileLoadedEvent) {
                 modelpanTopProperties.oData.imageSrc = await FORMS.imageResize(fileLoadedEvent.target.result, modelpanTopProperties.oData);

@@ -1,4 +1,4 @@
-const manager = modules.typeorm.getConnection().manager;
+const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
 
 const adaptiveApps = await manager.find("reports", {
     select: ["name", "description", "id", "application", "package", "updatedAt", "changedBy"],
