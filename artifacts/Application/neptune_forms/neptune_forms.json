@@ -143,7 +143,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "23.11.2.713",
+	"ver": "24.05.16.0640",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
@@ -182,6 +182,8 @@
 	"compilerTarget": 3,
 	"tabWidth": 4,
 	"printWidth": 200,
+	"generateVersionOnActivation": false,
+	"activationHistoryCount": 0,
 	"apis": [
 		{
 			"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",

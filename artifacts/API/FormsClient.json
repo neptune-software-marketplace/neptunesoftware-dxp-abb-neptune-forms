@@ -260,6 +260,7 @@
 	"apiType": "script",
 	"about": null,
 	"enableProxy": false,
+	"forwardProxy": null,
 	"restrictAccess": false,
 	"enableTrace": false,
 	"enableIDE": true,

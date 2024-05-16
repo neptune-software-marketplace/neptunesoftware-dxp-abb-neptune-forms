@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            background-color: #ffffff;
+            color: #0E043E;
+            overflow-x: hidden;
+        }
+
+        .ticker-container {
+            white-space: nowrap;
+            position: absolute;
+            animation: tickerAnimation 25s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 20px;
+            font-size: 11px;
+        }
+
+        @keyframes tickerAnimation {
+            0% {
+                transform: translateX(5vw);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        fetch('https://havoinvest.neptune-software.cloud/public/serverscript/publicapi/stats-ffa')
+  .then(response => response.json())
+  .then(data => {
+
+    console.log(data);
+  })
+  .catch(error => {
+
+
+  });
+
+
+    </script>
+
+    <div class="ticker-container">
+        <div class="ticker-item">S5_58 (148)</div>
+        <div class="ticker-item">P6_82 (140)</div>
+        <div class="ticker-item">Dey_10TC_S (132)</div>
+        <div class="ticker-item">Dry_Cape (122)</div>
+        <div class="ticker-item">S9_58 (120)</div>
+        <div class="ticker-item">Dry_5TC_P (119)</div>
+        <div class="ticker-item">Dry_HANDY_38 (104)</div>
+        <div class="ticker-item">HS3_38 (99)</div>
+        <div class="ticker-item">S10_58 (87)</div>
+        <div class="ticker-item">P1A_82 (78)</div>
+    </div>
+</body>
+
+</html>

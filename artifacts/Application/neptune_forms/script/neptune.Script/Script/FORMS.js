@@ -160,6 +160,11 @@ const FORMS = {
                     const bindingField = section.fieldName ? section.fieldName : section.id;
 
                     if (options.data && options.data[bindingField] && options.data[bindingField].length) {
+                        // KW addition (add init. sort value) // 28.11.2023
+                        var i = 0;
+                        for (const bv of options.data[bindingField]) {
+                            bv.initsort = ++i;
+                        }
                         modelData = options.data[bindingField];
                     } else {
                         let rows = section.rows || 1;
@@ -262,7 +267,7 @@ const FORMS = {
         return newRec;
     },
 
-    paginationHandle: function (section) {
+    paginationHandle: function (section, sort = false, lastPage = false) {
         const tabObject = sap.ui.getCore().byId("field" + section.id);
         const tabModel = tabObject.getModel();
         const take = parseInt(FORMS.paginationSetup[section.id].take);
@@ -271,7 +276,7 @@ const FORMS = {
         let filterData = FORMS.paginationSetup[section.id].filter ? FORMS.filterArray(tableData, FORMS.paginationSetup[section.id].filter) : tableData;
 
         // Sorting
-        if (FORMS.paginationSetup[section.id].sortField) {
+        if (sort && FORMS.paginationSetup[section.id].sortField) {
             filterData = FORMS.sortArray(filterData, FORMS.paginationSetup[section.id].sortField, FORMS.paginationSetup[section.id].sortOrder);
         }
 
@@ -340,6 +345,10 @@ const FORMS = {
 
         toolPaginationPages.setSelectedKey(FORMS.paginationSetup[section.id].index);
         toolPaginationTitle.setNumber(FORMS.paginationSetup[section.id].index + 1 + "/" + maxIndex);
+
+        if (lastPage) {
+            toolPaginationLast.firePress();
+        }
     },
 
     filterArray: function (jsonArray, filter) {
@@ -353,6 +362,14 @@ const FORMS = {
 
     sortArray: function (jsonArray, field, sortOrder = "Ascending") {
         const sortedArray = jsonArray.sort((a, b) => {
+            // KW addition (interpret undefined values as empty) // 22.11.2023
+            if (a[field] == undefined) {
+                a[field] = "";
+            }
+            if (b[field] == undefined) {
+                b[field] = "";
+            }
+
             if (sortOrder === "Ascending") {
                 return a[field] > b[field] ? 1 : -1;
             } else {
@@ -632,6 +649,32 @@ const FORMS = {
             );
         }
 
+        // KW addition (add init. sort button) // 28.11.2023
+        sectionToolbar.addContent(
+            new sap.m.Button({
+                text: "Init. sort",
+                type: "Emphasized",
+                press: function (oEvent) {
+                    // Clear All
+                    const keys = Object.keys(FORMS.colHeaders[section.id]);
+                    keys.forEach(function (key) {
+                        FORMS.colHeaders[section.id][key].setSortIndicator("None");
+                    });
+
+                    const bindingField = "initsort";
+
+                    if (section.enablePagination) {
+                        FORMS.paginationSetup[section.id].sortOrder = "Ascending";
+                        FORMS.paginationSetup[section.id].sortField = bindingField;
+
+                        FORMS.paginationHandle(section, true, false);
+                    } else {
+                        FORMS.handleColumnSorting(sectionTable, bindingField, "Ascending");
+                    }
+                },
+            })
+        );
+
         // Enable Add
         if (section.enableCreate && FORMS.editable) {
             sectionToolbar.addContent(
@@ -639,13 +682,17 @@ const FORMS = {
                     text: "Add",
                     type: "Emphasized",
                     press: function (oEvent) {
+                        var newRec = FORMS.buildRowTemplate(section.elements);
+
                         if (section.enablePagination) {
                             const model = FORMS.paginationSetup[section.id].data;
-                            model.push(FORMS.buildRowTemplate(section.elements));
-                            FORMS.paginationHandle(section);
+                            newRec.initsort = model.length + 1;
+                            model.push(newRec);
+                            FORMS.paginationHandle(section, false, true);
                         } else {
                             const model = sectionTable.getModel();
-                            model.oData.push(FORMS.buildRowTemplate(section.elements));
+                            newRec.initsort = model.oData.length + 1;
+                            model.oData.push(newRec);
                             FORMS.tableAddRowNumber(model.oData);
                             model.refresh();
                         }
@@ -916,11 +963,11 @@ const FORMS = {
                     press: function (oEvent) {
                         if (section.enablePagination) {
                             const model = FORMS.paginationSetup[section.id].data;
-                            model.push({ id: ModelData.genID() });
-                            FORMS.paginationHandle(section);
+                            model.push({ id: ModelData.genID(), initsort: model.length + 1 });
+                            FORMS.paginationHandle(section, false, true);
                         } else {
                             const model = sectionTable.getModel();
-                            model.oData.push({ id: ModelData.genID() });
+                            model.oData.push({ id: ModelData.genID(), initsort: model.oData.length + 1 });
                             FORMS.tableAddRowNumber(model.oData);
                             model.refresh();
                         }
@@ -959,7 +1006,7 @@ const FORMS = {
                     FORMS.paginationSetup[section.id].sortOrder = column.getSortIndicator();
                     FORMS.paginationSetup[section.id].sortField = bindingField;
 
-                    FORMS.paginationHandle(section);
+                    FORMS.paginationHandle(section, true, false);
                 } else {
                     FORMS.handleColumnSorting(table, bindingField, sortModelOrder);
                 }
@@ -1036,20 +1083,26 @@ const FORMS = {
             },
         }).addStyleClass("sapUiContentPadding");
 
+        const bindingField = section.fieldName ? section.fieldName : section.id;
+        const table = sap.ui.getCore().byId("field" + tableId);
+        const tableData = FORMS.getData().data[bindingField];
+        const rowData = ModelData.FindFirst(tableData, "id", rowId);
+
+        // KW addition (add row numbers) // 13.11.2023
         diaCopy.setEndButton(
             new sap.m.Button({
                 type: "Transparent",
                 text: "Close",
                 press: function (oEvent) {
+                    // ------
+                    let model = table.getModel();
+                    FORMS.tableAddRowNumber(model.oData);
+                    model.refresh();
+                    // ------
                     diaCopy.close();
                 },
             }).addStyleClass("sapUiSizeCompact")
         );
-
-        const bindingField = section.fieldName ? section.fieldName : section.id;
-        const table = sap.ui.getCore().byId("field" + tableId);
-        const tableData = FORMS.getData().data[bindingField];
-        const rowData = ModelData.FindFirst(tableData, "id", rowId);
 
         const maxEntries = 1000;
         const newData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tableData;
@@ -1081,6 +1134,8 @@ const FORMS = {
                             }
                         }
 
+                        // KW addition (add init. sort value) // 28.11.2023
+                        newRow.initsort = newData.length + 1;
                         newData.push(newRow);
                     }
 
@@ -1346,7 +1401,6 @@ const FORMS = {
 
             parent.addColumn(newColumn);
             FORMS.columnTemplate.addCell(elementField);
-
             FORMS.setColumnSorting(section, parent, newColumn, element);
         }
 
@@ -1697,22 +1751,57 @@ const FORMS = {
     },
 
     buildElementNumeric: function (element) {
+        // KW addition (number fields are empty after parsing on iOS) // 27.11.2023
+
+        // https://stackoverflow.com/questions/7571553/javascript-parse-float-is-ignoring-the-decimals-after-my-comma
+        const fnParseFloat = function (float, decimals) {
+            var resNum = "";
+
+            if (float) {
+                float = float.toString();
+
+                //Index of first comma
+                const posC = float.indexOf(",");
+
+                if (posC === -1) {
+                    //No commas found, treat as float
+                    resNum = parseFloat(float).toFixed(decimals);
+                } else {
+                    //Index of first full stop
+                    const posFS = float.indexOf(".");
+
+                    if (posFS === -1) {
+                        //Uses commas and not full stops - swap them (e.g. 1,23 --> 1.23)
+                        resNum = parseFloat(float.replace(/\,/g, ".")).toFixed(decimals);
+                    } else {
+                        //Uses both commas and full stops - ensure correct order and remove 1000s separators
+                        resNum = (posC < posFS ? parseFloat(float.replace(/\,/g, "")).toFixed(decimals) : parseFloat(float.replace(/\./g, "").replace(",", "."))).toFixed(decimals);
+                    }
+                }
+            }
+
+            return resNum == "NaN" ? null : resNum;
+        };
+
         const bindingField = element.fieldName ? element.fieldName : element.id;
 
         const newField = new sap.m.Input(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             placeholder: element.placeholder,
             editable: FORMS.editable,
-            type: "Number",
+            // KW addition (number fields are empty after parsing on iOS) // 27.11.2023
+            //type: "Number",
             change: function (oEvent) {
-                this.setValue(parseFloat(this.getValue()).toFixed(element.decimals));
+                this.setValue(fnParseFloat(this.getValue(), element.decimals));
             },
-            liveChange: function (oEvent) {
+            liveChange: async function (oEvent) {
                 this.setValueState();
             },
             visible: FORMS.buildVisibleCond(element),
         });
 
+        // KW addition (number fields are empty after parsing on iOS) // 27.11.2023
+        newField.addStyleClass("numField");
         return newField;
     },
 
@@ -1744,10 +1833,36 @@ const FORMS = {
     },
 
     buildElementSwitch: function (element) {
+        // KW addition (parse "boolean strings" as boolean values) // 13.11.2023
+        var SwitchBoolean = sap.ui.model.SimpleType.extend("sap.ui.model.type.Boolean", {
+            formatValue: function (oValue) {
+                var boolAns = false;
+                if (typeof oValue == "boolean") {
+                    boolAns = oValue;
+                } else if (typeof oValue == "string") {
+                    if (oValue === "true") {
+                        boolAns = true;
+                    } else {
+                        boolAns = false;
+                    }
+                }
+
+                return boolAns;
+            },
+            parseValue: function (oValue) {
+                return oValue;
+            },
+            validateValue: function (oValue) {
+                return true;
+            },
+        });
+
         const bindingField = element.fieldName ? element.fieldName : element.id;
 
         const newField = new sap.m.Switch(FORMS.buildElementFieldID(element), {
-            state: "{" + FORMS.bindingPath + bindingField + "}",
+            // state: "{" + FORMS.bindingPath + bindingField + "}",
+            // KW addition (parse "boolean strings" as boolean values) // 13.11.2023
+            state: { path: FORMS.bindingPath + bindingField, type: new SwitchBoolean() },
             enabled: FORMS.editable,
             customTextOff: element.customTextOff,
             customTextOn: element.customTextOn,
@@ -2016,6 +2131,8 @@ const FORMS = {
         const newField = new sap.m.DatePicker(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             displayFormat: element.displayFormat ? element.displayFormat : "dd.MM.yyyy",
+            // KW addition (date from SN not interpreted correctly) // 15.11.2023
+            valueFormat: "yyyy-MM-dd",
             editable: FORMS.editable,
             visible: FORMS.buildVisibleCond(element),
             liveChange: function (oEvent) {
@@ -2026,23 +2143,23 @@ const FORMS = {
             },
         });
 
-        const fieldName = FORMS.bindingPath + bindingField;
+        // const fieldName = FORMS.bindingPath + bindingField;
 
-        newField.bindProperty("dateValue", {
-            parts: [fieldName],
-            formatter: function (fieldName) {
-                if (typeof fieldName === "undefined" || fieldName === "" || fieldName === null) {
-                    return null;
-                }
+        // newField.bindProperty("dateValue", {
+        //     parts: [fieldName],
+        //     formatter: function (fieldName) {
+        //         if (typeof fieldName === "undefined" || fieldName === "" || fieldName === null) {
+        //             return null;
+        //         }
 
-                if (fieldName.indexOf("/") > -1) {
-                    return new Date(fieldName);
-                } else {
-                    const [day, month, year] = fieldName.split(".");
-                    return new Date(year, month - 1, day);
-                }
-            },
-        });
+        //         if (fieldName.indexOf("/") > -1) {
+        //             return new Date(fieldName);
+        //         } else {
+        //             const [day, month, year] = fieldName.split(".");
+        //             return new Date(year, month - 1, day);
+        //         }
+        //     },
+        // });
 
         return newField;
     },
@@ -2244,6 +2361,7 @@ const FORMS = {
                 new sap.m.Label({
                     text: item.question,
                     required: item.required,
+                    wrapping: true
                 })
             );
 
@@ -2321,7 +2439,12 @@ const FORMS = {
 
                 default:
                     if (element.fieldName) {
-                        if (formModel.oData[element.fieldName]) outputData[element.fieldName] = formModel.oData[element.fieldName];
+                        // KW addition (post false boolean values) // 13.11.2023
+                        if (typeof formModel.oData[element.fieldName] == "object" && typeof formModel.oData[element.fieldName].getMonth == "function") {
+                            outputData[element.fieldName] = formModel.oData[element.fieldName].toString();
+                        } else if (typeof formModel.oData[element.fieldName] == "boolean" || formModel.oData[element.fieldName]) {
+                            outputData[element.fieldName] = formModel.oData[element.fieldName];
+                        }
                     } else {
                         if (formModel.oData[element.id]) outputData[element.id] = formModel.oData[element.id];
                     }

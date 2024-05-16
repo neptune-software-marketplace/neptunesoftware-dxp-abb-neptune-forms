@@ -47,6 +47,7 @@
 	"name": "formList",
 	"ver": "23.10.6.1023",
 	"description": null,
+	"folder": null,
 	"content": "file:///content.js",
 	"useAsGlobalScript": false,
 	"transpiledContent": null,

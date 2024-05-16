@@ -15,6 +15,7 @@
 	"name": "formSaveLog",
 	"ver": "23.2.21.1219",
 	"description": null,
+	"folder": null,
 	"content": "file:///content.js",
 	"useAsGlobalScript": false,
 	"transpiledContent": null,

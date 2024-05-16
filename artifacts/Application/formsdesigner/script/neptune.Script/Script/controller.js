@@ -262,6 +262,19 @@ const controller = {
                         items.id = ModelData.genID();
                     });
                 }
+
+                if (element.elements?.length) {
+                    element.elements.forEach(function (subelement, i) {
+                        subelement.id = ModelData.genID();
+                        subelement.title = subelement.title + " (COPY)";
+
+                        if (subelement.items) {
+                            subelement.items.forEach(function (items) {
+                                items.id = ModelData.genID();
+                            });
+                        }
+                    });
+                }
             });
 
             modeloPageDetail.oData.setup.splice(elementIndex, 0, newElement);
@@ -276,6 +289,19 @@ const controller = {
             if (newElement.items) {
                 newElement.items.forEach(function (items) {
                     items.id = ModelData.genID();
+                });
+            }
+
+            if (newElement.elements?.length) {
+                newElement.elements.forEach(function (element, i) {
+                    element.id = ModelData.genID();
+                    element.title = element.title + " (COPY)";
+
+                    if (element.items) {
+                        element.items.forEach(function (items) {
+                            items.id = ModelData.genID();
+                        });
+                    }
                 });
             }
 

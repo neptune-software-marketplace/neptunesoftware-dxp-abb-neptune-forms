@@ -20,6 +20,7 @@
 	"name": "formGet",
 	"ver": "23.10.6.1026",
 	"description": null,
+	"folder": null,
 	"content": "file:///content.js",
 	"useAsGlobalScript": false,
 	"transpiledContent": null,

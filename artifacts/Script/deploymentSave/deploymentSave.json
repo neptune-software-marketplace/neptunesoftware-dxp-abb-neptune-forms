@@ -9,6 +9,7 @@
 	"name": "deploymentSave",
 	"ver": "23.3.5.926",
 	"description": null,
+	"folder": null,
 	"content": "file:///content.js",
 	"useAsGlobalScript": false,
 	"transpiledContent": null,
