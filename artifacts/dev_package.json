@@ -3,11 +3,11 @@
 	"createdAt": "2023-01-10T16:11:06.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
 	"git": {
-		"remote": "https://github.com/neptune-software-marketplace/neptunesoftware-dxp-abb-neptune-forms"
+		"remote": "https://github.com/neptune-software-marketplace/neptunesoftware-dxp-abb-neptune-forms.git"
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.05.16.0804",
+	"ver": "24.08.19.1112",
 	"enableCICD": true,
 	"apps": [
 		{
