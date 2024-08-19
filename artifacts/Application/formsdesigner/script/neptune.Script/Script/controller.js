@@ -267,7 +267,6 @@ const controller = {
                     element.elements.forEach(function (subelement, i) {
                         subelement.id = ModelData.genID();
                         subelement.title = subelement.title + " (COPY)";
-
                         if (subelement.items) {
                             subelement.items.forEach(function (items) {
                                 items.id = ModelData.genID();
@@ -290,13 +289,13 @@ const controller = {
                 newElement.items.forEach(function (items) {
                     items.id = ModelData.genID();
                 });
+
             }
 
             if (newElement.elements?.length) {
                 newElement.elements.forEach(function (element, i) {
                     element.id = ModelData.genID();
                     element.title = element.title + " (COPY)";
-
                     if (element.items) {
                         element.items.forEach(function (items) {
                             items.id = ModelData.genID();

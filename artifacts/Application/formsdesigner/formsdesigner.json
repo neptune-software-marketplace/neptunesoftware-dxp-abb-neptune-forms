@@ -2320,7 +2320,7 @@
 																		{
 																			"attribute": "text",
 																			"grouping": "Properties",
-																			"value": "Enable Reporting",
+																			"value": "Enable Reporting and Log",
 																			"script": "",
 																			"translation": []
 																		},
@@ -2328,6 +2328,41 @@
 																			"attribute": "selected",
 																			"grouping": "Properties",
 																			"value": "{/savedata}",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "editable",
+																			"grouping": "Properties",
+																			"value": "{appControl>/enableEdit}",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																},
+																{
+																	"fieldNo": "381c1dff-90eb-456b-ad5f-4cf09f8ce628",
+																	"fieldName": "informDetailReportSession",
+																	"fieldParent": "bb4af5a2-b9d6-4555-bc27-8ec08d504fca",
+																	"fieldType": "sap.m.CheckBox",
+																	"script": "",
+																	"customComponent": false,
+																	"bindingType": "h",
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "Show Log per Session",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "selected",
+																			"grouping": "Properties",
+																			"value": "{/enablesession}",
 																			"script": "",
 																			"translation": []
 																		},
@@ -5511,6 +5546,41 @@
 																													"attribute": "selected",
 																													"grouping": "Properties",
 																													"value": "{/popin}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "29a08ec7-e1db-4095-9060-3dcc59225d27",
+																											"fieldName": "insectionTableDeleteWarning",
+																											"fieldParent": "43729faf-7688-41bc-f77a-c0c906b44e82",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Enable Delete Warning message",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableDeleteMessage}",
 																													"script": "",
 																													"translation": []
 																												},
@@ -12865,6 +12935,238 @@
 																										}
 																									],
 																									"data": [
+																										{
+																											"fieldNo": "b67c1f75-f947-49da-b558-a59428ff942e",
+																											"fieldName": "lblElementTableDeleteWarning",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/enableDeleteMessage} ? true : false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Delete warning message",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "e5b148d3-614b-4665-d77c-24c1028a6cba",
+																											"fieldName": "VBox",
+																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
+																											"fieldType": "sap.m.VBox",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/enableDeleteMessage} ? true : false }",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": [
+																												{
+																													"fieldNo": "5b5f0009-6048-4366-eafc-7e98565e2148",
+																													"fieldName": "lblElementTableDeleteWarningSingle",
+																													"fieldParent": "e5b148d3-614b-4665-d77c-24c1028a6cba",
+																													"fieldType": "sap.m.Label",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableDeleteMessage} ? true : false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Single",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "5d82b6ee-f72c-4ebc-8718-ad2aabb74a49",
+																													"fieldName": "inElementTableDeleteWarningSingle",
+																													"fieldParent": "e5b148d3-614b-4665-d77c-24c1028a6cba",
+																													"fieldType": "sap.m.Input",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "width",
+																															"grouping": "Properties",
+																															"value": "98%",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableDeleteMessage} ? true : false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "value",
+																															"grouping": "Properties",
+																															"value": "{/deleteMessageSingle}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "placeholder",
+																															"grouping": "Properties",
+																															"value": "Do you want to delete the item?",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "9c95cce8-bc6e-4485-94ab-cf19b40130d9",
+																													"fieldName": "lblElementTableDeleteWarningMulti",
+																													"fieldParent": "e5b148d3-614b-4665-d77c-24c1028a6cba",
+																													"fieldType": "sap.m.Label",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableDeleteMessage} ? true : false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Multi",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "4bcf7bb3-85f4-414d-cf4f-bb73fdc0fa1c",
+																													"fieldName": "inElementTableDeleteWarningMulti",
+																													"fieldParent": "e5b148d3-614b-4665-d77c-24c1028a6cba",
+																													"fieldType": "sap.m.Input",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "width",
+																															"grouping": "Properties",
+																															"value": "98%",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableDeleteMessage} ? true : false }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "value",
+																															"grouping": "Properties",
+																															"value": "{/deleteMessageMulti}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiTinyMarginBegin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "placeholder",
+																															"grouping": "Properties",
+																															"value": "Do you want to delete the selected items?",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												}
+																											]
+																										},
 																										{
 																											"fieldNo": "2544ea31-97b4-4aaf-999e-3fc8b6262b15",
 																											"fieldName": "lblElementTableHeight",
@@ -25277,7 +25579,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "24.03.11.0813",
+	"ver": "24.08.19.1104",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

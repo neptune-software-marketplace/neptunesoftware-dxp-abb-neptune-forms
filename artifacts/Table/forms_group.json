@@ -24,7 +24,7 @@
 	"foreignKeys": [],
 	"name": "forms_group",
 	"description": "FORMS: Classification - Group",
-	"ver": "23.2.20.2346",
+	"ver": "24.08.14.1601",
 	"enableAudit": false,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",

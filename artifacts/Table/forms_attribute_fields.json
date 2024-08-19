@@ -32,7 +32,7 @@
 	"foreignKeys": [],
 	"name": "forms_attribute_fields",
 	"description": "FORMS: Object Attribute Fields",
-	"ver": "23.2.28.1347",
+	"ver": "24.08.14.1601",
 	"enableAudit": false,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
