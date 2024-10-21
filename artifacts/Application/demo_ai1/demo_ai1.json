@@ -59,7 +59,7 @@
 	"header": "",
 	"manifest": "",
 	"globalScript": null,
-	"deleted": true,
+	"deleted": false,
 	"libHighchart": false,
 	"libHighmap": false,
 	"publicAccess": false,

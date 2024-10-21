@@ -58,22 +58,14 @@
 			"isUnique": false,
 			"description": "Enable Reporting",
 			"isNullable": true
-		},
-		{
-			"id": "5bb12679-05d4-4da3-ec17-4906c6979eda",
-			"fieldName": "enablesession",
-			"fieldType": "boolean",
-			"isUnique": false,
-			"description": "Only save data per session",
-			"isNullable": true
 		}
 	],
 	"indices": [],
 	"foreignKeys": [],
 	"name": "forms_design",
 	"description": "FORMS: Design",
-	"ver": "24.08.14.1601",
-	"enableAudit": false,
+	"ver": "24.09.17.0710",
+	"enableAudit": true,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
 	"rolesRead": [],

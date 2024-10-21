@@ -7,7 +7,7 @@
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.08.19.1112",
+	"ver": "24.10.21.1535",
 	"enableCICD": true,
 	"apps": [
 		{
@@ -16,7 +16,7 @@
 			"title": "FORMS Deployment",
 			"description": "FORMS Deployment",
 			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
+				"id": "A313322E-F024-45F1-960F-B90081757B85"
 			}
 		},
 		{
@@ -25,7 +25,7 @@
 			"title": "",
 			"description": "",
 			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
+				"id": "A313322E-F024-45F1-960F-B90081757B85"
 			}
 		},
 		{
@@ -34,7 +34,7 @@
 			"title": "Neptune FORMS",
 			"description": "Neptune FORMS",
 			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
+				"id": "A313322E-F024-45F1-960F-B90081757B85"
 			}
 		},
 		{
@@ -43,7 +43,7 @@
 			"title": "Neptune FORMS",
 			"description": "Neptune FORMS",
 			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
+				"id": "A313322E-F024-45F1-960F-B90081757B85"
 			}
 		},
 		{
@@ -52,7 +52,7 @@
 			"title": "Neptune FORMS",
 			"description": "Neptune FORMS",
 			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
+				"id": "A313322E-F024-45F1-960F-B90081757B85"
 			}
 		},
 		{
@@ -61,11 +61,17 @@
 			"title": "Adaptive FORMS",
 			"description": "Adaptive FORMS",
 			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
+				"id": "A313322E-F024-45F1-960F-B90081757B85"
 			}
 		}
 	],
 	"api": [
+		{
+			"id": "db11a45c-7660-ef11-991a-000d3ab5734c",
+			"name": "forms_group",
+			"description": "FORMS: Classification - Group",
+			"apiGroup": null
+		},
 		{
 			"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
 			"name": "FormsClient",
@@ -359,7 +365,7 @@
 	"code_snippets": [
 		{
 			"id": "a8ee936a-9bd1-4cba-8292-5520de285ad1",
-			"name": "Documentation",
+			"name": "Usage in your own App",
 			"description": null
 		}
 	],
