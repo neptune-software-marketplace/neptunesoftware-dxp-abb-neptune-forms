@@ -1,0 +1,42 @@
+if (typeof id === "undefined" || id === null || id === "") {
+    return;
+}
+
+const multiObject = this;
+multiObject.removeAllTokens();
+
+// Get Item Data
+const data = ModelData.FindFirst(modelpanTopProperties.oData.visibility, "id", id);
+if (!data.visibleValue) return;
+
+// Get VisibleField
+const visibleField = controller.getObjectFromId(data.visibleFieldName);
+
+// Visibility
+switch (visibleField.type) {
+    case "Switch":
+    case "CheckBox":
+        if (data.visibleValue[0] === "true") {
+            multiObject.addToken(new sap.m.Token({ editable: false, key: "true", text: "True" }));
+        } else if (data.visibleValue[0] === "false") {
+            multiObject.addToken(new sap.m.Token({ editable: false, key: "false", text: "False" }));
+        }
+        break;
+
+    case "Input":
+    case "TextArea":
+        if (data.visibleValue[0] === "empty") {
+            multiObject.addToken(new sap.m.Token({ editable: false, key: "empty", text: "Empty" }));
+        }
+        break;
+
+    default:
+        if (visibleField.items) {
+            visibleField.items.forEach(function (item, i) {
+                if (data.visibleValue.includes(item.key)) {
+                    multiObject.addToken(new sap.m.Token({ editable: false, key: item.key, text: item.title }));
+                }
+            });
+        }
+        break;
+}

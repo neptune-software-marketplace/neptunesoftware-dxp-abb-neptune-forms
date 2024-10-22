@@ -7,7 +7,7 @@
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.08.19.1112",
+	"ver": "24.10.22.0935",
 	"enableCICD": true,
 	"apps": [
 		{
@@ -20,26 +20,8 @@
 			}
 		},
 		{
-			"id": "98b64f81-1c34-4221-9746-71750cd376ef",
-			"application": "neptune_forms_build",
-			"title": "",
-			"description": "",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
-		},
-		{
 			"id": "937aeefc-e1c5-44f2-b723-4065af58f03b",
 			"application": "neptune_forms",
-			"title": "Neptune FORMS",
-			"description": "Neptune FORMS",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
-		},
-		{
-			"id": "909da185-ed42-4ccd-9603-df19b93aa64a",
-			"application": "demo_ai1",
 			"title": "Neptune FORMS",
 			"description": "Neptune FORMS",
 			"package": {

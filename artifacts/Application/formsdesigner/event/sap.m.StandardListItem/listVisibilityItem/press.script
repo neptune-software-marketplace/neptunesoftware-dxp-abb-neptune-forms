@@ -1,11 +1,9 @@
 const context = oEvent.oSource.getBindingContext();
 const data = context.getObject();
 
-modelpanTopProperties.oData.visibleFieldName = data.id;
-modelpanTopProperties.oData.visibleCondition = "";
-modelpanTopProperties.oData.visibleValue = "";
-modelpanTopProperties.refresh();
+currentObject.visibleFieldName = data.id;
+currentObject.visibleCondition = "";
+currentObject.visibleValue = [];
 
-controller.visibleCondValue();
-
+modelpanTopProperties.refresh(true);
 diaVisibility.close();

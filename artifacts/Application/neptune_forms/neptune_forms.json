@@ -105,21 +105,6 @@
 					"attributes": [],
 					"data": [
 						{
-							"fieldNo": "e592b6f4-cdaa-46db-8fcb-d779541c67d5",
-							"fieldName": "appControl",
-							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
-							"fieldType": "neptune.model",
-							"script": "",
-							"customComponent": false,
-							"bindingValue": "Generic Array",
-							"bindingType": "h",
-							"bindingSource": "P9",
-							"request": [],
-							"response": [],
-							"attributes": [],
-							"data": []
-						},
-						{
 							"fieldNo": "415a019d-0c44-4fc0-8b3b-ce606f034cab",
 							"fieldName": "Signature",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
@@ -158,7 +143,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "24.08.19.1107",
+	"ver": "24.09.12.0945",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

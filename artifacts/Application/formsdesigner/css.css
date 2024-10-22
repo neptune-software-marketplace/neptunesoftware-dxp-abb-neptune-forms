@@ -7,11 +7,15 @@
     border-radius: 8px;
 }
 
-.formGeneral .sapUiFormResGrid > div {
+.formGeneral .sapUiFormResGrid>div {
     padding-bottom: 10px !important;
 }
 
-.formSettings .sapUiFormResGrid > div {
+.formTable .sapUiFormResGrid>div {
+    padding: 20px 0 20px 0;
+}
+
+.formSettings .sapUiFormResGrid>div {
     padding-top: 0 !important;
 }
 
@@ -21,12 +25,12 @@
     font-size: 18px;
 }
 
-.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH1,
-.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH2,
-.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH3,
-.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH4,
-.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH5,
-.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH6 {
+.panProperties .sapUiFormContainerTitle>.sapUiFormTitleH1,
+.panProperties .sapUiFormContainerTitle>.sapUiFormTitleH2,
+.panProperties .sapUiFormContainerTitle>.sapUiFormTitleH3,
+.panProperties .sapUiFormContainerTitle>.sapUiFormTitleH4,
+.panProperties .sapUiFormContainerTitle>.sapUiFormTitleH5,
+.panProperties .sapUiFormContainerTitle>.sapUiFormTitleH6 {
     font-size: 18px;
 }
 
@@ -67,10 +71,10 @@
     color: var(--nepInformationColor);
 }
 
-.sapUiRespGridMedia-Std-Phone.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanS12) > .nepLabelLeftAlign,
-.sapUiRespGridMedia-Std-Tablet.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanM12) > .nepLabelLeftAlign,
-.sapUiRespGridMedia-Std-Desktop.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanL12) > .nepLabelLeftAlign,
-.sapUiRespGridMedia-Std-LargeDesktop.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanXL12) > .nepLabelLeftAlign {
+.sapUiRespGridMedia-Std-Phone.sapUiFormResGridCont>.sapUiFormElementLbl:not(.sapUiRespGridSpanS12)>.nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-Tablet.sapUiFormResGridCont>.sapUiFormElementLbl:not(.sapUiRespGridSpanM12)>.nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-Desktop.sapUiFormResGridCont>.sapUiFormElementLbl:not(.sapUiRespGridSpanL12)>.nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-LargeDesktop.sapUiFormResGridCont>.sapUiFormElementLbl:not(.sapUiRespGridSpanXL12)>.nepLabelLeftAlign {
     text-align: left !important;
 }
 

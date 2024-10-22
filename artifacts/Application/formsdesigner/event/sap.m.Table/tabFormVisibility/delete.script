@@ -1,0 +1,6 @@
+const deleteItem = oEvent.getParameter("listItem");
+const context = deleteItem.getBindingContext();
+const data = context.getObject();
+
+ModelData.Delete(modelpanTopProperties.oData.visibility, "id", data.id);
+modelpanTopProperties.refresh();

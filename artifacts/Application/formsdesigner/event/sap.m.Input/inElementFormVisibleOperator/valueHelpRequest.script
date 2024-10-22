@@ -1,0 +1,25 @@
+const context = oEvent.oSource.getBindingContext();
+currentObject = context.getObject();
+
+const oper = [];
+
+// Get VisibleField
+const visibleField = controller.getObjectFromId(currentObject.visibleFieldName);
+
+// Visibility
+switch (visibleField.type) {
+    case "MultipleChoice":
+    case "MultipleSelect":
+        oper.push({ key: "any", text: "Contains Any" });
+        oper.push({ key: "all", text: "Contains All" });
+        break;
+
+    default:
+        oper.push({ key: "===", text: "Equal" });
+        oper.push({ key: "!==", text: "Not Equal" });
+        break;
+}
+
+modellistVisibilityOperation.setData(oper);
+
+popVisibilityOperation.openBy(this);

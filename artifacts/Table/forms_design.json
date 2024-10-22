@@ -72,7 +72,7 @@
 	"foreignKeys": [],
 	"name": "forms_design",
 	"description": "FORMS: Design",
-	"ver": "24.08.14.1601",
+	"ver": "24.05.23.1441",
 	"enableAudit": false,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",

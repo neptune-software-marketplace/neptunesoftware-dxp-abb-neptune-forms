@@ -1,0 +1,7 @@
+if (!modelpanTopProperties.oData.visibility) modelpanTopProperties.oData.visibility = [];
+
+modelpanTopProperties.oData.visibility.push({
+    id: ModelData.genID(),
+});
+
+modelpanTopProperties.refresh();

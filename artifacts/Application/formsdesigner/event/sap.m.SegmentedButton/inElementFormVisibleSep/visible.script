@@ -1,0 +1,12 @@
+if (typeof id === "undefined" || id === null || id === "") {
+    return;
+}
+
+const isId = (element) => element.id === id;
+const index = modelpanTopProperties.oData.visibility.findIndex(isId);
+
+if (index === 0) {
+    return false;
+} else {
+    return true;
+}

@@ -1,0 +1,17 @@
+if (typeof visibleCondition === "undefined" || visibleCondition === null || visibleCondition === "") {
+    return;
+}
+
+switch (visibleCondition) {
+    case "any":
+        return "Contains Any";
+
+    case "all":
+        return "Contains All";
+
+    case "===":
+        return "Equal";
+
+    case "!==":
+        return "Not Equal";
+}

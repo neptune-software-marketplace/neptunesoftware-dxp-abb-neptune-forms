@@ -267,6 +267,7 @@ const controller = {
                     element.elements.forEach(function (subelement, i) {
                         subelement.id = ModelData.genID();
                         subelement.title = subelement.title + " (COPY)";
+
                         if (subelement.items) {
                             subelement.items.forEach(function (items) {
                                 items.id = ModelData.genID();
@@ -289,13 +290,13 @@ const controller = {
                 newElement.items.forEach(function (items) {
                     items.id = ModelData.genID();
                 });
-
             }
 
             if (newElement.elements?.length) {
                 newElement.elements.forEach(function (element, i) {
                     element.id = ModelData.genID();
                     element.title = element.title + " (COPY)";
+
                     if (element.items) {
                         element.items.forEach(function (items) {
                             items.id = ModelData.genID();
@@ -843,6 +844,7 @@ const controller = {
 
     pressOutlineItem: function () {
         const element = modelpanTopProperties.oData;
+
         let elementParent = controller.getParentFromId(element.id);
 
         if (element.id === elementParent.id) elementParent = {};
@@ -876,45 +878,6 @@ const controller = {
             modelpanTopProperties.refresh();
         }
 
-        let visibilityFields = [];
-
-        const addConditionalField = function (element) {
-            if (element.id === modelpanTopProperties.oData.id) return;
-
-            switch (element.type) {
-                case "Image":
-                case "MultipleChoice":
-                case "MultipleSelect":
-                case "MessageStrip":
-                case "Text":
-                case "FormTitle":
-                case "Date":
-                    break;
-
-                default:
-                    const parent = controller.getParentFromId(element.id);
-
-                    switch (elementParent.type) {
-                        case "Table":
-                            if (elementParent.id !== parent.id) return;
-                            break;
-
-                        default:
-                            if (parent.type === "Table") return;
-                            break;
-                    }
-
-                    visibilityFields.push({
-                        id: element.id,
-                        text: element.title,
-                        parent: parent.title,
-                        index: visibilityFields.length + 1,
-                    });
-
-                    break;
-            }
-        };
-
         // Do not change type on parents
         if (element.elements) {
             elementToolbarChangeType.setVisible(false);
@@ -927,52 +890,19 @@ const controller = {
             controller.buildAdaptiveFields();
         }
 
-        // Conditional Access
-        modeloPageDetail.oData.setup.forEach(function (section) {
-            section.elements.forEach(function (element) {
-                addConditionalField(element);
-                if (element.elements) {
-                    element.elements.forEach(function (element) {
-                        addConditionalField(element);
-                    });
-                }
-            });
-        });
-
-        modellistVisibility.setData(visibilityFields);
-
-        controller.visibleCondValue();
-    },
-
-    visibleCondValue: function () {
-        if (!inElementFormVisibleField.getValue()) return;
-
-        inElementFormVisibleValue.destroyItems();
-        inElementFormVisibleValue.addItem(new sap.ui.core.Item());
-
-        // Get visibleField
-        const visibleField = controller.getObjectFromId(modelpanTopProperties.oData.visibleFieldName);
-
-        if (!visibleField) return;
-
-        switch (visibleField.type) {
-            case "Switch":
-            case "CheckBox":
-                inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: false, text: "false" }));
-                inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: true, text: "true" }));
-                break;
-
-            case "Input":
-                inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: "empty", text: "Empty" }));
-                break;
-
-            default:
-                if (visibleField.items) {
-                    visibleField.items.forEach(function (item, i) {
-                        inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: item.key, text: item.title }));
-                    });
-                }
-                break;
+        // Conditional Visibility
+        if (element.enableVisibleCond && !element.visibility) {
+            element.visibility = [];
+            // Migrate Old->New Setup
+            if (element.visibleFieldName && element.visibleCondition && element.visibleValue) {
+                element.visibility.push({
+                    id: ModelData.genID(),
+                    visibleFieldName: element.visibleFieldName,
+                    visibleCondition: element.visibleCondition,
+                    visibleValue: [element.visibleValue],
+                });
+                modelpanTopProperties.refresh();
+            }
         }
     },
 
@@ -1016,7 +946,9 @@ const controller = {
             id: modelpanTopProperties.oData.adaptiveApp,
         };
 
-        sap.n.Adaptive.init(data).then(function (res) {
+        const adaptiveInit = sap.n.Adaptive ? sap.n.Adaptive.init : neptune.Adaptive.init;
+
+        adaptiveInit(data).then(function (res) {
             inElementFormValueHelpField.destroyItems();
             inElementFormValueHelpField.addItem(new sap.ui.core.ListItem({ key: "", text: "" }));
 
