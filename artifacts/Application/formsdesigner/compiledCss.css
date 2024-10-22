@@ -11,6 +11,10 @@
   padding-bottom: 10px !important;
 }
 
+.formTable .sapUiFormResGrid > div {
+  padding: 20px 0 20px 0;
+}
+
 .formSettings .sapUiFormResGrid > div {
   padding-top: 0 !important;
 }

@@ -24,7 +24,7 @@
 	"foreignKeys": [],
 	"name": "forms_attribute_group",
 	"description": "FORMS: Object Attribute Group",
-	"ver": "24.08.14.1601",
+	"ver": "23.2.28.1346",
 	"enableAudit": false,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",

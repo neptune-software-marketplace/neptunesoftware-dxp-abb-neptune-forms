@@ -68,28 +68,3 @@
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
 }
-
-segmentedNoDefault .invisibleLi {
-  display: none;
-}
-
-.textCentered .sapMInputBaseInner {
-  text-align: center !important;
-}
-
-.innerDatePicker .sapMInputBaseIconContainer > span {
-  font-family: SAP-icons;
-  width: calc(100% - 8px) !important;
-  text-align: end;
-  padding-right: 8px;
-}
-
-.innerDatePicker .sapMInputBaseIconContainer {
-  position: absolute;
-  width: 100%;
-  text-align: start;
-}
-
-.innerDatePicker.sapMInputBase:not(.sapMInputBaseDisabled).sapMInputBaseIconPressed .sapMInputBaseIconContainer .sapMInputBaseIcon, .sapMInputBase:not(.sapMInputBaseDisabled) .sapMInputBaseIconContainer .sapMInputBaseIcon:active {
-  background-color: transparent;
-}
