@@ -33,7 +33,7 @@
 	"enableShadeCalc": false,
 	"numTiles": null,
 	"enableMessage": false,
-	"ver": "23.3.5.759",
+	"ver": "24.10.24.0926",
 	"headColor": null,
 	"headTxtClr": null,
 	"subheadTxtClr": null,
@@ -66,13 +66,7 @@
 	"roleTag": null,
 	"cockpitTileGroup": true,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
-	"roles": [
-		{
-			"id": "edbb8b4a-757f-4eaf-b8dc-11b7cfe0f77e",
-			"name": "neptunesoftware-forms",
-			"ver": "23.2.21.916"
-		}
-	],
+	"roles": [],
 	"tiles": [
 		{
 			"id": "d832bb94-ec3a-4f59-8f1a-bab662c6a4d6",

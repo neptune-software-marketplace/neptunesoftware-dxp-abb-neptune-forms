@@ -7,7 +7,7 @@
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.08.19.1112",
+	"ver": "24.10.24.0931",
 	"enableCICD": true,
 	"apps": [
 		{
@@ -310,13 +310,7 @@
 	],
 	"launchpad": [],
 	"certificates": [],
-	"role": [
-		{
-			"id": "edbb8b4a-757f-4eaf-b8dc-11b7cfe0f77e",
-			"name": "neptunesoftware-forms",
-			"description": "Neptune FORMS"
-		}
-	],
+	"role": [],
 	"systems": [],
 	"doc": [],
 	"wf_notifications": [],
