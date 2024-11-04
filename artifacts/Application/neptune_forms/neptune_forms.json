@@ -111,7 +111,6 @@
 							"fieldType": "neptune.model",
 							"script": "",
 							"customComponent": false,
-							"disabled": true,
 							"bindingValue": "Generic Array",
 							"bindingType": "h",
 							"bindingSource": "P9",
@@ -159,7 +158,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "24.10.14.1853",
+	"ver": "24.10.28.1010",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
