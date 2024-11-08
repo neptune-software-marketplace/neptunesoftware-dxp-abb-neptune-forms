@@ -23,6 +23,8 @@ const controller = {
         { icon: "sap-icon://checklist", text: "Check List", type: "CheckList", parent: false, table: false, table: true },
         { icon: "sap-icon://request", text: "Input", type: "Input", parent: false, table: true },
         { icon: "sap-icon://fa-regular/file-image", text: "Image Upload", type: "Image", parent: false, table: true },
+        // Map Custom Control
+        { icon: "sap-icon://map", text: "Map", type: "Map", parent: false, table: false },
         { icon: "sap-icon://message-information", text: "Message Strip", type: "MessageStrip", parent: false, table: true },
         { icon: "sap-icon://number-sign", text: "Numeric", type: "Numeric", parent: false, table: true },
         { icon: "sap-icon://picture", text: "Picture", type: "Picture", parent: false, table: false },
@@ -39,6 +41,8 @@ const controller = {
         { icon: "sap-icon://text", text: "Text", type: "Text", parent: false, table: true },
         { icon: "sap-icon://document-text", text: "Text Area", type: "TextArea", parent: false, table: true },
         { icon: "sap-icon://value-help", text: "Value Help", type: "ValueHelp", parent: false, table: true },
+        // AR
+        { icon: "sap-icon://fa-solid/calculator", text: "Calculation", type: "Calc", parent: false, table: true },
     ],
 
     init: function () {
@@ -109,6 +113,9 @@ const controller = {
         });
 
         modeloPageDetail.setSizeLimit(10000);
+
+        // AC: Connector Enhancement
+        getConnectorList();
 
         // Get FORMS
         this.list();
@@ -199,6 +206,25 @@ const controller = {
         return outlineMenu;
     },
 
+    validateItemForAddCopy: function (item) {
+        // Map Custom Control - Ensure only one map is added
+        if (item.type == "Map") {
+            debugger;
+            var setup = modeloPageDetail.getData().setup;
+            for (var s in setup) {
+                if (
+                    setup[s].elements.find((e) => {
+                        return e.type == "Map";
+                    }) != null
+                ) {
+                    sap.m.MessageBox.error("A form can only contain one Map control.");
+                    return false;
+                }
+            }
+        }
+        return true;
+    },
+
     handleContextMenu: function (oEvent, key, item) {
         const context = oEvent.oSource.getBindingContext();
         const data = context.getObject();
@@ -215,7 +241,9 @@ const controller = {
                 break;
 
             case "copy":
-                controller.objectCopy();
+                // Validate control is valid for copy (Map Control)
+                const currentlySelectedItem = modelpanTopProperties.oData;
+                if (controller.validateItemForAddCopy(currentlySelectedItem)) controller.objectCopy();
                 break;
 
             case "delete":
@@ -224,6 +252,24 @@ const controller = {
 
             case "add":
                 controller.currentObject = data;
+
+                // Ensure item is valid for add (Map Control)
+                if (!controller.validateItemForAddCopy(item)) return;
+
+                // Map Custom Control - Ensure only one map is added
+                /*if (item.type == "Map") {
+                    var setup = modeloPageDetail.getData().setup;
+                    for (var s in setup) {
+                        if (
+                            setup[s].elements.find((e) => {
+                                return e.type == "Map";
+                            }) != null
+                        ) {
+                            sap.m.MessageBox.error("A form can only contain one Map control.");
+                            return;
+                        }
+                    }
+                }*/
 
                 if (context.sPath.indexOf("elements") > -1) {
                     controller.currentIndex = parseInt(context.sPath.split("/")[4]) + 1;
@@ -274,6 +320,8 @@ const controller = {
                         }
                     });
                 }
+                // AR custom elements
+                if (typeof customFORMS !== "undefined") customFORMS.setCustomElement(element);
             });
 
             modeloPageDetail.oData.setup.splice(elementIndex, 0, newElement);
@@ -289,7 +337,6 @@ const controller = {
                 newElement.items.forEach(function (items) {
                     items.id = ModelData.genID();
                 });
-
             }
 
             if (newElement.elements?.length) {
@@ -346,6 +393,9 @@ const controller = {
         element.visibleFieldName = "";
         element.visibleCondition = "";
         element.visibleValue = "";
+        // AC: Conditional Visibility
+        element.visibleValueFrom = 0;
+        element.visibleValueTo = 0;
     },
 
     list: function () {
@@ -616,6 +666,10 @@ const controller = {
             enablePlaceholder: false,
             enableDuplicate: false,
             enableLabel: true,
+            enablePrePopulated: false, // AC: Field Pre Populated
+            prePopulatedValue: "", // AC: Field Pre Populated
+            prePopulatedFreeValue: "", // AC: Field Pre Populated
+            hideElement: false, // AC: Element Visibility in Form
             disabled: false,
             duplicateButtonText: "Add",
             duplicateButtonType: "Transparent",
@@ -632,6 +686,9 @@ const controller = {
         switch (elementData.type) {
             // Parents
             case "Table":
+                // AC: Table expandable
+                newElement.expanded = false;
+                newElement.expandable = false;
                 newElement.option = "P";
                 newElement.elements = [];
                 newElement.widths = [];
@@ -655,6 +712,7 @@ const controller = {
             // Elements
             case "Numeric":
                 newElement.decimals = 2;
+                newElement.enableLimits = false; // AC: Numeric Limits
                 break;
 
             case "Rating":
@@ -696,14 +754,25 @@ const controller = {
                     { id: ModelData.genID(), title: "Option3", key: "key3", option: "I" },
                 ];
                 newElement.horizontal = false;
+                // AC: Single Select Enable Connector
+                newElement.enableConnector = false;
                 break;
 
             case "SingleSelect":
+                // AC: Single Select Enable Connector
+                newElement.enableConnector = false;
+                newElement.connectorID = "";
+                newElement.connectorKey = "";
+                newElement.connectorTitle = "";
+
                 newElement.items = [
                     { id: ModelData.genID(), title: "Option1", key: "key1", option: "I" },
                     { id: ModelData.genID(), title: "Option2", key: "key2", option: "I" },
                     { id: ModelData.genID(), title: "Option3", key: "key3", option: "I" },
                 ];
+
+                // Connector Enhancement - Ensure Connector List is Updated on New Control
+                getConnectorList();
                 break;
 
             case "SingleSelectIcon":
@@ -750,7 +819,32 @@ const controller = {
                 newElement.dialogWidth = 900;
 
                 break;
+
+            // Map Custom Control
+            case "Map":
+                newElement.mapVisible = true;
+                newElement.width = "100";
+                newElement.widthMetric = "per";
+                newElement.height = "200";
+                newElement.heightMetric = "";
+
+                break;
+
+            // AR Calculation
+            case "Calc":
+                newElement.decimals = 2;
+                newElement.items = [{ id: ModelData.genID(), title: "", id: "", operator: "plus" }];
+
+            default:
+                // AR custom elements
+                if (typeof customFORMS !== "undefined") {
+                    customFORMS.setCustomElement(newElement);
+                }
+                break;
         }
+
+        // AC: Fill Pre Populated Value options
+        controller.fillPrePopulated(elementData);
 
         if (copy) {
             return newElement;
@@ -820,6 +914,25 @@ const controller = {
 
             // Navigate to Element
             if (!controller.pressedPreview) {
+                
+                // Start: If the control is in an Expandable Panel that is not Expanded, Expand the panel
+                function findPanel(ctrl) {
+                    var parent = ctrl;
+                    do {
+                        parent = parent.getParent();
+                    } while (!!parent && parent.getMetadata()._sClassName != "sap.m.Panel"); // Why doesn't getClass() work?
+                    return parent;
+                }
+
+                const parentPanel = findPanel(elementPreview);
+                if( !!parentPanel && parentPanel.getExpandable() && !parentPanel.getExpanded() )
+                {
+                    return; // Do Nothing
+                    // Alternatively we could expand the panel - parentPanel.setExpanded(true);
+                }
+                // End: If the control is in an Expandable Panel that is not Expanded, Expand the panel
+
+
                 scrollPreview.scrollToElement(elementPreview, 0);
 
                 if (scrollPreview._oScroller._scrollY !== scrollPreview._oScroller.getMaxScrollTop()) {
@@ -915,6 +1028,12 @@ const controller = {
             }
         };
 
+        // AC: Fill Pre Populated Value Options
+        controller.fillPrePopulated(element);
+
+        // AR: update refernce field names
+        controller.updateReferenceFieldName(element);
+
         // Do not change type on parents
         if (element.elements) {
             elementToolbarChangeType.setVisible(false);
@@ -925,6 +1044,11 @@ const controller = {
         // ValueHelp -> Get Adaptive Fields
         if (element.type === "ValueHelp") {
             controller.buildAdaptiveFields();
+        }
+
+        // AC: Single Select Connector
+        if (element.type === "SingleSelect") {
+            fillConnectorInfo(element.connectorID, element.connectorKey, element.connectorTitle);
         }
 
         // Conditional Access
@@ -950,6 +1074,12 @@ const controller = {
         inElementFormVisibleValue.destroyItems();
         inElementFormVisibleValue.addItem(new sap.ui.core.Item());
 
+        // AC: Conditional Visibility
+        inElementFormVisibleOperatorBetween.setEnabled(false);
+        inElementFormVisibleOperatorNotBetween.setEnabled(false);
+        inElementFormVisibleOperatorFrom.setEnabled(false);
+        inElementFormVisibleOperatorTo.setEnabled(false);
+
         // Get visibleField
         const visibleField = controller.getObjectFromId(modelpanTopProperties.oData.visibleFieldName);
 
@@ -966,12 +1096,49 @@ const controller = {
                 inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: "empty", text: "Empty" }));
                 break;
 
+            // AC: Conditional Visibility
+            case "Numeric":
+                inElementFormVisibleOperatorBetween.setEnabled(true);
+                inElementFormVisibleOperatorNotBetween.setEnabled(true);
+                inElementFormVisibleOperatorFrom.setEnabled(true);
+                inElementFormVisibleOperatorTo.setEnabled(true);
+
+                inElementFormVisibleValueFrom.onChange = inElementFormVisibleValueTo.onChange = function (oEvent) {
+                    this.setValue(FORMS.parseFloat(this.getValue(), visibleField.decimals));
+                };
+                break;
+
             default:
-                if (visibleField.items) {
-                    visibleField.items.forEach(function (item, i) {
-                        inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: item.key, text: item.title }));
-                    });
+                // AC: Conditional Visibility - Connector
+                // if (visibleField.items) {
+                //     visibleField.items.forEach(function (item, i) {
+                //         inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: item.key, text: item.title }));
+                //     });
+                // }
+                if (visibleField.enableConnector) {
+                    if (visibleField.connectorID && visibleField.connectorKey && visibleField.connectorTitle) {
+                        const connector = new Connector(visibleField.connectorID);
+                        // LIST
+                        let options = {
+                            fields: [{ name: visibleField.connectorKey }, { name: visibleField.connectorTitle }],
+                        };
+
+                        connector.list(options).then(function (values) {
+                            if (values.result && Array.isArray(values.result)) {
+                                values.result.forEach((value) =>
+                                    inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: value[visibleField.connectorKey], text: value[visibleField.connectorTitle] }))
+                                );
+                            }
+                        });
+                    }
+                } else {
+                    if (visibleField.items) {
+                        visibleField.items.forEach(function (item, i) {
+                            inElementFormVisibleValue.addItem(new sap.ui.core.Item({ key: item.key, text: item.title }));
+                        });
+                    }
                 }
+
                 break;
         }
     },
@@ -1060,6 +1227,86 @@ const controller = {
                 } catch (e) {}
             }
         });
+    },
+
+    // AC: Fill Pre Populated Value options
+    fillPrePopulated: function (element) {
+        inElementFormPrePopulateValues.removeAllItems();
+        inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: "", text: "Custom Value" }));
+        switch (element.type) {
+            case "DatePicker":
+            // inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: 'first', text: "First of the Month" }));
+            // inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: 'current', text: "Current Date" }));
+            // inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: 'last', text: "Last of the Month" }));
+            // break;
+            case "DateTimePicker":
+                inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: "current", text: "Current Date" }));
+                break;
+            case "Input":
+                inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: "name", text: "Name" }));
+                inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: "id", text: "ID" }));
+                inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: "email", text: "eMail" }));
+                break;
+            case "Numeric":
+                break;
+            default:
+                break;
+        }
+
+        inElementFormPrePopulateValues.setSelectedKey(element.prePopulatedValue);
+    },
+
+    // AR: update refernce field names
+    updateReferenceFieldName: function (element) {
+        function getTitle(id) {
+            const refElement = FORMS.getObjectFromId(id);
+            if (refElement !== null) {
+                return refElement.title;
+            } else {
+                return "";
+            }
+        }
+
+        switch (element.type) {
+            case "Calc":
+                element.items.forEach((item) => {
+                    item.title = getTitle(item.id);
+                });
+                break;
+
+            default:
+                // AR custom elements
+                if (typeof customFORMS !== "undefined") {
+                    customFORMS.updateCustomReference(element);
+                }
+                break;
+        }
+        modelpanTopProperties.refresh();
+    },
+
+    // AR
+    attachListener: function (configField, listener) {
+        const elementAttribute = configField.getCustomData().find((item) => item.getKey() === "element");
+        if (typeof elementAttribute === "undefined") return;
+        const element = elementAttribute.getValue();
+
+        const inputField = sap.ui.getCore().byId("field" + element.id);
+        if (typeof inputField === "undefined") return element;
+
+        const listenerField = sap.ui.getCore().byId("field" + listener.id);
+        if (typeof listenerField === "undefined") return element;
+
+        inputField.addCustomData(new sap.ui.core.CustomData({ key: "fireChange" + listenerField.sId, value: listenerField }));
+        // CE - Adding check so exception isn't thrown.  Fix TBD
+        if (!!inputField.detachChange) {
+            inputField.detachChange(FORMS.handleCustomData);
+            inputField.attachChange(FORMS.handleCustomData);
+        } else {
+            //CE - Added to prevent exception
+            console.log("Cannot attach to change event.  Control in table.");
+        }
+
+        return element;
     },
 };
 

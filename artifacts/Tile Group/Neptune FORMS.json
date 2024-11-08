@@ -4,11 +4,11 @@
 	"createdBy": "ole-andre.haugen@neptune-software.com",
 	"translation": [],
 	"tilesOrder": [
-		"538e3ef8-0493-4f9e-a738-a231db3e8c01",
-		"59f26a1a-f9d5-403b-ad96-4ba203ccbf13",
-		"d832bb94-ec3a-4f59-8f1a-bab662c6a4d6",
+		"ab45363e-4ca1-46cc-949c-267a20059ff7",
 		"b5d4a055-2df2-4ae1-976d-3e41d2d1ce3c",
-		"ab45363e-4ca1-46cc-949c-267a20059ff7"
+		"59f26a1a-f9d5-403b-ad96-4ba203ccbf13",
+		"538e3ef8-0493-4f9e-a738-a231db3e8c01",
+		"d832bb94-ec3a-4f59-8f1a-bab662c6a4d6"
 	],
 	"tilegroupsOrder": [],
 	"configMessage": {
@@ -18,8 +18,8 @@
 	"subTitle": null,
 	"description": null,
 	"titleAlignment": null,
-	"enableFullScreen": null,
-	"hideHeader": null,
+	"enableFullScreen": false,
+	"hideHeader": false,
 	"backgroundType": "cards",
 	"backgroundColor": "",
 	"backgroundShade": null,
@@ -33,7 +33,7 @@
 	"enableShadeCalc": false,
 	"numTiles": null,
 	"enableMessage": false,
-	"ver": "23.3.5.759",
+	"ver": "24.10.28.1449",
 	"headColor": null,
 	"headTxtClr": null,
 	"subheadTxtClr": null,

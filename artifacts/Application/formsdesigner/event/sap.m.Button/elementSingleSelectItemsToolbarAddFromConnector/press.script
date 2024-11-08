@@ -1,0 +1,25 @@
+// TODOXXX ANDRE - REMOVE OBJECT AND CODE
+
+// Clear the existing items
+modelpanTopProperties.oData.items = [];
+
+const connector = new Connector(cboxConnectors.getSelectedKey());
+// LIST
+let options = {
+    fields: [{ name: cboxKey.getSelectedKey() }, { name: cboxTitle.getSelectedKey() }],
+};
+
+const values = await connector.list(options);
+
+if (values.result && Array.isArray(values.result)) {
+    values.result.forEach((element) =>
+        modelpanTopProperties.oData.items.push({
+            id: ModelData.genID(),
+            title: element[cboxTitle.getSelectedKey()],
+            key: element[cboxKey.getSelectedKey()],
+            option: "I",
+        })
+    );
+}
+
+modelpanTopProperties.refresh();

@@ -30,4 +30,13 @@ const Utils = {
 
     dateFormats: [{ title: "dd.MM.yyyy" }, { title: "MM/dd/yyyy" }, { title: "MM.yyyy" }, { title: "dd MMM" }],
     dateTimeFormats: [{ title: "dd.MM.yyyy HH:mm" }, { title: "MM/dd/yyyy HH:mm" }, { title: "dd MMM HH:mm" }],
+
+    // AR copy from AC: - "Contains" for Single Select Filter
+    setSelectFilterFunction: function (sel) {
+        sel.setFilterFunction(function (sTerm, oItem) {
+            // A case-insensitive 'string contains' filter
+            return oItem.getText().match(new RegExp(sTerm, "i"));
+        });
+    },
 };
+

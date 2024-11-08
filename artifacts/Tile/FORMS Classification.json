@@ -30,7 +30,7 @@
 	"backgroundColor": null,
 	"backgroundShade": null,
 	"tileApplication": null,
-	"hideHeaderL": null,
+	"hideHeaderL": false,
 	"hideHeaderM": false,
 	"hideHeaderS": false,
 	"hideTileDesktop": false,

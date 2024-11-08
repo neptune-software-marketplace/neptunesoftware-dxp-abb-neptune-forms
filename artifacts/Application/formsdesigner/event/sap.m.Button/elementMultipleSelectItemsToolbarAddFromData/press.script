@@ -1,0 +1,33 @@
+navigator.clipboard.readText().then((clippedData) => {
+    try {
+        let values = [];
+        let rows = clippedData.split("\r\n");
+        
+        // Remove the last line only if blank
+        if( !rows[rows.length-1] ) rows.pop();
+
+        rows.forEach((r) => {
+            values.push(r.split("\t"));
+        });
+
+        if (rows.length == 0) {
+            sap.m.MessageBox.error("There were no entries to import.");
+            return;
+        }
+
+        modelpanTopProperties.oData.items = [];
+        values.forEach((element) =>
+            modelpanTopProperties.oData.items.push({
+                id: ModelData.genID(),
+                key: element[0],
+                title: element[1],
+                option: "I",
+            })
+        );
+
+        modelpanTopProperties.refresh();
+
+    } catch {
+        sap.m.MessageBox.error("Please ensure your clipboard only contains a two columns from an Excel file.");
+    }
+});

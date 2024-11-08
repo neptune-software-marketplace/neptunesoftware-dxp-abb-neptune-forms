@@ -13,32 +13,32 @@
 	],
 	"entitySets": [
 		{
-			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
+			"id": "2E3D2B75-DB26-438A-8BFF-BA72399FEAD8",
 			"name": "forms_attribute_fields",
 			"contextname": "forms_attribute_fields"
 		},
 		{
-			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
+			"id": "2E3D2B75-DB26-438A-8BFF-BA72399FEAD8",
 			"name": "forms_attribute_fields",
 			"contextname": "forms_attribute_fields"
 		},
 		{
-			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+			"id": "29F811FE-1310-4769-A00F-C27CD73D7F21",
 			"name": "forms_design",
 			"contextname": "forms_design"
 		},
 		{
-			"id": "4a9e3232-70e5-4f49-9b63-4104044f5642",
+			"id": "4A9E3232-70E5-4F49-9B63-4104044F5642",
 			"name": "forms_group",
 			"contextname": "forms_group"
 		},
 		{
-			"id": "78f60bae-e2ca-4d4a-ae6e-170ac0f67296",
+			"id": "78F60BAE-E2CA-4D4A-AE6E-170AC0F67296",
 			"name": "forms_subgroup",
 			"contextname": "forms_subgroup"
 		},
 		{
-			"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
+			"id": "DE90511F-F1CD-49AD-BB20-07F4C879CF3F",
 			"name": "forms_attribute_group",
 			"contextname": "forms_attribute_group"
 		}
@@ -54,6 +54,6 @@
 	"lastRunSuccessful": false,
 	"isTypescript": false,
 	"language": "javascript",
-	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
+	"jsscriptGroup": null,
 	"package": "a313322e-f024-45f1-960f-b90081757b85"
 }

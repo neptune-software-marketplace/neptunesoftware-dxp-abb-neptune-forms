@@ -1,0 +1,8 @@
+modelpanTopProperties.oData.items.push({ 
+    id: ModelData.genID(), 
+    title: "", 
+    id: "", 
+    operator: "" 
+});
+
+modelpanTopProperties.refresh();

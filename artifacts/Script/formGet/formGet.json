@@ -6,12 +6,12 @@
 	"externalModules": [],
 	"entitySets": [
 		{
-			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+			"id": "29F811FE-1310-4769-A00F-C27CD73D7F21",
 			"name": "forms_design",
 			"contextname": "forms_design"
 		},
 		{
-			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
+			"id": "2E3D2B75-DB26-438A-8BFF-BA72399FEAD8",
 			"name": "forms_attribute_fields",
 			"contextname": "forms_attribute_fields"
 		}
@@ -27,6 +27,6 @@
 	"lastRunSuccessful": false,
 	"isTypescript": false,
 	"language": "javascript",
-	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
+	"jsscriptGroup": null,
 	"package": "a313322e-f024-45f1-960f-b90081757b85"
 }

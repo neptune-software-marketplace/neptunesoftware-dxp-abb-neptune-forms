@@ -4,6 +4,11 @@ const data = context.getObject();
 modelpanTopProperties.oData.visibleFieldName = data.id;
 modelpanTopProperties.oData.visibleCondition = "";
 modelpanTopProperties.oData.visibleValue = "";
+
+// AC: Conditional Visibility
+modelpanTopProperties.oData.visibleValueFrom = 0;
+modelpanTopProperties.oData.visibleValueTo = 0;
+
 modelpanTopProperties.refresh();
 
 controller.visibleCondValue();
