@@ -1878,12 +1878,12 @@
 	"printWidth": 200,
 	"generateVersionOnActivation": false,
 	"activationHistoryCount": 0,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
 	"apis": [
 		{
 			"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
 			"name": "FormsClient",
 			"ver": "23.3.5.926"
 		}
-	],
-	"package": "a313322e-f024-45f1-960f-b90081757b85"
+	]
 }

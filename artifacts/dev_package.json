@@ -3,66 +3,41 @@
 	"createdAt": "2023-01-10T16:11:06.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
 	"git": {
-		"remote": "https://github.com/neptune-software-marketplace/neptunesoftware-dxp-abb-neptune-forms.git"
+		"remote": "https://github.com/neptune-software-marketplace/neptunesoftware-dxp-abb-neptune-forms.git",
+		"branch": "master"
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.10.24.0931",
+	"ver": "24.11.10.1746",
 	"enableCICD": true,
+	"internalReadOnly": false,
+	"oeVersion": null,
+	"excludeTemplateFiles": true,
+	"roles": [],
 	"apps": [
 		{
 			"id": "bbdfe2ca-c704-487a-bb87-b1656d571f3a",
 			"application": "neptune_forms_deployment",
 			"title": "FORMS Deployment",
-			"description": "FORMS Deployment",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
-		},
-		{
-			"id": "98b64f81-1c34-4221-9746-71750cd376ef",
-			"application": "neptune_forms_build",
-			"title": "",
-			"description": "",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
+			"description": "FORMS Deployment"
 		},
 		{
 			"id": "937aeefc-e1c5-44f2-b723-4065af58f03b",
 			"application": "neptune_forms",
 			"title": "Neptune FORMS",
-			"description": "Neptune FORMS",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
-		},
-		{
-			"id": "909da185-ed42-4ccd-9603-df19b93aa64a",
-			"application": "demo_ai1",
-			"title": "Neptune FORMS",
-			"description": "Neptune FORMS",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
+			"description": "Neptune FORMS"
 		},
 		{
 			"id": "74bff3f5-b8ae-4250-aed3-6ebfe904b23e",
 			"application": "formsdesigner",
 			"title": "Neptune FORMS",
-			"description": "Neptune FORMS",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
+			"description": "Neptune FORMS"
 		},
 		{
 			"id": "4b507eda-02d6-4b00-ab00-c730a27c7ffd",
 			"application": "planet9_adaptive_forms",
 			"title": "Adaptive FORMS",
-			"description": "Adaptive FORMS",
-			"package": {
-				"id": "a313322e-f024-45f1-960f-b90081757b85"
-			}
+			"description": "Adaptive FORMS"
 		}
 	],
 	"api": [
@@ -301,6 +276,7 @@
 			"name": "FORMS Designer"
 		}
 	],
+	"tile_layout": [],
 	"category": [
 		{
 			"id": "ca28178b-556e-486c-afa4-b9cd4ecab385",
@@ -308,7 +284,9 @@
 			"name": "Neptune FORMS"
 		}
 	],
+	"tilegroup_layout": [],
 	"launchpad": [],
+	"launchpad_layout": [],
 	"certificates": [],
 	"role": [],
 	"systems": [],
@@ -358,5 +336,6 @@
 		}
 	],
 	"wf_determination": [],
-	"wf_taskaction": []
+	"wf_taskaction": [],
+	"theme_ui5": []
 }

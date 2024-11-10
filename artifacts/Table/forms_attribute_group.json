@@ -28,6 +28,7 @@
 	"enableAudit": false,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"generationStrategy": null,
 	"rolesRead": [],
 	"rolesWrite": []
 }
