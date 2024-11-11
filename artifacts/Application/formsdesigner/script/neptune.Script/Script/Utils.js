@@ -30,4 +30,28 @@ const Utils = {
 
     dateFormats: [{ title: "dd.MM.yyyy" }, { title: "MM/dd/yyyy" }, { title: "MM.yyyy" }, { title: "dd MMM" }],
     dateTimeFormats: [{ title: "dd.MM.yyyy HH:mm" }, { title: "MM/dd/yyyy HH:mm" }, { title: "dd MMM HH:mm" }],
+    fileTypes: [{title: "pdf"}, {title: "doc"}, {title: "docx"}, {title: "xls"}, {title: "xlsx"}, {title: "ppt"}, {title: "pptx"}, {title: "bmp"}, {title: "png"}, {title: "jpg"}, {title: "jpeg"}],
+
+    // KW - enable media library (+ callback)
+    objMedialib: {
+        setValue: (url) => {
+            if (url && typeof url == "string" && url != "") {
+                let filename = decodeURIComponent(url).substring(url.lastIndexOf("/")+1);
+                controller.currentObject.getModel().getData().filename = filename;
+                controller.currentObject.getModel().getData().link     = decodeURIComponent(url);
+                controller.currentObject.getModel().refresh();
+            } else {
+                controller.currentObject.getModel().getData().filename = "";
+                controller.currentObject.getModel().getData().link     = "";
+                controller.currentObject.getModel().refresh();
+            }
+        },
+        fireChange: () => {}
+    }
 };
+
+// KW - init allowed file types for File element
+for (const t of Utils.fileTypes) {
+    mcbElementFormFileType.addItem(new sap.ui.core.Item({key: t.title, text: t.title}));
+}
+// modelmcbElementFormFileType.setData(Utils.fileTypes);

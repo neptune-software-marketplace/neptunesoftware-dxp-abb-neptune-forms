@@ -7,7 +7,7 @@
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.10.22.0935",
+	"ver": "24.11.11.1044",
 	"enableCICD": true,
 	"apps": [
 		{
@@ -53,6 +53,12 @@
 			"name": "FormsClient",
 			"description": "Neptune FORMS",
 			"apiGroup": "d3596a74-a10f-46d9-9d3d-f5462c65031a"
+		},
+		{
+			"id": "81208c0f-b900-4019-a5b1-f27a63549d32",
+			"name": "MediaLib",
+			"description": null,
+			"apiGroup": null
 		}
 	],
 	"odataSource": [],
@@ -104,6 +110,11 @@
 			"id": "abaf7108-29fa-424f-ab1f-61c698a599b4",
 			"name": "formDelete",
 			"description": null
+		},
+		{
+			"id": "90d6e4cd-8fe3-471e-9e75-b8e19cf1b09e",
+			"name": "medialibFoldersGet",
+			"description": "Reading the folders of the medialib in deep structure"
 		},
 		{
 			"id": "8451fdc0-46ea-4f35-bcf9-e3ebcdd0c79b",

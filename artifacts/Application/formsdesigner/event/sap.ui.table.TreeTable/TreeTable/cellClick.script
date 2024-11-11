@@ -1,0 +1,11 @@
+let selectedObj = oEvent.mParameters.rowBindingContext.getObject();
+
+if (selectedObj.name == "Root") {
+    sap.m.MessageToast.show("Please do not select the Root folder");
+} else {
+    controller.currentObject.getModel().getData().selectedFolderName = selectedObj.pathname;
+    controller.currentObject.getModel().getData().selectedFolderId = selectedObj.id;
+    controller.currentObject.getModel().refresh();
+
+    diaMediaFolders.close();
+}

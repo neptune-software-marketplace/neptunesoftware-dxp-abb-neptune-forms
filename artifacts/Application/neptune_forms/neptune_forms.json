@@ -23,6 +23,48 @@
 			],
 			"data": [
 				{
+					"fieldNo": "67dc6e93-bda2-4e67-b2b3-7fcf1df40dc2",
+					"fieldName": "FileUploader3",
+					"fieldParent": "e8b7b26b-3751-4cc0-d63f-2209966b6e1b",
+					"fieldType": "sap.ui.unified.FileUploader",
+					"script": "",
+					"customComponent": false,
+					"disabled": true,
+					"request": [],
+					"response": [],
+					"attributes": [
+						{
+							"attribute": "sendXHR",
+							"grouping": "Properties",
+							"value": "true",
+							"script": "",
+							"translation": []
+						},
+						{
+							"attribute": "sameFilenameAllowed",
+							"grouping": "Properties",
+							"value": "true",
+							"script": "",
+							"translation": []
+						},
+						{
+							"attribute": "multiple",
+							"grouping": "Properties",
+							"value": "true",
+							"script": "",
+							"translation": []
+						},
+						{
+							"attribute": "uploadUrl",
+							"grouping": "Properties",
+							"value": "/api/functions/Media/FileSave",
+							"script": "",
+							"translation": []
+						}
+					],
+					"data": []
+				},
+				{
 					"fieldNo": "ff5ae32d-074d-44fe-9a72-03dbeb134c8b",
 					"fieldName": "oHTMLUpload",
 					"fieldParent": "e8b7b26b-3751-4cc0-d63f-2209966b6e1b",
@@ -63,6 +105,63 @@
 					"response": [],
 					"attributes": [],
 					"data": [
+						{
+							"fieldNo": "1352864a-db68-498b-c8db-a39e0b7fc00f",
+							"fieldName": "FileDelete",
+							"fieldParent": "5da79be1-8fb0-4ce4-a5e3-7fc4517150fd",
+							"fieldType": "neptune.restapi",
+							"script": "",
+							"customComponent": false,
+							"restSource": "81208c0f-b900-4019-a5b1-f27a63549d32",
+							"restOperation": "4fcab8ef-2957-400b-a6fe-ea8722bed7c7",
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "bc1130d4-6987-4fdb-c46d-26c5798f8330",
+							"fieldName": "FileGet",
+							"fieldParent": "5da79be1-8fb0-4ce4-a5e3-7fc4517150fd",
+							"fieldType": "neptune.restapi",
+							"script": "",
+							"customComponent": false,
+							"restSource": "81208c0f-b900-4019-a5b1-f27a63549d32",
+							"restOperation": "520bedb2-657e-4f2f-b65d-f156017cefe0",
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "4202d8ab-c96f-4999-9270-f6a97c93c641",
+							"fieldName": "FileList",
+							"fieldParent": "5da79be1-8fb0-4ce4-a5e3-7fc4517150fd",
+							"fieldType": "neptune.restapi",
+							"script": "",
+							"customComponent": false,
+							"restSource": "81208c0f-b900-4019-a5b1-f27a63549d32",
+							"restOperation": "18d3f2ed-8b6a-4d58-d71c-f2450a48bd12",
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "3a0221ce-9844-4581-c329-c495049ad05c",
+							"fieldName": "FileSave",
+							"fieldParent": "5da79be1-8fb0-4ce4-a5e3-7fc4517150fd",
+							"fieldType": "neptune.restapi",
+							"script": "",
+							"customComponent": false,
+							"disabled": true,
+							"restSource": "81208c0f-b900-4019-a5b1-f27a63549d32",
+							"restOperation": "d78889d5-b5e7-4e03-e91d-017eae6142df",
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
 						{
 							"fieldNo": "40471241-0765-4a18-b1d1-31da6f83f3f2",
 							"fieldName": "ElementLog",
@@ -143,7 +242,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "24.09.12.0945",
+	"ver": "24.11.11.1036",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
@@ -188,7 +287,12 @@
 		{
 			"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
 			"name": "FormsClient",
-			"ver": "23.3.5.926"
+			"ver": "24.11.11.1030"
+		},
+		{
+			"id": "81208c0f-b900-4019-a5b1-f27a63549d32",
+			"name": "MediaLib",
+			"ver": "24.11.11.1014"
 		}
 	],
 	"package": "a313322e-f024-45f1-960f-b90081757b85"
