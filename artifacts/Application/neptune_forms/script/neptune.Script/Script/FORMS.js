@@ -1,3 +1,5 @@
+jQuery.sap.require("sap.m.MessageBox");
+
 const FORMS = {
     model: null,
     config: null,
@@ -18,6 +20,10 @@ const FORMS = {
     colSorting: {},
     paginationSetup: {},
     enhancement: {},
+    allFileTypes: ["bmp","doc","docx","jpg","jpeg","heic","heif","pdf","png","ppt","pptx","xls","xlsx"],
+    attachmentsPromise: [],
+    fileUploaders: [],
+    // fileUploader: new sap.ui.unified.FileUploader(),
 
     build: function (parent, options) {
         let formOptions;
@@ -417,7 +423,7 @@ const FORMS = {
         sectionForm.addStyleClass("FormsSimpleForm");
 
         sectionPanel.addContent(sectionForm);
-
+        
         FORMS.formParent.addContent(sectionPanel);
 
         return sectionForm;
@@ -1576,6 +1582,14 @@ const FORMS = {
                 elementField = FORMS.buildElementImage(element, parent);
                 break;
 
+            case "File":
+                elementField = FORMS.buildElementFile(element, parent);
+                break;
+
+            case "MediaLib":
+                elementField = FORMS.buildElementMediaLib(element, parent);
+                break;
+
             case "DateTimePicker":
                 elementField = FORMS.buildElementDateTimePicker(element);
                 break;
@@ -2385,6 +2399,353 @@ const FORMS = {
         return newField;
     },
 
+    buildElementFile: function (element, parent) {
+
+        const bindingField = element.fieldName ? element.fieldName : element.id;
+        const bindingPath  = FORMS.bindingPath;
+
+        const newField = new sap.m.VBox(FORMS.buildElementFieldID(element), {
+            width: "100%",
+            visible: FORMS.buildVisibleCond(element),
+        });
+
+
+        /* Upload change event I */
+        const uploadEvent = function (oEvent) {
+            FORMS.uploadObject = {
+                element,
+                bindingField: bindingField,
+                context: null,
+            };
+
+            fnChange(oEvent);
+        };
+
+        const now = () => {
+            let num = (n) => {return n <= 9 ? "0"+n : n.toString()};
+            
+            const date = new Date();
+            let now    = date.getFullYear() + num(parseInt(date.getMonth()+1)) + num(date.getDate()) + date.getHours() + date.getMinutes() + date.getSeconds() + date.getMilliseconds();
+            return now;
+        }
+
+        const updateFileName = (name) => {
+            let newName = name;
+            let iFileType = name.lastIndexOf(".");
+            if (iFileType >= 0) {
+                let fileName = name.substring(0,iFileType);
+                let fileType = name.substring(iFileType);
+                newName = fileName + "__" + now() + fileType;
+            }
+
+            return newName;
+        }
+
+        /* Upload change event II */
+        const fnChange = async (oEvent) => {
+            try {
+                const file       = oEvent.getParameter("files")[0];
+                const fileReader = new FileReader();
+                const filename   = file.name;
+                const filetype   = file.type;
+                
+                fileReader.onload = async function (fileLoadedEvent) {
+
+                    let formModel;
+                    let fileData  = fileLoadedEvent.target.result;
+                    let fileEntry = {
+                        id:   ModelData.genID(),
+                        src:  fileData.substring(fileData.indexOf("base64,") + "base64,".length),
+                        srcExists: true,
+                        name: updateFileName(filename),
+                        type: filetype,
+                        uploaded: false
+                    };
+
+                    if (!FORMS.formParent) {
+                        const formParent = sap.ui.getCore().byId("_nepFormParent");
+                        formModel = formParent.getModel();
+                    } else {
+                        formModel = FORMS.formParent.getModel();
+                    }
+
+                    if (FORMS.uploadObject && FORMS.uploadObject.context) {    
+                        FORMS.uploadObject.context[FORMS.uploadObject.bindingField] = fileEntry;
+                        FORMS.uploadObject.model.refresh();
+                    } else {
+                        formModel.oData[FORMS.uploadObject.bindingField] = fileEntry;
+                        formModel.refresh();
+                    }
+                };
+
+                fileReader.readAsDataURL(file);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+
+        const randomId = ModelData.genID();
+        const allowedFileTypes = element.fileTypes && element.fileTypes.length > 0 ? element.fileTypes : FORMS.allFileTypes;
+
+        const fnTypeMissmatch = () => {
+            const allowedTypesString = allowedFileTypes.join(", ");
+            // const allowedTypesString = allowedFileTypes.slice(0, -1).join(", ") + " and " + allowedFileTypes[allowedFileTypes.length - 1];
+            
+            sap.m.MessageBox.warning(
+                "The file type is not supported.\nPlease choose a file of one of the following file types:\n\n" + allowedTypesString
+            );
+        };
+
+        /* Upload complete event -> resolving / rejecting the upload promise */ 
+        const fnUploadComplete = (oEvent) => {
+            
+            // KW - File upload !!
+            // when calling the getData method with the "bUploadFiles" parameter set to true,
+            // all files will be uploaded to the media library BEFORE saving the dataset of the form.
+            // To achieve the BEFORE, there's manual promises created in the startUpload event of each fileuploader,
+            // that are being resolved / rejected in the uploadComplete event afterwards.
+
+            let id        = oEvent.getParameter("id");
+            let iPrUpload = FORMS.attachmentsPromise.findIndex(p => p.id == id);
+
+            const rejectUploadPromise = () => {if (iPrUpload >= 0) {FORMS.attachmentsPromise[iPrUpload].reject(id);}};
+
+            if (oEvent.getParameter("status").toString().indexOf("2") == 0) {
+                // Upload successful, refer to media lib
+                let md = FORMS.formParent.getModel();
+                if (md && md.getData()[element.id] && md.getData()[element.id].srcExists) {
+                    let mediaLibAttr = {
+                        name: md.getData()[element.id].name,
+                        path: element.selectedFolderName
+                    }
+                    apiFileList().then(res => {
+                        let path = element.selectedFolderName + "/" + mediaLibAttr.name;
+                        if (path && res && res.length > 0) {
+                            let iFile = res.findIndex(f => f.type == "File" && f.path == path);
+                            if (iFile >= 0) {
+                                md.getData()[element.id].src        = false;
+                                md.getData()[element.id].mediaLibId = res[iFile].id;
+                                md.getData()[element.id].uploaded   = true;
+                                md.refresh();
+                                
+                                if (iPrUpload >= 0) {
+                                    FORMS.attachmentsPromise[iPrUpload].resolve(id);
+                                }
+                            }
+                        }
+                    }).catch(()=>{
+                        rejectUploadPromise();
+                    });
+                } else {
+                    rejectUploadPromise();
+                }
+            } else {
+                rejectUploadPromise();
+            }
+        };
+
+        /* Upload start event -> creating a promise */ 
+        const fnUploadStart = (oEvent) => {
+            let externalResolve, externalReject;
+    
+            let prUpload = new Promise((resolve, reject) => {
+                externalResolve = resolve;
+                externalReject  = reject;
+            });
+            prUpload.id = oEvent.getParameter("id");
+
+            // Attach the resolve and reject methods to the promise to make
+            // them triggerable from outside of this method
+            prUpload.resolve = externalResolve;
+            prUpload.reject  = externalReject;
+
+            FORMS.attachmentsPromise.push(prUpload);
+        }
+
+        const elementUploader = new sap.ui.unified.FileUploader("f"+randomId+"inFiles", {
+            sendXHR:             true,
+            sameFilenameAllowed: true,
+            multiple:            false,
+            buttonOnly:          true,
+            buttonText:          element.text,
+            enabled:             FORMS.editable,
+            uploadOnChange:      false,
+            fileType:            allowedFileTypes,
+            visible:             "{= ${" + FORMS.bindingPath + bindingField + "} && ${" + FORMS.bindingPath + bindingField + "/srcExists" + "} ? false:true}",
+            uploadUrl:           "/api/functions/Media/FileSave",
+            change:              uploadEvent,
+            typeMissmatch:       fnTypeMissmatch,
+            uploadComplete:      fnUploadComplete,
+            uploadStart:         fnUploadStart
+
+        }).addStyleClass("sapUiSizeCompact");
+
+        elementUploader.setAdditionalData(element.selectedFolderName ? element.selectedFolderName + "/" : "/");
+        elementUploader.getProcessedBlobsFromArray = function getProcessedBlobsFromArray(arrBlobs) {
+
+            return Promise.all(
+                Array.from(arrBlobs).map(async (oldBlob) => {
+                    try {
+                        let newBlob = oldBlob.slice();
+                        // fetch the name from the model because we need to add a timestamp to the filename to make it unique 
+                        let newname = FORMS.formParent.getModel().getData()[element.id].name;
+                        newBlob.name = newname;
+                        return newBlob;
+                    } catch (err) {
+                        console.log(err);
+                        return oldBlob;
+                    }
+                })
+            );
+        };
+
+        FORMS.fileUploaders.push({uploader: elementUploader, elem: element});
+
+
+        /* Link (to the media library), when doc is uploaded */
+        const elementFile = new sap.m.Link({
+            text: "{= ${" + FORMS.bindingPath + bindingField + "} && ${" + FORMS.bindingPath + bindingField + "/name" + "} && ${" + FORMS.bindingPath + bindingField + "/name" + "}.length > 0 ? ${" + FORMS.bindingPath + bindingField + "/name" + "} :'File'}",
+            // icon: "sap-icon://show",
+            press: async function (oEvent) {
+                const fileAttr = this.getModel().getData()[bindingField];
+                let id = fileAttr && fileAttr.id ? fileAttr.id : null;
+                if (id) {
+
+                    let blob    = "";
+                    let blobUrl = "";
+
+                    if (fileAttr.uploaded) {
+                        // read file from Media Lib
+                        let file = await apiFileGet({data: {
+                            id: fileAttr.mediaLibId
+                        }});
+                        if (file) {
+                            blob     = FORMS.b64toBlob(file.content, fileAttr.type);
+                            blobUrl  = URL.createObjectURL(blob);
+                        }
+
+                    } else {
+                        // read file from local object    
+                        blob     = FORMS.b64toBlob(fileAttr.src, fileAttr.type);
+                        blobUrl  = URL.createObjectURL(blob);
+                    }
+
+                    FORMS.openFile(blobUrl);
+
+                } else {
+                    sap.m.MessageToast.show("File can not be found.");
+                }
+            },
+            visible: "{= ${" + FORMS.bindingPath + bindingField + "} && ${" + FORMS.bindingPath + bindingField + "/srcExists" + "} ? true:false}",
+        });
+
+        /* Icon to indicate that the file is uploaded to the media lib */
+        const elementUploaded = new sap.ui.core.Icon({
+            color: "#b9deaf",
+            src:   "sap-icon://upload-to-cloud",
+            tooltip: "File is uploaded to the Media Library",
+            visible: "{= ${" + FORMS.bindingPath + bindingField + "} && ${" + FORMS.bindingPath + bindingField + "/uploaded" + "} ? true:false}",
+        }).addStyleClass("iconFileUploaded");
+
+        const elementHBox = new sap.m.HBox();
+        const elementVBoxIcon = new sap.m.VBox({justifyContent: sap.m.FlexJustifyContent.Center}).addStyleClass("vboxIconFileUploaded");
+        elementVBoxIcon.addItem(elementUploaded);
+        elementHBox.addItem(elementUploader);
+        elementHBox.addItem(elementVBoxIcon);
+        elementHBox.addItem(elementFile);
+        newField.addItem(elementHBox);
+
+        /* Remove file button */
+        elementHBox.addItem(
+            new sap.m.Button({
+                type: "Reject",
+                enabled: FORMS.editable,
+                icon: "sap-icon://delete",
+                tooltip: "Remove File",
+                visible: "{= ${" + FORMS.bindingPath + bindingField + "} && ${" + FORMS.bindingPath + bindingField + "/srcExists" + "} ? true:false}",
+                press: function (oEvent) {
+                    let id = this.getModel().getData()[bindingField] && this.getModel().getData()[bindingField].id ? this.getModel().getData()[bindingField].id : null;
+                    if (id) {
+
+                        let md = this.getModel();
+                        sap.m.MessageBox.warning("Are you sure you want to remove this file?", {
+                            actions: ["Remove", sap.m.MessageBox.Action.CANCEL],
+                            emphasizedAction: "Remove",
+                            onClose: async function (sAction) {
+                                if (sAction == "Remove") {
+                                    if (md.getData()[bindingField].uploaded) {
+                                        // delete from media library
+                                        let path = element.selectedFolderName + "/" + md.getData()[bindingField].name;
+                                            await apiFileDelete({data: {
+                                                path: path
+                                            
+                                            }}).done(async () => {
+                                                apiFileList().done(list => {
+                                                    let iFile = list.findIndex(f => f.path == path);
+                                                    if (iFile >= 0) {
+                                                        sap.m.MessageToast.show("File could not be deleted, please delete it manually.");
+                                                    } else {
+                                                        sap.m.MessageToast.show("File deleted successfully.");
+                                                        md.getData()[bindingField] = "";
+                                                        md.refresh();
+                                                    }
+                                                });
+                                            });
+                                       
+                                    } else {
+                                        // delete from local object
+                                        sap.m.MessageToast.show("File deleted successfully.");
+                                        md.getData()[bindingField] = "";
+                                        md.refresh();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+            }).addStyleClass("sapUiSizeCompact sapUiTinyMarginBegin")
+        );
+        
+        return newField;
+    },
+
+
+    buildElementMediaLib: function (element) {
+
+        let newField;
+
+        if (element.filename && element.link) {
+
+            newField = new sap.m.Link({
+                text: element.filename,
+                press: function (oEvent) {
+                    let t = MediaFunctions.buildLink({url: element.link});
+                    t.indexOf("http") < 0 && (t = "" + location.origin + t),
+                    FORMS.openFile(t);
+                },
+                visible: true
+            });
+
+        } else {
+
+            if (element.hideNoFile) {
+                return;
+            } else {
+                // newField = new sap.m.VBox({justifyContent: sap.m.FlexJustifyContent.End});
+                newField = new sap.m.Title(FORMS.buildElementFieldID(element), {
+                    text: element.txtNoLinkProvided,
+                    // titleStyle: element.titleStyle,
+                    wrapping: true,
+                    // visible: FORMS.buildVisibleCond(element),
+                }).addStyleClass("sapUiSizeCompact");
+
+                // newField.addItem(textField);
+            }
+        }
+
+        return newField;
+    },
+
     buildElementDateTimePicker: function (element) {
         const bindingField = element.fieldName ? element.fieldName : element.id;
 
@@ -2489,8 +2850,12 @@ const FORMS = {
         return FORMS.validate("OnlyCheck");
     },
 
-    getData: function (complete, isDesigner) {
+    getData: async function (complete, isDesigner, bUploadFiles) {
         if (!FORMS.formParent) return null;
+
+        if (FORMS.config.savedata && bUploadFiles) {
+            await FORMS.uploadAttachments();
+        }
 
         const formModel = FORMS.formParent.getModel();
         const outputData = {};
@@ -2965,7 +3330,45 @@ const FORMS = {
 
         return elementData;
     },
+
+    openFile: function(blobUrl) {
+        setTimeout(() => {
+            var target = "_blank";
+            if (sap.ui.Device.system.combi || (sap.ui.Device.os.ios && sap.ui.Device.system.tablet) && window.matchMedia('(display-mode: standalone)').matches) {
+                target = '_top';
+            }
+            window.open(blobUrl, target);
+        });
+    },
+
+    uploadAttachments: async function() {
+            for (const up of FORMS.fileUploaders) {
+                up.uploader.upload(true);
+            }
+
+            return await Promise.all(FORMS.attachmentsPromise);
+    },
+
+    b64toBlob: function (b64Data, contentType='', sliceSize=512) {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+            
+        const blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    },
 };
 
-window.importImage = FORMS.importImage;
+window.importImage  = FORMS.importImage;
 window.importImages = FORMS.importImages;

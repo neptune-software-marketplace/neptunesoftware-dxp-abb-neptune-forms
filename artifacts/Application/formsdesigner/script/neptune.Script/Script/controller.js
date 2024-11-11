@@ -23,6 +23,8 @@ const controller = {
         { icon: "sap-icon://checklist", text: "Check List", type: "CheckList", parent: false, table: false, table: true },
         { icon: "sap-icon://request", text: "Input", type: "Input", parent: false, table: true },
         { icon: "sap-icon://fa-regular/file-image", text: "Image Upload", type: "Image", parent: false, table: true },
+        { icon: "sap-icon://add-document", text: "File Upload", type: "File", parent: false, table: false }, // KW
+        { icon: "sap-icon://attachment-video", text: "Media Library Link", type: "MediaLib", parent: false, table: false }, // KW
         { icon: "sap-icon://message-information", text: "Message Strip", type: "MessageStrip", parent: false, table: true },
         { icon: "sap-icon://number-sign", text: "Numeric", type: "Numeric", parent: false, table: true },
         { icon: "sap-icon://picture", text: "Picture", type: "Picture", parent: false, table: false },
@@ -101,6 +103,8 @@ const controller = {
                 controller.preview();
             }
         });
+
+        TreeTable.bindRows({path:"/children"});
 
         // Adaptive Apps Columns
         adaptiveAppsOpenColsKeys.forEach(function (k) {
@@ -679,6 +683,21 @@ const controller = {
                 newElement.widthMetric = "";
                 break;
 
+            case "File":
+                newElement.text = "Upload";
+                newElement.buttonType = "Emphasized";
+                newElement.fileTypes = [];
+                newElement.selectedFolderName = "";
+                newElement.selectedFolderId = null;
+                break;
+
+            case "MediaLib":
+                newElement.link = "";
+                newElement.filename = "";
+                newElement.txtNoLinkProvided = "There is no file selected";
+                newElement.hideNoFile = false;
+                break;
+
             case "CheckList":
                 newElement.questionTitle = "Question";
                 newElement.answerTitle = "Answer";
@@ -810,7 +829,7 @@ const controller = {
                 if (controller.markedElement.elemDom) controller.markedElement.elemDom.classList.remove("previewMarked");
 
                 if (!elementDom || !elementDom.classList) {
-                    debugger;
+                    // debugger;
                 } else {
                     elementDom.classList.add("previewMarked");
                 }
@@ -920,6 +939,29 @@ const controller = {
                 modelpanTopProperties.oData.imageSrc = await FORMS.imageResize(fileLoadedEvent.target.result, modelpanTopProperties.oData);
                 modelpanTopProperties.refresh();
                 document.getElementById("pictureUploader").value = "";
+            };
+
+            fileReader.readAsDataURL(file);
+        } catch (e) {
+            console.log(e);
+        }
+    },
+
+    // KW
+    importFile: function (oEvent) {
+        try {
+            const file = oEvent.target.files[0];
+            const fileReader = new FileReader();
+
+            if (file.size > 10000000) {
+                sap.m.MessageToast.show("File size is larger than max 10mb"); // KW ??
+                return;
+            }
+
+            fileReader.onload = async function (fileLoadedEvent) {
+                // modelpanTopProperties.oData.imageSrc = await FORMS.imageResize(fileLoadedEvent.target.result, modelpanTopProperties.oData);
+                // modelpanTopProperties.refresh();
+                // document.getElementById("pictureUploader").value = "";
             };
 
             fileReader.readAsDataURL(file);

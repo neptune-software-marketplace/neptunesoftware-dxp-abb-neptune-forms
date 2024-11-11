@@ -10,6 +10,7 @@ const addConditionalField = function (element) {
 
     switch (element.type) {
         case "Image":
+        case "File":
         case "MessageStrip":
         case "Text":
         case "FormTitle":

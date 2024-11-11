@@ -1,0 +1,250 @@
+{
+	"id": "81208c0f-b900-4019-a5b1-f27a63549d32",
+	"createdAt": "2024-10-23T14:33:00.000Z",
+	"createdBy": "karolina.wochnik@neptune-software.com",
+	"auth": [],
+	"endpoints": [],
+	"paths": [
+		{
+			"id": "520bedb2-657e-4f2f-b65d-f156017cefe0",
+			"method": "POST",
+			"path": "/Get",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [
+				{
+					"id": "6add69b3-c309-44e2-8a2f-2ac5d66349a8",
+					"status": "200",
+					"description": "OK",
+					"headers": [],
+					"content": [
+						{
+							"id": "8abb3218-3769-4834-8597-4c4831c36b6c",
+							"name": "GetData",
+							"objectType": "object"
+						}
+					]
+				}
+			],
+			"content": [],
+			"auth": [],
+			"endpoints": []
+		},
+		{
+			"id": "18d3f2ed-8b6a-4d58-d71c-f2450a48bd12",
+			"method": "POST",
+			"path": "/List",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [
+				{
+					"id": "8f941ebb-8bb3-485b-81b9-ae0babc00917",
+					"status": "200",
+					"description": "OK",
+					"headers": [],
+					"content": [
+						{
+							"id": "68ee0a05-f38b-4770-fc16-56a90fd05de7",
+							"name": "GetData",
+							"objectType": "array"
+						}
+					]
+				}
+			],
+			"content": [],
+			"auth": [],
+			"endpoints": []
+		},
+		{
+			"id": "d78889d5-b5e7-4e03-e91d-017eae6142df",
+			"method": "POST",
+			"path": "/FileSave",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": []
+		},
+		{
+			"id": "4fcab8ef-2957-400b-a6fe-ea8722bed7c7",
+			"method": "POST",
+			"path": "/FileDelete",
+			"description": "",
+			"parameters": [],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": []
+		}
+	],
+	"definitions": [
+		{
+			"id": "619640d9-bea1-4489-8678-b60cc818f07f",
+			"name": "GetData",
+			"description": "",
+			"isInclude": false,
+			"properties": [
+				{
+					"id": "26cb821c-dfd6-44bc-80a2-24542a56d130",
+					"name": "id",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "1c06da78-90a1-4676-e8e4-3b44abe176bd",
+					"name": "createdAt",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "bc3e1f45-0bdc-4d95-de24-f6f8bb36a762",
+					"name": "updatedAt",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "f430dada-df79-4da8-a10a-3f7c02de50e8",
+					"name": "createdBy",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "a10293fd-8cd5-4d6e-f5a4-3656923cf475",
+					"name": "filename",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "fae13d2e-393f-4e52-cd7c-91705ab01a58",
+					"name": "filesize",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "750ec262-290b-4813-bcb7-5b5d20fd8256",
+					"name": "mimetype",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "ecdef6d1-2208-424c-f9db-e10a7584b9ff",
+					"name": "auth",
+					"parent": "",
+					"description": "",
+					"objectType": "boolean",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "64ac334b-23cd-4142-f263-d7930272fd03",
+					"name": "folderID",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "15fcd48f-ec8d-44d8-9451-f1432ffbba42",
+					"name": "content",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				}
+			]
+		}
+	],
+	"documentation": [],
+	"name": "MediaLib",
+	"endpoint": "http://localhost:8080/api/functions/Media",
+	"ver": "24.11.11.1014",
+	"version": null,
+	"description": null,
+	"mediaType": null,
+	"securitySchemes": null,
+	"swaggerURI": null,
+	"swaggerSystem": null,
+	"apiType": "",
+	"about": null,
+	"enableProxy": true,
+	"forwardProxy": null,
+	"restrictAccess": false,
+	"enableTrace": false,
+	"enableIDE": true,
+	"internalAPI": false,
+	"isPublic": false,
+	"tlsAllowUntrusted": true,
+	"useOwnProcess": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"apiGroup": null,
+	"apiFormat": 0,
+	"roles": []
+}
