@@ -2719,7 +2719,7 @@ const FORMS = {
             newField = new sap.m.Link({
                 text: element.filename,
                 press: function (oEvent) {
-                    let t = MediaFunctions.buildLink({url: element.link});
+                    let t = encodeURI(element.link);//MediaFunctions.buildLink({url: element.link});
                     t.indexOf("http") < 0 && (t = "" + location.origin + t),
                     FORMS.openFile(t);
                 },
@@ -2853,7 +2853,7 @@ const FORMS = {
     getData: async function (complete, isDesigner, bUploadFiles) {
         if (!FORMS.formParent) return null;
 
-        if (FORMS.config.savedata && bUploadFiles) {
+        if (bUploadFiles) {
             await FORMS.uploadAttachments();
         }
 
