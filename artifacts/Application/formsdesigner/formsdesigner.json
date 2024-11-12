@@ -11124,6 +11124,82 @@
 																											"data": []
 																										},
 																										{
+																											"fieldNo": "619bcc58-d8b6-49fe-d4ec-9875427758ca",
+																											"fieldName": "lblElementSingleSelectHorizontalColumns",
+																											"fieldParent": "004cbe90-2754-4a3a-8112-a46eb912e390",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/type} === 'SingleChoice' &&  ${/horizontal} === true ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Number of displayed columns / options per row",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "9cde4b78-87e5-41c1-ca0c-df501aee4621",
+																											"fieldName": "inElementSingleSelectHorizontalColumns",
+																											"fieldParent": "004cbe90-2754-4a3a-8112-a46eb912e390",
+																											"fieldType": "sap.m.StepInput",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/type} === 'SingleChoice' &&  ${/horizontal} === true ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "value",
+																													"grouping": "Properties",
+																													"value": "{/numColumns}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "change",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.m.StepInput/inElementSingleSelectHorizontalColumns/change.js",
+																													"language": "javascript",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "placeholder",
+																													"grouping": "Properties",
+																													"value": "9",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
 																											"fieldNo": "f71861ff-1dae-44ed-b873-65b300816427",
 																											"fieldName": "inElementSingleSelectCustomWidth",
 																											"fieldParent": "004cbe90-2754-4a3a-8112-a46eb912e390",
@@ -27508,7 +27584,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "24.11.11.1035",
+	"ver": "24.11.12.1303",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
