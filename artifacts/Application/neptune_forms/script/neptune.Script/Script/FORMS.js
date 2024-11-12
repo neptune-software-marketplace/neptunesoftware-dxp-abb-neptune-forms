@@ -2098,7 +2098,7 @@ const FORMS = {
             visible: FORMS.buildVisibleCond(element),
         });
 
-        if (element.horizontal) newField.setColumns(10);
+        if (element.horizontal) newField.setColumns(element.numColumns ? element.numColumns : 9);
 
         const formModel = FORMS.formParent.getModel();
 
@@ -2544,24 +2544,6 @@ const FORMS = {
             }
         };
 
-        /* Upload start event -> creating a promise */ 
-        const fnUploadStart = (oEvent) => {
-            let externalResolve, externalReject;
-    
-            let prUpload = new Promise((resolve, reject) => {
-                externalResolve = resolve;
-                externalReject  = reject;
-            });
-            prUpload.id = oEvent.getParameter("id");
-
-            // Attach the resolve and reject methods to the promise to make
-            // them triggerable from outside of this method
-            prUpload.resolve = externalResolve;
-            prUpload.reject  = externalReject;
-
-            FORMS.attachmentsPromise.push(prUpload);
-        }
-
         const elementUploader = new sap.ui.unified.FileUploader("f"+randomId+"inFiles", {
             sendXHR:             true,
             sameFilenameAllowed: true,
@@ -2575,8 +2557,7 @@ const FORMS = {
             uploadUrl:           "/api/functions/Media/FileSave",
             change:              uploadEvent,
             typeMissmatch:       fnTypeMissmatch,
-            uploadComplete:      fnUploadComplete,
-            uploadStart:         fnUploadStart
+            uploadComplete:      fnUploadComplete
 
         }).addStyleClass("sapUiSizeCompact");
 
@@ -2852,6 +2833,7 @@ const FORMS = {
 
     getData: async function (complete, isDesigner, bUploadFiles) {
         if (!FORMS.formParent) return null;
+        FORMS.attachmentsPromise = [];
 
         if (bUploadFiles) {
             await FORMS.uploadAttachments();
@@ -3342,11 +3324,30 @@ const FORMS = {
     },
 
     uploadAttachments: async function() {
-            for (const up of FORMS.fileUploaders) {
-                up.uploader.upload(true);
-            }
 
-            return await Promise.all(FORMS.attachmentsPromise);
+        const addPromiseAttachment = (id) => {
+            let externalResolve, externalReject;
+    
+            let prUpload = new Promise((resolve, reject) => {
+                externalResolve = resolve;
+                externalReject  = reject;
+            });
+            prUpload.id = id;
+
+            // Attach the resolve and reject methods to the promise to make
+            // them triggerable from outside of this method
+            prUpload.resolve = externalResolve;
+            prUpload.reject  = externalReject;
+
+            FORMS.attachmentsPromise.push(prUpload);
+        }
+
+        for (const up of FORMS.fileUploaders) {
+            addPromiseAttachment(up.uploader.getId());
+            up.uploader.upload(true);
+        }
+
+        return await Promise.all(FORMS.attachmentsPromise);
     },
 
     b64toBlob: function (b64Data, contentType='', sliceSize=512) {
