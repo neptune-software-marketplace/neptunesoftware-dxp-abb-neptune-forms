@@ -2098,7 +2098,7 @@ const FORMS = {
             visible: FORMS.buildVisibleCond(element),
         });
 
-        if (element.horizontal) newField.setColumns(element.numColumns ? element.numColumns : 9);
+        if (element.horizontal) newField.setColumns(element.items && element.items.length > 0 ? element.items.length : 5);
 
         const formModel = FORMS.formParent.getModel();
 
@@ -2645,9 +2645,16 @@ const FORMS = {
                 tooltip: "Remove File",
                 visible: "{= ${" + FORMS.bindingPath + bindingField + "} && ${" + FORMS.bindingPath + bindingField + "/srcExists" + "} ? true:false}",
                 press: function (oEvent) {
+
+                    const clearFileUploader = (elemId) => {
+                        let iFU = FORMS.fileUploaders.findIndex(f => f.elem.id == elemId);
+                        if (iFU >= 0) {
+                            FORMS.fileUploaders[iFU].uploader.clear();
+                        };
+                    };
+
                     let id = this.getModel().getData()[bindingField] && this.getModel().getData()[bindingField].id ? this.getModel().getData()[bindingField].id : null;
                     if (id) {
-
                         let md = this.getModel();
                         sap.m.MessageBox.warning("Are you sure you want to remove this file?", {
                             actions: ["Remove", sap.m.MessageBox.Action.CANCEL],
@@ -2667,6 +2674,7 @@ const FORMS = {
                                                         sap.m.MessageToast.show("File could not be deleted, please delete it manually.");
                                                     } else {
                                                         sap.m.MessageToast.show("File deleted successfully.");
+                                                        clearFileUploader(bindingField);
                                                         md.getData()[bindingField] = "";
                                                         md.refresh();
                                                     }
@@ -2676,6 +2684,7 @@ const FORMS = {
                                     } else {
                                         // delete from local object
                                         sap.m.MessageToast.show("File deleted successfully.");
+                                        clearFileUploader(bindingField);
                                         md.getData()[bindingField] = "";
                                         md.refresh();
                                     }
@@ -2833,11 +2842,6 @@ const FORMS = {
 
     getData: async function (complete, isDesigner, bUploadFiles) {
         if (!FORMS.formParent) return null;
-        FORMS.attachmentsPromise = [];
-
-        if (bUploadFiles) {
-            await FORMS.uploadAttachments();
-        }
 
         const formModel = FORMS.formParent.getModel();
         const outputData = {};
@@ -2925,6 +2929,10 @@ const FORMS = {
             completed: completed,
             valid: valid,
         };
+
+        if (bUploadFiles) {
+            await FORMS.uploadAttachments();
+        }
 
         // Logging
         if (FORMS.config.savedata && !isDesigner) {
@@ -3325,6 +3333,8 @@ const FORMS = {
 
     uploadAttachments: async function() {
 
+        FORMS.attachmentsPromise = [];
+
         const addPromiseAttachment = (id) => {
             let externalResolve, externalReject;
     
@@ -3343,8 +3353,10 @@ const FORMS = {
         }
 
         for (const up of FORMS.fileUploaders) {
-            addPromiseAttachment(up.uploader.getId());
-            up.uploader.upload(true);
+            if (up.uploader.getValue() && up.uploader.getValue() != "") {
+                addPromiseAttachment(up.uploader.getId());
+                up.uploader.upload(true);
+            }
         }
 
         return await Promise.all(FORMS.attachmentsPromise);

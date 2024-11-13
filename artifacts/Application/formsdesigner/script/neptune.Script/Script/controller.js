@@ -716,7 +716,6 @@ const controller = {
                     { id: ModelData.genID(), title: "Option3", key: "key3", option: "I" },
                 ];
                 newElement.horizontal = false;
-                newElement.numColumns = 9;
                 break;
 
             case "SingleSelect":
@@ -744,7 +743,6 @@ const controller = {
                 newElement.validationParam = 1;
                 newElement.validationType = "noLimit";
                 newElement.horizontal = false;
-                newElement.numColumns = 9;
                 break;
 
             case "MultipleSelect":
