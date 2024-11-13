@@ -11,7 +11,7 @@
 	"ver": "24.11.10.1746",
 	"enableCICD": true,
 	"internalReadOnly": false,
-	"oeVersion": null,
+	"oeVersion": "24.10.0-rc.3",
 	"excludeTemplateFiles": true,
 	"roles": [],
 	"apps": [
