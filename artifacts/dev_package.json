@@ -6,7 +6,7 @@
 		"remote": "https://github.com/neptune-software-marketplace/neptunesoftware-dxp-abb-neptune-forms.git",
 		"branch": "v24"
 	},
-	"name": "neptunesoftware-forms",
+	"name": "neptunesoftware-dxp-abb-neptune-forms",
 	"description": "Neptune FORMS Solution",
 	"ver": "24.11.10.1746",
 	"enableCICD": true,
