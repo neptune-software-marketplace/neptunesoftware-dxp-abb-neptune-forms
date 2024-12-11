@@ -11163,6 +11163,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "6ec9131a-b22c-40b0-faa1-3cfeb380b5ca",
+																											"fieldName": "inElementSingleSelectEmptyOption",
+																											"fieldParent": "004cbe90-2754-4a3a-8112-a46eb912e390",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/type} === 'SingleChoice' ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Add empty option",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/emptyOption}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "select",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.m.CheckBox/inElementSingleSelectEmptyOption/select.js",
+																													"language": "javascript",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -20480,7 +20529,7 @@
 																														{
 																															"attribute": "editable",
 																															"grouping": "Properties",
-																															"value": "{appControl>/enableEdit}",
+																															"value": "{= ${appControl>/enableEdit} && !${disabledKeyField}}",
 																															"script": "",
 																															"translation": []
 																														}
@@ -27508,7 +27557,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "24.11.13.1809",
+	"ver": "24.12.11.1308",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

@@ -2,6 +2,11 @@ const deleteItem = oEvent.getParameter("listItem");
 const context = deleteItem.getBindingContext();
 const data = context.getObject();
 
+if (data.disabledKeyField) {
+    let dataElem = oEvent.getSource().getParent().getParent().getModel().getData();
+    dataElem.emptyOption = false;
+}
+
 let elementIndex = context.sPath.split("/")[2];
 ModelData.Delete(modelpanTopProperties.oData.items, "id", data.id);
 modelpanTopProperties.refresh();
