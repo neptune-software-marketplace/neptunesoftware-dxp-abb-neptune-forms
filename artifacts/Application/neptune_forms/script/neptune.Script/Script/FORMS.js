@@ -2143,6 +2143,7 @@ const FORMS = {
             newField.addButton(elementRadio);
         });
 
+        newField.setSelectedIndex(-1);
         return newField;
     },
 
