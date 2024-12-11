@@ -2096,6 +2096,13 @@ const FORMS = {
         newField = new sap.m.RadioButtonGroup(FORMS.buildElementFieldID(element), {
             selectedIndex: null,
             visible: FORMS.buildVisibleCond(element),
+            select: function(oEvent) {
+                if (oEvent.getSource().setValueState) {
+                    oEvent.getSource().setValueState();
+                } else {
+                    oEvent.getSource().removeStyleClass("notValid");
+                }
+            }
         });
 
         if (element.horizontal) newField.setColumns(element.items && element.items.length > 0 ? element.items.length : 5);
@@ -3040,7 +3047,12 @@ const FORMS = {
             // If field is required, check value and mark if not valid
             if (element.required) {
                 fieldCompleted = formModel.oData[bindingField] ? true : false;
+                // Single Choice
+                if (formModel.oData[bindingField] && element.type == "SingleChoice") {
+                    if (formModel.oData[bindingField] == "NA_option") fieldCompleted = false;
+                }
                 if (validForm) validForm = fieldCompleted;
+            
                 FORMS.validateMarkField(element.id, fieldCompleted, process);
             }
 
