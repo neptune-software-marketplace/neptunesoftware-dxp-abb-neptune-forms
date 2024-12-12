@@ -7,7 +7,7 @@
 	},
 	"name": "neptunesoftware-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.12.11.1510",
+	"ver": "24.12.11.1737",
 	"enableCICD": true,
 	"apps": [
 		{

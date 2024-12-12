@@ -2111,7 +2111,8 @@ const FORMS = {
 
         element.items.forEach(function (item, i) {
             // Always set first field as default value, as the parent is RadioButtonGroup
-            if (i === 0 && !formModel.oData[bindingField]) formModel.oData[bindingField] = item.key;
+            // #13 - Only selecting first option, when the "initiallyDeselected" value is not set
+            if (!element.initiallyDeselected && i === 0 && !formModel.oData[bindingField]) formModel.oData[bindingField] = item.key;
 
             const elementRadio = new sap.m.RadioButton("item" + item.id, {
                 text: item.title,
@@ -2143,7 +2144,8 @@ const FORMS = {
             newField.addButton(elementRadio);
         });
 
-        newField.setSelectedIndex(-1);
+        // #13 - Deselecting first option
+        if (element.initiallyDeselected) newField.setSelectedIndex(-1);
         return newField;
     },
 

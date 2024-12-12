@@ -11165,6 +11165,47 @@
 																											"data": []
 																										},
 																										{
+																											"fieldNo": "18cb4fa0-ae94-428f-e793-0ed14109e55d",
+																											"fieldName": "inElementSingleSelectIntiallyDeselected",
+																											"fieldParent": "004cbe90-2754-4a3a-8112-a46eb912e390",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/type} === 'SingleChoice' ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "No option is initially selected",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/initiallyDeselected}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
 																											"fieldNo": "6ec9131a-b22c-40b0-faa1-3cfeb380b5ca",
 																											"fieldName": "inElementSingleSelectEmptyOption",
 																											"fieldParent": "004cbe90-2754-4a3a-8112-a46eb912e390",
@@ -27557,7 +27598,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "24.12.11.1308",
+	"ver": "24.12.12.1642",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
