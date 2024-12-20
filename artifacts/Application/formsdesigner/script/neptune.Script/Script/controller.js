@@ -24,6 +24,7 @@ const controller = {
         { icon: "sap-icon://request", text: "Input", type: "Input", parent: false, table: true },
         { icon: "sap-icon://fa-regular/file-image", text: "Image Upload", type: "Image", parent: false, table: true },
         { icon: "sap-icon://message-information", text: "Message Strip", type: "MessageStrip", parent: false, table: true },
+        { icon: "sap-icon://message-popup", text: "Message Popup", type: "MessagePopup", parent: false, table: true },
         { icon: "sap-icon://number-sign", text: "Numeric", type: "Numeric", parent: false, table: true },
         { icon: "sap-icon://picture", text: "Picture", type: "Picture", parent: false, table: false },
         { icon: "sap-icon://feedback", text: "Rating", type: "Rating", parent: false, table: true },
@@ -230,7 +231,9 @@ const controller = {
                 } else {
                     controller.currentIndex = null;
                 }
-                controller.addElement(item);
+
+                let parent = context._parentContext ? context._parentContext.getObject() : context.getObject();
+                controller.addElement(item, null, parent.type);
                 break;
 
             default:
@@ -245,17 +248,20 @@ const controller = {
         const newElement = JSON.parse(JSON.stringify(modelpanTopProperties.oData));
         let elementIndex = 0;
 
-        if (modelpanTopProperties.oData.type === "Form" || modelpanTopProperties.oData.type === "Table") {
+        let isFormTitle = modelpanTopProperties.oData.type === "FormTitle";
+
+        if (modelpanTopProperties.oData.type === "Form" || modelpanTopProperties.oData.type === "Table" || isFormTitle) {
             modeloPageDetail.oData.setup.forEach(function (section, i) {
                 if (section.id === modelpanTopProperties.oData.id) elementIndex = i + 1;
             });
 
-            newElement.id = ModelData.genID();
+            newElement.id    = ModelData.genID();
             newElement.title = newElement.title + " (COPY)";
 
             newElement.elements.forEach(function (element, i) {
-                element.id = ModelData.genID();
-                element.title = element.title + " (COPY)";
+                element.originId = element.id;
+                element.id       = ModelData.genID();
+                element.title    = element.title + (isFormTitle ? "" : " (COPY)");
 
                 if (element.items) {
                     element.items.forEach(function (items) {
@@ -264,7 +270,31 @@ const controller = {
                 }
             });
 
-            modeloPageDetail.oData.setup.splice(elementIndex, 0, newElement);
+            // KW #22271 - if a whole section is being copied, the conditional visiblity inside of it should reference
+            // to the also copied field. Not the original one.
+            newElement.elements.forEach(function (element) {
+                
+                delete element.fieldName;
+                delete element.fieldId;
+
+                if (element.enableVisibleCond && element.visibleFieldName && element.visibleFieldName != "") {
+                    let iCondElement = newElement.elements.findIndex(e => e.originId == element.visibleFieldName);
+                    if (iCondElement >= 0) {
+                        element.visibleFieldName = newElement.elements[iCondElement].id;
+                    }
+                }
+            });
+            newElement.elements.forEach(function (element) {delete element.originId;});
+
+            if (isFormTitle) {
+                parent.elements.forEach(function (element, i) {
+                    if (element.id === modelpanTopProperties.oData.id) elementIndex = i + 1;
+                });
+                parent.elements.splice(elementIndex, 0, newElement);
+            } else {
+                modeloPageDetail.oData.setup.splice(elementIndex, 0, newElement);
+            }
+
         } else {
             parent.elements.forEach(function (element, i) {
                 if (element.id === modelpanTopProperties.oData.id) elementIndex = i + 1;
@@ -583,7 +613,7 @@ const controller = {
         };
     },
 
-    addElement: function (elementData, copy) {
+    addElement: function (elementData, copy, parentType) {
         let newElement = {
             id: ModelData.genID(),
             type: elementData.type,
@@ -602,6 +632,8 @@ const controller = {
             description: "",
             required: false,
             items: [],
+            hasInfoButton: false,
+            sectionType: parentType
         };
 
         switch (elementData.type) {
@@ -644,6 +676,10 @@ const controller = {
                 newElement.messageText = "";
                 newElement.messageType = "Information";
                 newElement.messageIcon = false;
+                break;
+
+            case "MessagePopup":
+                newElement.text = "";
                 break;
 
             case "Image":
@@ -861,6 +897,7 @@ const controller = {
                 case "MultipleChoice":
                 case "MultipleSelect":
                 case "MessageStrip":
+                case "MessagePopup":
                 case "Text":
                 case "FormTitle":
                 case "Date":
@@ -956,14 +993,19 @@ const controller = {
             const file = oEvent.target.files[0];
             const fileReader = new FileReader();
 
-            if (file.size > 100000) {
-                sap.m.MessageToast.show("File size is larger than max 100k");
+            if (file.size > 500000) {
+                sap.m.MessageToast.show("File size is larger than max 500k");
                 return;
             }
 
             fileReader.onload = async function (fileLoadedEvent) {
-                modelpanTopProperties.oData.imageSrc = await FORMS.imageResize(fileLoadedEvent.target.result, modelpanTopProperties.oData);
-                modelpanTopProperties.refresh();
+                if (!controller.imageTarget) {
+                    modelpanTopProperties.oData.imageSrc = await FORMS.imageResize(fileLoadedEvent.target.result, modelpanTopProperties.oData);
+                    modelpanTopProperties.refresh();
+                } else {
+                    controller.imageTarget.setSrc(await FORMS.imageResize(fileLoadedEvent.target.result, modelpanTopProperties.oData));
+                    controller.imageTarget = null;
+                }
                 document.getElementById("pictureUploader").value = "";
             };
 
@@ -1036,6 +1078,18 @@ const controller = {
             }
         });
     },
+
+    elementHasInfoButton: function (elem) {
+        return (elem.infobuttonText && elem.infobuttonText != "") || (elem.infobuttonImageSrc && elem.infobuttonImageSrc != "");
+    },
+    openDiaInfoButton: function () {
+        let parent = controller.getParentFromId(modelpanTopProperties.getData().id);
+        if (parent.type == "Table") {
+            sap.m.MessageToast.show("This option is not available for Table objects");
+        } else {
+            diaInfoButton.open();
+        }
+    }
 };
 
 controller.init();

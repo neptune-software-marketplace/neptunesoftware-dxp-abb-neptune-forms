@@ -4543,6 +4543,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "5dc5efe8-6195-41d1-adc6-16688b511de0",
+																											"fieldName": "btnElementSegmentedButtonInfoButton",
+																											"fieldParent": "7f37128f-e32e-42d7-eeec-fed007228bc2",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -5904,6 +5953,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "8d9724de-f7fa-4c55-a734-ba069031b909",
+																											"fieldName": "btnElementInputInfoButton",
+																											"fieldParent": "23a3b39b-812d-4274-82e5-16dfdd619cf6",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -6246,6 +6344,55 @@
 																													"grouping": "Properties",
 																													"value": "{appControl>/enableEdit}",
 																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "3114cf69-caf2-4242-9d12-7a0f31f1238b",
+																											"fieldName": "btnElementValueHelpInfoButton",
+																											"fieldParent": "d528c3b3-ec83-4ab6-cdc0-f7918ddbc878",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
 																													"translation": []
 																												}
 																											],
@@ -6596,6 +6743,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "7e0f1567-3eeb-4ba0-c018-48b5ca6007cd",
+																											"fieldName": "btnElementNumericInfoButton",
+																											"fieldParent": "7c09a4ce-ff66-42d7-e1ad-9597d7062162",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -6777,6 +6973,218 @@
 																											"fieldNo": "5b663a34-d8a4-458d-d834-4a5158226c2a",
 																											"fieldName": "inElementMessageStripVisibleCond",
 																											"fieldParent": "42f3107a-b781-4940-8b16-808a8d6f7f45",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Enable Conditional Visibility",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableVisibleCond}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										}
+																									]
+																								}
+																							]
+																						},
+																						{
+																							"fieldNo": "c3ae0a49-9a9c-4137-880e-11597b16d633",
+																							"fieldName": "elementSettingsMessagePopup",
+																							"fieldParent": "b5680927-eb06-4f8e-8f0a-d6bb8e27eb3e",
+																							"fieldType": "sap.ui.layout.form.SimpleForm",
+																							"script": "",
+																							"customComponent": false,
+																							"bindingType": "h",
+																							"request": [],
+																							"response": [],
+																							"attributes": [
+																								{
+																									"attribute": "visible",
+																									"grouping": "Properties",
+																									"value": "{= ${/type} === 'MessagePopup' ? true:false }",
+																									"script": "",
+																									"translation": []
+																								},
+																								{
+																									"attribute": "maxContainerCols",
+																									"grouping": "Properties",
+																									"value": "3",
+																									"script": "",
+																									"translation": []
+																								},
+																								{
+																									"attribute": "layout",
+																									"grouping": "Properties",
+																									"value": "ResponsiveGridLayout",
+																									"script": "",
+																									"translation": []
+																								},
+																								{
+																									"attribute": "labelSpanM",
+																									"grouping": "Properties",
+																									"value": "12",
+																									"script": "",
+																									"translation": []
+																								},
+																								{
+																									"attribute": "labelSpanL",
+																									"grouping": "Properties",
+																									"value": "12",
+																									"script": "",
+																									"translation": []
+																								},
+																								{
+																									"attribute": "editable",
+																									"grouping": "Properties",
+																									"value": "true",
+																									"script": "",
+																									"translation": []
+																								},
+																								{
+																									"attribute": "columnsM",
+																									"grouping": "Properties",
+																									"value": "2",
+																									"script": "",
+																									"translation": []
+																								}
+																							],
+																							"data": [
+																								{
+																									"fieldNo": "f404c2c7-800a-4caf-9d90-9fa9f381df18",
+																									"fieldName": "elementSettingsMessagePopupTitle",
+																									"fieldParent": "c3ae0a49-9a9c-4137-880e-11597b16d633",
+																									"fieldType": "sap.ui.core.Title",
+																									"script": "",
+																									"customComponent": false,
+																									"request": [],
+																									"response": [],
+																									"attributes": [
+																										{
+																											"attribute": "text",
+																											"grouping": "Properties",
+																											"value": "Settings",
+																											"script": "",
+																											"translation": []
+																										}
+																									],
+																									"data": []
+																								},
+																								{
+																									"fieldNo": "39915003-9dd5-4cdd-8676-cea335e8d7c0",
+																									"fieldName": "elemenSettingsMessagePopupLabel",
+																									"fieldParent": "c3ae0a49-9a9c-4137-880e-11597b16d633",
+																									"fieldType": "sap.m.Label",
+																									"script": "",
+																									"customComponent": false,
+																									"request": [],
+																									"response": [],
+																									"attributes": [],
+																									"data": []
+																								},
+																								{
+																									"fieldNo": "dee113f6-8369-40f6-c6e1-49ef8ad207e0",
+																									"fieldName": "boxElementMessagePopupSettings",
+																									"fieldParent": "c3ae0a49-9a9c-4137-880e-11597b16d633",
+																									"fieldType": "sap.m.VBox",
+																									"script": "",
+																									"customComponent": false,
+																									"request": [],
+																									"response": [],
+																									"attributes": [],
+																									"data": [
+																										{
+																											"fieldNo": "9d89d78d-c022-471c-dfd0-a1dbdfc31194",
+																											"fieldName": "inElementMessagePopupLabel",
+																											"fieldParent": "dee113f6-8369-40f6-c6e1-49ef8ad207e0",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Show Label",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/enableLabel}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "4637865c-3991-4c85-a601-120c1ad0cd95",
+																											"fieldName": "inElementMessagePopupIcon",
+																											"fieldParent": "dee113f6-8369-40f6-c6e1-49ef8ad207e0",
+																											"fieldType": "sap.m.CheckBox",
+																											"script": "",
+																											"customComponent": false,
+																											"disabled": true,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Show Icon",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "selected",
+																													"grouping": "Properties",
+																													"value": "{/messageIcon}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "1dd9c027-0c1f-439b-ac7a-51c54b09e58e",
+																											"fieldName": "inElementMessagePopupVisibleCond",
+																											"fieldParent": "dee113f6-8369-40f6-c6e1-49ef8ad207e0",
 																											"fieldType": "sap.m.CheckBox",
 																											"script": "",
 																											"customComponent": false,
@@ -7118,6 +7526,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "3e256653-4009-4250-9119-0b8fe53c706e",
+																											"fieldName": "btnElementCheckboxInfoButton",
+																											"fieldParent": "709eb94a-c53c-430b-ae9d-ec0afc46d6f3",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -7430,6 +7887,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "70567ce2-dd1d-48d5-a92e-5901d37764d1",
+																											"fieldName": "btnElementStepInputInfoButton",
+																											"fieldParent": "b78c09d0-2399-48f2-a619-e5ba51a48e12",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -7704,6 +8210,55 @@
 																													"grouping": "Properties",
 																													"value": "{appControl>/enableEdit}",
 																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "d3eae080-f988-4161-f7d7-f41346e9a3b5",
+																											"fieldName": "btnElementRatingInfoButton",
+																											"fieldParent": "cf0e5953-b9fc-4066-e5b8-fe7cc7630a21",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
 																													"translation": []
 																												}
 																											],
@@ -8050,6 +8605,55 @@
 																													"grouping": "Properties",
 																													"value": "{appControl>/enableEdit}",
 																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "02d043dc-9f2a-489f-931d-fa3b0acddb01",
+																											"fieldName": "btnElementSwitchInfoButton",
+																											"fieldParent": "38b2ae03-0222-4b50-8efe-4624e03ceb01",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
 																													"translation": []
 																												}
 																											],
@@ -8990,6 +9594,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "342fffd4-0b63-4283-a76d-0818173119be",
+																											"fieldName": "btnElementTextAreaInfoButton",
+																											"fieldParent": "858686de-de20-43c6-9bb6-aa1b690a075d",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -9298,6 +9951,55 @@
 																													"grouping": "Properties",
 																													"value": "{appControl>/enableEdit}",
 																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "1e760115-431c-4182-849c-7eb4a34d4cfd",
+																											"fieldName": "btnElementDateInfoButton",
+																											"fieldParent": "51ac5e8b-25d7-43df-fda9-94b657fc3563",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
 																													"translation": []
 																												}
 																											],
@@ -10212,6 +10914,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "96b82ef6-af89-40ae-aa6b-1dabdae69146",
+																											"fieldName": "btnElementMultipleSelectInfoButton",
+																											"fieldParent": "18e5879d-58c9-4ce2-b22b-40eff830ab35",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -10641,6 +11392,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "6f3453a9-d9f9-4d55-a56d-9eb26951c7f9",
+																											"fieldName": "btnElementSingleSelectInfoButton",
+																											"fieldParent": "004cbe90-2754-4a3a-8112-a46eb912e390",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -10885,6 +11685,55 @@
 																												}
 																											],
 																											"data": []
+																										},
+																										{
+																											"fieldNo": "cc84f858-a002-4b0a-c0ed-1a52122ea1f9",
+																											"fieldName": "btnElementCheckListInfoButton",
+																											"fieldParent": "5b7259fb-88f5-480e-bfc5-5438df379d77",
+																											"fieldType": "sap.m.Button",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "type",
+																													"grouping": "Properties",
+																													"value": "Transparent",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "icon",
+																													"grouping": "Properties",
+																													"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "press",
+																													"grouping": "Events",
+																													"value": "controller.openDiaInfoButton();",
+																													"script": "controller.openDiaInfoButton();",
+																													"translation": []
+																												}
+																											],
+																											"data": []
 																										}
 																									]
 																								}
@@ -11045,13 +11894,14 @@
 																									"fieldType": "sap.m.Input",
 																									"script": "",
 																									"customComponent": false,
+																									"bindingType": "h",
 																									"request": [],
 																									"response": [],
 																									"attributes": [
 																										{
 																											"attribute": "visible",
 																											"grouping": "Properties",
-																											"value": "{= ${/type} === 'Form' || ${/type} === 'FormTitle' || ${/type} === 'MessageStrip' ? false:true }",
+																											"value": "{= ${/type} === 'Form' || ${/type} === 'FormTitle' || ${/type} === 'MessageStrip' || ${/type} === 'MessagePopup' ? false:true }",
 																											"script": "",
 																											"translation": []
 																										},
@@ -14695,6 +15545,55 @@
 																														}
 																													],
 																													"data": []
+																												},
+																												{
+																													"fieldNo": "2258a11b-fc63-438a-de66-10c73275e5bc",
+																													"fieldName": "btnElementFormTitleInfoButton",
+																													"fieldParent": "df57e728-e595-4daa-f669-194e91e6b1ef",
+																													"fieldType": "sap.m.Button",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/sectionType} === 'Table' ? false : true}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "type",
+																															"grouping": "Properties",
+																															"value": "Transparent",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "{= ${/hasInfoButton} ? 'Update info button' : 'Add info button' }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "icon",
+																															"grouping": "Properties",
+																															"value": "{= ${/hasInfoButton} ? 'sap-icon://action-settings' : null }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "press",
+																															"grouping": "Events",
+																															"value": "controller.openDiaInfoButton();",
+																															"script": "controller.openDiaInfoButton();",
+																															"translation": []
+																														}
+																													],
+																													"data": []
 																												}
 																											]
 																										}
@@ -15455,6 +16354,532 @@
 																													"fieldType": "sap.ui.core.Item",
 																													"script": "",
 																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Warning",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "Warning",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						},
+																						{
+																							"fieldNo": "b88f6fc6-d852-4e9a-a734-a26eaf7ba5f6",
+																							"fieldName": "contElementMessagePopup",
+																							"fieldParent": "b5680927-eb06-4f8e-8f0a-d6bb8e27eb3e",
+																							"fieldType": "sap.m.VBox",
+																							"script": "",
+																							"customComponent": false,
+																							"bindingType": "h",
+																							"request": [],
+																							"response": [],
+																							"attributes": [
+																								{
+																									"attribute": "visible",
+																									"grouping": "Properties",
+																									"value": "{= ${/type} === 'MessagePopup' ? true:false }",
+																									"script": "",
+																									"translation": []
+																								},
+																								{
+																									"attribute": "styleClass",
+																									"grouping": "Properties",
+																									"value": "sapUiContentPadding",
+																									"script": "",
+																									"translation": []
+																								}
+																							],
+																							"data": [
+																								{
+																									"fieldNo": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																									"fieldName": "elementMessagePopupForm",
+																									"fieldParent": "b88f6fc6-d852-4e9a-a734-a26eaf7ba5f6",
+																									"fieldType": "sap.ui.layout.form.SimpleForm",
+																									"script": "",
+																									"customComponent": false,
+																									"request": [],
+																									"response": [],
+																									"attributes": [
+																										{
+																											"attribute": "styleClass",
+																											"grouping": "Properties",
+																											"value": "formSettings",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "maxContainerCols",
+																											"grouping": "Properties",
+																											"value": "3",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "layout",
+																											"grouping": "Properties",
+																											"value": "ResponsiveGridLayout",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "labelSpanM",
+																											"grouping": "Properties",
+																											"value": "12",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "labelSpanL",
+																											"grouping": "Properties",
+																											"value": "12",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "editable",
+																											"grouping": "Properties",
+																											"value": "true",
+																											"script": "",
+																											"translation": []
+																										},
+																										{
+																											"attribute": "columnsL",
+																											"grouping": "Properties",
+																											"value": "1",
+																											"script": "",
+																											"translation": []
+																										}
+																									],
+																									"data": [
+																										{
+																											"fieldNo": "5f94915b-1401-45da-8125-c7c070e23dc3",
+																											"fieldName": "lblElementFormMessagePopupText",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Text",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "22ecca48-3699-4a64-b79b-dc10f0351514",
+																											"fieldName": "inElementFormMessagePopupText",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.m.TextArea",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "value",
+																													"grouping": "Properties",
+																													"value": "{/infobuttonText}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "rows",
+																													"grouping": "Properties",
+																													"value": "1",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "growing",
+																													"grouping": "Properties",
+																													"value": "true",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "426ea867-b390-46ed-dd6d-5368a4de712c",
+																											"fieldName": "lblElementFormMessagePopupImage",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Image",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "1fff5744-ed8c-44db-ee3b-4cdf669c1d11",
+																											"fieldName": "boxElementFormMessagePopupImageUpload",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.m.VBox",
+																											"script": "",
+																											"customComponent": false,
+																											"request": [],
+																											"response": [],
+																											"attributes": [],
+																											"data": [
+																												{
+																													"fieldNo": "2b0f6c76-b610-4d2e-b510-74c2836843d3",
+																													"fieldName": "inElementFormMessagePopupImageUpload",
+																													"fieldParent": "1fff5744-ed8c-44db-ee3b-4cdf669c1d11",
+																													"fieldType": "sap.m.Button",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "width",
+																															"grouping": "Properties",
+																															"value": "120px",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "type",
+																															"grouping": "Properties",
+																															"value": "Emphasized",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Upload",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "enabled",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "enableCompactMode",
+																															"grouping": "Properties",
+																															"value": "true",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "press",
+																															"grouping": "Events",
+																															"value": "$(\"#pictureUploader\").click();",
+																															"script": "$(\"#pictureUploader\").click();",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "4ada0fb7-4321-4965-cb2f-b1519ca21a68",
+																													"fieldName": "imageElementFormMessagePopupImageUpload",
+																													"fieldParent": "1fff5744-ed8c-44db-ee3b-4cdf669c1d11",
+																													"fieldType": "sap.m.Image",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "width",
+																															"grouping": "Properties",
+																															"value": "100%",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "src",
+																															"grouping": "Properties",
+																															"value": "{/imageSrc}",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												}
+																											]
+																										},
+																										{
+																											"fieldNo": "6c2694c3-b7e3-4286-f507-a8ec118f440f",
+																											"fieldName": "lblElementFormMessagePopupImage",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"disabled": true,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Image",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "b185b990-5b6c-4f6b-a975-b0e89f0b528b",
+																											"fieldName": "fileElementFormMessagePopupImage",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.ui.unified.FileUploader",
+																											"script": "",
+																											"customComponent": false,
+																											"disabled": true,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "value",
+																													"grouping": "Properties",
+																													"value": "{/image}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "sameFilenameAllowed",
+																													"grouping": "Properties",
+																													"value": "true",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "fileType",
+																													"grouping": "Properties",
+																													"value": "[\"jpg\", \"jpeg\", \"bmp\", \"png\"]",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "enabled",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "buttonText",
+																													"grouping": "Properties",
+																													"value": "Upload image",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "buttonOnly",
+																													"grouping": "Properties",
+																													"value": "true",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "typeMissmatch",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.ui.unified.FileUploader/fileElementFormMessagePopupImage/typeMissmatch.js",
+																													"language": "javascript",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "change",
+																													"grouping": "Events",
+																													"value": "Anonymous Function",
+																													"script": "file://event/sap.ui.unified.FileUploader/fileElementFormMessagePopupImage/change.js",
+																													"language": "javascript",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "ddb80463-1495-4a41-8b07-2cd37cdbaf9c",
+																											"fieldName": "lblElementFormMessagePopupType",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.m.Label",
+																											"script": "",
+																											"customComponent": false,
+																											"disabled": true,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "text",
+																													"grouping": "Properties",
+																													"value": "Type",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": []
+																										},
+																										{
+																											"fieldNo": "9a222640-6632-4159-9d85-79f93bad9f6a",
+																											"fieldName": "inElementFormMessagePopupType",
+																											"fieldParent": "a57829a1-a07b-4ee2-942d-1bf4b5d9d3eb",
+																											"fieldType": "sap.m.Select",
+																											"script": "",
+																											"customComponent": false,
+																											"disabled": true,
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "selectedKey",
+																													"grouping": "Properties",
+																													"value": "{/messageType}",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "{appControl>/enableEdit}",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": [
+																												{
+																													"fieldNo": "ec0a352e-c139-409b-bbf4-6a741144f8ff",
+																													"fieldName": "inElementFormMessagePopupTypeInformation",
+																													"fieldParent": "9a222640-6632-4159-9d85-79f93bad9f6a",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"disabled": true,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Information",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "Information",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "711d480d-b5cc-4c90-cc8e-cda6a2f599fe",
+																													"fieldName": "inElementFormMessagePopupTypeError",
+																													"fieldParent": "9a222640-6632-4159-9d85-79f93bad9f6a",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"disabled": true,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Error",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "Error",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "bd45c9b8-eff4-4e69-996f-d3ce2cb6b1f6",
+																													"fieldName": "inElementFormMessagePopupTypeSuccess",
+																													"fieldParent": "9a222640-6632-4159-9d85-79f93bad9f6a",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"disabled": true,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Success",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "key",
+																															"grouping": "Properties",
+																															"value": "Success",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "042ef4b5-0719-48d6-d426-3315f3a5d2dd",
+																													"fieldName": "inElementFormMessagePopupTypeWarning",
+																													"fieldParent": "9a222640-6632-4159-9d85-79f93bad9f6a",
+																													"fieldType": "sap.ui.core.Item",
+																													"script": "",
+																													"customComponent": false,
+																													"disabled": true,
 																													"request": [],
 																													"response": [],
 																													"attributes": [
@@ -22932,6 +24357,472 @@
 					"attributes": [],
 					"data": [
 						{
+							"fieldNo": "2decd2eb-1750-4209-b27a-99bccec1616b",
+							"fieldName": "diaInfoButtonClear",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"bindingType": "h",
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "type",
+									"grouping": "Properties",
+									"value": "Emphasized",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Clear",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enabled",
+									"grouping": "Properties",
+									"value": "{appControl>/enableEdit}",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableCompactMode",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Button/diaInfoButtonClear/press.js",
+									"language": "javascript",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "58f1468c-a7c0-45dd-c451-b81a677098f5",
+							"fieldName": "diaInfoButtonClose",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "type",
+									"grouping": "Properties",
+									"value": "Emphasized",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Close",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableCompactMode",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Button/diaInfoButtonClose/press.js",
+									"language": "javascript",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "443d1adc-d6d8-4a50-db4e-d6a0c354d7dc",
+							"fieldName": "diaInfoButton",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "sap.m.Dialog",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "title",
+									"grouping": "Properties",
+									"value": "Info Button",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "contentWidth",
+									"grouping": "Properties",
+									"value": "600px",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "contentHeight",
+									"grouping": "Properties",
+									"value": "600px",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "beforeOpen",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Dialog/diaInfoButton/beforeOpen.script",
+									"translation": []
+								},
+								{
+									"attribute": "afterClose",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Dialog/diaInfoButton/afterClose.js",
+									"language": "javascript",
+									"translation": []
+								},
+								{
+									"attribute": "endButton",
+									"grouping": "Associations",
+									"value": "diaInfoButtonClose",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "beginButton",
+									"grouping": "Associations",
+									"value": "diaInfoButtonClear",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": [
+								{
+									"fieldNo": "8b8481f4-d861-4954-d69b-31492256db35",
+									"fieldName": "sfDiaInfoButton",
+									"fieldParent": "443d1adc-d6d8-4a50-db4e-d6a0c354d7dc",
+									"fieldType": "sap.ui.layout.form.SimpleForm",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "layout",
+											"grouping": "Properties",
+											"value": "GridLayout",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "editable",
+											"grouping": "Properties",
+											"value": "true",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "354a38cb-a604-4068-8664-1a14e337cbb5",
+											"fieldName": "lblDiaInfoButtonTitle",
+											"fieldParent": "8b8481f4-d861-4954-d69b-31492256db35",
+											"fieldType": "sap.m.Label",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Title",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "453044e9-864a-46a7-a16a-7dc4cf686666",
+											"fieldName": "inDiaInfoButtonTitle",
+											"fieldParent": "8b8481f4-d861-4954-d69b-31492256db35",
+											"fieldType": "sap.m.Input",
+											"script": "",
+											"customComponent": false,
+											"bindingType": "h",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "enabled",
+													"grouping": "Properties",
+													"value": "{appControl>/enableEdit}",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "4bc80dfe-0da8-4c75-8920-8a3f8d351789",
+											"fieldName": "lblDiaInfoButtonText",
+											"fieldParent": "8b8481f4-d861-4954-d69b-31492256db35",
+											"fieldType": "sap.m.Label",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Text",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "2a4136d9-f85d-41f5-c57f-2b1a0028edf7",
+											"fieldName": "txtareaDiaInfoButtonText",
+											"fieldParent": "8b8481f4-d861-4954-d69b-31492256db35",
+											"fieldType": "sap.m.TextArea",
+											"script": "",
+											"customComponent": false,
+											"bindingType": "h",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "rows",
+													"grouping": "Properties",
+													"value": "8",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "editable",
+													"grouping": "Properties",
+													"value": "{appControl>/enableEdit}",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "883875c3-555d-48c7-9ff2-004feaa38791",
+											"fieldName": "lblDiaInfoButtonImage",
+											"fieldParent": "8b8481f4-d861-4954-d69b-31492256db35",
+											"fieldType": "sap.m.Label",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": " Image",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "1e7de74b-eae3-440c-c434-b33e3b2c57fe",
+											"fieldName": "boxDiaInfoButtonImage",
+											"fieldParent": "8b8481f4-d861-4954-d69b-31492256db35",
+											"fieldType": "sap.m.VBox",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [],
+											"data": [
+												{
+													"fieldNo": "ff8fd407-1d99-40a1-89b4-99f6ff1624b6",
+													"fieldName": "hboxDiaInfoButtonImage",
+													"fieldParent": "1e7de74b-eae3-440c-c434-b33e3b2c57fe",
+													"fieldType": "sap.m.HBox",
+													"script": "",
+													"customComponent": false,
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "justifyContent",
+															"grouping": "Properties",
+															"value": "SpaceBetween",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": [
+														{
+															"fieldNo": "396e37d4-471c-474d-871a-2c9f3c0ebcdc",
+															"fieldName": "inElementDiaInfoButtonImage",
+															"fieldParent": "ff8fd407-1d99-40a1-89b4-99f6ff1624b6",
+															"fieldType": "sap.m.Button",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "width",
+																	"grouping": "Properties",
+																	"value": "120px",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "type",
+																	"grouping": "Properties",
+																	"value": "Emphasized",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "text",
+																	"grouping": "Properties",
+																	"value": "Upload",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "enabled",
+																	"grouping": "Properties",
+																	"value": "{appControl>/enableEdit}",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "press",
+																	"grouping": "Events",
+																	"value": "Anonymous Function",
+																	"script": "file://event/sap.m.Button/inElementDiaInfoButtonImage/press.js",
+																	"language": "javascript",
+																	"translation": []
+																}
+															],
+															"data": []
+														},
+														{
+															"fieldNo": "d6ea71d2-e92f-4306-9c9b-05e16f865674",
+															"fieldName": "inElementDiaInfoButtonImageDelete",
+															"fieldParent": "ff8fd407-1d99-40a1-89b4-99f6ff1624b6",
+															"fieldType": "sap.m.Button",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "width",
+																	"grouping": "Properties",
+																	"value": "120px",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "type",
+																	"grouping": "Properties",
+																	"value": "Reject",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "text",
+																	"grouping": "Properties",
+																	"value": "Remove image",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "enabled",
+																	"grouping": "Properties",
+																	"value": "{appControl>/enableEdit}",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "press",
+																	"grouping": "Events",
+																	"value": "Anonymous Function",
+																	"script": "file://event/sap.m.Button/inElementDiaInfoButtonImageDelete/press.script",
+																	"translation": []
+																}
+															],
+															"data": []
+														}
+													]
+												},
+												{
+													"fieldNo": "ace4cf15-cb94-48b2-b252-2ca27d3f6b9e",
+													"fieldName": "imageElementDiaInfoButtonImage",
+													"fieldParent": "1e7de74b-eae3-440c-c434-b33e3b2c57fe",
+													"fieldType": "sap.m.Image",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "width",
+															"grouping": "Properties",
+															"value": "100%",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "load",
+															"grouping": "Events",
+															"value": "inElementDiaInfoButtonImageDelete.setVisible(true);",
+															"script": "inElementDiaInfoButtonImageDelete.setVisible(true);",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
 							"fieldNo": "3e617615-03f1-498c-9db2-bf36db3fc045",
 							"fieldName": "diaVisibilityClear",
 							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
@@ -25544,7 +27435,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "24.08.09.1556",
+	"ver": "24.11.20.1022",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

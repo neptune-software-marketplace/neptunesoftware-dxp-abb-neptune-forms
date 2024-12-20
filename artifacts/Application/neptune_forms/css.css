@@ -59,10 +59,11 @@
     line-height: 1.5rem !important;
 }
 
-.segmentedNoDefault .sapMSegBBtn:nth-child(2) .sapMSegBBtnInnerWrapper {
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
-}
+// .segmentedNoDefault .sapMSegBBtn:nth-child(2) .sapMSegBBtnInnerWrapper {
+//     border-top-left-radius: 7px;
+//     border-bottom-left-radius: 7px;
+// }
+
 
 .segmentedNoDefault .sapMSegBBtn:nth-child(2) .sapMSegBBtnInnerWrapper .sapMSegBBtnInner {
     border-top-left-radius: 7px;
@@ -90,4 +91,86 @@ segmentedNoDefault .invisibleLi {
 }
 .innerDatePicker.sapMInputBase:not(.sapMInputBaseDisabled).sapMInputBaseIconPressed .sapMInputBaseIconContainer .sapMInputBaseIcon, .sapMInputBase:not(.sapMInputBaseDisabled) .sapMInputBaseIconContainer .sapMInputBaseIcon:active {
     background-color: transparent;
+}
+
+.formsInfoButton {
+    width: 35px;
+}
+.formsInfoButtonElement {
+    margin-left: 10px;
+}
+.formsInfoButton>span, .formsInfoButton .sapMBtnIcon  {
+    border-radius: 2rem !important;
+}
+.formsHboxInfoButton>:first-child {
+    flex: 1 !important;
+}
+
+.formsToolbarImageUploader.sapMTB-Transparent-CTX.sapMTB, .sapMIBar.sapMTB-Info-CTX.sapMTB {
+    padding: 0;
+    margin: 0.25rem 0 0 0;
+}
+
+
+
+/* Jorgen's idea */
+.formsSegmentedButtonItem1 li {
+    width: auto;
+    min-width: 100%;
+}
+.formsSegmentedButtonItem2 li {
+    width: auto;
+    min-width: 50%;
+}
+.formsSegmentedButtonItem3 li {
+    width: auto;
+    min-width: 33.3%;
+}
+.formsSegmentedButtonItem4 li {
+    width: auto;
+    min-width: 25%;
+}
+.formsSegmentedButtonItem5 li {
+    width: auto;
+    min-width: 20%;
+}
+.formsSegmentedButtonItem6 li {
+    width: auto;
+    min-width: 16.66%;
+}
+.formsSegmentedButtonItem7 li {
+    width: auto;
+    min-width: 14.28%;
+}
+.formsSegmentedButtonItem8 li {
+    width: auto;
+    min-width: 12.4%;
+}
+.formsSegmentedButtonItem9 li {
+    width: auto;
+    min-width: 11.10%;
+}
+.formsSegmentedButtonItem10 li {
+    width: auto;
+    min-width: 10%;
+}
+.formsSegmentedButtonItem11 li {
+    width: auto;
+    min-width: 9.08%;
+}
+.formsSegmentedButtonItem12 li {
+    width: auto;
+    min-width: 8.32%;
+}
+.formsSegmentedButtonItem13 li {
+    width: auto;
+    min-width: 7.68%;
+}
+.formsSegmentedButtonItem14 li {
+    width: auto;
+    min-width: 7.13%;
+}
+.formsSegmentedButtonItem15 li {
+    width: auto;
+    min-width: 6.66%;
 }

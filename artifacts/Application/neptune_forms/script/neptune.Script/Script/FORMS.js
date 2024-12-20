@@ -169,6 +169,8 @@ const FORMS = {
 
             // Elements
             section.elements.forEach(function (element, i) {
+          
+
                 FORMS.buildElement(sectionParent, element, section, i);
 
                 if (element.elements) {
@@ -524,6 +526,7 @@ const FORMS = {
 
         // Label
         if (element.enableLabel) {
+            
             const elementLabel = new sap.m.Label({
                 text: element.title,
                 required: element.required,
@@ -531,8 +534,8 @@ const FORMS = {
             });
 
             if (section.labelLeftAlign) elementLabel.addStyleClass("nepLabelLeftAlign");
-
             parent.addContent(elementLabel);
+
         } else {
             parent.addContent(new sap.m.Label());
         }
@@ -540,7 +543,7 @@ const FORMS = {
         // Form Container
         const elementParent = new sap.m.VBox({
             width: "100%",
-            wrap: "Wrap",
+            wrap: element.type == "SegmentedButton" ? sap.m.FlexWrap.NoWrap : "Wrap", // KW addition css fix for segmented button line beak
             visible: FORMS.buildVisibleCond(element),
         });
 
@@ -659,7 +662,18 @@ const FORMS = {
                 }
             }
         } else {
-            visibleCond = "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + " ? " + visibleStatement + " }";
+
+            // 2024-12-12 KW: fix for undefined value
+            // when a cond. visibility depends on a "false" value, it also depends on an "undefined" value
+
+            let bAddUndefined = visibleValueSep + element.visibleValue + visibleValueSep == "false";
+            let sVisCond = bAddUndefined
+                           ? "{= (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + ")" +
+                             " || (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + "undefined" + visibleValueSep + ")"
+                           : "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep;
+            
+            visibleCond = sVisCond + " ? " + visibleStatement + " }";
+            //visibleCond = "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + " ? " + visibleStatement + " }";
         }
 
         return visibleCond;
@@ -743,9 +757,8 @@ const FORMS = {
             sectionTable.setAlternateRowColors(true);
         }
 
-        // Table Parent
         const sectionPanel = new sap.m.Panel("section" + section.id, {
-            visible: FORMS.buildVisibleCond(section),
+            visible: FORMS.buildVisibleCond(section), width:"99%"
         }).addStyleClass("sapUiNoContentPadding sapUiSmallMarginTopBottom");
 
         // Height
@@ -994,7 +1007,15 @@ const FORMS = {
             columListItem.addCell(new sap.m.ObjectNumber({ number: "{rowNumber}" }));
         }
 
-        sectionPanel.addContent(sectionTable);
+        // KW Render the Table in a scrollcontainer, otherwise the horizontal scrollbar was not visible
+        const sectionScroll = new sap.m.ScrollContainer("sectionScroll" + section.id, {
+            visible: FORMS.buildVisibleCond(section)
+        }).addStyleClass("sapUiNoContentPadding sapUiSmallMarginTopBottom scrollContTable");
+
+        sectionScroll.addContent(sectionTable);
+        sectionPanel.addContent(sectionScroll);
+
+        // sectionPanel.addContent(sectionTable);
 
         FORMS.formParent.addContent(sectionPanel);
         FORMS.columnTemplate = columListItem;
@@ -1619,6 +1640,10 @@ const FORMS = {
                 elementField = FORMS.buildElementMessageStrip(element);
                 break;
 
+            case "MessagePopup":
+                elementField = FORMS.buildElementMessagePopup(element, true);
+                break;
+
             case "Text":
                 elementField = FORMS.buildElementText(element);
                 break;
@@ -1712,6 +1737,16 @@ const FORMS = {
         // Custom CSS
         if (elementField.addStyleClass) elementField.addStyleClass("FormsInput");
 
+        if (element.hasInfoButton && element.type != "FormTitle") {
+            // FormTitle is being handled individually in the buildelementformtitle
+
+            let hbox = new sap.m.HBox().addStyleClass("formsHboxInfoButton");
+            hbox.addItem(elementField);
+            hbox.addItem(FORMS.buildElementMessagePopup(element));
+            
+            elementField = hbox;
+        }
+
         switch (section.type) {
             case "Form":
                 FORMS.buildParentFormChildren(parent, element, section, index, elementField);
@@ -1735,16 +1770,76 @@ const FORMS = {
     },
 
     buildElementMessageStrip: function (element) {
-        return new sap.m.MessageStrip(FORMS.buildElementFieldID(element), {
+
+        // let hbox = new sap.m.HBox({width:"100%"});
+
+        // hbox.addItem(FORMS.buildElementMessagePopup(element));
+        
+        // new sap.m.Button({
+        //     icon: "sap-icon://information"
+        // }).addStyleClass("formsInfoButton"));
+
+        // hbox.addItem(
+            return new sap.m.MessageStrip(FORMS.buildElementFieldID(element), {
             text: element.text,
             showIcon: element.messageIcon,
             type: element.messageType || "Information",
             visible: FORMS.buildVisibleCond(element),
+        });//);
+
+        // return hbox;
+    },
+
+    buildElementMessagePopup: function (element, bSingleElement) {
+        let newField = new sap.m.Button(bSingleElement ? FORMS.buildElementFieldID(element) : "", {
+            icon: "sap-icon://information",
+            press: (oEvent) =>{
+
+                let popover = new sap.m.Popover({
+                    placement: sap.m.PlacementType.Auto,
+                    title: bSingleElement ? element.title : element.infobuttonTitle,
+                    contentWidth: "350px"
+                });
+
+                let contentBoxText = new sap.m.HBox({justifyContent: sap.m.FlexJustifyContent.Center});
+                contentBoxText.addItem(new sap.m.Text({
+                    text: element.infobuttonText
+                })).addStyleClass("sapUiSmallMargin");
+                popover.addContent(contentBoxText);
+
+                let hasImage = (bSingleElement && element.imageSrc && element.imageSrc != "")
+                            || (!bSingleElement && element.infobuttonImageSrc && element.infobuttonImageSrc != "");
+
+                if (hasImage) {
+                    let contentBoxImage = new sap.m.HBox({justifyContent: sap.m.FlexJustifyContent.Center});
+                    contentBoxImage.addItem(new sap.m.Image({
+                        src: bSingleElement ? element.imageSrc : element.infobuttonImageSrc,
+                        width: "340px"
+                    }));
+                    popover.addContent(contentBoxImage);
+                }
+                
+                popover.openBy(oEvent.getSource());
+            },
+            visible: FORMS.buildVisibleCond(element)
         });
+
+        newField.addStyleClass("formsInfoButton");
+        if (!bSingleElement) {
+            newField.addStyleClass("formsInfoButtonElement");
+        }
+
+        return newField;
+        
     },
 
     buildElementFormTitle: function (element) {
-        const newField = new sap.ui.core.Title(FORMS.buildElementFieldID(element), {
+
+        // const newField = new sap.ui.core.Title(FORMS.buildElementFieldID(element), {
+        //     text: element.enableLabel ? element.title : ""
+        // });
+
+        const newField = new sap.m.Title(FORMS.buildElementFieldID(element), {
             text: element.enableLabel ? element.title : "",
         });
 
@@ -1752,7 +1847,32 @@ const FORMS = {
             FORMS.formTitleHide.push(FORMS.buildElementFieldID(element));
         }
 
-        return newField;
+        const Toolbar = new sap.m.Toolbar({
+                design: "Transparent",
+                height: "2rem",
+            }).addStyleClass("sapUiSizeCompact noBorder");
+
+        Toolbar.addContent(newField);
+
+        // let res = newField;
+
+            // Toolbar.addContent(newField);
+
+        // res = Toolbar;
+
+        if (element.hasInfoButton) {
+
+            Toolbar.addContent(FORMS.buildElementMessagePopup(element));
+
+            // res.setIcon("sap-icon://information");
+            // res = new sap.m.FlexBox().setAlignItems(sap.m.FlexAlignItems.Center);
+            // res.addItem(newField);
+            // res.addItem(FORMS.buildElementMessagePopup(element));
+        }
+        
+        return Toolbar;
+        
+        // return newField;
     },
 
     buildElementInput: function (element) {
@@ -2101,7 +2221,8 @@ const FORMS = {
             selectionChange:  function (oEvent) {
                 // this.setValueState();
                 this.removeStyleClass("notValid");
-            }
+            },
+            
         });
 
         let widthItems = 0;
@@ -2118,11 +2239,13 @@ const FORMS = {
 
         if (element.items?.length) {
             if (element.noDefault) {
+                // KW - CSS was fd up a bit - changed to "setSelectedButton("none")"
                 //newField.addItem(new sap.m.SegmentedButtonItem({ key: "", text: "", width: "0px" }));
                 newField.addStyleClass("segmentedNoDefault");
-                var invisibleItem = new sap.m.SegmentedButtonItem({ key: "", text: "", width: "0px" });
-                invisibleItem.addStyleClass("invisibleLi");
-                newField.addItem(invisibleItem);
+                newField.setSelectedButton("none");
+                // var invisibleItem = new sap.m.SegmentedButtonItem({ key: "", text: "", width: "0px" });
+                // invisibleItem.addStyleClass("invisibleLi");
+                // newField.addItem(invisibleItem);
             } else {
 
                 const formModel = FORMS.formParent.getModel();
@@ -2146,11 +2269,13 @@ const FORMS = {
 
                 // Element Width
                 if (element.width && element.noDefault) {
-                    if (element.widthMetric) {
-                        newItem.setWidth(widthItems + "%");
-                    } else {
-                        newItem.setWidth(widthItems + "px");
-                    }
+                    newField.addStyleClass("formsSegmentedButtonItem" + element.items.length);
+                    newItem.setWidth("auto");
+                    // if (element.widthMetric) {
+                        // newItem.setWidth(widthItems + "%");
+                    // } else {
+                        // newItem.setWidth(widthItems + "px");
+                    // }
                 }
 
                 newField.addItem(newItem);
@@ -2394,6 +2519,7 @@ const FORMS = {
     },
 
     buildElementImage: function (element, parent) {
+
         const meta = parent.getMetadata();
         const bindingField = element.fieldName ? element.fieldName : element.id;
         const bindingPath = element.enableMulti ? "" : FORMS.bindingPath;
@@ -2504,6 +2630,7 @@ const FORMS = {
 
             tabImages.setHeaderToolbar(Toolbar);
             Toolbar.addContent(elementUploader);
+            Toolbar.addStyleClass("formsToolbarImageUploader");
 
             newField.addItem(tabImages);
         } else {
@@ -2677,9 +2804,9 @@ const FORMS = {
                 default:
                     // KW addition (bug when checking getMonth in object -> null is also an object though..) // 13.05.2024
                     if (element.fieldName && formModel.oData[element.fieldName]) {
-                        // KW addition (post false boolean values) // 13.11.2023
                         if (typeof formModel.oData[element.fieldName] == "object" && typeof formModel.oData[element.fieldName].getMonth == "function") {
                             outputData[element.fieldName] = formModel.oData[element.fieldName].toString();
+                        // KW addition (post false boolean values) // 13.11.2023
                         } else if (typeof formModel.oData[element.fieldName] == "boolean" || formModel.oData[element.fieldName]) {
                             outputData[element.fieldName] = formModel.oData[element.fieldName];
                         }
@@ -2977,6 +3104,9 @@ const FORMS = {
                 validateSectionHeader(section.id, validTable || section.disabled);
                 
             } else {
+                if (!FORMS.isElementVisible(section, FORMS.config.setup, formModel.oData)) {
+                    return;
+                }
                 section.elements.forEach(function (element) {
                     validateElement(element);
                     if (!fieldCompleted) sectionValid = false;
@@ -3194,6 +3324,9 @@ const FORMS = {
                         }
                     }
 
+                    let coreElem = sap.ui.getCore().byId("field"+FORMS.uploadObject.element.id);
+                    if (coreElem) { coreElem.removeStyleClass("notValid")};
+
                     document.getElementById("imageUploader").value = "";
                     document.getElementById("imagesUploader").value = "";
                 };
@@ -3236,7 +3369,7 @@ const FORMS = {
 
     isElementVisible: function (/*parentElementID, */dependentElement, setup, data) {
         let visible = true;
-        if (dependentElement.visibleCondition && dependentElement.visibleFieldName && dependentElement.visibleValue) {
+        if (dependentElement.enableVisibleCond && dependentElement.visibleCondition && dependentElement.visibleFieldName && dependentElement.visibleValue) {
             let parentElement = FORMS.getObjectFromFieldNameOrID(dependentElement.visibleFieldName/*parentElementID*/, setup, data);
             if (parentElement) {
                 let idData        = parentElement.fieldName ? parentElement.fieldName : parentElement.id;
