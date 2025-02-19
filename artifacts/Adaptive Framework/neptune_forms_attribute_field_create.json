@@ -41,7 +41,16 @@
 				"enablePadding": true,
 				"title": "Attribute Field",
 				"subTitle": "",
-				"avatarIcon": "sap-icon://tnt/map-all-fields"
+				"avatarIcon": "sap-icon://tnt/map-all-fields",
+				"confirmationCheckCreate": false,
+				"confirmationCheckUpdate": false,
+				"titleConfirmCreate": "Create entry",
+				"textConfirmCreate": "Are you sure you want to create this entry?",
+				"titleConfirmUpdate": "Update entry",
+				"textConfirmUpdate": "Are you sure you want to update this entry?",
+				"textConfirmDelete": "Do you want to delete this entry? ",
+				"titleConfirmDelete": "Delete ",
+				"requiredFieldsToast": "Please fill in all the required fields"
 			},
 			"form": {
 				"enableCompact": false,
@@ -59,9 +68,15 @@
 				"usage": "BOTH"
 			},
 			{
-				"name": "name",
-				"label": "Name",
-				"type": "smalltext",
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
 				"usage": "BOTH"
 			},
 			{
@@ -71,26 +86,20 @@
 				"usage": "BOTH"
 			},
 			{
+				"name": "name",
+				"label": "Name",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
 				"name": "updatedAt",
 				"label": "Updated At",
 				"type": "timestamp",
 				"usage": "BOTH"
 			},
 			{
-				"name": "createdAt",
-				"label": "Created At",
-				"type": "timestamp",
-				"usage": "BOTH"
-			},
-			{
 				"name": "updatedBy",
 				"label": "Updated By",
-				"type": "text",
-				"usage": "BOTH"
-			},
-			{
-				"name": "createdBy",
-				"label": "Created By",
 				"type": "text",
 				"usage": "BOTH"
 			}
@@ -132,7 +141,16 @@
 			"val": [],
 			"inclusions": {},
 			"exclusions": {}
-		}
+		},
+		"translation": {
+			"EN": {
+				"report": {},
+				"form": {},
+				"table": {},
+				"fieldCatalog": {}
+			}
+		},
+		"table": "forms_attribute_fields"
 	},
 	"name": "neptune_forms_attribute_field_create",
 	"description": "",
@@ -142,10 +160,10 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.3.17.816",
+	"ver": "25.02.19.2019",
 	"disabled": false,
 	"appType": "A",
-	"application": "planet9_adaptive_edit",
+	"application": "neptunedxp_adaptive_edit",
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
 	"roles": [],
 	"scriptSelObj": null,

@@ -55,12 +55,17 @@
 					"destinationTargetF": "95f1287d-b3a8-45b4-b880-28aa297033d5",
 					"keyField": []
 				},
-				"avatarBackgroundColor": "Accent7"
+				"avatarBackgroundColor": "Accent7",
+				"requiredFieldsToast": "Please fill in all required fields",
+				"textConfirmDelete": "Do you want to delete this entry? ",
+				"titleConfirmDelete": "Delete",
+				"odataValueList": "Field does not have any OData ValueListReference"
 			},
 			"form": {
 				"enableCompact": true,
 				"headerExpanded": true,
-				"headerPreserveState": false
+				"headerPreserveState": false,
+				"enableSearchWildcard": false
 			},
 			"table": {
 				"enablePagination": true,
@@ -85,7 +90,8 @@
 				"action4Text": "",
 				"action4Type": "Transparent",
 				"action5Text": "",
-				"action5Type": "Transparent"
+				"action5Type": "Transparent",
+				"enableAutoPopin": false
 			}
 		},
 		"fieldCatalog": [
@@ -194,7 +200,40 @@
 			"val": [],
 			"inclusions": {},
 			"exclusions": {}
-		}
+		},
+		"translation": {
+			"EN": {
+				"report": {
+					"title": "",
+					"subTitle": "",
+					"textUnique": "",
+					"textButtonClose": "",
+					"textButtonSave": "",
+					"textToastSave": "",
+					"textButtonDelete": "",
+					"textToastDelete": "",
+					"textButtonAttachment": "",
+					"tab0Text": "",
+					"tabAText": "",
+					"tab1Text": "",
+					"tab2Text": "",
+					"tab3Text": "",
+					"tab4Text": "",
+					"tab5Text": "",
+					"titleConfirmCreate": "",
+					"textConfirmCreate": "",
+					"titleConfirmUpdate": "",
+					"textConfirmUpdate": "",
+					"textConfirmDelete": "",
+					"titleConfirmDelete": "",
+					"requiredFieldsToast": ""
+				},
+				"form": {},
+				"table": {},
+				"fieldCatalog": {}
+			}
+		},
+		"table": "forms_attribute_group"
 	},
 	"name": "neptune_forms_attribute_group_list",
 	"description": "",
@@ -204,10 +243,10 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.4.5.934",
+	"ver": "25.02.19.2021",
 	"disabled": false,
 	"appType": "A",
-	"application": "planet9_adaptive_list",
+	"application": "neptunedxp_adaptive_list",
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
 	"roles": [],
 	"scriptSelObj": null,

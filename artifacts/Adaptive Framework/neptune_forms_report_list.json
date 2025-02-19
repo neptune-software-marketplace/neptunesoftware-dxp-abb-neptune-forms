@@ -47,12 +47,17 @@
 					"butType": "Accept",
 					"destinationTargetF": "ab34d0f6-ff00-429e-9838-703092fa1323",
 					"keyField": []
-				}
+				},
+				"requiredFieldsToast": "Please fill in all required fields",
+				"textConfirmDelete": "Do you want to delete this entry? ",
+				"titleConfirmDelete": "Delete",
+				"odataValueList": "Field does not have any OData ValueListReference"
 			},
 			"form": {
 				"enableCompact": true,
 				"headerExpanded": true,
-				"headerPreserveState": false
+				"headerPreserveState": false,
+				"enableSearchWildcard": false
 			},
 			"table": {
 				"enablePagination": true,
@@ -79,28 +84,11 @@
 				"action5Text": "",
 				"action5Type": "Transparent",
 				"initialSortField": "updatedAt",
-				"initialSortOrder": "DESC"
+				"initialSortOrder": "DESC",
+				"enableAutoPopin": false
 			}
 		},
 		"fieldCatalog": [
-			{
-				"name": "createdAt",
-				"label": "Created At",
-				"type": "timestamp",
-				"usage": "BOTH"
-			},
-			{
-				"name": "createdBy",
-				"label": "Created By",
-				"type": "text",
-				"usage": "BOTH"
-			},
-			{
-				"name": "data",
-				"label": "FORM Data",
-				"type": "json",
-				"usage": "BOTH"
-			},
 			{
 				"name": "formid",
 				"label": "FORM ID",
@@ -126,14 +114,32 @@
 				"usage": "BOTH"
 			},
 			{
+				"name": "data",
+				"label": "FORM Data",
+				"type": "json",
+				"usage": "BOTH"
+			},
+			{
 				"name": "updatedAt",
 				"label": "Updated At",
 				"type": "timestamp",
 				"usage": "BOTH"
 			},
 			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
 				"name": "updatedBy",
 				"label": "Updated By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
 				"type": "text",
 				"usage": "BOTH"
 			}
@@ -227,7 +233,40 @@
 			"val": [],
 			"inclusions": {},
 			"exclusions": {}
-		}
+		},
+		"translation": {
+			"EN": {
+				"report": {
+					"title": "",
+					"subTitle": "",
+					"textButtonClose": "",
+					"textButtonCreate": "",
+					"textButtonExport": "",
+					"textButtonImport": "",
+					"textButtonMultiSelect": "",
+					"textButtonRun": "",
+					"searchLabel": "",
+					"searchPlaceholder": "",
+					"requiredFieldsToast": "",
+					"textConfirmDelete": "",
+					"titleConfirmDelete": "",
+					"odataValueList": ""
+				},
+				"form": {},
+				"table": {
+					"headerText": "",
+					"footerText": "",
+					"noDataText": "",
+					"action1Tooltip": "",
+					"action2Tooltip": "",
+					"action3Tooltip": "",
+					"action4Tooltip": "",
+					"action5Tooltip": ""
+				},
+				"fieldCatalog": {}
+			}
+		},
+		"table": "forms_data"
 	},
 	"name": "neptune_forms_report_list",
 	"description": "",
@@ -237,10 +276,10 @@
 	"scriptSel": null,
 	"scriptRun": null,
 	"tableid": null,
-	"ver": "23.4.5.934",
+	"ver": "25.02.19.2021",
 	"disabled": false,
 	"appType": "A",
-	"application": "planet9_adaptive_list",
+	"application": "neptunedxp_adaptive_list",
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
 	"roles": [],
 	"scriptSelObj": null,

@@ -11,7 +11,7 @@
 	"ver": "24.11.10.1746",
 	"enableCICD": true,
 	"internalReadOnly": false,
-	"oeVersion": "24.10.1",
+	"oeVersion": "24.11.0-rc.6",
 	"excludeTemplateFiles": true,
 	"roles": [],
 	"apps": [
@@ -160,31 +160,31 @@
 			"id": "ed5ee798-cb24-407f-8ef2-c4a1bd9e4811",
 			"name": "neptune_forms_subclassification_list",
 			"description": "",
-			"application": "planet9_adaptive_list"
+			"application": "neptunedxp_adaptive_list"
 		},
 		{
 			"id": "e83a706d-3f77-4536-9c17-67e6cc67942a",
 			"name": "neptune_forms_attribute_group_list",
 			"description": "",
-			"application": "planet9_adaptive_list"
+			"application": "neptunedxp_adaptive_list"
 		},
 		{
 			"id": "c5376245-bc88-4d7e-9e9b-4b60044eea14",
 			"name": "neptune_forms_classification_detail",
 			"description": "",
-			"application": "planet9_adaptive_edit"
+			"application": "neptunedxp_adaptive_edit"
 		},
 		{
 			"id": "c44d98ad-fdb8-40a7-9476-cab348d55a2b",
 			"name": "neptune_forms_report_list",
 			"description": "",
-			"application": "planet9_adaptive_list"
+			"application": "neptunedxp_adaptive_list"
 		},
 		{
 			"id": "b86ddb45-614b-4b14-9a3c-81b8d180770c",
 			"name": "neptune_forms_attribute_field_detail",
 			"description": "",
-			"application": "planet9_adaptive_edit"
+			"application": "neptunedxp_adaptive_edit"
 		},
 		{
 			"id": "ab34d0f6-ff00-429e-9838-703092fa1323",
@@ -196,49 +196,49 @@
 			"id": "aad32fc1-f284-44e4-b6ab-3e49fb9c8809",
 			"name": "neptune_forms_subclassification_detail",
 			"description": "",
-			"application": "planet9_adaptive_edit"
+			"application": "neptunedxp_adaptive_edit"
 		},
 		{
 			"id": "95f1287d-b3a8-45b4-b880-28aa297033d5",
 			"name": "neptune_forms_attribute_group_detail",
 			"description": "",
-			"application": "planet9_adaptive_edit"
+			"application": "neptunedxp_adaptive_edit"
 		},
 		{
 			"id": "95522c9f-3c92-4be4-9375-445d1da47e68",
 			"name": "neptune_forms_attribute_field_create",
 			"description": "",
-			"application": "planet9_adaptive_edit"
+			"application": "neptunedxp_adaptive_edit"
 		},
 		{
 			"id": "89ea0eb8-fc55-42ff-9a04-d8d0b9d05ded",
 			"name": "neptune_forms_attribute_field_list",
 			"description": "",
-			"application": "planet9_adaptive_list"
+			"application": "neptunedxp_adaptive_list"
 		},
 		{
 			"id": "44e04b91-df79-49be-955e-3a27cb6aeb2c",
 			"name": "neptune_forms_classification_list",
 			"description": "",
-			"application": "planet9_adaptive_list"
+			"application": "neptunedxp_adaptive_list"
 		},
 		{
 			"id": "21c58eaa-cc42-4ab4-b60b-89b38bc99825",
 			"name": "neptune_forms_design_list",
 			"description": "",
-			"application": "planet9_adaptive_list"
+			"application": "neptunedxp_adaptive_list"
 		},
 		{
 			"id": "18e87cdd-a920-4b72-8ed0-8146a62ce210",
 			"name": "neptune_forms_classification_create",
 			"description": "",
-			"application": "planet9_adaptive_edit"
+			"application": "neptunedxp_adaptive_edit"
 		},
 		{
 			"id": "024a4eb3-e205-4f8a-a36c-56a39a1bbb6d",
 			"name": "neptune_forms_attribute_group_create",
 			"description": "",
-			"application": "planet9_adaptive_edit"
+			"application": "neptunedxp_adaptive_edit"
 		}
 	],
 	"api_authentication": [],
@@ -337,5 +337,6 @@
 	],
 	"wf_determination": [],
 	"wf_taskaction": [],
-	"theme_ui5": []
+	"theme_ui5": [],
+	"webapp": []
 }
