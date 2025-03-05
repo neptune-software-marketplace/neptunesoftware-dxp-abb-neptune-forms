@@ -1,0 +1,5 @@
+inDiaInfoButtonTitle.setValue(modelpanTopProperties.oData.infobuttonTitle);
+txtareaDiaInfoButtonText.setValue(modelpanTopProperties.oData.infobuttonText);
+imageElementDiaInfoButtonImage.setSrc(modelpanTopProperties.oData.infobuttonImageSrc);
+inElementDiaInfoButtonImageDelete.setVisible(!!(imageElementDiaInfoButtonImage.getSrc() && (imageElementDiaInfoButtonImage.getSrc() != "")));
+

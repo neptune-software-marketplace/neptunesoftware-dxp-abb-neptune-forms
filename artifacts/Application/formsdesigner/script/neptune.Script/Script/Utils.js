@@ -28,7 +28,7 @@ const Utils = {
         }
     },
 
-    dateFormats: [{ title: "dd.MM.yyyy" }, { title: "MM/dd/yyyy" }, { title: "MM.yyyy" }, { title: "dd MMM" }],
+    dateFormats: [{ title: "dd.MM.yyyy" }, { title: "MM/dd/yyyy" }, { title: "MM.yyyy" }, { title: "dd MMM" }, {title: "yyyy"}],
     dateTimeFormats: [{ title: "dd.MM.yyyy HH:mm" }, { title: "MM/dd/yyyy HH:mm" }, { title: "dd MMM HH:mm" }],
     fileTypes: [{title: "pdf"}, {title: "doc"}, {title: "docx"}, {title: "xls"}, {title: "xlsx"}, {title: "ppt"}, {title: "pptx"}, {title: "bmp"}, {title: "png"}, {title: "jpg"}, {title: "jpeg"}],
 
