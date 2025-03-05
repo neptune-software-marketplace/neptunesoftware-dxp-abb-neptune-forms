@@ -210,7 +210,6 @@
 							"fieldType": "neptune.model",
 							"script": "",
 							"customComponent": false,
-							"disabled": true,
 							"bindingValue": "Generic Array",
 							"bindingType": "h",
 							"bindingSource": "P9",

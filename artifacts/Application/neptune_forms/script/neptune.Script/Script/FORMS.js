@@ -1,6 +1,6 @@
 sap.ui.require(['sap/m/MessageBox']);
-var modelappControl = new sap.ui.model.json.JSONModel();
-this.setModel(modelappControl, "appControl");
+// var modelappControl = new sap.ui.model.json.JSONModel();
+// this.setModel(modelappControl, "appControl");
 
 const FORMS = {
     model: null,
@@ -26,11 +26,31 @@ const FORMS = {
     attachmentsPromise: [],
     fileUploaders: [],
     // fileUploader: new sap.ui.unified.FileUploader(),
+    appControl: {},
+    revalidate: false,
+
+    initAppControl: function () {
+
+        if (!(FORMS.appControl instanceof sap.ui.model.json.JSONModel)) {
+            FORMS.appControl = modelappControl;
+            if (typeof FORMS.appControl.getData() !== "object") {
+                FORMS.appControl.setData({});
+            }
+        }
+    },
+
+    updateAppControl: function() {
+        FORMS.appControl.getData().formControl = {formEditable: FORMS.editable};
+        FORMS.appControl.refresh();
+    },
 
     build: function (parent, options) {
 
         let formOptions;
         let formId;
+
+        FORMS.initAppControl();
+        FORMS.revalidate = false;
 
         if (typeof options === "string") {
             formId = options;
@@ -123,8 +143,9 @@ const FORMS = {
             formModel.setData({});
         }
 
-        modelappControl.oData.formControl = {formEditable: FORMS.editable};
-        modelappControl.refresh();
+        FORMS.updateAppControl();
+        // modelappControl.oData.formControl = {formEditable: FORMS.editable};
+        // modelappControl.refresh();
 
         FORMS.formParent.setModel(formModel);
         if (!options.data) FORMS.setDefaultValues();
@@ -2160,7 +2181,7 @@ const FORMS = {
             enabled: "{appControl>/formControl/formEditable}",
             visible: FORMS.buildVisibleCond(element),
             selectionChange:  function (oEvent) {
-                this.setValueState();
+                // this.setValueState();
                 this.removeStyleClass("notValid");
             }
         });
@@ -3065,6 +3086,7 @@ const FORMS = {
 
         let completed = false;
         const process = complete ? "" : "OnlyCheck";
+        if (complete) FORMS.revalidate = !!complete;
         const valid = FORMS.validate(process);
 
         if (complete && valid) completed = true;
@@ -3235,27 +3257,50 @@ const FORMS = {
         formModel.refresh();
     },
 
-    findById: function(targetId) {
-        let stack = []; // Just like all the things I keep in my head when thinking about you
-        if (typeof FORMS.formParent.getContent === 'function') {
-            stack = FORMS.formParent.getContent();
-        } else if (typeof FORMS.formParent.getItems === 'function') {
-            stack = FORMS.formParent.getItems();
-        }
+    findSectionByElementId: function(elementId) {
+        let stack = [];
+        for (let section of FORMS.config.setup) {
 
-        while (stack.length > 0) {
-            let current = stack.pop();
+            if (Array.isArray(section.elements) && section.elements.length > 0) {
+                
+                stack = section.elements.concat();
+
+                while (stack.length > 0) {
+                    let current = stack.pop();
+                    if (current.id === elementId) {
+                        return section;
+                    }
+
+                    if (Array.isArray(current.elements) && current.elements.length > 0) {
+                        stack.push(...current.elements.concat());
+                    }
+                }
+
+            }
             
-            if (current.getId() === targetId) {
-                return current; // Found you, baby, no need to keep looking, huh?
-            }
+            
+            
+            // if (typeof section.getContent === 'function') {
+            //     stack = section.getContent();
+            // } else if (typeof section.getItems === 'function') {
+            //     stack = section.getItems();
+            // }
 
-            if (typeof current.getContent === 'function') {
-                stack.push(...current.getContent());
-            } else if (typeof current.getItems === 'function') {
-                stack.push(...current.getItems());
-            }
+            // while (stack.length > 0) {
+            //     let current = stack.pop();
+                
+            //     if (current.getId() === targetId) {
+            //         return section;
+            //     }
+
+            //     if (typeof current.getContent === 'function') {
+            //         stack.push(...current.getContent());
+            //     } else if (typeof current.getItems === 'function') {
+            //         stack.push(...current.getItems());
+            //     }
+            // }
         }
+        
         return null; // If nothing found, but we don't settle for less, do we?
     },
 
@@ -3265,7 +3310,10 @@ const FORMS = {
         const formModel = FORMS.formParent.getModel();
 
         const validateElement = function (element) {
-            const field = sap.ui.getCore().byId("field" + element.id);
+
+            fieldCompleted = true;
+
+            // const field = sap.ui.getCore().byId("field" + element.id);
             const bindingField = element.fieldName ? element.fieldName : element.id;
 
             // Disabled Field
@@ -3315,18 +3363,21 @@ const FORMS = {
                 switch (element.validationType) {
                     case "equalTo":
                         if (formModel.oData[bindingField].length !== parseInt(element.validationParam)) {
+                            fieldCompleted = false;
                             FORMS.validateMarkField(element.id, false, process);
                         }
                         break;
 
                     case "atMost":
                         if (formModel.oData[bindingField].length > parseInt(element.validationParam)) {
+                            fieldCompleted = false;
                             FORMS.validateMarkField(element.id, false, process);
                         }
                         break;
 
                     case "atLeast":
                         if (formModel.oData[bindingField].length < parseInt(element.validationParam)) {
+                            fieldCompleted = false;
                             FORMS.validateMarkField(element.id, false, process);
                         }
                         break;
@@ -3334,6 +3385,7 @@ const FORMS = {
                     default:
                         break;
                 }
+                if (validForm) validForm = fieldCompleted;
             }
 
             if (element.type === "CheckList") {
@@ -3345,22 +3397,36 @@ const FORMS = {
                     }
                 });
             }
+
+        };
+
+        const validateSectionHeader = (sectionId, bValid) => {
+            // Wizard extension:
+            // mark the steps in the header that contain invalid elements
+            if (FORMS.markSectionHeadOfElementWizard) FORMS.markSectionHeadOfElementWizard(sectionId, !bValid);// ((element.id, !fieldCompleted);
         };
 
         FORMS.config.setup.forEach(function (section) {
             if (!section) return;
+            let sectionValid = true;
             if (section.type === "Table") {
                 const validTable = FORMS.validateTableContentRequired(section, process);
                 if (!validTable && !section.disabled) validForm = false;
+                validateSectionHeader(section.id, validTable || section.disabled);
+                
             } else {
                 section.elements.forEach(function (element) {
                     validateElement(element);
+                    if (!fieldCompleted) sectionValid = false;
 
                     if (element.elements) {
                         element.elements.forEach(function (subElement) {
                             validateElement(subElement);
+                            if (!fieldCompleted) sectionValid = false;
                         });
                     }
+
+                    validateSectionHeader(section.id, sectionValid);
                 });
             }
         });
@@ -3368,12 +3434,45 @@ const FORMS = {
         return validForm;
     },
 
+    // markSectionHeadOfElementWizard: function (elementId, bAddClass) {
+    //     let res = null;
+
+    //     let section = FORMS.findSectionByElementId(elementId);
+    //     if (section) {
+    //         if (FORMS.wizardData && Array.isArray(FORMS.wizardData)) {
+    //             let iWD = FORMS.wizardData.findIndex(wh => wh.breakId == section.id);
+    //             if (iWD >= 0) {
+    //                 if (bAddClass)
+    //                     FORMS.wizardHead.getItems()[iWD]._oImageControl.addStyleClass("wizardHeaderErrorTab");
+    //                 else {
+    //                     FORMS.wizardHead.getItems()[iWD]._oImageControl.removeStyleClass("wizardHeaderErrorTab");
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     return res;
+    // },
+
     validateTableContentRequired: function (section, process) {
         const table = sap.ui.getCore().byId("field" + section.id);
 
-        if (!table) return false;
+        // alternative for "field not visible":
+        if (!FORMS.isElementVisible(section, FORMS.config.setup, FORMS.formParent.getModel().getData())) {
+            return true;
+        }
+        // if (!table) return false;
 
-        const model = table.getModel();
+        let model = null;
+        let modelData;
+        
+        if (table) {
+            model = table.getModel();
+            modelData = model.oData ? model.oData : [];
+        } else {
+            let bindingField = section.fieldName && section.fieldName != "" ? section.fieldName : section.id;
+            modelData = FORMS.formParent.getModel().getData()[bindingField] ? FORMS.formParent.getModel().getData()[bindingField] : [];
+        }
 
         let validTable = true;
         let requiredFields = [];
@@ -3382,8 +3481,10 @@ const FORMS = {
             if (element.required) requiredFields.push(element.fieldName ? element.fieldName : element.id);
         });
 
-        if (model.oData && model.oData.length) {
-            model.oData.forEach(function (rowData) {
+        // if (model.oData && model.oData.length) {
+        if (modelData && modelData.length) {
+            // model.oData.forEach(function (rowData) {
+                modelData.forEach(function (rowData) {
                 delete rowData.highlight;
 
                 if (process !== "Reset") {
@@ -3397,7 +3498,7 @@ const FORMS = {
             });
         }
 
-        model.refresh();
+        if (model) model.refresh();
 
         return validTable;
     },
@@ -3410,7 +3511,7 @@ const FORMS = {
         if (!field) return;
 
         if (validStatus) {
-            if (field.setValueState) {
+            if (field && field.setValueState) {
                 field.setValueState();
             } else {
                 field.removeStyleClass("notValid");
@@ -3418,9 +3519,9 @@ const FORMS = {
 
             if (field.setHighlight) field.setHighlight();
         } else {
-            if (field.setValueState) {
+            if (field && field.setValueState) {
                 field.setValueState("Error");
-            } 
+            }
             // else {
             //     field.addStyleClass("notValid");
             // }
