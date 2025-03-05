@@ -115,6 +115,9 @@ const FORMS = {
         if (options.data) {
             if (options.completed) FORMS.editable = false;
             formModel.setData(options.data);
+            modelappControl.oData.formControl = {formEditable: FORMS.editable};
+            modelappControl.refresh();
+            // formModel.oData.formEditable = FORMS.editable;
         } else {
             formModel.setData({});
         }
@@ -209,6 +212,36 @@ const FORMS = {
         if (parent.addItem) parent.addItem(FORMS.formParent);
     },
 
+    parseStringToBoolean: function (oValue) {
+        let boolAns = false;
+        if (typeof oValue == "boolean") {
+            boolAns = oValue;
+
+        } else if (typeof oValue == "string") {
+            if (oValue === "true") {
+                boolAns = true;
+            } else {
+                boolAns = false;
+            }
+        }
+
+        return boolAns;
+    },
+
+    // KW addition (parse "boolean strings" as boolean values) // 11.03.2024
+    getBooleanStringType: function () {
+
+        return sap.ui.model.SimpleType.extend("sap.ui.model.type.Boolean", {
+
+            formatValue: function(oValue) {
+                return FORMS.parseStringToBoolean(oValue);
+            },
+
+            parseValue:    function(oValue) { return oValue; },
+            validateValue: function(oValue) { return true;   }
+        });
+    },
+
     setDefaultValues: function () {
         const formModel = FORMS.formParent.getModel();
 
@@ -254,10 +287,23 @@ const FORMS = {
 
             switch (element.type) {
                 case "SingleChoice":
-                case "SegmentedButton":
-                    if (element.items && !element.noDefault) {
+                    if (element.items && !element.noDefault && element.items.length && element.items.length > 0) {
                         const firstItem = element.items[0];
                         newRec[bindingField] = firstItem.key;
+                    }
+                    break;
+                case "SegmentedButton":
+                    // KW addition (Rendering crashes, when no items are existing in segmented button) // 17.06.2024
+                    if (element.items && !element.noDefault && element.items.length && element.items.length > 0) {
+                        let selectedItem = element.items[0];
+                        // KW addition (default value in segmented button - wasn't implemented for tables) // 23.07.2024
+                        if (element.defaultValue && element.defaultValue != "") {
+                            let iKey = element.items.findIndex(e => e.key == element.defaultValue);
+                            if (iKey >= 0) {
+                                selectedItem = element.items[iKey];
+                            }
+                        }
+                        newRec[bindingField] = selectedItem.key;
                     }
                     break;
 
@@ -287,9 +333,13 @@ const FORMS = {
         const tableData = FORMS.paginationSetup[section.id].data;
         let filterData = FORMS.paginationSetup[section.id].filter ? FORMS.filterArray(tableData, FORMS.paginationSetup[section.id].filter) : tableData;
 
+        let sortField = FORMS.paginationSetup[section.id].sortField;
         // Sorting
-        if (sort && FORMS.paginationSetup[section.id].sortField) {
-            filterData = FORMS.sortArray(filterData, FORMS.paginationSetup[section.id].sortField, FORMS.paginationSetup[section.id].sortOrder);
+        if (sort && sortField) {
+            // KW addition (Sort numerically, not only alphabetically) // 23.05.2024
+            let iSect          = section.elements.findIndex(e => e.fieldName && e.fieldName == sortField);
+            let numericSorting = iSect >= 0 && section.elements[iSect].type == "Numeric";
+            filterData = FORMS.sortArray(filterData, sortField, numericSorting, FORMS.paginationSetup[section.id].sortOrder);
         }
 
         // Add RowNumber
@@ -372,8 +422,26 @@ const FORMS = {
         return result;
     },
 
-    sortArray: function (jsonArray, field, sortOrder = "Ascending") {
-        const sortedArray = jsonArray.sort((a, b) => {
+    // KW addition (Sort numerically, not only alphabetically) // 23.05.2024
+    sortArray: function (jsonArray, field, numeric = false, sortOrder = "Ascending") {
+
+        const sortNumeric = (a,b) => {
+            const la = parseFloat(sortOrder === "Ascending" ? a[field] : b[field]);
+            const lb = parseFloat(sortOrder === "Ascending" ? b[field] : a[field]);
+
+            if (isNaN(la) && isNaN(lb)) {
+                return 0;
+            }
+            if (isNaN(la)) {
+                return 1;
+            }
+            if (isNaN(lb)) {
+                return -1;
+            }
+            return la - lb;
+        };
+
+        const sortAlphabetic = (a, b) => {
             // KW addition (interpret undefined values as empty) // 22.11.2023
             if (a[field] == undefined) {
                 a[field] = "";
@@ -387,8 +455,9 @@ const FORMS = {
             } else {
                 return a[field] < b[field] ? 1 : -1;
             }
-        });
-        return sortedArray;
+        };
+
+        return numeric ? jsonArray.sort(sortNumeric) : jsonArray.sort(sortAlphabetic);
     },
 
     tableAddRowNumber: function (modelData) {
@@ -493,10 +562,11 @@ const FORMS = {
         }
 
         // Duplicate
-        if (element.enableDuplicate && FORMS.editable) {
+        if (element.enableDuplicate/* && FORMS.editable*/) {
             if (element.isDuplicate) {
                 elementParent.addItem(
                     new sap.m.Button({
+                        visible: "{appControl>/formControl/formEditable}",
                         icon: "sap-icon://delete",
                         type: "Reject",
                         press: function (oEvent) {
@@ -513,6 +583,7 @@ const FORMS = {
             } else {
                 elementParent.addItem(
                     new sap.m.Button({
+                        visible: "{appControl>/formControl/formEditable}",
                         text: element.duplicateButtonText,
                         type: element.duplicateButtonType,
                         icon: element.duplicateButtonIcon,
@@ -646,30 +717,54 @@ const FORMS = {
 
     buildParentTable: function (section) {
         const sectionTable = new sap.m.Table(FORMS.buildElementFieldID(section), {
+            mode: FORMS.editable && section.enableDelete ? "Delete" : "None", //{= ${appControl>/formControl/formEditable} ? \"Delete\" : \"None\"}",
             showSeparators: sap.m.ListSeparators.None,
             backgroundDesign: "Solid",
             contextualWidth: "Auto",
             sticky: ["ColumnHeaders", "HeaderToolbar"],
             showNoData: false,
             delete: function (oEvent) {
-                const context = oEvent.mParameters.listItem.getBindingContext();
-                const data = context.getObject();
 
-                if (section.enablePagination) {
-                    const model = FORMS.paginationSetup[section.id].data;
-                    ModelData.Delete(model, "id", data.id);
-                    FORMS.paginationHandle(section);
-                } else {
-                    const model = this.getModel();
-                    ModelData.Delete(model, "id", data.id);
-                    FORMS.tableAddRowNumber(model.oData);
+                const context = oEvent.mParameters.listItem.getBindingContext();
+
+                const fnDelete = () => {
+                    const data = context.getObject();
+
+                    if (section.enablePagination) {
+                        const model = FORMS.paginationSetup[section.id].data;
+                        ModelData.Delete(model, "id", data.id);
+                        FORMS.paginationHandle(section);
+                    } else {
+                        const model = this.getModel();
+                        ModelData.Delete(model, "id", data.id);
+                        FORMS.tableAddRowNumber(model.oData);
+                    }
                 }
+
+                // KW addition (confirmation for deletion in tables) // 01.07.2024
+                if (section.enableDeleteMessage) {
+                    let deleteMsg = section.deleteMessageSingle && section.deleteMessageSingle != "" ? section.deleteMessageSingle : "Do you want to delete the item?";
+                    sap.m.MessageBox.warning(deleteMsg, {
+                        actions: ["Delete", sap.m.MessageBox.Action.CANCEL],
+                        emphasizedAction: "Delete",
+                        styleClass: "forms_messageBoxDeleteWarning",
+                        onClose: function (sAction) {
+                            if (sAction == "Delete") {
+                                fnDelete();
+                            }
+                        }
+                    });
+                } else {
+                    fnDelete();
+                }
+                
             },
             updateFinished: function (oEvent) {
                 const counter = sap.ui.getCore().byId("counter" + section.id);
                 if (counter) {
                     let length = 0;
-                    if (section.enablePagination) {
+                    // KW !
+                    if (section.enablePagination && FORMS.paginationSetup && FORMS.paginationSetup[section.id]) {
                         length = FORMS.paginationSetup[section.id].data.length;
                     } else {
                         length = this.getModel().oData.length;
@@ -755,9 +850,10 @@ const FORMS = {
         );
 
         // Enable Add
-        if (section.enableCreate && FORMS.editable) {
+        if (section.enableCreate/* && FORMS.editable*/) {
             sectionToolbar.addContent(
                 new sap.m.Button({
+                    visible: "{appControl>/formControl/formEditable}",
                     text: "Add",
                     type: "Emphasized",
                     press: function (oEvent) {
@@ -775,6 +871,12 @@ const FORMS = {
                             FORMS.tableAddRowNumber(model.oData);
                             model.refresh();
                         }
+
+                        // KW addition (enhance add fn) // 08.08.2024
+                        if (FORMS.enhancement.addEntry) {
+                            let tableId = section.fieldName ? section.fieldName : section.id;
+                            FORMS.enhancement.addEntry(tableId);
+                        }
                     },
                 })
             );
@@ -784,6 +886,7 @@ const FORMS = {
             icon: "sap-icon://multiselect-all",
             type: "Transparent",
             tooltip: "Switch to multi select",
+            visible: "{appControl>/formControl/formEditable}",
             press: function (oEvent) {
                 sectionTable.setMode("MultiSelect");
                 butSingleSwitch.setVisible(true);
@@ -796,6 +899,7 @@ const FORMS = {
             icon: "sap-icon://multiselect-none",
             type: "Transparent",
             tooltip: "Switch to single select",
+            //visible: "{" + FORMS.bindingPath + "formEditable" + "}",
             visible: false,
             press: function (oEvent) {
                 sectionTable.setMode("Delete");
@@ -816,38 +920,63 @@ const FORMS = {
                 const selectedItems = sectionTable.getSelectedItems();
                 const items = [];
 
-                if (selectedItems) {
-                    selectedItems.forEach(function (item) {
-                        const context = item.getBindingContext();
-                        if (context) {
-                            const data = context.getObject();
-                            items.push(data);
-                            data.delete = true;
-                        }
-                    });
+                const fnPress = () => {
+                    
+                    if (selectedItems) {
+                        selectedItems.forEach(function (item) {
+                            const context = item.getBindingContext();
+                            if (context) {
+                                const data = context.getObject();
+                                items.push(data);
+                                data.delete = true;
+                            }
+                        });
 
-                    if (FORMS.enhancement.multiDelete) {
-                        FORMS.enhancement.multiDelete(fieldID, items);
+                        if (FORMS.enhancement.multiDelete) {
+                            FORMS.enhancement.multiDelete(fieldID, items);
+                        }
+
+                        ModelData.Delete(tabData, "delete", true);
                     }
 
-                    ModelData.Delete(tabData, "delete", true);
+                    if (section.enablePagination) {
+                        FORMS.paginationHandle(section);
+                    } else {
+                        sectionTable.getModel().refresh();
+                    }
+
+                    sectionTable.removeSelections();
+                };
+
+
+                // KW addition (confirmation for deletion in tables) // 01.07.2024
+                if (selectedItems.length > 0) {
+                    if (section.enableDeleteMessage) {
+                        let deleteMsg = section.deleteMessageMulti && section.deleteMessageMulti != "" ? section.deleteMessageMulti : "Do you want to delete the selected items?";
+                
+                        sap.m.MessageBox.warning(deleteMsg , {
+                            actions: ["Delete", sap.m.MessageBox.Action.CANCEL],
+                            emphasizedAction: "Delete",
+                            styleClass: "forms_messageBoxDeleteWarning",
+                            onClose: function (sAction) {
+                                if (sAction == "Delete") {
+                                    fnPress();
+                                }
+                            }
+                        });
+                    } else  {
+                        fnPress();
+                    }
                 }
 
-                if (section.enablePagination) {
-                    FORMS.paginationHandle(section);
-                } else {
-                    sectionTable.getModel().refresh();
-                }
-
-                sectionTable.removeSelections();
             },
         }).addStyleClass("sapUiSizeCompact");
 
         sectionPanel.setHeaderToolbar(sectionToolbar);
 
         // Enable Delete
-        if (section.enableDelete && FORMS.editable) {
-            sectionTable.setMode("Delete");
+        if (section.enableDelete/* && FORMS.editable*/) {
+            //sectionTable.setMode("{= ${/formEditable} ? 'Delete' : 'None}");//"Delete");
             sectionToolbar.addContent(new sap.m.ToolbarSeparator());
             sectionToolbar.addContent(butMultiDelete);
             sectionToolbar.addContent(butMultiSwitch);
@@ -873,13 +1002,14 @@ const FORMS = {
         if (section.vAlign) columListItem.setVAlign(section.vAlign);
 
         // Enable Copy
-        if (section.enableCopy && FORMS.editable) {
+        if (section.enableCopy/* && FORMS.editable*/) {
             const newColumn = new sap.m.Column({ width: "50px" });
 
             sectionTable.addColumn(newColumn);
 
             columListItem.addCell(
                 new sap.m.Button({
+                    visible: "{appControl>/formControl/formEditable}",
                     icon: "sap-icon://copy",
                     type: "Transparent",
                     press: function (oEvent) {
@@ -1034,9 +1164,11 @@ const FORMS = {
         }
 
         // Enable Add
-        if (section.enableCreate && FORMS.editable) {
+        if (section.enableCreate/* && FORMS.editable*/) {
+            
             sectionPanel.addContent(
                 new sap.m.Button({
+                    visible: "{appControl>/formControl/formEditable}",
                     text: "Add",
                     type: "Emphasized",
                     press: function (oEvent) {
@@ -1049,6 +1181,12 @@ const FORMS = {
                             model.oData.push({ id: ModelData.genID(), initsort: model.oData.length + 1 });
                             FORMS.tableAddRowNumber(model.oData);
                             model.refresh();
+                        }
+                        
+                        // KW addition (enhance add fn) // 08.08.2024
+                        if (FORMS.enhancement.addEntry) {
+                            let tableId = section.fieldName ? section.fieldName : section.id;
+                            FORMS.enhancement.addEntry(tableId);
                         }
                     },
                 }).addStyleClass("sapUiSizeCompact sapUiSmallMargin")
@@ -1226,6 +1364,12 @@ const FORMS = {
                         model.refresh();
                     }
 
+                    // KW addition (enhance copy fn) // 08.08.2024
+                    if (FORMS.enhancement.copyEntry) {
+                        let tableId = section.fieldName ? section.fieldName : section.id;
+                        FORMS.enhancement.copyEntry(tableId, numEntriesCopy);
+                    }
+
                     diaCopy.close();
                 },
             }).addStyleClass("sapUiSizeCompact")
@@ -1233,7 +1377,7 @@ const FORMS = {
 
         const panCopies = new sap.m.Panel();
         panCopies.addContent(new sap.m.Title({ text: "Number of copies" }));
-        const numCopy = new sap.m.StepInput({ width: "100%", min: 1, max: maxCopyEntries, value: 1 }).addStyleClass("sapUiSmallMarginBottom");
+        const numCopy = new sap.m.StepInput({ width: "100%", min: 1, max: maxCopyEntries, value: 1 }).addStyleClass("sapUiSmallMarginBottom").addStyleClass("textCentered");
         const numInfo = new sap.m.MessageStrip({ text: "Max entries to copy is: " + maxCopyEntries });
 
         numCopy.onAfterRendering = function () {
@@ -1468,7 +1612,9 @@ const FORMS = {
                     } else {
                         newColumn.setWidth("150px");
                     }
-                }
+                
+                // KW addition (fields in table with no width are not displayed) // 29.05.2024
+                } else { newColumn.setWidth("150px"); }
             }
 
             // Column Header
@@ -1527,7 +1673,7 @@ const FORMS = {
                 break;
 
             case "SegmentedButton":
-                elementField = FORMS.buildElementSegmentedButton(element);
+                elementField = FORMS.buildElementSegmentedButton(element, section);
                 break;
 
             case "StepInput":
@@ -1663,7 +1809,8 @@ const FORMS = {
 
         const newField = new sap.m.Input(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
-            editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
+            // editable: FORMS.editable,
             placeholder: element.placeholder,
             visible: FORMS.buildVisibleCond(element),
             liveChange: function (oEvent) {
@@ -1679,7 +1826,8 @@ const FORMS = {
 
         const newField = new sap.m.Input(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             placeholder: element.placeholder,
             valueHelpOnly: true,
             showValueHelp: true,
@@ -1803,7 +1951,9 @@ const FORMS = {
         const newField = new sap.m.TextArea(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             placeholder: element.placeholder,
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            //editable: "{" + "/" + FORMS.bindingPath + "formEditable" + "}",
+            editable: "{appControl>/formControl/formEditable}",
             growing: element.growing,
             rows: parseInt(element.rows),
             width: "100%",
@@ -1822,7 +1972,8 @@ const FORMS = {
 
         const newField = new sap.m.RatingIndicator(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             maxValue: element.maxValue,
             visible: FORMS.buildVisibleCond(element),
             change: function (oEvent) {
@@ -1878,7 +2029,8 @@ const FORMS = {
         const newField = new sap.m.Input(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             placeholder: element.placeholder,
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             // KW addition (number fields are empty after parsing on iOS) // 27.11.2023
             //type: "Number",
             change: function (oEvent) {
@@ -1901,7 +2053,8 @@ const FORMS = {
         const newField = new sap.m.StepInput(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             placeholder: element.placeholder,
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             visible: FORMS.buildVisibleCond(element),
             change: function (oEvent) {
                 this.setValueState();
@@ -1923,58 +2076,50 @@ const FORMS = {
     },
 
     buildElementSwitch: function (element) {
-        // KW addition (parse "boolean strings" as boolean values) // 13.11.2023
-        var SwitchBoolean = sap.ui.model.SimpleType.extend("sap.ui.model.type.Boolean", {
-            formatValue: function (oValue) {
-                var boolAns = false;
-                if (typeof oValue == "boolean") {
-                    boolAns = oValue;
-                } else if (typeof oValue == "string") {
-                    if (oValue === "true") {
-                        boolAns = true;
-                    } else {
-                        boolAns = false;
-                    }
-                }
 
-                return boolAns;
-            },
-            parseValue: function (oValue) {
-                return oValue;
-            },
-            validateValue: function (oValue) {
-                return true;
-            },
-        });
-
+        // KW addition (parse "boolean strings" as boolean values) // 11.03.2024
+        var SwitchBoolean  = FORMS.getBooleanStringType();
         const bindingField = element.fieldName ? element.fieldName : element.id;
 
         const newField = new sap.m.Switch(FORMS.buildElementFieldID(element), {
+            // KW addition "boolean strings" // 11.03.2024
+            state: {path: FORMS.bindingPath + bindingField, type: new SwitchBoolean()},
             // state: "{" + FORMS.bindingPath + bindingField + "}",
-            // KW addition (parse "boolean strings" as boolean values) // 13.11.2023
-            state: { path: FORMS.bindingPath + bindingField, type: new SwitchBoolean() },
-            enabled: FORMS.editable,
+            // enabled: FORMS.editable,
+            enabled: "{appControl>/formControl/formEditable}",
             customTextOff: element.customTextOff,
             customTextOn: element.customTextOn,
             visible: FORMS.buildVisibleCond(element),
             change: function (oEvent) {
                 this.removeStyleClass("notValid");
-            },
+            }
         });
 
         if (element.approveSwitch) {
             newField.setType("AcceptReject");
         }
 
+        // KW addition (parse string 'true' and 'false' to boolean) // 24.07.2024
+        let formModel = FORMS.formParent.getModel();
+        if (formModel.oData[bindingField] && typeof formModel.oData[bindingField] == "string") {
+            formModel.oData[bindingField] = FORMS.parseStringToBoolean(formModel.oData[bindingField]);
+        }
+
         return newField;
     },
 
     buildElementCheckBox: function (element) {
-        const bindingField = element.fieldName ? element.fieldName : element.id;
+
+        // KW addition (parse "boolean strings" as boolean values) // 11.03.2024
+        var CheckboxBoolean = FORMS.getBooleanStringType();
+        const bindingField  = element.fieldName ? element.fieldName : element.id;
 
         const newField = new sap.m.CheckBox(FORMS.buildElementFieldID(element), {
-            selected: "{" + FORMS.bindingPath + bindingField + "}",
-            editable: FORMS.editable,
+            // KW addition "boolean strings" // 11.03.2024
+            selected: {path: FORMS.bindingPath + bindingField, type: new CheckboxBoolean()},
+            // selected: "{" + FORMS.bindingPath + bindingField + "}",
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             text: element.text,
             visible: FORMS.buildVisibleCond(element),
             select: function (oEvent) {
@@ -1982,15 +2127,22 @@ const FORMS = {
             },
         });
 
+        // KW addition (parse string 'true' and 'false' to boolean) // 24.07.2024
+        let formModel = FORMS.formParent.getModel();
+        if (formModel.oData[bindingField] && typeof formModel.oData[bindingField] == "string") {
+            formModel.oData[bindingField] = FORMS.parseStringToBoolean(formModel.oData[bindingField]);
+        }
+
         return newField;
     },
 
-    buildElementSegmentedButton: function (element) {
+    buildElementSegmentedButton: function (element, section) {
         const bindingField = element.fieldName ? element.fieldName : element.id;
 
         const newField = new sap.m.SegmentedButton(FORMS.buildElementFieldID(element), {
             selectedKey: "{" + FORMS.bindingPath + bindingField + "}",
-            enabled: FORMS.editable,
+            // enabled: FORMS.editable,
+            enabled: "{appControl>/formControl/formEditable}",
             visible: FORMS.buildVisibleCond(element),
         });
 
@@ -2008,11 +2160,27 @@ const FORMS = {
 
         if (element.items?.length) {
             if (element.noDefault) {
-                newField.addItem(new sap.m.SegmentedButtonItem({ key: "", text: "", width: "0px" }));
+                //newField.addItem(new sap.m.SegmentedButtonItem({ key: "", text: "", width: "0px" }));
                 newField.addStyleClass("segmentedNoDefault");
+                var invisibleItem = new sap.m.SegmentedButtonItem({ key: "", text: "", width: "0px" });
+                invisibleItem.addStyleClass("invisibleLi");
+                newField.addItem(invisibleItem);
             } else {
+
                 const formModel = FORMS.formParent.getModel();
-                if (!formModel.oData[bindingField]) element.defaultValue ? (formModel.oData[bindingField] = element.defaultValue) : (formModel.oData[bindingField] = element.items[0].key);
+                // KW addition (if the bindingfield is on a table, the value should not be set on overall level) // 22.07.2024
+                if (section.type == "Table") {
+                    const bindingFieldParent = section.fieldName ? section.fieldName : section.id;
+                    if (!formModel.oData[bindingFieldParent]) formModel.oData[bindingFieldParent] = [];
+                    for (let i = 0; i < section.rows; i++) {
+                        if (!formModel.oData[bindingFieldParent][i]) formModel.oData[bindingFieldParent][i] = {};
+                        if (!formModel.oData[bindingFieldParent][i][bindingField]) element.defaultValue ? (formModel.oData[bindingFieldParent][i][bindingField] = element.defaultValue) : (formModel.oData[bindingFieldParent][i][bindingField] = element.items[0].key);
+                    }
+                    
+                } else if (!formModel.oData[bindingField]) {
+                    element.defaultValue ? (formModel.oData[bindingField] = element.defaultValue) : (formModel.oData[bindingField] = element.items[0].key);
+                }
+                
             }
 
             element.items.forEach(function (item, i) {
@@ -2040,7 +2208,8 @@ const FORMS = {
         const newField = new sap.m.Select(FORMS.buildElementFieldID(element), {
             selectedKey: "{" + FORMS.bindingPath + bindingField + "}",
             width: "100%",
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             visible: FORMS.buildVisibleCond(element),
             change: function (oEvent) {
                 this.setValueState();
@@ -2067,7 +2236,8 @@ const FORMS = {
         const newField = new sap.m.ComboBox(FORMS.buildElementFieldID(element), {
             selectedKey: "{" + FORMS.bindingPath + bindingField + "}",
             width: "100%",
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             visible: FORMS.buildVisibleCond(element),
             change: function (oEvent) {
                 this.setValueState();
@@ -2117,7 +2287,8 @@ const FORMS = {
             const elementRadio = new sap.m.RadioButton("item" + item.id, {
                 text: item.title,
                 groupName: newField.sId,
-                editable: FORMS.editable,
+                // editable: FORMS.editable,
+                editable: "{appControl>/formControl/formEditable}",
                 select: function (oEvent) {
                     const context = oEvent.oSource.getBindingContext();
                     if (context) {
@@ -2155,7 +2326,8 @@ const FORMS = {
         const newField = new sap.m.MultiComboBox(FORMS.buildElementFieldID(element), {
             selectedKeys: "{" + FORMS.bindingPath + bindingField + "}",
             width: "100%",
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             showSelectAll: true,
             visible: FORMS.buildVisibleCond(element),
             change: function (oEvent) {
@@ -2194,7 +2366,8 @@ const FORMS = {
         element.items.forEach(function (item, i) {
             const elementCheckBox = new sap.m.CheckBox("item" + item.id, {
                 text: item.title,
-                editable: FORMS.editable,
+                // editable: FORMS.editable,
+                editable: "{appControl>/formControl/formEditable}",
                 select: function (oEvent) {
                     this.getParent().removeStyleClass("notValid");
 
@@ -2234,10 +2407,12 @@ const FORMS = {
 
         const newField = new sap.m.DatePicker(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
+            // value: "{" + FORMS.bindingPath + bindingField + "}",
             displayFormat: element.displayFormat ? element.displayFormat : "dd.MM.yyyy",
             // KW addition (date from SN not interpreted correctly) // 15.11.2023
             valueFormat: "yyyy-MM-dd",
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             visible: FORMS.buildVisibleCond(element),
             liveChange: function (oEvent) {
                 this.setValueState();
@@ -2265,6 +2440,8 @@ const FORMS = {
         //     },
         // });
 
+        newField.addStyleClass("innerDatePicker");
+
         return newField;
     },
 
@@ -2281,7 +2458,8 @@ const FORMS = {
         const elementUploader = new sap.m.Button({
             type: element.buttonType,
             text: element.text,
-            enabled: FORMS.editable,
+            // enabled: FORMS.editable,
+            enabled: "{appControl>/formControl/formEditable}",
             press: function (oEvent) {
                 FORMS.uploadObject = {
                     element,
@@ -2339,9 +2517,9 @@ const FORMS = {
         const elementHBox = new sap.m.HBox();
         elementHBox.addItem(elementUploader);
 
-        if (element.enableMulti) {
+        if (element.enableMulti && sap.f) {
             const tabImages = new sap.f.GridList({
-                mode: "Delete",
+                mode: FORMS.editable ? "Delete" : "None",
                 showSeparators: "None",
                 showNoData: false,
                 delete: function (oEvent) {
@@ -2387,7 +2565,8 @@ const FORMS = {
             elementHBox.addItem(
                 new sap.m.Button({
                     type: "Reject",
-                    enabled: FORMS.editable,
+                    // enabled: FORMS.editable,
+                    enabled: "{appControl>/formControl/formEditable}",
                     icon: "sap-icon://delete",
                     tooltip: "Delete Image",
                     visible: "{= ${" + FORMS.bindingPath + bindingField + "} ? true:false}",
@@ -2752,7 +2931,8 @@ const FORMS = {
         const newField = new sap.m.DateTimePicker(FORMS.buildElementFieldID(element), {
             value: "{" + FORMS.bindingPath + bindingField + "}",
             displayFormat: element.displayFormat ? element.displayFormat : "dd.MM.yyyy HH:mm",
-            editable: FORMS.editable,
+            // editable: FORMS.editable,
+            editable: "{appControl>/formControl/formEditable}",
             visible: FORMS.buildVisibleCond(element),
             liveChange: function (oEvent) {
                 this.setValueState();
@@ -2812,14 +2992,16 @@ const FORMS = {
                 case "Input":
                     itemAnswer = new sap.m.Input({
                         value: "{/" + item.id + "}",
-                        editable: FORMS.editable,
+                        editable: "{appControl>/formControl/formEditable}",
+                        // editable: FORMS.editable,
                     });
                     break;
 
                 case "AcceptReject":
                     itemAnswer = new sap.m.Switch({
                         state: "{/" + item.id + "}",
-                        enabled: FORMS.editable,
+                        enabled: "{appControl>/formControl/formEditable}",
+                        // enabled: FORMS.editable,
                         type: "AcceptReject",
                     });
                     break;
@@ -2827,14 +3009,16 @@ const FORMS = {
                 case "CheckBox":
                     itemAnswer = new sap.m.CheckBox({
                         selected: "{/" + item.id + "}",
-                        editable: FORMS.editable,
+                        editable: "{appControl>/formControl/formEditable}",
+                        // editable: FORMS.editable,
                     });
                     break;
 
                 default:
                     itemAnswer = new sap.m.Switch({
                         state: "{/" + item.id + "}",
-                        enabled: FORMS.editable,
+                        enabled: "{appControl>/formControl/formEditable}",
+                        // enabled: FORMS.editable,
                     });
                     break;
             }
@@ -2879,7 +3063,8 @@ const FORMS = {
                     break;
 
                 default:
-                    if (element.fieldName) {
+                    // KW addition (bug when checking getMonth in object -> null is also an object though..) // 13.05.2024
+                    if (element.fieldName && formModel.oData[element.fieldName]) {
                         // KW addition (post false boolean values) // 13.11.2023
                         if (typeof formModel.oData[element.fieldName] == "object" && typeof formModel.oData[element.fieldName].getMonth == "function") {
                             outputData[element.fieldName] = formModel.oData[element.fieldName].toString();
@@ -2915,7 +3100,7 @@ const FORMS = {
 
                 if (!tabObject) return;
 
-                const tabData = section.enablePagination ? FORMS.paginationSetup[section.id].data : tabObject.getModel().oData;
+                const tabData = section.enablePagination && FORMS.paginationSetup[section.id] ? FORMS.paginationSetup[section.id].data : tabObject.getModel().oData;
 
                 if (tabData) {
                     const bindingField = section.fieldName ? section.fieldName : section.id;
@@ -3316,6 +3501,73 @@ const FORMS = {
         });
     },
 
+    isElementVisible: function (parentElementID, dependentElement, setup, data) {
+        let visible = true;
+        if (dependentElement.visibleCondition && dependentElement.visibleFieldName && dependentElement.visibleValue) {
+            let parentElement = FORMS.getObjectFromFieldNameOrID(parentElementID, setup);
+            if (parentElement) {
+                let idData        = parentElement.fieldName ? parentElement.fieldName : parentElement.id;
+                // if (data[idData]) {
+                    visible = eval("'"+data[idData]+"'" + dependentElement.visibleCondition + "'"+dependentElement.visibleValue+"'");
+                // }
+            }
+        }
+
+        return visible;
+    },
+
+    // KW new Function to get an Object by the field-name or ID // 10.07.2024
+    getObjectFromFieldNameOrID: function (fieldNameOrID, setup, data) {
+        let elementData = null;
+        
+        if (setup && Symbol.iterator in Object(setup)) {
+            setup.forEach(function (section, i) {
+                if ((section.fieldName && section.fieldName === fieldNameOrID) || section.id === fieldNameOrID)
+                    elementData = section;
+
+                section.elements.forEach(function (element, i) {
+                    if ((element.fieldName && element.fieldName === fieldNameOrID) || element.id === fieldNameOrID)
+                        elementData = element;
+
+                    if (element.elements) {
+                        element.elements.forEach(function (element, i) {
+                            if ((element.fieldName && element.fieldName === fieldNameOrID) || element.id === fieldNameOrID)
+                                elementData = element;
+                        });
+                    }
+                });
+            });
+        }
+        if (elementData && elementData.visibleValue) {
+            elementData.isVisible = FORMS.isElementVisible(elementData.visibleFieldName, elementData, setup, data);
+        }
+
+        return elementData;
+    },
+
+    // KW new Function to get an Object by the field-name // 11.03.2024
+    getObjectFromFieldName: function (fieldName, setup) {
+        let elementData = null;
+        
+        if (setup && Symbol.iterator in Object(setup)) {
+            setup.forEach(function (section, i) {
+                if (section.fieldName === fieldName) elementData = section;
+
+                section.elements.forEach(function (element, i) {
+                    if (element.fieldName === fieldName) elementData = element;
+
+                    if (element.elements) {
+                        element.elements.forEach(function (element, i) {
+                            if (element.fieldName === fieldName) elementData = element;
+                        });
+                    }
+                });
+            });
+        }
+
+        return elementData;
+    },
+
     getObjectFromId: function (id) {
         let elementData = null;
 
@@ -3396,6 +3648,58 @@ const FORMS = {
         const blob = new Blob(byteArrays, {type: contentType});
         return blob;
     },
+
+    getAllFieldNames: function (setup) {
+        let res = [];
+        setup.forEach(section => {
+            if (section.fieldName) res.push(section.fieldName);
+            section.elements.forEach(function (element) {
+                if (element.fieldName) res.push(element.fieldName);
+                if (element.elements) {
+                    element.elements.forEach(function (element) {
+                        if (element.fieldName) res.push(element.fieldName);
+                    });
+                }
+            });
+        });
+
+        return res;
+        
+    },
+
+    setFormEditable: function (bEditable) {
+
+        FORMS.editable = bEditable;
+        modelappControl.oData.formControl.formEditable = bEditable;
+        modelappControl.refresh();
+    //     FORMS.editable = bEditable;
+
+    //     if (FORMS.formParent && FORMS.formParent.getContent && FORMS.formParent.getContent().length > 0) {
+    //         FORMS.formParent.getContent().forEach(parentContent => {
+    //             if (parentContent.getContent && parentContent.getContent().length > 0) {
+    //                 parentContent.getContent().forEach(c => {
+    //                     if (c.getContent && c.getContent().length > 0) {
+    //                         c.getContent().forEach(cc => {
+    //                             if (cc.setEditable) {
+    //                                 cc.setEditable(bEditable);
+    //                             } else if(cc.setEnabled) {
+    //                                 cc.setEnabled(bEditable);
+    //                             } else if (cc.getItems && cc.getItems().length > 0) {
+    //                                 cc.getItems().forEach(ci => {
+    //                                     if (ci.setEditable) {
+    //                                         ci.setEditable(bEditable);
+    //                                     } else if(ci.setEnabled) {
+    //                                         ci.setEnabled(bEditable);
+    //                                     }
+    //                                 })
+    //                             }
+    //                         })
+    //                     }
+    //                 });
+    //             }
+    //         });           
+    //     }
+    }
 };
 
 window.importImage  = FORMS.importImage;
