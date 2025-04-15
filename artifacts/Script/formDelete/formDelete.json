@@ -2,7 +2,13 @@
 	"id": "abaf7108-29fa-424f-ab1f-61c698a599b4",
 	"createdAt": "2023-01-13T06:44:21.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
-	"globalScripts": [],
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
 	"externalModules": [],
 	"entitySets": [
 		{
@@ -13,7 +19,7 @@
 	],
 	"apis": [],
 	"name": "formDelete",
-	"ver": "23.1.13.820",
+	"ver": "25.04.16.0017",
 	"description": null,
 	"folder": null,
 	"content": "file:///content.js",

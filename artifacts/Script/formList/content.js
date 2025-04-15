@@ -1,5 +1,10 @@
 const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
 
+// PRR - forms/#17 - role access to forms (ADD - Begin)
+let {gatherRoleIds, getAuthorizedDataWithFormData} = globals.FormsAuthorizationGlobal;
+const userRoleIds = await gatherRoleIds(req?.user?.id);
+// PRR - forms/#17 - role access to forms (ADD - End)
+
 const adaptiveApps = await manager.find("reports", {
     select: ["name", "description", "id", "application", "package", "updatedAt", "changedBy"],
     order: { name: "ASC" },
@@ -10,7 +15,10 @@ const package = await manager.find("dev_package", {
     order: { name: "ASC" },
 });
 
-const forms = await entities.forms_design.find({
+// PRR - forms/#17 - role access to forms (MOD - Begin)
+// const forms = await entities.forms_design.find({
+const formsAll = await entities.forms_design.find({
+// PRR - forms/#17 - role access to forms (MOD - End)
     select: [
         "name",
         "description",
@@ -20,9 +28,16 @@ const forms = await entities.forms_design.find({
         "released",
         "groupid",
         "subgroupid",
+        "roles"
     ],
     order: { name: "ASC" },
 });
+// PRR - forms/#17 - role access to forms (ADD - Begin)
+const forms = [];
+for (let form of formsAll) {
+    if (getAuthorizedDataWithFormData(userRoleIds,form).isAuthorized) {forms.push(form);}
+}
+// PRR - forms/#17 - role access to forms (ADD - End)
 
 const group = await entities.forms_group.find({
     select: ["id", "name", "description"],

@@ -2909,6 +2909,561 @@
 									]
 								},
 								{
+									"fieldNo": "e7b89d11-f632-4421-e3b0-e36e0368b8ca",
+									"fieldName": "tabFormRole",
+									"fieldParent": "44e81455-bb72-4451-b650-4dac2ed64d7c",
+									"fieldType": "sap.m.IconTabFilter",
+									"description": "forms/#17 - role access to forms",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "text",
+											"grouping": "Properties",
+											"value": "Role",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "key",
+											"grouping": "Properties",
+											"value": "ROLE",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "count",
+											"grouping": "Properties",
+											"value": "{= (!${/roles/length}) ? 0 : ${/roles/length}}",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "3fca2aeb-3dcc-46ab-f25c-cbb954459ff3",
+											"fieldName": "scrollFormRole",
+											"fieldParent": "e7b89d11-f632-4421-e3b0-e36e0368b8ca",
+											"fieldType": "sap.m.ScrollContainer",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "height",
+													"grouping": "Properties",
+													"value": "100%",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "horizontal",
+													"grouping": "Properties",
+													"value": "false",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "vertical",
+													"grouping": "Properties",
+													"value": "true",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": [
+												{
+													"fieldNo": "dc2abb9b-bf6a-4548-bdbf-ab59870c096e",
+													"fieldName": "tableFormRole",
+													"fieldParent": "3fca2aeb-3dcc-46ab-f25c-cbb954459ff3",
+													"fieldType": "sap.m.Table",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"modelPath": "/roles",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "sticky",
+															"grouping": "Properties",
+															"value": "[\"ColumnHeaders\",\"HeaderToolbar\"]",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "enableCompactMode",
+															"grouping": "Properties",
+															"value": "true",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "delete",
+															"grouping": "Events",
+															"value": "Anonymous Function",
+															"script": "file://event/sap.m.Table/tableFormRole/delete.ts",
+															"language": "typescript",
+															"translation": []
+														},
+														{
+															"attribute": "mode",
+															"grouping": "Properties",
+															"value": "{= ${appControl>/enableEdit} ? 'Delete' : 'None' }",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "defaultColumn",
+															"grouping": "Sorter",
+															"value": "name",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "sorterEnable",
+															"grouping": "Sorter",
+															"value": "true",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": [
+														{
+															"fieldNo": "afe52ac3-a129-499a-a869-5fa5dce8455f",
+															"fieldName": "toolFormRole",
+															"fieldParent": "dc2abb9b-bf6a-4548-bdbf-ab59870c096e",
+															"fieldType": "sap.m.Toolbar",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "position",
+																	"grouping": "Parent",
+																	"value": "HeaderToolbar",
+																	"script": "",
+																	"translation": []
+																}
+															],
+															"data": [
+																{
+																	"fieldNo": "65baa1f6-4209-40e0-8dca-579f1e362220",
+																	"fieldName": "btnFormRoleAdd",
+																	"fieldParent": "afe52ac3-a129-499a-a869-5fa5dce8455f",
+																	"fieldType": "sap.m.Button",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "press",
+																			"grouping": "Events",
+																			"value": "Anonymous Function",
+																			"script": "file://event/sap.m.Button/btnFormRoleAdd/press.ts",
+																			"language": "typescript",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "Add",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "icon",
+																			"grouping": "Properties",
+																			"value": "sap-icon://add",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enabled",
+																			"grouping": "Properties",
+																			"value": "{appControl>/enableEdit}",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																},
+																{
+																	"fieldNo": "7934546a-f556-42f7-8dbd-c0da28eb5cd0",
+																	"fieldName": "toolFormRoleSpacer",
+																	"fieldParent": "afe52ac3-a129-499a-a869-5fa5dce8455f",
+																	"fieldType": "sap.m.ToolbarSpacer",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																}
+															]
+														},
+														{
+															"fieldNo": "f477bd0c-3908-4933-c4ab-56dc45060687",
+															"fieldName": "coltableFormRoleName",
+															"fieldParent": "dc2abb9b-bf6a-4548-bdbf-ab59870c096e",
+															"fieldType": "sap.m.Column",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																}
+															],
+															"data": [
+																{
+																	"fieldNo": "2de53371-b633-4ab8-ef65-be586ebd3d92",
+																	"fieldName": "colHtableFormRoleName",
+																	"fieldParent": "f477bd0c-3908-4933-c4ab-56dc45060687",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "Name",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																}
+															]
+														},
+														{
+															"fieldNo": "12250af3-9551-4b69-84c8-9c9b36d15bac",
+															"fieldName": "coltableFormRoleDescription",
+															"fieldParent": "dc2abb9b-bf6a-4548-bdbf-ab59870c096e",
+															"fieldType": "sap.m.Column",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																}
+															],
+															"data": [
+																{
+																	"fieldNo": "97312d91-b4fe-4aa4-c161-f718c09ee6af",
+																	"fieldName": "colHtableFormRoleDescription",
+																	"fieldParent": "12250af3-9551-4b69-84c8-9c9b36d15bac",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "Description",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																}
+															]
+														},
+														{
+															"fieldNo": "e4f4252e-6bf3-4dab-ba76-02788c0a9f06",
+															"fieldName": "coltableFormRoleUpdatedAt",
+															"fieldParent": "dc2abb9b-bf6a-4548-bdbf-ab59870c096e",
+															"fieldType": "sap.m.Column",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																}
+															],
+															"data": [
+																{
+																	"fieldNo": "33a19439-b195-4fe7-de38-ece3f62db12a",
+																	"fieldName": "colHtableFormRoleUpdatedAt",
+																	"fieldParent": "e4f4252e-6bf3-4dab-ba76-02788c0a9f06",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "Changed On",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																}
+															]
+														},
+														{
+															"fieldNo": "0c0bdc36-797b-43fd-a975-d99a46d53f57",
+															"fieldName": "coltableFormRoleChangedBy",
+															"fieldParent": "dc2abb9b-bf6a-4548-bdbf-ab59870c096e",
+															"fieldType": "sap.m.Column",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																}
+															],
+															"data": [
+																{
+																	"fieldNo": "6a4d7be3-fad5-4319-ae47-3c5aa278b7ca",
+																	"fieldName": "colHtableFormRoleChangedBy",
+																	"fieldParent": "0c0bdc36-797b-43fd-a975-d99a46d53f57",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "Changed By",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																}
+															]
+														},
+														{
+															"fieldNo": "e82fca12-3a09-4874-b897-398a2da8278d",
+															"fieldName": "colItemtableFormRole",
+															"fieldParent": "dc2abb9b-bf6a-4548-bdbf-ab59870c096e",
+															"fieldType": "sap.m.ColumnListItem",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "enableCompactMode",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																}
+															],
+															"data": [
+																{
+																	"fieldNo": "df6ed3da-eee3-4525-d4c3-fe7bd583fa96",
+																	"fieldName": "intableFormRoleName",
+																	"fieldParent": "e82fca12-3a09-4874-b897-398a2da8278d",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "{name}",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																},
+																{
+																	"fieldNo": "57a1bcaa-823e-4b8f-bb98-b2640d82de5b",
+																	"fieldName": "intableFormRoleDescription",
+																	"fieldParent": "e82fca12-3a09-4874-b897-398a2da8278d",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "{description}",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																},
+																{
+																	"fieldNo": "d8132a16-7e4f-44e3-d8a9-2be24571895f",
+																	"fieldName": "intableFormRoleUpdatedAt",
+																	"fieldParent": "e82fca12-3a09-4874-b897-398a2da8278d",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "{updatedAt}",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "text",
+																			"grouping": "Formatter",
+																			"value": "Anonymous Function",
+																			"script": "file://event/sap.m.Text/intableFormRoleUpdatedAt/text.script",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																},
+																{
+																	"fieldNo": "60300b1b-8d6b-4c80-f997-4b50a6dd8483",
+																	"fieldName": "intableFormRoleChangedBy",
+																	"fieldParent": "e82fca12-3a09-4874-b897-398a2da8278d",
+																	"fieldType": "sap.m.Text",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "{changedBy}",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "enableCompactMode",
+																			"grouping": "Properties",
+																			"value": "true",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
 									"fieldNo": "53047f77-d33c-4077-fbe5-099b4be9f33a",
 									"fieldName": "tabDetailDesigner",
 									"fieldParent": "44e81455-bb72-4451-b650-4dac2ed64d7c",
@@ -29181,7 +29736,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.03.19.1209",
+	"ver": "25.04.16.0033",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

@@ -2,7 +2,13 @@
 	"id": "7341be77-5379-4c38-a6c5-01b4cb553199",
 	"createdAt": "2023-01-13T06:41:01.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
-	"globalScripts": [],
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
 	"externalModules": [],
 	"entitySets": [
 		{
@@ -13,7 +19,7 @@
 	],
 	"apis": [],
 	"name": "formSave",
-	"ver": "23.10.6.1030",
+	"ver": "25.04.16.0015",
 	"description": null,
 	"folder": null,
 	"content": "file:///content.js",

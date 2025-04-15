@@ -2,7 +2,13 @@
 	"id": "8451fdc0-46ea-4f35-bcf9-e3ebcdd0c79b",
 	"createdAt": "2023-01-13T06:42:08.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
-	"globalScripts": [],
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
 	"externalModules": [
 		{
 			"id": "c1e44158-f85b-48c3-85df-cd3bb1f6c7f4",
@@ -23,6 +29,11 @@
 			"contextname": "forms_attribute_fields"
 		},
 		{
+			"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
+			"name": "forms_attribute_group",
+			"contextname": "forms_attribute_group"
+		},
+		{
 			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
 			"name": "forms_design",
 			"contextname": "forms_design"
@@ -36,21 +47,16 @@
 			"id": "78f60bae-e2ca-4d4a-ae6e-170ac0f67296",
 			"name": "forms_subgroup",
 			"contextname": "forms_subgroup"
-		},
-		{
-			"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
-			"name": "forms_attribute_group",
-			"contextname": "forms_attribute_group"
 		}
 	],
 	"apis": [],
 	"name": "formList",
-	"ver": "23.10.6.1023",
+	"ver": "25.04.16.0058",
 	"description": null,
 	"folder": null,
 	"content": "file:///content.js",
 	"useAsGlobalScript": false,
-	"lastRunSuccessful": false,
+	"lastRunSuccessful": true,
 	"isTypescript": false,
 	"language": "javascript",
 	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",

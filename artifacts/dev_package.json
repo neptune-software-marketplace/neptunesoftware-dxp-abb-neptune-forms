@@ -8,7 +8,7 @@
 	},
 	"name": "neptunesoftware-dxp-abb-neptune-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "25.04.15.0917",
+	"ver": "25.04.16.0119",
 	"enableCICD": true,
 	"internalReadOnly": false,
 	"oeVersion": "24.11.0-rc.6",
@@ -211,6 +211,11 @@
 			"description": null
 		},
 		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorizationGlobal",
+			"description": null
+		},
+		{
 			"id": "1e524702-d0db-40fe-96c1-8afbfa29c7f0",
 			"name": "deploymentSaveComposer",
 			"description": null
@@ -246,6 +251,11 @@
 			"id": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
 			"name": "Forms",
 			"description": null
+		},
+		{
+			"id": "167edf10-fe2b-4cd4-a1f9-b7107d95acf0",
+			"name": "FormsAuthorization",
+			"description": "Global functions to handle authorization (issue forms/#17)"
 		}
 	],
 	"theme": [],

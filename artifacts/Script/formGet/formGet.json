@@ -2,23 +2,29 @@
 	"id": "ad295417-bab7-49c6-afa6-2a1a8ffa4539",
 	"createdAt": "2023-01-13T06:43:47.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
-	"globalScripts": [],
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
 	"externalModules": [],
 	"entitySets": [
-		{
-			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
-			"name": "forms_design",
-			"contextname": "forms_design"
-		},
 		{
 			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
 			"name": "forms_attribute_fields",
 			"contextname": "forms_attribute_fields"
+		},
+		{
+			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+			"name": "forms_design",
+			"contextname": "forms_design"
 		}
 	],
 	"apis": [],
 	"name": "formGet",
-	"ver": "23.10.6.1026",
+	"ver": "25.04.16.0015",
 	"description": null,
 	"folder": null,
 	"content": "file:///content.js",

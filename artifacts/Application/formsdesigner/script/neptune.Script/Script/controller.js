@@ -457,7 +457,15 @@ const controller = {
                 controller.list();
                 oApp.setBusy(false);
                 oApp.back();
+            })
+            // PRR - forms/#17 - role access to forms (ADD - Begin)
+            .catch(function (result) {
+                oApp.setBusy(false);
+                sap.m.MessageToast.show( result?.responseJSON?.status 
+                                            ? result.responseJSON.status 
+                                            : `Error deleting form.`);
             });
+            // PRR - forms/#17 - role access to forms (ADD - End)
         }, "FORM");
     },
 
