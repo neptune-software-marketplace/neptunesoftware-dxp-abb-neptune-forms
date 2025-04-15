@@ -7428,6 +7428,13 @@
 											"script": "file://event/sap.m.Dialog/diaSingleFormsSelect/beforeOpen.js",
 											"language": "javascript",
 											"translation": []
+										},
+										{
+											"attribute": "contentHeight",
+											"grouping": "Properties",
+											"value": "80%",
+											"script": "",
+											"translation": []
 										}
 									],
 									"data": [
@@ -7451,7 +7458,7 @@
 												{
 													"attribute": "styleClass",
 													"grouping": "Properties",
-													"value": "nepDimension44x50rem",
+													"value": "nepDimension44x100perc_min22rem",
 													"script": "",
 													"translation": []
 												}
@@ -8979,7 +8986,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.04.15.0244",
+	"ver": "25.04.15.0913",
 	"application": "formscomposerdesigner",
 	"title": "Forms Composer",
 	"description": "Forms Composer",

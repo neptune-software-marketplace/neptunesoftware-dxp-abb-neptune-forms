@@ -34,6 +34,12 @@
   height: 22rem;
 }
 
+.nepDimension44x100perc_min22rem {
+  width: 44rem;
+  height: 100%;
+  min-height: 22rem;
+}
+
 .nepListItemSelected {
   border: dashed 3px var(--nepHighlightColor);
 }
