@@ -1,9 +1,13 @@
 const formId = req.query.formid;
+const sessionid = req.query.sessionid;
 const elementId = req.query.elementid;
 const elementData = [];
 
+let where = { formid: formId };
+if (sessionid) where.sessionid = sessionid;
+
 const logs = await entities.forms_data.find({
-    where: { formid: formId },
+    where: where,
     order: { updatedAt: "DESC" },
 });
 

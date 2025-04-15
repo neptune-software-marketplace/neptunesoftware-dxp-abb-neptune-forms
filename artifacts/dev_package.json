@@ -152,12 +152,12 @@
 		},
 		{
 			"id": "a728cf3c-126a-4b14-b8b3-0c0613102eca",
-			"name": "formSave",
+			"name": "formSaveComposer",
 			"description": null
 		},
 		{
 			"id": "a4876e28-6b20-4318-80ff-26729161905f",
-			"name": "formSaveLog",
+			"name": "formSaveLogComposer",
 			"description": null
 		},
 		{
@@ -177,7 +177,7 @@
 		},
 		{
 			"id": "82a3b65f-a627-4353-8abf-4cafa080e5c5",
-			"name": "deploymentList",
+			"name": "deploymentListComposer",
 			"description": null
 		},
 		{
@@ -192,7 +192,7 @@
 		},
 		{
 			"id": "675402ff-8775-4a1b-ae84-46bb378fa705",
-			"name": "formGet",
+			"name": "formGetComposer",
 			"description": null
 		},
 		{
@@ -207,17 +207,17 @@
 		},
 		{
 			"id": "33703733-f41e-4cd9-a0c1-983d66e13463",
-			"name": "formGetLog",
+			"name": "formGetLogComposer",
 			"description": null
 		},
 		{
 			"id": "1e524702-d0db-40fe-96c1-8afbfa29c7f0",
-			"name": "deploymentSave",
+			"name": "deploymentSaveComposer",
 			"description": null
 		},
 		{
 			"id": "178bbc62-ae42-4f2b-8106-16c4b092c6b7",
-			"name": "formDelete",
+			"name": "formDeleteComposer",
 			"description": null
 		},
 		{
@@ -227,7 +227,7 @@
 		},
 		{
 			"id": "096bf9ce-49c6-4bf3-b5e1-c7ee706bda90",
-			"name": "formList",
+			"name": "formListComposer",
 			"description": null
 		}
 	],

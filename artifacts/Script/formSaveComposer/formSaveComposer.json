@@ -1,0 +1,26 @@
+{
+	"id": "a728cf3c-126a-4b14-b8b3-0c0613102eca",
+	"createdAt": "2025-03-26T13:30:34.000Z",
+	"createdBy": "admin",
+	"globalScripts": [],
+	"externalModules": [],
+	"entitySets": [
+		{
+			"id": "82c65538-c736-46f6-8ddf-90932f27f1db",
+			"name": "forms_composer_design",
+			"contextname": "forms_composer_design"
+		}
+	],
+	"apis": [],
+	"name": "formSaveComposer",
+	"ver": "25.04.15.0814",
+	"description": null,
+	"folder": "",
+	"content": "file:///content.js",
+	"useAsGlobalScript": false,
+	"lastRunSuccessful": false,
+	"isTypescript": false,
+	"language": "javascript",
+	"jsscriptGroup": "9c09bf80-d732-4968-8d64-9c01cf20caf9",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

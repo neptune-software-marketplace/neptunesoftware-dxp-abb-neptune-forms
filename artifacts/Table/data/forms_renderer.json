@@ -1,0 +1,31 @@
+[
+	{
+		"id": "456f7cfe-d68b-4ae6-b3ab-b1966d3450b6",
+		"createdAt": "1743820742831",
+		"updatedAt": "1744677565262",
+		"createdBy": "admin",
+		"updatedBy": "admin",
+		"nameSpace": "neptune",
+		"displayType": "freeStepWizard",
+		"composerId": null,
+		"composerFields": {
+			"checkboxLabel": "New step in the Free Step Wizard",
+			"groupTitle": "Free Step Wizard",
+			"fields": [
+				{
+					"id": "crumbName",
+					"label": "Step circle value",
+					"type": "input"
+				},
+				{
+					"id": "tabName",
+					"label": "Step name",
+					"type": "input"
+				}
+			]
+		},
+		"appName": "formsrenderer_freestepwizard",
+		"appType": "application",
+		"active": true
+	}
+]

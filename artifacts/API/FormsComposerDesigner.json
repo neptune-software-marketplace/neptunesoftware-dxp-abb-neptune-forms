@@ -581,7 +581,7 @@
 	"documentation": [],
 	"name": "FormsComposerDesigner",
 	"endpoint": "/api/serverscript/FormsComposerDesigner",
-	"ver": "25.04.05.0432",
+	"ver": "25.04.15.0815",
 	"version": null,
 	"description": "Operations used by the Forms Composer",
 	"mediaType": null,

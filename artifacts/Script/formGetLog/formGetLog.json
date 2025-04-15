@@ -1,7 +1,7 @@
 {
-	"id": "33703733-f41e-4cd9-a0c1-983d66e13463",
-	"createdAt": "2025-03-26T13:26:36.000Z",
-	"createdBy": "admin",
+	"id": "65546019-2d1a-483a-970b-e5a4a165dd01",
+	"createdAt": "2023-02-23T07:51:02.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
 	"globalScripts": [],
 	"externalModules": [],
 	"entitySets": [
@@ -13,14 +13,14 @@
 	],
 	"apis": [],
 	"name": "formGetLog",
-	"ver": "25.03.26.1427",
+	"ver": "24.05.23.1443",
 	"description": null,
-	"folder": "",
+	"folder": null,
 	"content": "file:///content.js",
 	"useAsGlobalScript": false,
 	"lastRunSuccessful": false,
 	"isTypescript": false,
 	"language": "javascript",
-	"jsscriptGroup": "9c09bf80-d732-4968-8d64-9c01cf20caf9",
+	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
 	"package": "a313322e-f024-45f1-960f-b90081757b85"
 }
