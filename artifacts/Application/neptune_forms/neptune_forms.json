@@ -95,6 +95,117 @@
 			"fieldNo": 99999,
 			"data": [
 				{
+					"fieldNo": "0cadc807-4a8b-487d-f7f6-b6fb4d10f293",
+					"fieldName": "formsdeclare",
+					"fieldParent": 99999,
+					"fieldType": "neptune_formsdeclare",
+					"script": "",
+					"customComponent": true,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": []
+				},
+				{
+					"fieldNo": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+					"fieldName": "Translation",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "282b25c0-3215-439e-84aa-62ab6d56c29a",
+							"fieldName": "i18nLabel",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Standard",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "e2f5bf6d-f1aa-43cd-dfa3-085c5b945fb3",
+							"fieldName": "i18nDescription",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Standard renderer",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "e78e207b-af11-4437-d8ed-9ad257364967",
+					"fieldName": "Model",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "c4e3d056-2b1c-402f-b42e-f01b978a828c",
+							"fieldName": "RendererCustomization",
+							"fieldParent": "e78e207b-af11-4437-d8ed-9ad257364967",
+							"fieldType": "neptune.model",
+							"script": "",
+							"customComponent": false,
+							"disabled": true,
+							"bindingValue": "FormsRenderer>responseRendererCustomization",
+							"bindingType": "h",
+							"bindingSource": "API",
+							"bindingParentID": "c90193d2-e3e9-4b9a-a6ae-ec6720d42ad5",
+							"bindingPathID": "fdd07565-c4c5-4525-aeb9-04406bccce4a",
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "e592b6f4-cdaa-46db-8fcb-d779541c67d5",
+							"fieldName": "appControl",
+							"fieldParent": "e78e207b-af11-4437-d8ed-9ad257364967",
+							"fieldType": "neptune.model",
+							"script": "",
+							"customComponent": false,
+							"bindingValue": "Generic Array",
+							"bindingType": "h",
+							"bindingSource": "P9",
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				},
+				{
 					"fieldNo": "5da79be1-8fb0-4ce4-a5e3-7fc4517150fd",
 					"fieldName": "API",
 					"fieldParent": 99999,
@@ -189,6 +300,27 @@
 							"response": [],
 							"attributes": [],
 							"data": []
+						},
+						{
+							"fieldNo": "84f23b19-94e0-4bd1-b2e6-e1d520827401",
+							"fieldName": "GetAllRenderers",
+							"fieldParent": "5da79be1-8fb0-4ce4-a5e3-7fc4517150fd",
+							"fieldType": "neptune.restapi",
+							"script": "",
+							"customComponent": false,
+							"restSource": "c90193d2-e3e9-4b9a-a6ae-ec6720d42ad5",
+							"restOperation": "58b7338e-40d3-4b8f-b6d4-947af025a11d",
+							"request": [
+								{
+									"name": "onlyActive",
+									"value": "false",
+									"parent": "RequestParameter",
+									"expression": ""
+								}
+							],
+							"response": [],
+							"attributes": [],
+							"data": []
 						}
 					]
 				},
@@ -204,18 +336,23 @@
 					"attributes": [],
 					"data": [
 						{
-							"fieldNo": "e592b6f4-cdaa-46db-8fcb-d779541c67d5",
-							"fieldName": "appControl",
+							"fieldNo": "b6eae88e-537b-407b-98b8-85126a9dcc7a",
+							"fieldName": "Global",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
-							"fieldType": "neptune.model",
-							"script": "",
+							"fieldType": "neptune.Script",
+							"script": "file://script/neptune.Script/Script/Global.js",
 							"customComponent": false,
-							"bindingValue": "Generic Array",
-							"bindingType": "h",
-							"bindingSource": "P9",
 							"request": [],
 							"response": [],
-							"attributes": [],
+							"attributes": [
+								{
+									"attribute": "isUnique",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								}
+							],
 							"data": []
 						},
 						{
@@ -227,15 +364,95 @@
 							"customComponent": false,
 							"request": [],
 							"response": [],
+							"attributes": [
+								{
+									"attribute": "isUnique",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "10083566-0295-4ceb-bb43-05fd6eb29c5c",
+							"fieldName": "safeClone",
+							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/safeClone.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "isUnique",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "ddfa1361-d940-4bff-ff6f-a993d044be66",
+							"fieldName": "FORMS.rendererFramework",
+							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/FORMS.rendererFramework.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "isUnique",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "0ecc8d16-985b-416a-dab5-26c97b03b040",
+							"fieldName": "FORMS.rendererTypeStandard",
+							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/FORMS.rendererTypeStandard.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
 							"attributes": [],
 							"data": []
 						},
 						{
-							"fieldNo": "3cf1e9b2-73d9-435f-98d7-9363cf7bbca5",
-							"fieldName": "FORMS",
+							"fieldNo": "3a3be61d-e1a3-4ec1-af81-fe46ed6527a6",
+							"fieldName": "FORMS.original",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
-							"fieldType": "neptune.Script",
-							"script": "file://script/neptune.Script/Script/FORMS.js",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/FORMS.original.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "isUnique",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "40a5c1a7-6f9d-44c4-fe48-e713c6d98a55",
+							"fieldName": "DEBUG",
+							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/DEBUG.ts",
 							"customComponent": false,
 							"request": [],
 							"response": [],
@@ -257,7 +474,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "24.12.12.1647",
+	"ver": "25.04.14.2012",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
@@ -304,6 +521,11 @@
 			"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
 			"name": "FormsClient",
 			"ver": "24.11.11.1030"
+		},
+		{
+			"id": "c90193d2-e3e9-4b9a-a6ae-ec6720d42ad5",
+			"name": "FormsRenderer",
+			"ver": "25.04.05.0436"
 		},
 		{
 			"id": "81208c0f-b900-4019-a5b1-f27a63549d32",

@@ -1,0 +1,2 @@
+//
+diaCustomizeRenderers.close();

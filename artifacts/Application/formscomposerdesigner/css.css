@@ -1,0 +1,155 @@
+*:focus {
+    outline: none !important;
+}
+
+.nepOverflowHidden,
+.nepOverflowHidden > [id$=-content] {
+    overflow: hidden;
+}
+.nepOverflowHidden_Important,
+.nepOverflowHidden_Important > [id$=-content] {
+    overflow: hidden!important;
+}
+
+.nepPositionFixed {
+    position: fixed;
+}
+.nepPositionStatic {
+    position: static;
+}
+
+.nepHideItemRadioButton [role=radio] {
+    visibility: hidden;
+}
+
+.nepDimension44x50rem {
+    width: 44rem;
+    height: 50rem;
+}
+.nepDimension44x22rem {
+    width: 44rem;
+    height: 22rem;
+}
+
+.nepListItemSelected {
+    border: dashed 3px var(--nepHighlightColor);
+}
+
+.nepDragNDropIcon {
+    margin: 0!important;
+    padding: 1rem!important;
+}
+.nepDragNDropCursor {
+    cursor:grab;
+}
+.nepPointerCursor {
+    cursor:pointer;
+}
+.nepProjectView .sapMLIBHighlightError, /* Exclude */
+.nepProjectView .sapMLIBHighlightWarning, /* Disabled */
+.nepProjectView .sapMLIBHighlightInformation { /* Exclude & Disabled */
+    position: absolute;
+    z-index: 98;
+    width: 100%!important;
+}
+.nepProjectView .sapMLIBHighlightError {
+    background-color: #fa61613f;
+}
+.nepProjectView .sapMLIBHighlightWarning {
+    background-color: #FFE2523f;
+}
+.nepProjectView .sapMLIBHighlightInformation {
+    background: linear-gradient(45deg, rgba(255, 226, 82, 0.247059), rgba(255, 226, 82, 0.247059), rgba(251, 97, 97, 0.2470588235))!important
+}
+.nepProjectView .nepProjectItemSelected {
+    background-color: grey!important;
+}
+.nepProjectView .sapMLIBHighlightError+span,
+.nepProjectView .sapMLIBHighlightWarning+span,
+.nepProjectView .sapMLIBHighlightInformation+span {
+    z-index: 99;
+    background-color: transparent!important;
+}
+.nepProjectView .sapMLIBSelected {
+    background-color: transparent!important;
+}
+.nepProjectView .nepProjectItemSelected {
+    background-color: grey!important;
+}
+
+.previewMarked {
+    border: 3px dashed var(--nepBrandYellow);
+    border-radius: 8px;
+}
+
+.formGeneral .sapUiFormResGrid > div {
+    padding-bottom: 10px !important;
+}
+
+.formSettings .sapUiFormResGrid > div {
+    padding-top: 0 !important;
+}
+
+.titleItems {
+    padding-top: 20px;
+    padding-bottom: 0px;
+    font-size: 18px;
+}
+
+.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH1,
+.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH2,
+.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH3,
+.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH4,
+.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH5,
+.panProperties .sapUiFormContainerTitle > .sapUiFormTitleH6 {
+    font-size: 18px;
+}
+
+.formDnDIcon.sapUiIcon {
+    color: var(--nepInformationColor);
+    margin-top: 6px;
+}
+
+.formPreview {
+    border: 6px dashed var(--nepBorderColor);
+}
+
+.formPreviewMobile {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formPreviewTablet {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formPreviewDesktop {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formPreviewFull {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.treeOutline .sapMSTIIcon {
+    color: var(--nepInformationColor);
+}
+
+.sapUiRespGridMedia-Std-Phone.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanS12) > .nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-Tablet.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanM12) > .nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-Desktop.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanL12) > .nepLabelLeftAlign,
+.sapUiRespGridMedia-Std-LargeDesktop.sapUiFormResGridCont > .sapUiFormElementLbl:not(.sapUiRespGridSpanXL12) > .nepLabelLeftAlign {
+    text-align: left !important;
+}
+
+// TODO
+.sapMLIB.sapMLIBActive {
+    background-color: #223548 !important;
+}

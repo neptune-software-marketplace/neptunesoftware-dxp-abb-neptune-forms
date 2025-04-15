@@ -1,0 +1,259 @@
+{
+	"id": "47a2889c-5ca1-460e-baf9-ae868ea076e5",
+	"createdAt": "2025-04-07T23:53:51.000Z",
+	"createdBy": "admin",
+	"settings": {
+		"properties": {
+			"report": {
+				"showIcon": true,
+				"actionButtonLeft": false,
+				"hideHeader": false,
+				"iconButtonClose": "",
+				"textButtonClose": "Close",
+				"typeButtonClose": "Transparent",
+				"iconButtonCreate": "",
+				"textButtonCreate": "Create",
+				"typeButtonCreate": "Emphasized",
+				"iconButtonExport": "sap-icon://excel-attachment",
+				"textButtonExport": "",
+				"typeButtonExport": "Transparent",
+				"iconButtonImport": "sap-icon://fa-solid/file-import",
+				"textButtonImport": "",
+				"typeButtonImport": "Transparent",
+				"iconButtonMultiSelect": "",
+				"textButtonMultiSelect": "MultiSelect",
+				"typeButtonMultiSelect": "Emphasized",
+				"iconButtonRun": "",
+				"textButtonRun": "Update",
+				"typeButtonRun": "Emphasized",
+				"enableRun": true,
+				"enableCreate": true,
+				"enableClose": false,
+				"enableDelete": false,
+				"enableExport": false,
+				"enableImport": false,
+				"enableMultiSelect": false,
+				"enableVariant": false,
+				"autoRun": true,
+				"autoRunFocus": false,
+				"searchLabel": "Search",
+				"searchPlaceholder": "",
+				"requiredFieldsToast": "Please fill in all required fields",
+				"textConfirmDelete": "Do you want to delete this entry? ",
+				"titleConfirmDelete": "Delete",
+				"odataValueList": "Field does not have any OData ValueListReference",
+				"title": "Renderers",
+				"_navigationCreate": {
+					"destinationType": "F",
+					"openAs": "P",
+					"butType": "Accept",
+					"fieldType": "Navigation",
+					"displayResponse": false,
+					"dialogHeader": true,
+					"destinationTargetF": "4d2094ec-cef1-4f6d-8a68-19c35451a8c3",
+					"keyField": []
+				},
+				"_navigationItemPress": {
+					"destinationType": "F",
+					"openAs": "P",
+					"butType": "Accept",
+					"fieldType": "Navigation",
+					"displayResponse": false,
+					"dialogHeader": true,
+					"destinationTargetF": "4d2094ec-cef1-4f6d-8a68-19c35451a8c3",
+					"keyField": [
+						{
+							"fieldName": "id",
+							"key": "id",
+							"value": ""
+						}
+					]
+				},
+				"avatarIcon": "sap-icon://customize"
+			},
+			"form": {
+				"enableCompact": false,
+				"headerExpanded": true,
+				"headerPreserveState": false,
+				"enableSearchWildcard": false
+			},
+			"table": {
+				"enablePagination": false,
+				"paginationShowSelection": false,
+				"paginationRows": 25,
+				"showSeparators": "All",
+				"alternateRowColors": false,
+				"fixedLayout": false,
+				"inset": false,
+				"enableCompact": true,
+				"enableAutoPopin": false,
+				"enableAction1": false,
+				"enableAction2": false,
+				"enableAction3": false,
+				"enableAction4": false,
+				"enableAction5": false,
+				"action1Text": "",
+				"action1Type": "Transparent",
+				"action2Text": "",
+				"action2Type": "Transparent",
+				"action3Text": "",
+				"action3Type": "Transparent",
+				"action4Text": "",
+				"action4Type": "Transparent",
+				"action5Text": "",
+				"action5Type": "Transparent",
+				"headerText": "",
+				"initialSortField": "nameSpace",
+				"initialSortOrder": "ASC"
+			}
+		},
+		"fieldCatalog": [
+			{
+				"name": "createdAt",
+				"label": "Created At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "createdBy",
+				"label": "Created By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedAt",
+				"label": "Updated At",
+				"type": "timestamp",
+				"usage": "BOTH"
+			},
+			{
+				"name": "updatedBy",
+				"label": "Updated By",
+				"type": "text",
+				"usage": "BOTH"
+			},
+			{
+				"name": "active",
+				"label": "active",
+				"type": "boolean",
+				"usage": "BOTH"
+			},
+			{
+				"name": "appName",
+				"label": "appName",
+				"type": "mediumtext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "appType",
+				"label": "appType",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "composerFields",
+				"label": "composerFields",
+				"type": "json",
+				"usage": "BOTH"
+			},
+			{
+				"name": "composerId",
+				"label": "composerId",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "displayType",
+				"label": "displayType",
+				"type": "smalltext",
+				"usage": "BOTH"
+			},
+			{
+				"name": "nameSpace",
+				"label": "nameSpace",
+				"type": "smalltext",
+				"usage": "BOTH"
+			}
+		],
+		"fieldsSel": [
+			{
+				"visible": true,
+				"name": "nameSpace",
+				"text": "Namespace",
+				"fieldPos": 1,
+				"type": "MultiSelect"
+			}
+		],
+		"fieldsRun": [
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Inline",
+				"enableFilter": false,
+				"enableSort": true,
+				"visible": true,
+				"name": "active",
+				"text": "Is Active?",
+				"fieldPos": 2,
+				"type": "CheckBox"
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Inline",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "nameSpace",
+				"text": "Namespace",
+				"fieldPos": 3
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Inline",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "displayType",
+				"text": "Display type",
+				"fieldPos": 4
+			},
+			{
+				"buttonType": "Transparent",
+				"popinDisplay": "Inline",
+				"enableFilter": true,
+				"enableSort": true,
+				"visible": true,
+				"name": "composerId",
+				"text": "Composer Id",
+				"fieldPos": 5,
+				"valueType": ""
+			}
+		],
+		"defaultVariant": {
+			"id": "2a77246b-842c-4f8c-c2d4-eff352f18b89",
+			"colOrder": "key_a_to_z",
+			"rowOrder": "key_a_to_z",
+			"row": [],
+			"column": [],
+			"val": [],
+			"inclusions": {},
+			"exclusions": {}
+		}
+	},
+	"name": "neptune_forms_renderer_list",
+	"description": "List of renderers to customize",
+	"group": "",
+	"type": "C",
+	"connectorid": "fdeed274-00c9-4d7f-a8c7-8244d2ee3b77",
+	"scriptSel": null,
+	"scriptRun": null,
+	"tableid": null,
+	"ver": "25.04.15.0241",
+	"disabled": false,
+	"appType": "A",
+	"application": "neptunedxp_adaptive_list",
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"roles": [],
+	"scriptSelObj": null,
+	"scriptRunObj": null,
+	"tableObj": null
+}

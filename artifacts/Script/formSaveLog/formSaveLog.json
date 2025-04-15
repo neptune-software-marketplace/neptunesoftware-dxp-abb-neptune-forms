@@ -1,7 +1,7 @@
 {
-	"id": "dd272da2-5e6a-40e9-a9e6-117337fa68ee",
-	"createdAt": "2023-02-20T22:56:44.000Z",
-	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"id": "a4876e28-6b20-4318-80ff-26729161905f",
+	"createdAt": "2025-03-26T13:32:19.000Z",
+	"createdBy": "admin",
 	"globalScripts": [],
 	"externalModules": [],
 	"entitySets": [
@@ -13,14 +13,14 @@
 	],
 	"apis": [],
 	"name": "formSaveLog",
-	"ver": "24.05.23.1457",
+	"ver": "25.03.26.1432",
 	"description": null,
-	"folder": null,
+	"folder": "",
 	"content": "file:///content.js",
 	"useAsGlobalScript": false,
 	"lastRunSuccessful": false,
 	"isTypescript": false,
 	"language": "javascript",
-	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
+	"jsscriptGroup": "9c09bf80-d732-4968-8d64-9c01cf20caf9",
 	"package": "a313322e-f024-45f1-960f-b90081757b85"
 }

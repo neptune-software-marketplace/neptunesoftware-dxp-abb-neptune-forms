@@ -1,0 +1,17 @@
+{
+	"id": "fdeed274-00c9-4d7f-a8c7-8244d2ee3b77",
+	"createdAt": "2025-04-07T23:27:44.000Z",
+	"createdBy": "admin",
+	"settings": {
+		"tableid": "2c64ca07-8c95-43e3-86d0-948b206f5488",
+		"hasDocumentation": false
+	},
+	"documentation": {},
+	"name": "Neptune FORMS: Renderer",
+	"description": null,
+	"group": null,
+	"type": "T",
+	"ver": "25.04.15.0234",
+	"disabled": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

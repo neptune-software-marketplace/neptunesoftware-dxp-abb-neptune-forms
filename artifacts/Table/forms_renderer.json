@@ -1,0 +1,89 @@
+{
+	"id": "2c64ca07-8c95-43e3-86d0-948b206f5488",
+	"createdAt": "2025-04-04T13:39:22.000Z",
+	"createdBy": "admin",
+	"fields": [
+		{
+			"id": "524976da-8360-411c-a5e8-05f6912bbff4",
+			"fieldName": "nameSpace",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"isNullable": true
+		},
+		{
+			"id": "83e44d7d-bfa8-40fa-9405-5f02c7ece65d",
+			"fieldName": "displayType",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"isNullable": true
+		},
+		{
+			"id": "fb31ff65-62cc-4740-f512-b7d544cf3fc6",
+			"fieldName": "composerId",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"isNullable": true
+		},
+		{
+			"id": "0e12f00b-f1c9-44de-8508-1e0dd68e7e18",
+			"fieldName": "composerFields",
+			"fieldType": "json",
+			"isUnique": false,
+			"isNullable": true
+		},
+		{
+			"id": "00799e6d-8907-46ee-8be0-d18cd912e54f",
+			"fieldName": "appName",
+			"fieldType": "mediumtext",
+			"isUnique": false,
+			"isNullable": true
+		},
+		{
+			"id": "39d8a4a3-f310-4e6f-f7e2-0bb9b82cac33",
+			"fieldName": "appType",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"isNullable": true
+		},
+		{
+			"id": "22a89558-1c9d-48ba-fd9f-3baec7ac1a62",
+			"fieldName": "active",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"isNullable": false
+		}
+	],
+	"indices": [
+		{
+			"id": "622c6678-4be6-4826-abf7-0e8ae158ff67",
+			"name": "IDX_7047a6196a5a5f1a0e797c0f1d",
+			"columns": [
+				{
+					"id": "524976da-8360-411c-a5e8-05f6912bbff4",
+					"fieldName": "nameSpace",
+					"fieldType": "smalltext",
+					"isUnique": false,
+					"isNullable": true
+				},
+				{
+					"id": "83e44d7d-bfa8-40fa-9405-5f02c7ece65d",
+					"fieldName": "displayType",
+					"fieldType": "smalltext",
+					"isUnique": false,
+					"isNullable": true
+				}
+			],
+			"isUnique": true
+		}
+	],
+	"foreignKeys": [],
+	"name": "forms_renderer",
+	"description": "Renderers' property customization for Composer and ",
+	"ver": "25.04.15.0231",
+	"enableAudit": false,
+	"includeDataInPackage": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"generationStrategy": "uuid",
+	"rolesRead": [],
+	"rolesWrite": []
+}

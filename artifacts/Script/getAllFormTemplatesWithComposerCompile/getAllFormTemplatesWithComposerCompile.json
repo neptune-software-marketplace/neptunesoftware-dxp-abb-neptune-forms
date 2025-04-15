@@ -1,0 +1,31 @@
+{
+	"id": "4e35e04f-fcbb-49eb-bd3f-138f3cf7ebe4",
+	"createdAt": "2025-03-26T13:37:29.000Z",
+	"createdBy": "admin",
+	"globalScripts": [],
+	"externalModules": [],
+	"entitySets": [
+		{
+			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+			"name": "forms_design",
+			"contextname": "forms_design"
+		},
+		{
+			"id": "82c65538-c736-46f6-8ddf-90932f27f1db",
+			"name": "forms_composer_design",
+			"contextname": "forms_composer_design"
+		}
+	],
+	"apis": [],
+	"name": "getAllFormTemplatesWithComposerCompile",
+	"ver": "25.04.09.1501",
+	"description": "Gets all forms (Single and Compounded) ready to use",
+	"folder": "",
+	"content": "file:///content.js",
+	"useAsGlobalScript": false,
+	"lastRunSuccessful": true,
+	"isTypescript": false,
+	"language": "javascript",
+	"jsscriptGroup": "9c09bf80-d732-4968-8d64-9c01cf20caf9",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

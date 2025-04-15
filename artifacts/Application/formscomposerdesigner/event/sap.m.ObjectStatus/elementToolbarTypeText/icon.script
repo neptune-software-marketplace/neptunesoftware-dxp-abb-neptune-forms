@@ -1,0 +1,4 @@
+if (typeof _datatype === "undefined" || _datatype === null || _datatype === "") { return; }  
+
+var element = ModelData.FindFirst(controller.elementTypes,"type",_datatype);
+return element.icon;

@@ -10,7 +10,7 @@ const package = await manager.find("dev_package", {
     order: { name: "ASC" },
 });
 
-const forms = await entities.forms_design.find({
+const forms = await entities.forms_composer_design.find({
     select: [
         "name",
         "description",

@@ -1,0 +1,161 @@
+{
+	"id": "c90193d2-e3e9-4b9a-a6ae-ec6720d42ad5",
+	"createdAt": "2025-03-31T02:35:53.000Z",
+	"createdBy": "admin",
+	"auth": [],
+	"endpoints": [],
+	"paths": [
+		{
+			"id": "58b7338e-40d3-4b8f-b6d4-947af025a11d",
+			"method": "GET",
+			"path": "/getAllRenderers",
+			"description": "",
+			"parameters": [
+				{
+					"name": "onlyActive",
+					"description": "",
+					"required": false,
+					"inPath": false,
+					"value": "",
+					"default": "",
+					"example": ""
+				}
+			],
+			"headers": [],
+			"responses": [
+				{
+					"id": "088f157c-d36d-43f3-b95f-22a72d1571ea",
+					"status": "200",
+					"description": "OK",
+					"headers": [],
+					"content": [
+						{
+							"id": "241bee95-64c1-4d6b-a425-edf499896f54",
+							"name": "responseRendererCustomization",
+							"objectType": "array"
+						}
+					]
+				}
+			],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"tags": "Renderer",
+			"serverScript": "9b120056-15b3-4faa-a84c-1b833f5a09a5"
+		}
+	],
+	"definitions": [
+		{
+			"id": "fdd07565-c4c5-4525-aeb9-04406bccce4a",
+			"name": "responseRendererCustomization",
+			"description": "Renderer customization data",
+			"isInclude": false,
+			"properties": [
+				{
+					"id": "6ba2ddda-a314-4c3f-9ec7-f0b59d467775",
+					"name": "nameSpace",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "1f41be2b-e88e-410c-8ee9-75900c74c2fd",
+					"name": "displayType",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "c73c93b8-3c98-40bd-886a-4fe08f8f5908",
+					"name": "composerFields",
+					"parent": "",
+					"description": "",
+					"objectType": "object",
+					"objectName": "composerFields",
+					"isParent": true,
+					"enableValueHelp": false,
+					"canAddSubNode": true,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "9118d04c-c6cf-4e6e-855b-44e00f431276",
+					"name": "appName",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "e1749470-2c5a-4d19-b342-8a689c8abe5b",
+					"name": "appType",
+					"parent": "",
+					"description": "",
+					"objectType": "string",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				},
+				{
+					"id": "59ebf8ed-d7e5-4e92-945a-7292b0c6b422",
+					"name": "active",
+					"parent": "",
+					"description": "",
+					"objectType": "boolean",
+					"isParent": false,
+					"enableValueHelp": false,
+					"canAddSubNode": false,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
+				}
+			]
+		}
+	],
+	"documentation": [],
+	"name": "FormsRenderer",
+	"endpoint": "/api/serverscript/FormsRenderer",
+	"ver": "25.04.05.0436",
+	"version": null,
+	"description": "Access to the Forms' Renderer Customization",
+	"mediaType": null,
+	"securitySchemes": null,
+	"swaggerURI": null,
+	"swaggerSystem": null,
+	"apiType": "script",
+	"about": null,
+	"enableProxy": false,
+	"forwardProxy": null,
+	"restrictAccess": false,
+	"enableTrace": false,
+	"enableIDE": true,
+	"internalAPI": false,
+	"isPublic": false,
+	"tlsAllowUntrusted": true,
+	"useOwnProcess": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"apiGroup": "d3596a74-a10f-46d9-9d3d-f5462c65031a",
+	"apiFormat": 0,
+	"roles": []
+}

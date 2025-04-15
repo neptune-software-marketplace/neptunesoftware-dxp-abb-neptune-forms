@@ -1,0 +1,21 @@
+let loData = this.getBindingContext("appData").getObject();
+if (!loData[C_FIELD_ID_SINGLE_FORM]) {
+    return; /* Maybe it's not an element */
+}
+
+let loSelectedItem = modelappControl.getData().projectItemSelected;
+if (loSelectedItem && loData.id === loSelectedItem.id && loData[C_FIELD_ID_SINGLE_FORM] === loSelectedItem[C_FIELD_ID_SINGLE_FORM]) {
+    this.addStyleClass(C_CSS_PROJECT_ITEM_SELECTED);
+} else {
+    this.removeStyleClass(C_CSS_PROJECT_ITEM_SELECTED);
+}
+try {
+    let loConfig = modelappData.getData().selectedForm.config.control[loData[C_FIELD_ID_SINGLE_FORM]][loData.id];
+    if (loConfig?.excluded && loData.disabled) {
+        return sap.ui.core.MessageType.Information;
+    } else if (loConfig?.excluded) {
+        return sap.ui.core.MessageType.Error;
+    } else if (loData.disabled) {
+        return sap.ui.core.MessageType.Warning;
+    }
+} catch (e) {}

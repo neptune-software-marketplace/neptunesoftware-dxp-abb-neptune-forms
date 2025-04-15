@@ -4,11 +4,11 @@
 	"createdBy": "ole-andre.haugen@neptune-software.com",
 	"git": {
 		"remote": "https://github.com/neptune-software-marketplace/neptunesoftware-dxp-abb-neptune-forms.git",
-		"branch": "v24"
+		"branch": "Mergev24"
 	},
 	"name": "neptunesoftware-dxp-abb-neptune-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "24.12.11.1740",
+	"ver": "25.04.15.0302",
 	"enableCICD": true,
 	"internalReadOnly": false,
 	"oeVersion": "24.11.0-rc.6",
@@ -16,49 +16,46 @@
 	"roles": [],
 	"apps": [
 		{
+			"id": "ec4b9ad5-a212-45d7-8859-9ce068dd7ac8",
+			"application": "neptune_formsdeclare",
+			"title": "",
+			"description": ""
+		},
+		{
 			"id": "bbdfe2ca-c704-487a-bb87-b1656d571f3a",
 			"application": "neptune_forms_deployment",
 			"title": "FORMS Deployment",
-			"description": "FORMS Deployment",
-			"package": {
-				"id": "A313322E-F024-45F1-960F-B90081757B85"
-			}
+			"description": "FORMS Deployment"
 		},
 		{
-			"id": "98b64f81-1c34-4221-9746-71750cd376ef",
-			"application": "neptune_forms_build",
-			"title": "",
-			"description": "",
-			"package": {
-				"id": "A313322E-F024-45F1-960F-B90081757B85"
-			}
+			"id": "980e849c-1785-4f33-a339-dbeb8863549c",
+			"application": "formscomposerdesigner",
+			"title": "Forms Composer",
+			"description": "Forms Composer"
 		},
 		{
 			"id": "937aeefc-e1c5-44f2-b723-4065af58f03b",
 			"application": "neptune_forms",
 			"title": "Neptune FORMS",
-			"description": "Neptune FORMS",
-			"package": {
-				"id": "A313322E-F024-45F1-960F-B90081757B85"
-			}
+			"description": "Neptune FORMS"
+		},
+		{
+			"id": "836fbae4-6157-4829-bdeb-c4ab11710a70",
+			"application": "formsrenderer_freestepwizard",
+			"title": "",
+			"description": ""
 		},
 		{
 			"id": "74bff3f5-b8ae-4250-aed3-6ebfe904b23e",
 			"application": "formsdesigner",
 			"title": "Neptune FORMS",
-			"description": "Neptune FORMS",
-			"package": {
-				"id": "A313322E-F024-45F1-960F-B90081757B85"
-			}
+			"description": "Neptune FORMS"
 		},
 		{
 			"id": "4b507eda-02d6-4b00-ab00-c730a27c7ffd",
 			"application": "planet9_adaptive_forms",
 			"title": "Adaptive FORMS",
-			"description": "Adaptive FORMS",
-			"package": {
-				"id": "A313322E-F024-45F1-960F-B90081757B85"
-			}
+			"description": "Adaptive FORMS"
 		}
 	],
 	"api": [
@@ -75,6 +72,18 @@
 			"apiGroup": "d3596a74-a10f-46d9-9d3d-f5462c65031a"
 		},
 		{
+			"id": "c90193d2-e3e9-4b9a-a6ae-ec6720d42ad5",
+			"name": "FormsRenderer",
+			"description": "Access to the Forms' Renderer Customization",
+			"apiGroup": "d3596a74-a10f-46d9-9d3d-f5462c65031a"
+		},
+		{
+			"id": "9ecf7b8e-40c0-4484-9cb6-a22997013950",
+			"name": "FormsComposerDesigner",
+			"description": "Operations used by the Forms Composer",
+			"apiGroup": "d3596a74-a10f-46d9-9d3d-f5462c65031a"
+		},
+		{
 			"id": "81208c0f-b900-4019-a5b1-f27a63549d32",
 			"name": "MediaLib",
 			"description": null,
@@ -88,6 +97,11 @@
 			"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
 			"name": "forms_attribute_group",
 			"description": "FORMS: Object Attribute Group"
+		},
+		{
+			"id": "82c65538-c736-46f6-8ddf-90932f27f1db",
+			"name": "forms_composer_design",
+			"description": "FORMS: Composer"
 		},
 		{
 			"id": "7c35f34a-4a8d-498d-8366-684cdf4c791f",
@@ -108,6 +122,11 @@
 			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
 			"name": "forms_attribute_fields",
 			"description": "FORMS: Object Attribute Fields"
+		},
+		{
+			"id": "2c64ca07-8c95-43e3-86d0-948b206f5488",
+			"name": "forms_renderer",
+			"description": "Renderers' property customization for Composer and "
 		},
 		{
 			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
@@ -132,6 +151,21 @@
 			"description": null
 		},
 		{
+			"id": "a728cf3c-126a-4b14-b8b3-0c0613102eca",
+			"name": "formSave",
+			"description": null
+		},
+		{
+			"id": "a4876e28-6b20-4318-80ff-26729161905f",
+			"name": "formSaveLog",
+			"description": null
+		},
+		{
+			"id": "9b120056-15b3-4faa-a84c-1b833f5a09a5",
+			"name": "getAllRenderers",
+			"description": null
+		},
+		{
 			"id": "90d6e4cd-8fe3-471e-9e75-b8e19cf1b09e",
 			"name": "medialibFoldersGet",
 			"description": "Reading the folders of the medialib in deep structure"
@@ -139,6 +173,11 @@
 		{
 			"id": "8451fdc0-46ea-4f35-bcf9-e3ebcdd0c79b",
 			"name": "formList",
+			"description": null
+		},
+		{
+			"id": "82a3b65f-a627-4353-8abf-4cafa080e5c5",
+			"name": "deploymentList",
 			"description": null
 		},
 		{
@@ -152,17 +191,57 @@
 			"description": null
 		},
 		{
+			"id": "675402ff-8775-4a1b-ae84-46bb378fa705",
+			"name": "formGet",
+			"description": null
+		},
+		{
 			"id": "65546019-2d1a-483a-970b-e5a4a165dd01",
 			"name": "formGetLog",
+			"description": null
+		},
+		{
+			"id": "4e35e04f-fcbb-49eb-bd3f-138f3cf7ebe4",
+			"name": "getAllFormTemplatesWithComposerCompile",
+			"description": "Gets all forms (Single and Compounded) ready to use"
+		},
+		{
+			"id": "33703733-f41e-4cd9-a0c1-983d66e13463",
+			"name": "formGetLog",
+			"description": null
+		},
+		{
+			"id": "1e524702-d0db-40fe-96c1-8afbfa29c7f0",
+			"name": "deploymentSave",
+			"description": null
+		},
+		{
+			"id": "178bbc62-ae42-4f2b-8106-16c4b092c6b7",
+			"name": "formDelete",
 			"description": null
 		},
 		{
 			"id": "0ffd1154-b693-44e0-9019-75c95e4bffc0",
 			"name": "deploymentList",
 			"description": null
+		},
+		{
+			"id": "096bf9ce-49c6-4bf3-b5e1-c7ee706bda90",
+			"name": "formList",
+			"description": null
 		}
 	],
 	"jsscript_group": [
+		{
+			"id": "ab252cb5-f1a4-45e6-bd24-5ed2d540d228",
+			"name": "FormsRenderer",
+			"description": "Scripts to manage the customization of the Forms' Renderers"
+		},
+		{
+			"id": "9c09bf80-d732-4968-8d64-9c01cf20caf9",
+			"name": "FormsComposerDesigner",
+			"description": "Scripts for the Forms' Composer Designer"
+		},
 		{
 			"id": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
 			"name": "Forms",
@@ -255,6 +334,18 @@
 			"application": "neptunedxp_adaptive_list"
 		},
 		{
+			"id": "4d2094ec-cef1-4f6d-8a68-19c35451a8c3",
+			"name": "neptune_forms_renderer_edit",
+			"description": "Edit/create a renderer's customization",
+			"application": "neptunedxp_adaptive_edit"
+		},
+		{
+			"id": "47a2889c-5ca1-460e-baf9-ae868ea076e5",
+			"name": "neptune_forms_renderer_list",
+			"description": "List of renderers to customize",
+			"application": "neptunedxp_adaptive_list"
+		},
+		{
 			"id": "44e04b91-df79-49be-955e-3a27cb6aeb2c",
 			"name": "neptune_forms_classification_list",
 			"description": "",
@@ -299,6 +390,11 @@
 			"name": "FORMS Reports"
 		},
 		{
+			"id": "addd10c1-98b5-4899-bf76-05ff73202391",
+			"description": "Combine Standard FORMS into one Compounded Form",
+			"name": "FORMS Composer"
+		},
+		{
 			"id": "ab45363e-4ca1-46cc-949c-267a20059ff7",
 			"description": "Deploy FORMS to other Open Edition systems",
 			"name": "FORMS Deployment"
@@ -312,6 +408,11 @@
 			"id": "538e3ef8-0493-4f9e-a738-a231db3e8c01",
 			"description": "Create FORMS easily with no-code",
 			"name": "FORMS Designer"
+		},
+		{
+			"id": "442000e1-0c37-49ae-8345-9d927850c991",
+			"description": "Activates/Deactivates renderers for the forms",
+			"name": "FORMS Renderer Customization"
 		}
 	],
 	"tile_layout": [],
@@ -334,6 +435,11 @@
 	"script_scheduler": [],
 	"wf_definition": [],
 	"connector": [
+		{
+			"id": "fdeed274-00c9-4d7f-a8c7-8244d2ee3b77",
+			"name": "Neptune FORMS: Renderer",
+			"description": null
+		},
 		{
 			"id": "eff69025-ed3b-4393-96aa-f68647e513ee",
 			"name": "Neptune FORMS: Report",
@@ -369,12 +475,11 @@
 	"code_snippets": [
 		{
 			"id": "a8ee936a-9bd1-4cba-8292-5520de285ad1",
-			"name": "Usage in your own App",
+			"name": "Documentation",
 			"description": null
 		}
 	],
 	"wf_determination": [],
 	"wf_taskaction": [],
-	"theme_ui5": [],
-	"webapp": []
+	"theme_ui5": []
 }

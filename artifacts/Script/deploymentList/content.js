@@ -6,7 +6,7 @@ const systems = await manager.find("systems", {
     order: { name: "ASC" },
 });
 
-const forms = await entities.forms_design.find({ order: { name: "ASC" } });
+const forms = await entities.forms_composer_design.find({ order: { name: "ASC" } });
 const group = await entities.forms_group.find({ order: { name: "ASC" } });
 const subgroup = await entities.forms_subgroup.find({ order: { name: "ASC" } });
 const attributegroup = await entities.forms_attribute_group.find({ order: { name: "ASC" } });

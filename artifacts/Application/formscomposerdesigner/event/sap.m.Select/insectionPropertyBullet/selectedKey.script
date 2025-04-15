@@ -1,0 +1,4 @@
+if (typeof _dataid === "undefined" || _dataid === null || _dataid === "") { return false; } 
+let loData = modelpanTopProperties.getData()._data;
+let loConfig = modelpanTopProperties.getData()._config[loData.id];
+return loConfig.bulletsLevel; 

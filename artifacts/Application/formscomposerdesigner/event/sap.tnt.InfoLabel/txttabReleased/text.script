@@ -1,0 +1,5 @@
+if (released) {
+    return "Released";
+} else {
+    return "Draft";
+}

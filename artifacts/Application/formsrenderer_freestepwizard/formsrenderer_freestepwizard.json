@@ -1,0 +1,208 @@
+{
+	"id": "836fbae4-6157-4829-bdeb-c4ab11710a70",
+	"createdAt": "2025-04-06T19:10:05.000Z",
+	"createdBy": "admin",
+	"objects": [
+		{
+			"fieldNo": "d0272b3b-dd75-4a6c-a499-d1de6846259c",
+			"fieldName": "invisibleBox",
+			"fieldParent": 0,
+			"fieldType": "sap.m.FlexBox",
+			"script": "",
+			"customComponent": false,
+			"request": [],
+			"response": [],
+			"attributes": [
+				{
+					"attribute": "visible",
+					"grouping": "Properties",
+					"value": "false",
+					"script": "",
+					"translation": []
+				}
+			],
+			"data": []
+		},
+		{
+			"fieldNo": 99999,
+			"data": [
+				{
+					"fieldNo": "85cf2477-52b1-4a48-b9c4-9e194960e2c8",
+					"fieldName": "Translation",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "040a7f59-0fac-4a04-83ca-ffc34281157a",
+							"fieldName": "i18nLabel",
+							"fieldParent": "85cf2477-52b1-4a48-b9c4-9e194960e2c8",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Free step wizard",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "d30f1a38-ac8b-412a-9f22-9fec6be5839a",
+							"fieldName": "i18nDescription",
+							"fieldParent": "85cf2477-52b1-4a48-b9c4-9e194960e2c8",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "This renderer builds a wizard that allows for arbitrary step selection. The form's elements are generated when a step is selected for the first time.",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "e376bccf-6712-4355-9810-3c52e0b087b2",
+					"fieldName": "CustomComponents",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "58ac7c0b-5873-4b06-d367-f01738ccc373",
+							"fieldName": "formsdeclare",
+							"fieldParent": "e376bccf-6712-4355-9810-3c52e0b087b2",
+							"fieldType": "neptune_formsdeclare",
+							"script": "",
+							"customComponent": true,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "36604209-1eb9-4fe5-857b-1cfc2cd6b87f",
+					"fieldName": "Init",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "a69eeea5-e6a1-451d-b6e5-b0939b6bf145",
+							"fieldName": "Init",
+							"fieldParent": "36604209-1eb9-4fe5-857b-1cfc2cd6b87f",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Init/Init.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "21d03b79-9b0c-4e6c-8838-ee63e4662d15",
+					"fieldName": "neptune.freeStepWizard",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "d99c8d0f-5119-4ae4-d2e8-51143b480da4",
+							"fieldName": "FORMS.rendererTypeFreeStepWizard",
+							"fieldParent": "21d03b79-9b0c-4e6c-8838-ee63e4662d15",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/neptune.freeStepWizard/FORMS.rendererTypeFreeStepWizard.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"fieldNo": 99998,
+			"data": []
+		}
+	],
+	"componentInterface": [],
+	"ver": "25.04.09.0547",
+	"application": "formsrenderer_freestepwizard",
+	"title": "",
+	"description": "",
+	"enableFileStorage": false,
+	"enableManifest": false,
+	"enableStylesheet": false,
+	"enableObfuscate": false,
+	"onlyRunLaunchpad": false,
+	"disabled": false,
+	"loadLaunchpadCode": null,
+	"loadApplicationCode": null,
+	"appType": "A",
+	"ui5_m": true,
+	"ui5_f": false,
+	"ui5_table": false,
+	"ui5_tnt": false,
+	"ui5_uxap": false,
+	"ui5_chart": false,
+	"ui5_theme": "sap_horizon",
+	"ui5_version": "",
+	"ui5_language": null,
+	"ui5_url": "",
+	"cus_theme": "",
+	"css": "",
+	"compiledCss": null,
+	"header": "",
+	"manifest": "",
+	"globalScript": null,
+	"deleted": false,
+	"libHighchart": false,
+	"libHighmap": false,
+	"publicAccess": false,
+	"ui5_bootstrap": false,
+	"ui5_ionic": false,
+	"useV2AppHandler": false,
+	"compilerTarget": 3,
+	"tabWidth": null,
+	"printWidth": null,
+	"generateVersionOnActivation": false,
+	"activationHistoryCount": 0,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"apis": []
+}

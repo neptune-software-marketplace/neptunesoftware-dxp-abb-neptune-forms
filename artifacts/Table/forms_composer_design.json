@@ -1,0 +1,130 @@
+{
+	"id": "82c65538-c736-46f6-8ddf-90932f27f1db",
+	"createdAt": "2025-03-26T10:49:24.000Z",
+	"createdBy": "admin",
+	"fields": [
+		{
+			"id": "d27bdf1b-3bb6-4557-88ee-ef12546d6da4",
+			"fieldName": "name",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Name",
+			"isNullable": true
+		},
+		{
+			"id": "325c8899-90be-449f-ba0a-23ff472da9bc",
+			"fieldName": "description",
+			"fieldType": "mediumtext",
+			"isUnique": false,
+			"description": "Description",
+			"isNullable": true
+		},
+		{
+			"id": "10f9e4bb-a048-4768-ecbe-bfb2734f8981",
+			"fieldName": "setup",
+			"fieldType": "json",
+			"isUnique": false,
+			"description": "Setup in JSON",
+			"isNullable": true
+		},
+		{
+			"id": "cad9a7f6-35e9-4af8-c717-7dc9911a0701",
+			"fieldName": "config",
+			"fieldType": "json",
+			"isUnique": false,
+			"description": "Config in JSON",
+			"isNullable": true
+		},
+		{
+			"id": "28abf463-80b6-4bf1-bf44-3b1c93254786",
+			"fieldName": "draft",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Is FORM a Draft (default)",
+			"isNullable": true
+		},
+		{
+			"id": "d52089f5-ec0f-44d3-8b55-a8a0f808497b",
+			"fieldName": "released",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Is FORM Released",
+			"isNullable": true
+		},
+		{
+			"id": "08dd8e0b-791e-40b3-9fae-ceff09b2ab05",
+			"fieldName": "obsolete",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Is FORM Obsolete",
+			"isNullable": true
+		},
+		{
+			"id": "05dc23a1-4018-400d-fbd5-b96fee0718e1",
+			"fieldName": "groupid",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Classification Group",
+			"isNullable": true
+		},
+		{
+			"id": "37f89bd4-b0d4-4fc5-db86-c7c6e75f54f3",
+			"fieldName": "subgroupid",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Classification Sub Group",
+			"isNullable": true
+		},
+		{
+			"id": "a5a407d2-cfe4-41c1-c666-39f2868a3a9a",
+			"fieldName": "savedata",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Enable Reporting",
+			"isNullable": true
+		},
+		{
+			"id": "95e115e4-1273-40d2-9449-2a689885a5d8",
+			"fieldName": "validFrom",
+			"fieldType": "timestamp",
+			"isUnique": false,
+			"description": "The form is valid from ",
+			"isNullable": true
+		},
+		{
+			"id": "eede6169-5a9b-4f53-b3d4-5c5fa2b18d3d",
+			"fieldName": "validTo",
+			"fieldType": "timestamp",
+			"isUnique": false,
+			"description": "The form is valid to",
+			"isNullable": true
+		},
+		{
+			"id": "5f897318-c079-49fd-9575-e63fe77816e9",
+			"fieldName": "lastGoodState",
+			"fieldType": "smalltext",
+			"isUnique": false,
+			"description": "Last non-obsolete state",
+			"isNullable": true
+		},
+		{
+			"id": "4152f363-dc2d-42b8-e252-50b769f03ce7",
+			"fieldName": "idMapPool",
+			"fieldType": "json",
+			"isUnique": false,
+			"description": "Id Map Pool in JSON",
+			"isNullable": true
+		}
+	],
+	"indices": [],
+	"foreignKeys": [],
+	"name": "forms_composer_design",
+	"description": "FORMS: Composer",
+	"ver": "25.04.15.0250",
+	"enableAudit": false,
+	"includeDataInPackage": false,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"generationStrategy": "uuid",
+	"rolesRead": [],
+	"rolesWrite": []
+}

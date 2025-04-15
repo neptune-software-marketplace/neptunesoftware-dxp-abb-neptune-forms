@@ -14113,7 +14113,7 @@
 																										},
 																										{
 																											"fieldNo": "e5b148d3-614b-4665-d77c-24c1028a6cba",
-																											"fieldName": "VBox",
+																											"fieldName": "VBox1",
 																											"fieldParent": "2f85efa5-c4af-4db2-a82e-e2bd523a9a5d",
 																											"fieldType": "sap.m.VBox",
 																											"script": "",
@@ -28998,6 +28998,7 @@
 							"fieldType": "neptune.restapi",
 							"script": "",
 							"customComponent": false,
+							"disabled": true,
 							"restSource": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
 							"restOperation": "94e59631-b375-4fbc-fe4c-7f96db43e7d0",
 							"request": [],
@@ -29019,8 +29020,9 @@
 								{
 									"attribute": "ajaxSuccess",
 									"grouping": "Events",
-									"value": "modelTreeTable.setData(modelmediaFolders.getData());",
-									"script": "modelTreeTable.setData(modelmediaFolders.getData());",
+									"value": "Anonymous Function",
+									"script": "file://event/neptune.restapi/ListMediaFolders/ajaxSuccess.js",
+									"language": "javascript",
 									"translation": []
 								},
 								{
@@ -29179,7 +29181,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "24.12.12.1644",
+	"ver": "25.03.19.1209",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

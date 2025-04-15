@@ -1,0 +1,3 @@
+let lvIsNewString = (!isNew) ?"" :` {${txtNew.getText()}}`;
+let lvHasChangesString = (!hasChanges) ?"" :" *";
+return `${txtSubTitleDetailPage.getText()}${lvIsNewString}${lvHasChangesString}`;

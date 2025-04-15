@@ -1,0 +1,11 @@
+let loData = this.getBindingContext("appData").getObject();
+let loConfig = (typeof modelappData.getData().selectedForm?.config?.control === "object")
+                ? modelappData.getData().selectedForm?.config?.control[loData[C_FIELD_ID_SINGLE_FORM]] || {} // Can still be undefined
+                : {};
+if (loConfig[id]) {
+    if (loConfig[id].overridesTitle) {
+        return (loConfig[id].title) ? loConfig[id].title : title;
+    }
+}
+
+return title;

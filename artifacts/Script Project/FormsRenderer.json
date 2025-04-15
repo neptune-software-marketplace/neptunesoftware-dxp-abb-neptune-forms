@@ -1,0 +1,9 @@
+{
+	"id": "ab252cb5-f1a4-45e6-bd24-5ed2d540d228",
+	"createdAt": "2025-04-05T02:33:36.000Z",
+	"createdBy": "admin",
+	"name": "FormsRenderer",
+	"description": "Scripts to manage the customization of the Forms' Renderers",
+	"ver": "25.04.05.0445",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

@@ -1,0 +1,9 @@
+if (typeof _dataid === "undefined" || _dataid === null || _dataid === "") { return false; } 
+let loData = modelpanTopProperties.getData()._data;
+let loConfig = modelpanTopProperties.getData()._config[loData.id];
+let loResult = (loConfig?.overridesTitle || loConfig?.startsWizardStep);
+for (let name of Object.getOwnPropertyNames(loConfig?.useRenderer ?? {})) {
+    if (loResult) {break;}
+    loResult ||= loConfig.useRenderer[name];
+}
+return !!loResult;

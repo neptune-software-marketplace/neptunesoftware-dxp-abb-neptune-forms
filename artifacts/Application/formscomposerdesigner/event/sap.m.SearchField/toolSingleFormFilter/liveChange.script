@@ -1,0 +1,5 @@
+const binding1 = listSingleForm.getBinding("items");
+const binding2 = listProjectView.getBinding("items");
+const filter = new sap.ui.model.Filter("name", "Contains", this.getValue());
+binding1.filter([filter]);
+binding2.filter([filter]);

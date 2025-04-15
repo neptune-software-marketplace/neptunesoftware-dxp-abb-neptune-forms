@@ -1,0 +1,8 @@
+if (existsAlready) {
+    this.addStyleClass(C_CSS_HIDE_ITEM_RADIO_BUTTON);
+}
+else {
+    this.removeStyleClass(C_CSS_HIDE_ITEM_RADIO_BUTTON);
+}
+var formattedText = groupname + " " + existsAlready; 
+return groupname;

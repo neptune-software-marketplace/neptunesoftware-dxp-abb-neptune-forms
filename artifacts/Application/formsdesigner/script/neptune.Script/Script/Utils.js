@@ -36,9 +36,24 @@ const Utils = {
     objMedialib: {
         setValue: (url) => {
             if (url && typeof url == "string" && url != "") {
-                let filename = decodeURIComponent(url).substring(url.lastIndexOf("/")+1);
+                // MOD #(20250319-1139) begin
+                // INFO: { reason: "3: 1)the url may contain ? parameters; 2) decoded url is calculated twice; 3) name acquisition will fail if decided url !== url" }
+                // let filename = decodeURIComponent(url).substring(url.lastIndexOf("/")+1);
+                // controller.currentObject.getModel().getData().filename = filename;
+                // controller.currentObject.getModel().getData().link     = decodeURIComponent(url);
+                // MOD #(20250319-1139) ---
+                let decodedUrl = decodeURIComponent(url);
+                // extract name it expects the url to have at least one "/"
+                const C_REGEX_URLNAME = /\/([^/?]*)\/?(?:\?.*)?$/;
+                let nameMatch = decodedUrl.match(C_REGEX_URLNAME);
+                let filename = (Array.isArray(nameMatch))
+                                ? (nameMatch[1])
+                                    ? nameMatch[1]
+                                    : "" // A match was found but no filename was able to be extracted
+                                : decodedUrl; // No "/" was found so assume that the name is the full decodedUrl
                 controller.currentObject.getModel().getData().filename = filename;
-                controller.currentObject.getModel().getData().link     = decodeURIComponent(url);
+                controller.currentObject.getModel().getData().link     = decodedUrl;
+                // MOD #(20250319-1139) end
                 controller.currentObject.getModel().refresh();
             } else {
                 controller.currentObject.getModel().getData().filename = "";

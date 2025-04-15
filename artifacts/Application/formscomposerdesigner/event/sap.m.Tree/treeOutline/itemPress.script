@@ -1,0 +1,37 @@
+const selectedItem = this.getSelectedItem();
+
+if (selectedItem) {
+    const context = selectedItem.getBindingContext("appData");
+    const data = context.getObject();
+
+    controller.setSelectedItemSingleForm(controller.getItemSingleFormById(data[C_FIELD_ID_SINGLE_FORM]));
+
+    let loConfigData = modelappData.getData().selectedForm.config.control[data[C_FIELD_ID_SINGLE_FORM]];
+    if (!loConfigData) {
+        loConfigData = {};
+        modelappData.getData().selectedForm.config.control[data[C_FIELD_ID_SINGLE_FORM]] = loConfigData;
+    }
+    if (!loConfigData[data.id]) { 
+        loConfigData[data.id] = {}; 
+    }
+
+    data._changeCount = (isNaN(data._changeCount)) ?0 :data._changeCount+1;
+
+    if (modelappControl.getData().projectItemSelected) {
+        let loLastSelection = modelappControl.getData().projectItemSelected;
+        loLastSelection._changeCount = (isNaN(loLastSelection._changeCount)) ?0 :loLastSelection._changeCount+1;
+    }
+    modelappControl.getData().projectItemSelected = data;
+    modelappControl.refresh();
+
+    modelappData.getData().selectedElement = {_data: data, _config: loConfigData};
+    modelappData.refresh();
+
+    modelpanTopProperties.setData(modelappData.getData().selectedElement);
+    modelpanTopProperties.refresh();
+
+    return;
+    controller.pressOutlineItem();
+}
+
+

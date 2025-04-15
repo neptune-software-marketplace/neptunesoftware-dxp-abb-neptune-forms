@@ -105,7 +105,8 @@ const controller = {
             }
         });
 
-        TreeTable.bindRows({path:"/children"});
+        // // TODO: review ListMediaFolders
+        // TreeTable.bindRows({path:"/children"});
 
         // Adaptive Apps Columns
         adaptiveAppsOpenColsKeys.forEach(function (k) {
@@ -1028,10 +1029,20 @@ const controller = {
     filterSubGroup: function () {
         const binding = informDetailSubGroup.getBinding("items");
 
+        // MOD #(20250319-1114) begin
+        // INFO: { reason: "an exception occurs when .getData().groupid is undefined" }
+        // const filter = new sap.ui.model.Filter({
+        //     filters: [new sap.ui.model.Filter("groupid", "EQ", modeloPageDetail.oData.groupid), new sap.ui.model.Filter("name", "EQ", "")],
+        //     and: false,
+        // });
+        // MOD #(20250319-1114) ---
         const filter = new sap.ui.model.Filter({
-            filters: [new sap.ui.model.Filter("groupid", "EQ", modeloPageDetail.oData.groupid), new sap.ui.model.Filter("name", "EQ", "")],
+            filters: [
+                new sap.ui.model.Filter("groupid", "EQ", modeloPageDetail.getData()?.groupid ?? null), 
+                new sap.ui.model.Filter("name", "EQ", "")],
             and: false,
         });
+        // MOD #(20250319-1114) end
 
         binding.filter([filter]);
     },

@@ -1,0 +1,9 @@
+if (typeof _dataid === "undefined" || _dataid === null || _dataid === "") { return false; }
+if (typeof _data_sfId === "undefined" || _data_sfId === null || _data_sfId === "") { return false; }
+
+let loThisSfData = ModelData.FindFirst(modelappData.getData().selectedForm.setup.forms, "id", _data_sfId);
+if (Array.isArray(loThisSfData?.setup)) {
+    let lohisElementIsSection = ModelData.FindFirst(loThisSfData.setup, "id", _dataid);
+    if (lohisElementIsSection) {return true};
+}
+return false;

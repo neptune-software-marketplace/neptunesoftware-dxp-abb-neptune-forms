@@ -1,0 +1,5 @@
+// hiding the element for the time being
+return false;
+// if (typeof enableEdit === "undefined" || enableEdit === null || enableEdit === "") { return; }  
+// var formattedText = enableEdit; 
+// return formattedText;
