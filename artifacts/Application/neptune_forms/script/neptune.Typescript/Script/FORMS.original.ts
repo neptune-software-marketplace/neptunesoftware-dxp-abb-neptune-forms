@@ -676,45 +676,51 @@ namespace FORMS {
 
         let bindingPath = element.type === "Table" ? "/" : FORMS.bindingPath;
 
-        let visibleStatement = element.visibleInverse ? "false:true" : "true:false";
-        let visibleValueSep = element.visibleValue === "true" || element.visibleValue === "false" ? "" : "'";
-        let visibleFieldName = element.visibleFieldName;
-        let visibleCond;
+        // forms/#22(Bug) - code change
+        // Two different logics are found in this method. One if for a single visible condition, and another is for an array of conditions
+        // This hints to two different versions, and both exist for backwards compatibility
+        if (!element?.visibility?.length) { // forms/#22 ADD
+            let visibleStatement = element.visibleInverse ? "false:true" : "true:false";
+            let visibleValueSep = element.visibleValue === "true" || element.visibleValue === "false" ? "" : "'";
+            let visibleFieldName = element.visibleFieldName;
+            let visibleCond;
 
-        // Check if field have object attributes
-        const checkElement = FORMS.getElementFromId(element.visibleFieldName);
+            // Check if field have object attributes
+            const checkElement = FORMS.getElementFromId(element.visibleFieldName);
 
-        if (!checkElement) return;
-        if (checkElement.fieldName) visibleFieldName = checkElement.fieldName;
+            if (!checkElement) return;
+            if (checkElement.fieldName) visibleFieldName = checkElement.fieldName;
 
-        if (checkElement.type === "Input" || checkElement.type === "TextArea") {
-            if (element.visibleValue === "empty") {
-                if (element.visibleCondition === "===") {
-                    visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? false:true }";
-                } else {
-                    visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? true:false }";
+            if (checkElement.type === "Input" || checkElement.type === "TextArea") {
+                if (element.visibleValue === "empty") {
+                    if (element.visibleCondition === "===") {
+                        visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? false:true }";
+                    } else {
+                        visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? true:false }";
+                    }
                 }
+            } else {
+
+                // 2024-12-12 KW: fix for undefined value
+                // when a cond. visibility depends on a "false" value, it also depends on an "undefined" value
+
+                let bAddUndefined = visibleValueSep + element.visibleValue + visibleValueSep == "false";
+                let sVisCond = bAddUndefined
+                            ? "{= (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + ")" +
+                                " || (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + "undefined" + visibleValueSep + ")"
+                            : "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep;
+                
+                visibleCond = sVisCond + " ? " + visibleStatement + " }";
+                //visibleCond = "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + " ? " + visibleStatement + " }";
             }
-        } else {
+            return visibleCond // forms/#22 ADD
+        } // forms/#22 ADD
 
-            // 2024-12-12 KW: fix for undefined value
-            // when a cond. visibility depends on a "false" value, it also depends on an "undefined" value
-
-            let bAddUndefined = visibleValueSep + element.visibleValue + visibleValueSep == "false";
-            let sVisCond = bAddUndefined
-                           ? "{= (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + ")" +
-                             " || (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + "undefined" + visibleValueSep + ")"
-                           : "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep;
-            
-            visibleCond = sVisCond + " ? " + visibleStatement + " }";
-            //visibleCond = "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + " ? " + visibleStatement + " }";
-        }
-
-        if (!element.visibility?.length) return;
+        // if (!element.visibility?.length) return; // forms/#22 DEL
 
         // Top Parameters
         bindingPath = element.type === "Table" ? "/" : FORMS.bindingPath;
-        visibleStatement = element.visibleInverse === "hide" ? "false:true" : "true:false";
+        let visibleStatement = element.visibleInverse === "hide" ? "false:true" : "true:false";
 
         let visibleWhere = "";
         let visibleWhereSep = "";
@@ -738,28 +744,34 @@ namespace FORMS {
             let visibleFieldOptions = "";
             let visibleFieldOptionsSep = "";
 
+            let visCondIsEqual = condition.visibleCondition === "===";
+            let visCondSign = visCondIsEqual ? '' : '!';
             condition.visibleValue.forEach(function (value) {
                 switch (checkElement.type) {
                     case "Switch":
                     case "CheckBox":
-                        if (value === "true") {
-                            visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}" + condition.visibleCondition + "true";
-                        } else if (value === "false") {
-                            visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}" + condition.visibleCondition + "false";
-                        }
+                        visibleFieldOptions += `${visibleFieldOptionsSep}\${${bindingPath}${visibleFieldName}}${condition.visibleCondition}${value}`; // forms/#22 ADD
+                        // if (value === "true") { // forms/#22 DEL
+                        //     visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}" + condition.visibleCondition + "true"; // forms/#22 DEL
+                        // } else if (value === "false") { // forms/#22 DEL
+                        //     visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}" + condition.visibleCondition + "false"; // forms/#22 DEL
+                        // } // forms/#22 DEL
                         break;
 
                     case "Input":
                     case "TextArea":
-                        if (condition.visibleCondition === "===") {
-                            visibleFieldOptions += visibleFieldOptionsSep + "!${" + bindingPath + visibleFieldName + "}";
-                        } else {
-                            visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "} !== ''";
-                        }
+                        visibleFieldOptions += `${visibleFieldOptionsSep}\${${bindingPath}${visibleFieldName}}${condition.visibleCondition}''`; // forms/#22 ADD
+                        // visibleFieldOptions += `${visibleFieldOptionsSep}${visCondSign}(\${${bindingPath}${visibleFieldName}} === '')`; // forms/#22 ADD
+                        // if (visCondIsEqual) { // forms/#22 DEL
+                        //     visibleFieldOptions += visibleFieldOptionsSep + "!${" + bindingPath + visibleFieldName + "}"; // forms/#22 DEL
+                        // } else { // forms/#22 DEL
+                        //     visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "} !== ''"; // forms/#22 DEL
+                        // } // forms/#22 DEL
                         break;
 
                     default:
-                        visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}.includes('" + value + "')";
+                        visibleFieldOptions += `${visibleFieldOptionsSep}${visCondSign}\${${bindingPath}${visibleFieldName}}.includes('${value}')`; // forms/#22 ADD
+                        // visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}.includes('" + value + "')"; // forms/#22 DEL
                         break;
                 }
 
