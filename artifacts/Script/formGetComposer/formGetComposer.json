@@ -2,7 +2,13 @@
 	"id": "675402ff-8775-4a1b-ae84-46bb378fa705",
 	"createdAt": "2025-03-26T13:22:39.000Z",
 	"createdBy": "admin",
-	"globalScripts": [],
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
 	"externalModules": [],
 	"entitySets": [
 		{
@@ -13,7 +19,7 @@
 	],
 	"apis": [],
 	"name": "formGetComposer",
-	"ver": "25.04.15.0813",
+	"ver": "25.04.22.0428",
 	"description": null,
 	"folder": "",
 	"content": "file:///content.js",

@@ -1,5 +1,10 @@
 const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
 
+// PRR - forms/#20 - role access to forms (ADD - Begin) 
+let {gatherRoleIds, getAuthorizedDataWithFormData} = globals.FormsAuthorizationGlobal; 
+const userRoleIds = await gatherRoleIds(req?.user?.id); 
+// PRR - forms/#20 - role access to forms (ADD - End) 
+
 const adaptiveApps = await manager.find("reports", {
     select: ["name", "description", "id", "application", "package", "updatedAt", "changedBy"],
     order: { name: "ASC" },
@@ -10,7 +15,10 @@ const package = await manager.find("dev_package", {
     order: { name: "ASC" },
 });
 
-const forms = await entities.forms_composer_design.find({
+// PRR - forms/#20 - role access to forms (MOD - Begin) 
+// const forms = await entities.forms_composer_design.find({
+const formsAll = await entities.forms_composer_design.find({ 
+// PRR - forms/#20 - role access to forms (MOD - End) 
     select: [
         "name",
         "description",
@@ -20,10 +28,20 @@ const forms = await entities.forms_composer_design.find({
         "released",
         "groupid",
         "subgroupid",
+        // PRR - forms/#20 - role access to forms (ADD - Begin)
+        "roles"
+        // PRR - forms/#20 - role access to forms (ADD - End) 
     ],
     order: { name: "ASC" },
 });
 
+// PRR - forms/#20 - role access to forms (ADD - Begin) 
+const forms = []; 
+for (let form of formsAll) { 
+    if (getAuthorizedDataWithFormData(userRoleIds,form).isAuthorized) {forms.push(form);} 
+} 
+// PRR - forms/#20 - role access to forms (ADD - End) 
+ 
 const group = await entities.forms_group.find({
     select: ["id", "name", "description"],
     order: { name: "ASC" },

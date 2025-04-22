@@ -216,6 +216,31 @@
 			"endpoints": [],
 			"serverScript": "4e35e04f-fcbb-49eb-bd3f-138f3cf7ebe4",
 			"tags": "Compounded Form"
+		},
+		{
+			"id": "35c70a39-fa67-4ae7-dd57-2d284dc88404",
+			"method": "GET",
+			"path": "/getSingleNoRbac",
+			"description": "",
+			"parameters": [
+				{
+					"name": "id",
+					"description": "",
+					"required": true,
+					"inPath": false,
+					"value": "",
+					"default": "",
+					"example": ""
+				}
+			],
+			"headers": [],
+			"responses": [],
+			"content": [],
+			"auth": [],
+			"endpoints": [],
+			"serverScript": "9e2cbcb2-a090-4692-9655-4dddd0711a27",
+			"tags": "Compounded Form",
+			"enableCredentials": false
 		}
 	],
 	"definitions": [
@@ -574,6 +599,24 @@
 					"enabled": true,
 					"showNameField": true,
 					"children": []
+				},
+				{
+					"id": "6fc9800e-8cef-4008-e86a-3a4f8a5ea91d",
+					"name": "roles",
+					"objectType": "object",
+					"description": "",
+					"required": false,
+					"value": "",
+					"minLength": "",
+					"maxLength": "",
+					"default": "",
+					"example": "",
+					"isParent": true,
+					"enableValueHelp": false,
+					"canAddSubNode": true,
+					"enabled": true,
+					"showNameField": true,
+					"children": []
 				}
 			]
 		}
@@ -581,7 +624,7 @@
 	"documentation": [],
 	"name": "FormsComposerDesigner",
 	"endpoint": "/api/serverscript/FormsComposerDesigner",
-	"ver": "25.04.15.0815",
+	"ver": "25.04.22.0449",
 	"version": null,
 	"description": "Operations used by the Forms Composer",
 	"mediaType": null,

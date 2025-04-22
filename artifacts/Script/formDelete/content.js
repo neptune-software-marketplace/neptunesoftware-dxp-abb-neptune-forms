@@ -5,7 +5,7 @@ const form = await entities.forms_design.findOne({ id: req.query.id });
 let {gatherRoleIds, getAuthorizedDataWithFormData} = globals.FormsAuthorizationGlobal;
 if (!getAuthorizedDataWithFormData(await gatherRoleIds(req?.user?.id),form).isAuthorized) {
     result.statusCode = 403;
-    result.data = { status: `Missing role authorization` };
+    result.data = { status: `You have no access to the requested resource` };
     return complete();
 }
 // PRR - forms/#17 - role access to forms (ADD - End)

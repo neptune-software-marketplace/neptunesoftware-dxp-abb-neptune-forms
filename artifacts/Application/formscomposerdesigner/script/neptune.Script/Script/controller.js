@@ -482,6 +482,14 @@ const controller = {
             cockpitUtils.dataSaved = modeloPageDetail.getJSON();
             cockpitUtils.configSaved = Utils.getFormConfigJSON();
             cockpitUtils.toggleEdit(true);
+        })
+        .catch(error => {
+            if (error?.responseJSON?.status) {
+                sap.m.MessageBox.error(`${error.responseJSON.status}. The form was not saved.`);
+            }
+            else {
+                sap.m.MessageBox.error(`An error code ${error.status} occurred. The form was not saved.`);
+            }
         });
     },
 
@@ -1249,7 +1257,7 @@ const controller = {
             }
             else {
                 let lvFormId = loForm;
-                apiGetSingleForm({parameters:{id:lvFormId}})
+                apiGetSingleFormNoRbac({parameters:{id:lvFormId}})
                 .then(function (poResult, pvState, poXhr) {
                     lvDoneGets++;
 

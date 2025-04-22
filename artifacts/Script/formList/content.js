@@ -27,8 +27,11 @@ const formsAll = await entities.forms_design.find({
         "updatedBy",
         "released",
         "groupid",
+        // PRR - forms/#17 - role access to forms (MOD - Begin)
+        // "subgroupid"
         "subgroupid",
         "roles"
+        // PRR - forms/#17 - role access to forms (MOD - End)
     ],
     order: { name: "ASC" },
 });

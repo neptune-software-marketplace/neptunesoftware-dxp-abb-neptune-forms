@@ -2,7 +2,13 @@
 	"id": "178bbc62-ae42-4f2b-8106-16c4b092c6b7",
 	"createdAt": "2025-03-26T13:20:47.000Z",
 	"createdBy": "admin",
-	"globalScripts": [],
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
 	"externalModules": [],
 	"entitySets": [
 		{
@@ -13,7 +19,7 @@
 	],
 	"apis": [],
 	"name": "formDeleteComposer",
-	"ver": "25.04.15.0813",
+	"ver": "25.04.22.0425",
 	"description": null,
 	"folder": "",
 	"content": "file:///content.js",

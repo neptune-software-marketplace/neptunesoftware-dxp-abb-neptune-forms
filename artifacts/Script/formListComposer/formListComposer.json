@@ -2,7 +2,13 @@
 	"id": "096bf9ce-49c6-4bf3-b5e1-c7ee706bda90",
 	"createdAt": "2025-03-26T13:28:00.000Z",
 	"createdBy": "admin",
-	"globalScripts": [],
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
 	"externalModules": [
 		{
 			"id": "b9052a1f-3e99-4a36-b8a7-49396670518b",
@@ -40,7 +46,7 @@
 	],
 	"apis": [],
 	"name": "formListComposer",
-	"ver": "25.04.15.0814",
+	"ver": "25.04.22.0442",
 	"description": null,
 	"folder": "",
 	"content": "file:///content.js",

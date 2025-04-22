@@ -19,9 +19,15 @@
  */
 let loData = req.query;
 
+// PRR - forms/#20 - role access to forms (ADD - Begin) 
+let {gatherRoleIds, getAuthorizedDataWithFormData} = globals.FormsAuthorizationGlobal; 
+const userRoleIds = await gatherRoleIds(req?.user?.id); 
+// PRR - forms/#20 - role access to forms (ADD - End) 
+
 /** / // <- Join "* /" together to enable the test data
-loData = {id_form:"0ebb2e5c-e870-4d28-9c1d-f167683c32ec", retrieve_all: true}; // Compounded
-//loData = {id_form:"F41E49CF-CF5E-EF11-991A-000D3AB5734C", retrieve_all: true}; // Compounded
+loData = {retrieve_all: true}; // All
+// loData = {id_form:"0ebb2e5c-e870-4d28-9c1d-f167683c32ec", retrieve_all: true}; // Compounded
+// loData = {id_form:"F41E49CF-CF5E-EF11-991A-000D3AB5734C", retrieve_all: true}; // Compounded
 /**/
 // Single templates
 let loChecklistTemplatesReq = entities.forms_design.createQueryBuilder("");
@@ -71,6 +77,21 @@ const loChecklistTemplates = await loChecklistTemplatesReq.getMany();
 const loChecklistCompounded = await loChecklistCompoundedReq.getMany();
 // const loChecklistTemplates = await loChecklistTemplatesReq.getRawMany();
 // const loChecklistCompounded = await loChecklistCompoundedReq.getRawMany();
+
+// PRR - forms/#20 - role access to forms (ADD - Begin) 
+for (let index = loChecklistTemplates.length-1; index >= 0; index--) {
+    if (!getAuthorizedDataWithFormData(userRoleIds,loChecklistTemplates[index]).isAuthorized) {
+        // Not authorized. Removes it
+        loChecklistTemplates.splice(index,1);
+    }
+}
+for (let index = loChecklistCompounded.length-1; index >= 0; index--) {
+    if (!getAuthorizedDataWithFormData(userRoleIds,loChecklistCompounded[index]).isAuthorized) {
+        // Not authorized. Removes it
+        loChecklistCompounded.splice(index,1);
+    }
+}
+// PRR - forms/#20 - role access to forms (ADD - End) 
 
 
 // log.info(loChecklistTemplates);
@@ -236,7 +257,7 @@ function fnTraverseArray(poArrayElements, poConfig, poCompoundedConfig) {
 	}
 	// console.log(loUuidMaps);
     //console.dir(loUuidMaps);
-    //console.dir(loResult);
+    // console.dir(loResult);
 
     //console.dir(JSON.stringify(loResult, null, 4));
 

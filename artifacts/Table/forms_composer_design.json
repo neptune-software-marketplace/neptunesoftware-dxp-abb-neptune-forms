@@ -114,13 +114,21 @@
 			"isUnique": false,
 			"description": "Id Map Pool in JSON",
 			"isNullable": true
+		},
+		{
+			"id": "4823bf59-c62a-495a-8ee7-185c4e12b636",
+			"fieldName": "roles",
+			"fieldType": "json",
+			"isUnique": false,
+			"description": "Roles for Form access",
+			"isNullable": true
 		}
 	],
 	"indices": [],
 	"foreignKeys": [],
 	"name": "forms_composer_design",
 	"description": "FORMS: Composer",
-	"ver": "25.04.15.0250",
+	"ver": "25.04.22.0420",
 	"enableAudit": false,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",

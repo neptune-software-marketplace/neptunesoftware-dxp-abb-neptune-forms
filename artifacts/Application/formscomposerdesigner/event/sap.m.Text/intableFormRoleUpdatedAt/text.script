@@ -1,0 +1,2 @@
+// Formats the date
+if (null != updatedAt && "" !== updatedAt) {return sap.n.Planet9.formatDate(updatedAt);}

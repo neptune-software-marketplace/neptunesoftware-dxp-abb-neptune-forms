@@ -4,6 +4,6 @@
 	"createdBy": "admin",
 	"name": "FormsAuthorization",
 	"description": "Global functions to handle authorization (issue forms/#17)",
-	"ver": "25.04.16.0100",
+	"ver": "25.04.16.0821",
 	"package": "a313322e-f024-45f1-960f-b90081757b85"
 }
