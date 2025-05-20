@@ -1,4 +1,5 @@
-const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
+const manager = p9.manager;
+// const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
 
 // PRR - forms/#17 - role access to forms (ADD - Begin)
 let {gatherRoleIds, getAuthorizedDataWithFormData} = globals.FormsAuthorizationGlobal;

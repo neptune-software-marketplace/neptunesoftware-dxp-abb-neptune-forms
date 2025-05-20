@@ -1,4 +1,5 @@
-const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
+const manager = p9.manager;
+// const manager = p9.manager ? p9.manager : modules.typeorm.getConnection().manager;
 
 const systems = await manager.find("systems", {
     where: { type: "" },
