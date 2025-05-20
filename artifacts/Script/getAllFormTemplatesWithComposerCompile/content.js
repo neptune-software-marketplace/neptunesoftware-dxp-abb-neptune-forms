@@ -161,8 +161,8 @@ function fnBuildCompositeIdForFomatterEngine(element, poConfig, poUuidMaps) { //
     // Builds the sfId|elId uuid pair for all parameters
     if (element?.enableVisibleCond && Array.isArray(element.visibility) && element.visibility.length) {
         for (let condition of element.visibility) {
+            if (!isValidUuid(condition.visibleFieldName)) {continue;}
             condition.visibleFieldName = `${poConfig.sfId}|${condition.visibleFieldName}`;
-            console.log("NoCode > " + condition.visibleFieldName + " => " + poUuidMaps[condition.visibleFieldName]);
             if (!poUuidMaps[condition.visibleFieldName]) {poUuidMaps[condition.visibleFieldName] = fnGenerateUuid();}
         }
     }
@@ -171,8 +171,8 @@ function fnBuildCompositeIdForFomatterEngine(element, poConfig, poUuidMaps) { //
         for (let property of configNames) {
             if (element?.useFormatterConfig[property]) {
                 for (let param of element.formatterConfig[property].paramList ?? []) {
+                    if (!isValidUuid(param.fieldId)) {continue;}
                     param.fieldId = `${poConfig.sfId}|${param.fieldId}`;
-                    console.log("Adv >>>> " + param.fieldId + " => " + poUuidMaps[param.fieldId]);
                     if (!poUuidMaps[param.fieldId]) {poUuidMaps[param.fieldId] = fnGenerateUuid();}
                 }
             } 
@@ -183,6 +183,7 @@ function fnApplyNewIdForFomatterEngine(element, poConfig, poUuidMaps) { // #48
     // Applies the new Id connecte to the sfId|elId uuid pair that exists in all parameters
     if (element?.enableVisibleCond && Array.isArray(element.visibility) && element.visibility.length) {
         for (let condition of element.visibility) {
+            if (isValidUuid(condition.visibleFieldName)) {continue;}
             condition.visibleFieldName = poUuidMaps[condition.visibleFieldName];
         }
     }
@@ -191,6 +192,7 @@ function fnApplyNewIdForFomatterEngine(element, poConfig, poUuidMaps) { // #48
         for (let property of configNames) {
             if (element?.useFormatterConfig[property]) {
                 for (let param of element.formatterConfig[property].paramList ?? []) {
+                    if (isValidUuid(param.fieldId)) {continue;}
                     param.fieldId = poUuidMaps[param.fieldId];
                 }
             } 
