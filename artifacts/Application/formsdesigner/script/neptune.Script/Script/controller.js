@@ -13,36 +13,7 @@ const controller = {
     dragElement: null,
     tableReset: false,
 
-    elementTypes: [
-        { icon: "sap-icon://form", text: "Form", type: "Form", parent: true, descripton: "Present the data in Form layout" },
-        { icon: "sap-icon://table-view", text: "Table", type: "Table", parent: true, descripton: "Present the data in Table layout" },
-        { icon: "sap-icon://header", text: "Form Title", type: "FormTitle", parent: false, table: false },
-        { icon: "sap-icon://calendar", text: "Date Picker", type: "DatePicker", parent: false, table: true },
-        { icon: "sap-icon://date-time", text: "Date Time Picker", type: "DateTimePicker", parent: false, table: true },
-        { icon: "sap-icon://fa-regular/check-square", text: "Check Box", type: "CheckBox", parent: false, table: true },
-        { icon: "sap-icon://checklist", text: "Check List", type: "CheckList", parent: false, table: false, table: true },
-        { icon: "sap-icon://request", text: "Input", type: "Input", parent: false, table: true },
-        { icon: "sap-icon://fa-regular/file-image", text: "Image Upload", type: "Image", parent: false, table: true },
-        { icon: "sap-icon://add-document", text: "File Upload", type: "File", parent: false, table: false }, // KW
-        { icon: "sap-icon://attachment-video", text: "Media Library Link", type: "MediaLib", parent: false, table: false }, // KW
-        { icon: "sap-icon://message-information", text: "Message Strip", type: "MessageStrip", parent: false, table: true },
-        { icon: "sap-icon://message-popup", text: "Message Popup", type: "MessagePopup", parent: false, table: true },
-        { icon: "sap-icon://number-sign", text: "Numeric", type: "Numeric", parent: false, table: true },
-        { icon: "sap-icon://picture", text: "Picture", type: "Picture", parent: false, table: false },
-        { icon: "sap-icon://feedback", text: "Rating", type: "Rating", parent: false, table: true },
-        { icon: "sap-icon://numbered-text", text: "Step Input", type: "StepInput", parent: false, table: true },
-        { icon: "sap-icon://switch-views", text: "Switch", type: "Switch", parent: false, table: true },
-        { icon: "sap-icon://activities", text: "Segmented Button", type: "SegmentedButton", parent: false, table: true },
-        { icon: "sap-icon://fa-solid/signature", text: "Signature", type: "Signature", parent: false, table: false },
-        { icon: "sap-icon://fa-regular/circle", text: "Single Select Icon", type: "SingleSelectIcon", parent: false, table: true },
-        { icon: "sap-icon://fa-regular/circle", text: "Single Select", type: "SingleSelect", parent: false, table: true },
-        { icon: "sap-icon://fa-regular/circle", text: "Single Choice", type: "SingleChoice", parent: false, table: false },
-        { icon: "sap-icon://multi-select", text: "Multiple Select", type: "MultipleSelect", parent: false, table: true },
-        { icon: "sap-icon://multi-select", text: "Multiple Choice", type: "MultipleChoice", parent: false, table: false },
-        { icon: "sap-icon://text", text: "Text", type: "Text", parent: false, table: true },
-        { icon: "sap-icon://document-text", text: "Text Area", type: "TextArea", parent: false, table: true },
-        { icon: "sap-icon://value-help", text: "Value Help", type: "ValueHelp", parent: false, table: true },
-    ],
+    elementTypes: FORMS.elementTypes,
 
     init: function () {
         jQuery.sap.require("sap.m.MessageBox");
@@ -118,6 +89,34 @@ const controller = {
 
         // Get FORMS
         this.list();
+
+        // prepares the monaco code editor
+        controller.setMonacoEditor();
+    },
+
+    setMonacoEditor: () => {
+        let parentId = htmlTopCodeEditor.getId();
+        let editorId = `${parentId}--core`;
+        htmlTopCodeEditor
+            .setContent(`<div id='${parentId}' style='height:calc(100% - 2rem)'><div id='${editorId}' style='height:100%'/></div>`);
+        neptune.Utils.waitForElement(editorId)
+            .then(() => {
+                MonacoEditor.instance = monaco.editor.create(document.getElementById(editorId),{
+                    value: "",
+                    automaticLayout: true,
+                    readOnly: true,
+                    language: "javascript"
+                });
+                MonacoEditor.instance.getModel().onDidChangeContent(function() {
+                    let data = modelpanTopProperties.getData();
+                    if (!data.formatterConfig?.visible) {
+                        FORMS.bindingWrapper.Advanced.Configuration.setFormatterConfig( data );
+                        data.formatterConfig.visible = {paramList:[], code: ''}
+                    }
+                    data.formatterConfig.visible.code = MonacoEditor.instance.getValue();
+                });
+                MonacoEditor.fulfillMonacoCreated(MonacoEditor.instance);
+            });
     },
 
     buildContextMenu: function () {
@@ -137,7 +136,6 @@ const controller = {
         outlineMenu.addItem(
             new sap.m.MenuItem({
                 text: "Enable",
-                // enabled: "{= ${appControl>/enableEdit} && ${appControl>/isForm}}",
                 enabled: "{appControl>/enableEdit}",
                 icon: "sap-icon://fa-solid/toggle-on",
                 press: function (oEvent) {
@@ -331,7 +329,7 @@ const controller = {
             ModelData.Delete(parent.elements, "id", id);
         }
 
-        // Remove field if used in conditional visibility
+        // Remove field if used in conditional visibility (old - backwards compatible)
         modeloPageDetail.oData.setup.forEach(function (section, i) {
             if (section.visibleFieldName === id) controller.clearVisibleCondition(section);
 
@@ -346,8 +344,12 @@ const controller = {
             });
         });
 
+        // Recheck if used in an advanced conditional visibility (report error/warning, but does not delete)
+        if (controller.getAllVisibilityConditionsById(id).length) { controller.checkVisCondParamValidation(); }
+
         modelpanTopProperties.setData({});
         modelpanTopProperties.refresh();
+        modelpanTopEditor.setData({});
 
         modeloPageDetail.refresh();
     },
@@ -393,6 +395,7 @@ const controller = {
             controller.tableReset = true;
             modeloPageDetail.setData(req);
             modelpanTopProperties.setData({});
+            modelpanTopEditor.setData({});
 
             if (oApp.getCurrentPage() === oPageStart) {
                 tabDetail.setSelectedItem(tabDetailInfo);
@@ -413,6 +416,23 @@ const controller = {
     save: function () {
         // Check Required Fields
         if (!sap.n.Planet9.requiredFieldsCheck(cockpitUtils.requiredFields)) {
+            return;
+        }
+
+        let visCondParamValidation = controller.checkVisCondParamValidation();
+        let canSave = true;
+        for (let condition of visCondParamValidation) {
+            if (condition.hasErrors) {
+                let objectOutline = controller.getOutlineElementById(condition.fieldId);
+                if (!objectOutline.disabled) {
+                    canSave = false;
+                    break;
+                }
+            }
+        }            
+        if (!canSave) {
+            tabDetail.setSelectedItem(tabDetailDesigner);
+            sap.m.MessageBox.error("Please check the elements in the outline\nand related errors.", {title: 'Errors detected'});          
             return;
         }
 
@@ -579,6 +599,8 @@ const controller = {
                 modelpanTopProperties.setData(data);
                 modelpanTopProperties.refresh();
 
+                modelpanTopEditor.setData(data);
+
                 if (!forceMarking) {
                     controller.pressedPreview = true;
                 }
@@ -645,6 +667,8 @@ const controller = {
             description: "",
             required: false,
             items: [],
+            useFormatterConfig:{},
+            formatterConfig: {},
             hasInfoButton: false,
             sectionType: parentType
         };
@@ -1120,7 +1144,148 @@ const controller = {
         } else {
             diaInfoButton.open();
         }
+    },
+    getElementType: (elemType) => controller.elementTypes.find(
+            element=>element.type.toLocaleLowerCase("en") === elemType.toLocaleLowerCase("en")
+    ),
+    getVisCondParamTypeOf: function (elementData) {
+        let elementConfig = controller.getElementType(elementData.type);
+        if (!elementConfig?.parameter) {return "undefined";}
+        return elementConfig.paramType + (elementData.enableDuplicate ? "[]" : "");
+    },
+    getVisCondParamFieldIdsOf: function (elementData) {
+        return elementData.id;
+    },
+    getOutlineElementById: id => {
+        function findItem(items) {
+            if (!(Array.isArray(items)&&items.length)) {return {};}
+            for (let item of items) {
+                if (item.id === id) {return item;}
+            }
+            return {};
+        }
+        function findElement(elements) {
+            if (!(Array.isArray(elements)&&elements.length)) {return {};}
+            for (let element of elements) {
+                if (element.id === id) {return element;}
+                let childElement = findElement(element.elements);
+                if (childElement.id === id) {return childElement;}
+                let itemElement = findItem(element.items);
+                if (itemElement.id === id) {return element;}
+            }
+            return {};
+        }
+        for (let section of modeloPageDetail.getData().setup) {
+            if (section.id === id) {return section;}
+            let childElement = findElement(section.elements);
+            if (childElement.id === id) {return childElement;}
+            let itemElement = findItem(section.items);
+            if (itemElement.id === id) {return section;}
+        }
+        return null;
+    },
+    getAllVisibilityConditions: function (includeDisabled = false, includeNoCode = false) {
+        // THIS IS CODE COPIED from BindingWrapper.Advanced.Configuration.getAllConditions
+        // copy all the code except for lines that end with /* ADAPT FROM COPY */ which you must adapt to the designer's reality
+        const thisInstance = FORMS.bindingWrapper; /* ADAPT FROM COPY */
+        function reduceElements(elements) {
+            if (!(Array.isArray(elements) && elements.length)) {return [];}
+            return elements.reduce((bag, element) => {
+                let newElBag = bag;
+                if (includeNoCode && element.enableVisibleCond && (includeDisabled || !element.disabled)) {
+                    newElBag.push(element);
+                }
+                else if (includeDisabled || !element.disabled) {
+                    const formatterConfigList = thisInstance.Advanced.Configuration.getFormatterConfigList(element);
+                    if (Array.isArray(formatterConfigList) && formatterConfigList.length) {
+                        newElBag.push(element);
+                    }
+                }
+                return newElBag.concat(reduceElements(element.elements)); // considers applications where elements aggregate elementss
+            },[]);
+        };
+        return reduceElements(modeloPageDetail.getData().setup);  /* ADAPT FROM COPY */
+    },
+    getAllVisibilityConditionsById: function (id, includeDisabled = false, includeNoCode = false) {
+        // THIS IS CODE COPIED from BindingWrapper.Advanced.Configuration.getAllConditionsWithParamId
+        // copy all the code except for lines that end with /* ADAPT FROM COPY */ which you must adapt to the designer's reality
+        const thisInstance = FORMS.bindingWrapper; /* ADAPT FROM COPY */
+        function reduceElements(elements) {
+            if (!(Array.isArray(elements) && elements.length)) {return [];}
+            return elements.reduce((bag, element) => {
+                let newElBag = bag;
+                if (includeNoCode && element.enableVisibleCond && (includeDisabled || !element.disabled)) {
+                    if (element?.visibility?.length) {
+                        let foundMatch = element.visibility.find(item=>item.visibleFieldName === id);
+                        if (foundMatch) {
+                            newElBag.push(element);
+                        }
+                    }
+                    else if (element.visibleFieldName === id) {
+                        newElBag.push(element);
+                    }
+                }
+                else if (includeDisabled || !element.disabled) {
+                    const formatterConfigList = thisInstance.Advanced.Configuration.getFormatterConfigList(element);
+                    const {getFormatterConfig} = thisInstance.Advanced.Configuration;
+                    if (Array.isArray(formatterConfigList) && formatterConfigList.length && (includeDisabled || !element.disabled)) {
+                        let foundMatch = formatterConfigList.some(property => 
+                            getFormatterConfig(element, property).paramList.some(param=>param.fieldId === id));
+                        if (foundMatch) {newElBag.push(element);}
+                    }
+                }
+                return newElBag.concat(reduceElements(element.elements)); // considers applications where elements aggregate elementss
+            },[]);
+        };
+        return reduceElements(modeloPageDetail.getData().setup); /* ADAPT FROM COPY */
+    },
+    checkVisCondParamValidation: function (property = "visible") {
+        let result = [];
+        let allConditions = controller.getAllVisibilityConditions();
+        for (let condition of allConditions) {
+            let variables = [];
+            let entry = {fieldId: condition.id, hasErrors: false, error:{}};
+            let errorFound = false;
+            // Check parameters
+            const formatterConfig = FORMS.bindingWrapper.Advanced.Configuration.getFormatterConfig(condition, property);
+            for (let param of formatterConfig.paramList ?? []) {
+                entry.error[param.fieldId] = {};
+                param.error = {};
+                param.hasErrors = false;
+                if (variables.includes(param.variable)) {
+                    param.hasErrors = true;
+                    entry.hasErrors = true;
+                    entry.error[param.fieldId].duplicated = true;
+                    param.error.duplicated = true;
+                }
+                else { variables.push(param.variable); }
+                let sourceObject = controller.getOutlineElementById(param.fieldId);
+                if (!sourceObject) {
+                    param.hasErrors = true;
+                    entry.hasErrors = true;
+                    entry.error[param.fieldId].missing = true;
+                    param.error.missing = true;
+                }
+                errorFound ||= param.hasErrors;
+            }
+            // Check function creation
+            const errorReturn = {};
+            const fnFormatter = FORMS.bindingWrapper.Advanced.Generator.formatterFunction(formatterConfig, false, errorReturn);
+            if (!fnFormatter) {
+                errorFound = true;
+                entry.hasErrors = errorFound;
+                entry.error.code = errorReturn.text ?? "Activation error";
+                condition.codeError = entry.error.code;
+            }
+            else {delete condition.codeError};
+            condition.hasErrors = errorFound;
+            result.push(entry);
+        }
+        modelpanTopEditor.refresh();
+        modeloPageDetail.refresh();
+        return result;
     }
+
 };
 
 controller.init();

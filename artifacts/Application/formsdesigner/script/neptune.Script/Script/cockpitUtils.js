@@ -41,6 +41,8 @@ const cockpitUtils = {
 
         modelappControl.oData.enableEdit = editable;
         modelappControl.refresh();
+        MonacoEditor.onCreated
+            .then(editor=>editor.updateOptions({readOnly: !editable}));
 
         if (modeloPageDetail.oData.id && editable) {
             butDetailDelete.setVisible(true);
@@ -62,6 +64,7 @@ const cockpitUtils = {
 
         modelappControl.oData.enableEdit = true;
         modelappControl.refresh();
+        MonacoEditor.onCreated.then(editor=>editor.updateOptions({readOnly: false}));
 
         // Cockpit Action
         sap.n.Planet9.setToolbarButton(true);

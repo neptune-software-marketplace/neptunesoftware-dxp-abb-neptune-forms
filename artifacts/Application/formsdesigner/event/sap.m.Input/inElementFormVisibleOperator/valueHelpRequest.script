@@ -10,13 +10,89 @@ const visibleField = controller.getObjectFromId(currentObject.visibleFieldName);
 switch (visibleField.type) {
     case "MultipleChoice":
     case "MultipleSelect":
-        oper.push({ key: "any", text: "Contains Any" });
-        oper.push({ key: "all", text: "Contains All" });
+    case "CheckList":
+        [
+            FORMS.CONDITION_OPERATOR.CONTAINS_ANY,
+            FORMS.CONDITION_OPERATOR.CONTAINS_ALL,
+            FORMS.CONDITION_OPERATOR.EQUAL,
+            FORMS.CONDITION_OPERATOR.NOT_EQUAL,
+        ].forEach(operation => {
+            const {key,title} = operation;
+            oper.push({key,title})
+        })
+        break;
+
+    case "SegmentedButton":
+    case "SingleSelectIcon":
+    case "SingleSelect":
+    case "SingleChoice":
+        [
+            FORMS.CONDITION_OPERATOR.CONTAINS_ANY,
+            FORMS.CONDITION_OPERATOR.EQUAL,
+            FORMS.CONDITION_OPERATOR.NOT_EQUAL,
+        ].forEach(operation => {
+            const {key,title} = operation;
+            oper.push({key,title})
+        })
+        break;
+
+    case "CheckBox":
+    case "Switch":
+    case "Image":
+    case "File":
+        [
+            FORMS.CONDITION_OPERATOR.EQUAL,
+            FORMS.CONDITION_OPERATOR.NOT_EQUAL,
+        ].forEach(operation => {
+            const {key,title} = operation;
+            oper.push({key,title})
+        })
+        break; 
+
+    case "Numeric":
+    case "Rating":
+    case "StepInput":
+        [
+            FORMS.CONDITION_OPERATOR.GREATER_THAN,
+            FORMS.CONDITION_OPERATOR.GREATER_OR_EQUAL,
+            FORMS.CONDITION_OPERATOR.EQUAL,
+            FORMS.CONDITION_OPERATOR.LOWER_OR_EQUAL,
+            FORMS.CONDITION_OPERATOR.LOWER_THAN,
+            FORMS.CONDITION_OPERATOR.NOT_EQUAL,
+        ].forEach(operation => {
+            const {key,title} = operation;
+            oper.push({key,title})
+        })
+        break;
+
+    case "TextArea":
+        [
+            FORMS.CONDITION_OPERATOR.EQUAL,
+            FORMS.CONDITION_OPERATOR.NOT_EQUAL,
+            FORMS.CONDITION_OPERATOR.STARTS_WITH,
+            FORMS.CONDITION_OPERATOR.CONTAINS,
+            FORMS.CONDITION_OPERATOR.ENDS_WITH,
+        ].forEach(operation => {
+            const {key,title} = operation;
+            oper.push({key,title})
+        })
         break;
 
     default:
-        oper.push({ key: "===", text: "Equal" });
-        oper.push({ key: "!==", text: "Not Equal" });
+        [
+            FORMS.CONDITION_OPERATOR.GREATER_THAN,
+            FORMS.CONDITION_OPERATOR.GREATER_OR_EQUAL,
+            FORMS.CONDITION_OPERATOR.EQUAL,
+            FORMS.CONDITION_OPERATOR.LOWER_OR_EQUAL,
+            FORMS.CONDITION_OPERATOR.LOWER_THAN,
+            FORMS.CONDITION_OPERATOR.NOT_EQUAL,
+            FORMS.CONDITION_OPERATOR.STARTS_WITH,
+            FORMS.CONDITION_OPERATOR.CONTAINS,
+            FORMS.CONDITION_OPERATOR.ENDS_WITH,
+        ].forEach(operation => {
+            const {key,title} = operation;
+            oper.push({key,title})
+        })
         break;
 }
 

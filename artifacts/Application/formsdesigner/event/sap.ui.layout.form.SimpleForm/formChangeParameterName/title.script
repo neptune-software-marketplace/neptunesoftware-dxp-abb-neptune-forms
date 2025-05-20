@@ -1,0 +1,3 @@
+if (typeof title === "undefined" || title === null || title === "") { return; }  
+var formattedText = `Change the variable name of ${title}`; 
+return formattedText;

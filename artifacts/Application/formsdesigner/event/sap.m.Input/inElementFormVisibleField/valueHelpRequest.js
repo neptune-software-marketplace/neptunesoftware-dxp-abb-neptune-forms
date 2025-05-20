@@ -5,49 +5,30 @@ let visibilityFields = [];
 
 let elementParent = controller.getParentFromId(modelpanTopProperties.oData.id);
 
-const addConditionalField = function (element) {
+const addConditionalField = function (element, prefix) {
     if (element.id === modelpanTopProperties.oData.id) return;
+    if (!controller.elementTypes.find(item=>item.type === element.type)?.parameter) {return;} // not usable as a conditional parameter
 
-    switch (element.type) {
-        case "Image":
-        case "File":
-        case "MessageStrip":
-        case "Text":
-        case "FormTitle":
-        case "Date":
-            break;
+    const parent = controller.getParentFromId(element.id);
 
-        default:
-            const parent = controller.getParentFromId(element.id);
-
-            switch (elementParent.type) {
-                case "Table":
-                    if (elementParent.id !== parent.id) return;
-                    break;
-
-                default:
-                    if (parent.type === "Table") return;
-                    break;
-            }
-
-            visibilityFields.push({
-                id: element.id,
-                text: element.title,
-                parent: parent.title,
-                index: visibilityFields.length + 1,
-            });
-
-            break;
-    }
+    visibilityFields.push({
+        id: element.id,
+        text: element.title,
+        parent: parent.title,
+        parentId: `${prefix}|${parent.title}`,
+        index: visibilityFields.length + 1,
+    });
 };
 
 // Conditional Access
-modeloPageDetail.oData.setup.forEach(function (section) {
+let prefix = '';
+modeloPageDetail.oData.setup.forEach(function (section, index) {
+    prefix = `0000000${index}`.slice(-8);
     section.elements.forEach(function (element) {
-        addConditionalField(element);
+        addConditionalField(element, prefix);
         if (element.elements) {
             element.elements.forEach(function (element) {
-                addConditionalField(element);
+                addConditionalField(element, prefix);
             });
         }
     });

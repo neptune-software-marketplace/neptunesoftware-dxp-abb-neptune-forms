@@ -1,0 +1,7 @@
+if (!useFormatterConfigvisible) return false;
+MonacoEditor.onCreated
+    .then(editor=>{
+        editor.updateOptions({readOnly: !enableEdit})
+        editor.setValue(formatterConfigvisiblecode ?? "");
+    });
+return true;

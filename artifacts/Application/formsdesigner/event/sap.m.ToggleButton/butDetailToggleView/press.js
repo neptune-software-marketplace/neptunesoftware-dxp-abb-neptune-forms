@@ -1,11 +1,9 @@
-splitDesigner.removeAllContentAreas();
+splitWorkbench.removeAllContentAreas();
 
 if (this.getPressed()) {
-    splitDesigner.addContentArea(panTopOutline);
-    splitDesigner.addContentArea(panTopProperties);
-    splitDesigner.addContentArea(panTopPreview);
+    splitWorkbench.addContentArea(panTopProperties);
+    splitWorkbench.addContentArea(panTopPreview);
 } else {
-    splitDesigner.addContentArea(panTopOutline);
-    splitDesigner.addContentArea(panTopPreview);
-    splitDesigner.addContentArea(panTopProperties);
+    splitWorkbench.addContentArea(panTopPreview);
+    splitWorkbench.addContentArea(panTopProperties);
 }

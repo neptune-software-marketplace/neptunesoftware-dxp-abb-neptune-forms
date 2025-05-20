@@ -1,0 +1,5 @@
+if (!hasErrors) {return;}
+let errors = [];
+if (errorduplicated) {errors.push("duplicated")};
+if (errormissing) {errors.push("missing")};
+return errors.join(",");

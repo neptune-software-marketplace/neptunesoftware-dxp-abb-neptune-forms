@@ -2,6 +2,7 @@ if (!modelpanTopProperties.oData.visibility) modelpanTopProperties.oData.visibil
 
 modelpanTopProperties.oData.visibility.push({
     id: ModelData.genID(),
+    visibleSep: modelpanTopProperties.oData.visibility.length ? "and" : undefined
 });
 
 modelpanTopProperties.refresh();

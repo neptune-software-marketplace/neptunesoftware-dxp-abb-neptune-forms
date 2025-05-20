@@ -118,6 +118,226 @@
 					"attributes": [],
 					"data": [
 						{
+							"fieldNo": "bc67d179-d3c0-4724-e0b7-77f4f2f47f7f",
+							"fieldName": "i18nConditionOperatorContainsAny",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Contains Any",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "a3f07b2d-3a07-4fd6-c9f1-0dd67eb26a0a",
+							"fieldName": "i18nConditionOperatorContainsAll",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Contains All",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "e88f6f1d-0dab-4661-a338-9b8797be7a93",
+							"fieldName": "i18nConditionOperatorGreaterThan",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Greater Than",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "3ba02fe8-f50c-445a-bc0b-0c9d080da4a9",
+							"fieldName": "i18nConditionOperatorGreaterOrEqual",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Greater or Equal",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "9ee6d3dc-95b7-4c1e-bbb6-7e9644bc825b",
+							"fieldName": "i18nConditionOperatorEqual",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Equal",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "b6997185-aee4-4376-ca59-4ef327ec5bbd",
+							"fieldName": "i18nConditionOperatorLowerOrEqual",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Lower or Equal",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "b2a6a3a6-23ec-421f-e693-251d09cddd7c",
+							"fieldName": "i18nConditionOperatorLowerThan",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Lower Than",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "4e4f06aa-30c9-4c66-ccb8-8bdf03d5b177",
+							"fieldName": "i18nConditionOperatorNotEqual",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Not Equal",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "5f8ef86a-5763-45d8-ddf6-3564194a4874",
+							"fieldName": "i18nConditionOperatorStartsWith",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Starts With",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "bb158603-5368-4853-bc12-a1ea546e0b3c",
+							"fieldName": "i18nConditionOperatorContains",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Contains",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "72ed7336-1502-4eb0-817a-48ed5b4bd981",
+							"fieldName": "i18nConditionOperatorEndsWith",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Ends With",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
 							"fieldNo": "282b25c0-3215-439e-84aa-62ab6d56c29a",
 							"fieldName": "i18nLabel",
 							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
@@ -396,6 +616,18 @@
 							"data": []
 						},
 						{
+							"fieldNo": "26e2e0a6-3c21-4b36-965d-439f636be1d0",
+							"fieldName": "BindingWrapper",
+							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/BindingWrapper.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
 							"fieldNo": "ddfa1361-d940-4bff-ff6f-a993d044be66",
 							"fieldName": "FORMS.rendererFramework",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
@@ -436,11 +668,11 @@
 							"data": []
 						},
 						{
-							"fieldNo": "40a5c1a7-6f9d-44c4-fe48-e713c6d98a55",
-							"fieldName": "DEBUG",
+							"fieldNo": "c6d51628-c5b0-409c-f4e2-710841277997",
+							"fieldName": "TestGeneratedCode",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
 							"fieldType": "neptune.Typescript",
-							"script": "file://script/neptune.Typescript/Script/DEBUG.ts",
+							"script": "",
 							"customComponent": false,
 							"request": [],
 							"response": [],
@@ -462,7 +694,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "25.04.22.1350",
+	"ver": "25.05.20.0153",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

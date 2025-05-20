@@ -1,0 +1,15 @@
+if (typeof id !== "string" || id === "") { return;}  
+if (!modelappControl.getData().enableEdit) {return;}
+let sourceElement = controller.getOutlineElementById(id);
+if (!sourceElement) {return;}
+// Check if this element is part of any advanced conditional visibility. If so, update the type
+let newVarType = controller.getVisCondParamTypeOf(sourceElement);
+for (let element of controller.getAllVisibilityConditionsById(id)) {
+    let {paramList} = element.formatterConfig?.visible;
+    if (!Array.isArray(paramList)) {continue;}
+    let condition = paramList.find(cond=>cond.fieldId === id);
+    if (condition) { condition.varType = newVarType; }
+}
+
+modeloPageDetail.refresh();
+return;

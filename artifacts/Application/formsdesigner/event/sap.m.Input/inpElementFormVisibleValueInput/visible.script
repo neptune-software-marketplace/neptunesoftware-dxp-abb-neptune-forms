@@ -1,0 +1,22 @@
+if (typeof visibleFieldName === "undefined" || visibleFieldName === null || visibleFieldName === "") { return false; }  
+
+const object = controller.getObjectFromId(visibleFieldName);
+if (!object) return false;
+
+switch (object.type) {
+    case "MultipleChoice":
+    case "MultipleSelect":
+    case "SegmentedButton":
+    case "SingleSelectIcon":
+    case "SingleSelect":
+    case "SingleChoice":
+    case "CheckList":
+    case "CheckBox":
+    case "Switch":
+    case "Image":
+    case "File":
+        return false;
+
+    default:
+        return true;
+}

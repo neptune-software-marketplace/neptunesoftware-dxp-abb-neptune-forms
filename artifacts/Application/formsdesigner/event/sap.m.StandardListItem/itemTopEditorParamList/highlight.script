@@ -1,0 +1,2 @@
+if (!hasErrors) { return "None"; }  
+return sap.ui.core.IndicationColor.Indication08;

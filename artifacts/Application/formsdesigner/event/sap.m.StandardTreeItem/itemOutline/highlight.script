@@ -1,3 +1,4 @@
-if (typeof disabled === "undefined" || disabled === null || disabled === "") { return; }  
-
+if (disabled && hasErrors) return "Warning";
+if (hasErrors) return sap.ui.core.IndicationColor.Indication08;
 if (disabled) return "Error";
+return;

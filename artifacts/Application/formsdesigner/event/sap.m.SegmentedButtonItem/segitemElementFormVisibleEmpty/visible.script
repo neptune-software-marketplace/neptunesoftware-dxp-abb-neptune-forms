@@ -1,0 +1,13 @@
+if (typeof visibleFieldName === "undefined" || visibleFieldName === null || visibleFieldName === "") { return false; }
+
+const object = controller.getObjectFromId(visibleFieldName);
+if (!object) return false;
+
+switch (object.type) {
+    case "Image":
+    case "File":
+        return true;
+
+    default:
+        return false;
+}

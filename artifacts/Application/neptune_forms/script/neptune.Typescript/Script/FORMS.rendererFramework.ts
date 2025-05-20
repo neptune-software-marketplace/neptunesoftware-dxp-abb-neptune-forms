@@ -218,20 +218,26 @@ apiGetAllRenderers({parameters: {onlyActive: true}}).then(result => {
     console.log("FORMS: read all renderers");
     let loadPromises = [];
     let now = new Date();
+    let count = 0;
     for (let rendererInfo of result) {
         if (rendererInfo.appType === "application") {
             let resolved:any;
             loadPromises.push(new Promise(ok => {resolved=ok;}));
             // @ts-ignore
-            AppCache.Load(rendererInfo.appName, {
+            let loadOutcome = AppCache.Load(rendererInfo.appName, {
                 load: "init",
                 startParams:{
                     FORMS,
                     rendererInfo,
                     onLoad: () => resolved(true)
                 },
-                appGUID: `${rendererInfo.appName}.${now.getTime()}`
+                appGUID: `forms_renderer-${count++}.${now.getTime()}`
             });
+            (loadOutcome?.then && loadOutcome?.then(result=>{
+                console.log(`${rendererInfo.appName} then with the result:`,result);
+            }));
+            (loadOutcome?.catch && loadOutcome?.catch(reject=>console.log(`${rendererInfo.appName} catch. Error: ${reject}`)));
+            console.log(loadOutcome);
         }
     }
     Promise.allSettled(loadPromises).then(()=>FORMS.Renderer.resolveLoaded());

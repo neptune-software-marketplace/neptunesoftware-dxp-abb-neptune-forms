@@ -2,16 +2,7 @@ if (typeof visibleCondition === "undefined" || visibleCondition === null || visi
     return;
 }
 
-switch (visibleCondition) {
-    case "any":
-        return "Contains Any";
-
-    case "all":
-        return "Contains All";
-
-    case "===":
-        return "Equal";
-
-    case "!==":
-        return "Not Equal";
-}
+let formattedText="";
+const operators = FORMS.CONDITION_OPERATOR;
+Object.getOwnPropertyNames(operators).some(opName=>(operators[opName].key)===visibleCondition?formattedText=operators[opName].title:"");
+return formattedText;

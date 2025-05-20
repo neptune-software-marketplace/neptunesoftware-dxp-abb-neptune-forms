@@ -34,6 +34,31 @@
     font-size: 18px;
 }
 
+.nepNoBorderAll .sapMPanelContent {
+    height: 100% !important;
+}
+
+.nepNoOverflow {
+    overflow: hidden;
+}
+.nepNoOverflow-0 > :first-child{
+    overflow: hidden;
+}
+.nepNoOverflow-1 > :nth-child(2){
+    overflow: hidden;
+}
+.nepMinWidth10rem {
+    min-width: 10rem;
+}
+.nepMinWidth15rem {
+    min-width: 15rem;
+}
+.nepMinHeight10rem {
+    min-height: 10rem;
+}
+.nepMinHeight15rem {
+    min-height: 15rem;
+}
 .formDnDIcon.sapUiIcon {
     color: var(--nepInformationColor);
     margin-top: 6px;
@@ -65,6 +90,10 @@
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.nepPanContentHeightMinus3Rem > .sapMPanelContent {
+    height: calc(100% - 3rem)!important
 }
 
 .treeOutline .sapMSTIIcon {

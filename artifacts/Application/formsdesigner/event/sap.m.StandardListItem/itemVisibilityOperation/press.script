@@ -3,5 +3,30 @@ const data = context.getObject();
 
 currentObject.visibleCondition = data.key;
 
+switch(currentObject.visibleCondition) {
+    case FORMS.CONDITION_OPERATOR.EQUAL.key:
+    case FORMS.CONDITION_OPERATOR.NOT_EQUAL.key:
+        let conditionObject = controller.getOutlineElementById(currentObject.visibleFieldName);
+        switch(conditionObject.type) {
+            case "SegmentedButton":
+            case "SingleSelectIcon":
+            case "SingleSelect":
+            case "SingleChoice":
+                currentObject.visibleValue = [];
+                break;
+            case "CheckBox":
+            case "Switch":
+                currentObject.visibleValue = "true";
+                break;
+            case "Image":
+            case "File":
+                currentObject.visibleValue = "exists";
+                break;
+            default:
+                currentObject.visibleValue = "";
+        }
+        break;
+}
+
 modelpanTopProperties.refresh();
 popVisibilityOperation.close();

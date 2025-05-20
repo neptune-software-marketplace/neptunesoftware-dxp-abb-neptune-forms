@@ -30,7 +30,58 @@ namespace FORMS {
         attachmentsPromise = [],
         fileUploaders = [],
         appControl: Partial<sap.ui.model.json.JSONModel> = {},
-        revalidate = false;
+        revalidate = false,
+        bindingWrapper,
+        elementTypes = [
+            { icon: "sap-icon://form",                    text: "Form",               type: "Form",             parent: true,  table: false, parameter: false, paramType: '', descripton: "Present the data in Form layout" },
+            { icon: "sap-icon://table-view",              text: "Table",              type: "Table",            parent: true,  table: false, parameter: false, paramType: '', descripton: "Present the data in Table layout" },
+            { icon: "sap-icon://header",                  text: "Form Title",         type: "FormTitle",        parent: false, table: false, parameter: false, paramType: '', },
+            { icon: "sap-icon://calendar",                text: "Date Picker",        type: "DatePicker",       parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://date-time",               text: "Date Time Picker",   type: "DateTimePicker",   parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://fa-regular/check-square", text: "Check Box",          type: "CheckBox",         parent: false, table: true,  parameter: true,  paramType: 'boolean', },
+            { icon: "sap-icon://checklist",               text: "Check List",         type: "CheckList",        parent: false, table: true,  parameter: true,  paramType: 'boolean[]', },
+            { icon: "sap-icon://request",                 text: "Input",              type: "Input",            parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://fa-regular/file-image",   text: "Image Upload",       type: "Image",            parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://add-document",            text: "File Upload",        type: "File",             parent: false, table: false, parameter: true,  paramType: 'any', },
+            { icon: "sap-icon://attachment-video",        text: "Media Library Link", type: "MediaLib",         parent: false, table: false, parameter: false, paramType: '', },
+            { icon: "sap-icon://message-information",     text: "Message Strip",      type: "MessageStrip",     parent: false, table: true,  parameter: false, paramType: '', },
+            { icon: "sap-icon://message-popup",           text: "Message Popup",      type: "MessagePopup",     parent: false, table: true,  parameter: false, paramType: '', },
+            { icon: "sap-icon://number-sign",             text: "Numeric",            type: "Numeric",          parent: false, table: true,  parameter: true,  paramType: 'number', }, // must be converted to number b4 function
+            { icon: "sap-icon://picture",                 text: "Picture",            type: "Picture",          parent: false, table: false, parameter: false, paramType: '', },
+            { icon: "sap-icon://feedback",                text: "Rating",             type: "Rating",           parent: false, table: true,  parameter: true,  paramType: 'number', },
+            { icon: "sap-icon://numbered-text",           text: "Step Input",         type: "StepInput",        parent: false, table: true,  parameter: true,  paramType: 'number', },
+            { icon: "sap-icon://switch-views",            text: "Switch",             type: "Switch",           parent: false, table: true,  parameter: true,  paramType: 'boolean', },
+            { icon: "sap-icon://activities",              text: "Segmented Button",   type: "SegmentedButton",  parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://fa-solid/signature",      text: "Signature",          type: "Signature",        parent: false, table: false, parameter: false, paramType: '', },
+            { icon: "sap-icon://fa-regular/circle",       text: "Single Select Icon", type: "SingleSelectIcon", parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://fa-regular/circle",       text: "Single Select",      type: "SingleSelect",     parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://fa-regular/circle",       text: "Single Choice",      type: "SingleChoice",     parent: false, table: false, parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://multi-select",            text: "Multiple Select",    type: "MultipleSelect",   parent: false, table: true,  parameter: true,  paramType: 'string[]', },
+            { icon: "sap-icon://multi-select",            text: "Multiple Choice",    type: "MultipleChoice",   parent: false, table: false, parameter: true,  paramType: 'string[]', },
+            { icon: "sap-icon://text",                    text: "Text",               type: "Text", 			parent: false, table: true,  parameter: false, paramType: '', },
+            { icon: "sap-icon://document-text",           text: "Text Area",          type: "TextArea",         parent: false, table: true,  parameter: true,  paramType: 'string', },
+            { icon: "sap-icon://value-help",              text: "Value Help",         type: "ValueHelp",        parent: false, table: true,  parameter: true,  paramType: 'string', },
+        ];
+
+    export const CONDITION_OPERATOR = Object.freeze({
+        CONTAINS_ANY:     { key: "any",        title: i18nConditionOperatorContainsAny.getText() },
+        CONTAINS_ALL:     { key: "all",        title: i18nConditionOperatorContainsAll.getText() },
+        GREATER_THAN:     { key: ">",          title: i18nConditionOperatorGreaterThan.getText() },
+        GREATER_OR_EQUAL: { key: ">=",         title: i18nConditionOperatorGreaterOrEqual.getText() },
+        EQUAL:            { key: "===",        title: i18nConditionOperatorEqual.getText() },
+        LOWER_OR_EQUAL:   { key: "<=",         title: i18nConditionOperatorLowerOrEqual.getText() },
+        LOWER_THAN:       { key: "<",          title: i18nConditionOperatorLowerThan.getText() },
+        NOT_EQUAL:        { key: "!==",        title: i18nConditionOperatorNotEqual.getText() },
+        STARTS_WITH:      { key: "startsWith", title: i18nConditionOperatorStartsWith.getText() },
+        CONTAINS:         { key: "contains",   title: i18nConditionOperatorContains.getText() },
+        ENDS_WITH:        { key: "endsWith",   title: i18nConditionOperatorEndsWith.getText() },
+    });
+
+    export function getView(): sap.ui.core.mvc.View {
+        // WISH: check if there is another way to obtain the view, without using sap.n.currentView.
+        // @ts-ignore
+        return sap.n.currentView;
+    }
 
     export function initAppControl () {
         if (!(FORMS.appControl instanceof sap.ui.model.json.JSONModel)) {
@@ -46,12 +97,31 @@ namespace FORMS {
         FORMS.appControl.refresh();
     }
 
+    export function initAdvanceFormatterConfig(options) {
+        //
+        // Old templates' nodes (section/element) may not have the /useFormatterConfig and /formatterConfig properties.
+        // This routine adds them, if needed.
+        function traverseNodes(arrayNodes) {
+            for(let node of arrayNodes) {
+                if (!(typeof node.useFormatterConfig === "object") && (node.useFormatterConfig !== null)) {
+                    node.useFormatterConfig = {};
+                }
+                if (!(typeof node.formatterConfig === "object") && (node.formatterConfig !== null)) {
+                    node.formatterConfig = {};
+                }
+                if (Array.isArray(node.elements)) {traverseNodes(node.elements);}
+            }
+        };
+        if (Array.isArray(options?.config?.setup)) {traverseNodes(options.config.setup)};
+    };
+
     export function build (parent, options) {
 
         let formOptions;
         let formId;
 
         FORMS.initAppControl();
+        FORMS.initAdvanceFormatterConfig(options);
         FORMS.revalidate = false;
 
         if (typeof options === "string") {
@@ -162,6 +232,15 @@ namespace FORMS {
         if (!options.data) FORMS.setDefaultValues();
         formModel.refresh(true);
 
+        // Binding Wrapper
+        FORMS.bindingWrapper = new BindingWrapper(FORMS);
+        const [DO_NOT_INCLUDE_DISABLED, INCLUDE_DISABLED] = [false, true];
+        const [DO_NOT_INCLUDE_NOCODE,   INCLUDE_NOCODE  ] = [false, true];
+        const elementsConfig = FORMS.bindingWrapper.Advanced.Configuration.getAllConditions(DO_NOT_INCLUDE_DISABLED, INCLUDE_NOCODE);
+        elementsConfig.forEach(elementConfig => 
+            FORMS.bindingWrapper.Advanced.Form.createBindingFor(elementConfig, "visible", DO_NOT_INCLUDE_DISABLED, INCLUDE_NOCODE));
+        FORMS.bindingWrapper.Advanced.Form.createWatchdogs(DO_NOT_INCLUDE_DISABLED, INCLUDE_NOCODE);
+
         // Renderer Framework - {
         let repository = FORMS.Renderer.getRepository(FORMS.Renderer.selected());
         // Sets necessary CSS to the selected rendered
@@ -173,90 +252,6 @@ namespace FORMS {
         // Starts the first rendering
         FORMS.Renderer.executeFirstRendering(repository); // options);
         // Renderer Framework - }
-
-        // let sectionParent;
-
-        // // Section
-        // options.config.setup.forEach(function (section, i) {
-        //     if (!section) return;
-        //     if (section.disabled) return;
-
-        //     switch (section.type) {
-        //         case "Form":
-        //             FORMS.bindingPath = "/";
-        //             sectionParent = FORMS.buildParentForm(FORMS.formParent, section);
-        //             break;
-
-        //         case "Table":
-        //             FORMS.bindingPath = "";
-        //             delete section.origMode; // this attribute saves the delete or multiselect mode when the dynamic editability is being set (see fn setFormEditable)
-        //             sectionParent = FORMS.buildParentTable(FORMS.formParent, section);
-        //             break;
-        //     }
-
-        //     // Elements
-        //     section.elements.forEach(function (element, i) {
-          
-
-        //         FORMS.buildElement(sectionParent, element, section, i);
-
-        //         if (element.elements) {
-        //             element.elements.forEach(function (subElement, iSub) {
-        //                 if (subElement) {
-        //                     FORMS.buildElement(sectionParent, subElement, section, iSub);
-        //                 }
-        //             });
-        //         }
-        //     });
-
-        //     // Post processing
-        //     switch (section.type) {
-        //         case "Table":
-        //             const tabModel = new sap.ui.model.json.JSONModel();
-        //             let modelData = [];
-
-        //             sectionParent.setModel(tabModel);
-
-        //             const bindingField = section.fieldName ? section.fieldName : section.id;
-        //             if (options.data && options.data[bindingField] && options.data[bindingField].length) {
-        //                 // KW addition (add init. sort value) // 28.11.2023
-        //                 var i: any = 0;
-        //                 for (const bv of options.data[bindingField]) {
-        //                     bv.initsort = ++i;
-        //                 }
-        //                 modelData = options.data[bindingField];
-        //             } else {
-        //                 let rows = section.rows || 1;
-
-        //                 for (let i = 0; i < rows; i++) {
-        //                     modelData.push(FORMS.buildRowTemplate(section.elements));
-        //                 }
-        //             }
-
-        //             // Row Number
-        //             if (section.enableRowNumber) FORMS.tableAddRowNumber(modelData);
-
-        //             // Pagination
-        //             if (section.enablePagination) {
-        //                 FORMS.paginationSetup[section.id] = {
-        //                     take: section.paginationTake || 2,
-        //                     index: 0,
-        //                     count: 0,
-        //                     filter: "",
-        //                     sortOrder: "Ascending",
-        //                     sortField: "",
-        //                     data: modelData,
-        //                 };
-
-        //                 FORMS.paginationHandle(section);
-        //             } else {
-        //                 tabModel.setData(modelData);
-        //             }
-
-        //             sectionParent.bindAggregation("items", { path: "/", template: FORMS.columnTemplate, templateShareable: false });
-        //             break;
-        //     }
-        // });
 
         if (parent.addContent) parent.addContent(FORMS.formParent);
         if (parent.addItem) parent.addItem(FORMS.formParent);
@@ -647,6 +642,7 @@ namespace FORMS {
                             let newElement = JSON.parse(JSON.stringify(element));
                             newElement.id = ModelData.genID();
                             newElement.isDuplicate = true;
+                            newElement.duplicatedFromId = element.id;
 
                             // Object Attribute
                             if (newElement.fieldName) newElement.fieldName = newElement.fieldName + "_" + ModelData.genID();
@@ -670,139 +666,14 @@ namespace FORMS {
         parent.addContent(elementParent);
     }
 
-    export function buildVisibleCond (element) {
-        if (!element) return;
-        if (!element.enableVisibleCond) return;
+    export function buildVisibleCondAdvanced (element): `{${string}}` {
+        if (!FORMS.bindingWrapper.formatters[element.id]?.["visible"]) {return;}
+        return `{/visible/${element.id}}`;
+    }
+    export function buildVisibleCond (element): `{${string}}` {
+        if (!(element?.enableVisibleCond || element.useFormatterConfig?.visible)) {return;}
 
-        let bindingPath = element.type === "Table" ? "/" : FORMS.bindingPath;
-
-        // forms/#22(Bug) - code change
-        // Two different logics are found in this method. One if for a single visible condition, and another is for an array of conditions
-        // This hints to two different versions, and both exist for backwards compatibility
-        if (!element?.visibility?.length) { // forms/#22 ADD
-            let visibleStatement = element.visibleInverse ? "false:true" : "true:false";
-            let visibleValueSep = element.visibleValue === "true" || element.visibleValue === "false" ? "" : "'";
-            let visibleFieldName = element.visibleFieldName;
-            let visibleCond;
-
-            // Check if field have object attributes
-            const checkElement = FORMS.getElementFromId(element.visibleFieldName);
-
-            if (!checkElement) return;
-            if (checkElement.fieldName) visibleFieldName = checkElement.fieldName;
-
-            if (checkElement.type === "Input" || checkElement.type === "TextArea") {
-                if (element.visibleValue === "empty") {
-                    if (element.visibleCondition === "===") {
-                        visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? false:true }";
-                    } else {
-                        visibleCond = "{= ${" + bindingPath + visibleFieldName + "} ? true:false }";
-                    }
-                }
-            } else {
-
-                // 2024-12-12 KW: fix for undefined value
-                // when a cond. visibility depends on a "false" value, it also depends on an "undefined" value
-
-                let bAddUndefined = visibleValueSep + element.visibleValue + visibleValueSep == "false";
-                let sVisCond = bAddUndefined
-                            ? "{= (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + ")" +
-                                " || (${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + "undefined" + visibleValueSep + ")"
-                            : "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep;
-                
-                visibleCond = sVisCond + " ? " + visibleStatement + " }";
-                //visibleCond = "{= ${" + bindingPath + visibleFieldName + "} " + element.visibleCondition + " " + visibleValueSep + element.visibleValue + visibleValueSep + " ? " + visibleStatement + " }";
-            }
-            return visibleCond // forms/#22 ADD
-        } // forms/#22 ADD
-
-        // if (!element.visibility?.length) return; // forms/#22 DEL
-
-        // Top Parameters
-        bindingPath = element.type === "Table" ? "/" : FORMS.bindingPath;
-        let visibleStatement = element.visibleInverse === "hide" ? "false:true" : "true:false";
-
-        let visibleWhere = "";
-        let visibleWhereSep = "";
-        let expression;
-
-        element.visibility.forEach(function (condition, index) {
-            if (!condition.visibleFieldName) return;
-            if (!condition.visibleCondition) return;
-            if (!condition.visibleValue?.length) return;
-
-            let visibleValueSep = condition.visibleValue === "true" || condition.visibleValue === "false" ? "" : "'";
-            let visibleFieldName = condition.visibleFieldName;
-
-            // Check if field have object attributes
-            const checkElement = FORMS.getElementFromId(condition.visibleFieldName);
-            if (!checkElement) return;
-
-            // Object Attributes vs Field ID
-            if (checkElement.fieldName) visibleFieldName = checkElement.fieldName;
-
-            let visibleFieldOptions = "";
-            let visibleFieldOptionsSep = "";
-
-            let visCondIsEqual = condition.visibleCondition === "===";
-            let visCondSign = visCondIsEqual ? '' : '!';
-            condition.visibleValue.forEach(function (value) {
-                switch (checkElement.type) {
-                    case "Switch":
-                    case "CheckBox":
-                        visibleFieldOptions += `${visibleFieldOptionsSep}\${${bindingPath}${visibleFieldName}}${condition.visibleCondition}${value}`; // forms/#22 ADD
-                        // if (value === "true") { // forms/#22 DEL
-                        //     visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}" + condition.visibleCondition + "true"; // forms/#22 DEL
-                        // } else if (value === "false") { // forms/#22 DEL
-                        //     visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}" + condition.visibleCondition + "false"; // forms/#22 DEL
-                        // } // forms/#22 DEL
-                        break;
-
-                    case "Input":
-                    case "TextArea":
-                        visibleFieldOptions += `${visibleFieldOptionsSep}\${${bindingPath}${visibleFieldName}}${condition.visibleCondition}''`; // forms/#22 ADD
-                        // visibleFieldOptions += `${visibleFieldOptionsSep}${visCondSign}(\${${bindingPath}${visibleFieldName}} === '')`; // forms/#22 ADD
-                        // if (visCondIsEqual) { // forms/#22 DEL
-                        //     visibleFieldOptions += visibleFieldOptionsSep + "!${" + bindingPath + visibleFieldName + "}"; // forms/#22 DEL
-                        // } else { // forms/#22 DEL
-                        //     visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "} !== ''"; // forms/#22 DEL
-                        // } // forms/#22 DEL
-                        break;
-
-                    default:
-                        visibleFieldOptions += `${visibleFieldOptionsSep}${visCondSign}\${${bindingPath}${visibleFieldName}}.includes('${value}')`; // forms/#22 ADD
-                        // visibleFieldOptions += visibleFieldOptionsSep + "${" + bindingPath + visibleFieldName + "}.includes('" + value + "')"; // forms/#22 DEL
-                        break;
-                }
-
-                switch (condition.visibleCondition) {
-                    case "any":
-                        visibleFieldOptionsSep = " || ";
-                        break;
-
-                    default:
-                        visibleFieldOptionsSep = "  && ";
-                        break;
-                }
-            });
-
-            if (index !== 0) {
-                visibleWhereSep = condition.visibleSep === "or" ? " || " : " && ";
-            }
-
-            if (visibleFieldOptions) {
-                visibleWhere += visibleWhereSep + "(" + visibleFieldOptions + ")";
-            }
-        });
-
-        if (visibleWhere) {
-            expression = `{= ${visibleWhere} ? ${visibleStatement} }`;
-        } else {
-            expression = true;
-        }
-
-        console.log(expression);
-        return expression;
+        return buildVisibleCondAdvanced(element);
     }
 
     export function buildParentTable (parent, section) {
@@ -3294,9 +3165,9 @@ namespace FORMS {
 
                 case "CheckList":
                     element.items.forEach(function (item) {
-                        if (formModel.oData[item.id]) {
+                        if (formModel.oData[item.id]) {                    
                             outputData[item.id] = formModel.oData[item.id];
-                        }
+                        }                                                  
                     });
                     break;
 
@@ -4089,6 +3960,48 @@ namespace FORMS {
                 }
             });
         }
+    }
+
+    export function getLocaleIsoString (input:string|Date|number) {
+        // @ts-ignore
+        if ((typeof input === "string") || (input instanceof Date) || !isNaN(Number.parseInt(input))) {
+            try {
+                const dateObj = (input instanceof Date) ? input : new Date(input);
+                const C_REGEX = /(\d+)\/(\d+)\/(\d+),\s*(\d+)\:(\d+)\:(\d+)[^P]*(PM)?/;
+                const match = C_REGEX.exec(dateObj.toLocaleString("iso"));
+                if (!match) {return;}
+                if (match[7] === "PM") {
+                    if (match[4] === "12") {
+                        const nextDay = new Date(dateObj.getTime()+1000*60*60*24);
+                        const nextStr = nextDay.toISOString();
+                        match[3] = nextStr.slice(0,4);
+                        match[1] = nextStr.slice(5,7);
+                        match[2] = nextStr.slice(8,10);
+                        match[4] = "00";
+                    }
+                    else {
+                        match[4] = `${Number.parseInt(match[4]) + 12}`;
+                    }
+                }
+                else {
+                    if (match[4] === "12") {
+                        match[4] = "00";
+                    }
+                    else {
+                        match[4] = `0${match[4]}`.slice(-2);                   
+                    }
+                }
+                return  `${match[3]}-` + // year
+                        `0${match[1]}-`.slice(-3) + // month
+                        `0${match[2]}`.slice(-2) + // day
+                        ` ${match[4]}:` + //hour
+                        `0${match[5]}:`.slice(-3) + // minutes
+                        `0${match[6]}`.slice(-2) // seconds
+            }
+            catch(e) {
+            }
+        }
+        return;
     }
 
 };

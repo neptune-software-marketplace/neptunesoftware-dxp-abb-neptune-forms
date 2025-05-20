@@ -6,6 +6,8 @@ if (selectedItem) {
 
     modelpanTopProperties.setData(data);
     modelpanTopProperties.refresh();
+    
+    modelpanTopEditor.setData(data);
 
     controller.pressOutlineItem();
 }

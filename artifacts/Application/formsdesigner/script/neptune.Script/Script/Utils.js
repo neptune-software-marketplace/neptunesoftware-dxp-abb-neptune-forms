@@ -14,6 +14,62 @@ const Utils = {
         }
         arr.splice(toPos, 0, arr.splice(fromPos, 1)[0]);
     },
+    toCamelCase: text => {
+        if (typeof text !== "string") {return '';}
+        if (!text) {return '';}
+        let capitalLetter = false;
+        let camelCasedText = Array.from(text).reduce( (bag, letter) => {
+            if (letter.match(/[^\w]/)) {
+                capitalLetter = true;
+                return bag;
+            }
+            let newLetter = (capitalLetter) ? letter.toLocaleUpperCase("en") : letter;
+            capitalLetter = false;
+            return bag+newLetter;
+        }, '');
+        return camelCasedText[0].toLocaleLowerCase("en")+camelCasedText.slice(1);
+    },
+    fallbackCopyTextToClipboard: text => {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Fallback: Copying text command was ' + msg);
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+        document.body.removeChild(textArea);
+    },
+    checkVisibleConditionMutuallyExclusive: (source, oEvent) => {
+        switch(source) {
+            case "advanced":
+                if (oEvent.getParameter("selected")) {
+                    modelpanTopProperties.getData().enableVisibleCond = false;
+                    modelpanTopProperties.refresh();
+                }
+                // Note: changes to the advanced are always reported to panTopEditor
+                modelpanTopEditor.refresh();
+                break;
+            default:
+                if (oEvent.getParameter("selected")) {
+                    FORMS.bindingWrapper.Advanced.Configuration.setFormatterConfig(modelpanTopProperties.getData());
+                    modelpanTopProperties.getData().useFormatterConfig.visible = false;
+                    modelpanTopProperties.refresh();
+                    modelpanTopEditor.refresh();
+                }
+        }
+    },
 
     buildValParamSelect: (select, i) => {
         select.destroyItems();

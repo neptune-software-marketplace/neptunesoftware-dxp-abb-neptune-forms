@@ -1,0 +1,25 @@
+if (typeof id === "undefined" || id === null || id === "") {
+    return;
+}
+
+const multiObject = this;
+multiObject.removeAllTokens();
+
+// Get Item Data
+const data = ModelData.FindFirst(modelpanTopProperties.oData.visibility, "id", id);
+if (!data.visibleValue) return;
+
+// Get VisibleField
+const visibleField = controller.getObjectFromId(data.visibleFieldName);
+if (!visibleField) {return;}
+const fieldKey = (["CheckList"].includes(visibleField.type)) ? "id" : "key";
+const fieldText = (["CheckList"].includes(visibleField.type)) ? "question" : "title";
+
+if (visibleField.items) {
+    visibleField.items.forEach(function (item, i) {
+        if (data.visibleValue.includes(item[fieldKey])) {
+            multiObject.addToken(new sap.m.Token({ editable: false, key: item[fieldKey], text: item[fieldText] }));
+        }
+    });
+}
+

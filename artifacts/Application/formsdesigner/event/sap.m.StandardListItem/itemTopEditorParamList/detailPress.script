@@ -1,0 +1,9 @@
+// Opens the change variable name dialog
+let data = this.getBindingContext().getObject();
+
+modeldiaChangeParameterName.setData({
+    title: data.title,
+    variable: data.variable,
+    _source: data
+})
+diaChangeParameterName.open();
