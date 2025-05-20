@@ -1430,7 +1430,14 @@ const controller = {
         modelappData.refresh();
     },
     filterProjectViewItemsByWhatToHide: () => {
-        let loFilters = [new sap.ui.model.Filter("option", "NE", "I")];
+        let loFilters = [
+            new sap.ui.model.Filter({
+                filters: [
+                    new sap.ui.model.Filter("option", "EQ", "P"),
+                    new sap.ui.model.Filter("option", "EQ", "E")
+                ],
+                and: false
+            })];
         let lvUpdateDisabled, lvUpdateExcluded;
         switch( modelappControl.getData().selectedHideFilter ) {
             case "1":

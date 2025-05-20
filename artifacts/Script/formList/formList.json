@@ -9,14 +9,7 @@
 			"contextname": "FormsAuthorizationGlobal"
 		}
 	],
-	"externalModules": [
-		{
-			"id": "c1e44158-f85b-48c3-85df-cd3bb1f6c7f4",
-			"name": "typeorm",
-			"contextname": "typeorm",
-			"path": "typeorm"
-		}
-	],
+	"externalModules": [],
 	"entitySets": [
 		{
 			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
@@ -51,7 +44,7 @@
 	],
 	"apis": [],
 	"name": "formList",
-	"ver": "25.05.20.0925",
+	"ver": "25.05.20.1617",
 	"description": null,
 	"folder": null,
 	"content": "file:///content.js",
