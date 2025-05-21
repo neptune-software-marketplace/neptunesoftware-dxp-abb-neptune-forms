@@ -649,10 +649,10 @@
 						},
 						{
 							"fieldNo": "3a3be61d-e1a3-4ec1-af81-fe46ed6527a6",
-							"fieldName": "FORMS.original",
+							"fieldName": "FORMS",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
 							"fieldType": "neptune.Typescript",
-							"script": "file://script/neptune.Typescript/Script/FORMS.original.ts",
+							"script": "file://script/neptune.Typescript/Script/FORMS.ts",
 							"customComponent": false,
 							"request": [],
 							"response": [],
@@ -694,7 +694,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "25.05.20.0153",
+	"ver": "25.05.21.1017",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

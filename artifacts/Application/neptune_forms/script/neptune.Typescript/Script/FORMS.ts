@@ -97,6 +97,43 @@ namespace FORMS {
         FORMS.appControl.refresh();
     }
 
+    export function applyBackwardCompatibility(setup) {
+        function traverseNodesAndApplyBackwardCompatibility (nodes) {
+            for (let node of nodes) {
+                if (node.visibleFieldName && !Array.isArray(node.visibility)) {
+                    const {visibleFieldName, visibleCondition, visibleValue} = node;
+                    const id = ModelData.genID();
+                    node.visibility = [applyBackwardCompatibilityToValue({id, visibleFieldName, visibleCondition, visibleValue})];
+                    delete node.visibleFieldName;
+                    delete node.visibleCondition;
+                    delete node.visibleValue;
+                }
+                if (Array.isArray(node.elements)) {
+                    traverseNodesAndApplyBackwardCompatibility(node.elements);
+                }
+            }
+        };
+        function applyBackwardCompatibilityToValue (visibility) {
+            const condObject = FORMS.getObjectFromId(visibility.visibleFieldName);
+            switch(condObject.type) {
+                case "MultipleSelect":
+                case "MultipleChoice":
+                case "CheckList":
+                case "SegmentedButton":
+                case "SingleSelectIcon":
+                case "SingleSelect":
+                case "SingleChoice":
+                    if (!Array.isArray(visibility.visibleValue)) {
+                        visibility.visibleValue = [visibility.visibleValue];
+                    }
+                    break;
+            }
+            return visibility;
+        };
+        if (!(Array.isArray(setup)) && setup.length) {return;}
+        traverseNodesAndApplyBackwardCompatibility(setup);
+    };
+
     export function initAdvanceFormatterConfig(options) {
         //
         // Old templates' nodes (section/element) may not have the /useFormatterConfig and /formatterConfig properties.
@@ -112,7 +149,10 @@ namespace FORMS {
                 if (Array.isArray(node.elements)) {traverseNodes(node.elements);}
             }
         };
-        if (Array.isArray(options?.config?.setup)) {traverseNodes(options.config.setup)};
+        if (Array.isArray(options?.config?.setup)) {
+            traverseNodes(options.config.setup);
+            FORMS.applyBackwardCompatibility(options.config.setup);
+        };
     };
 
     export function build (parent, options) {
@@ -3831,10 +3871,11 @@ namespace FORMS {
         return elementData;
     }
 
-    export function getObjectFromId (id) {
+    export function getObjectFromId (id, setup?) {
         let elementData = null;
 
-        FORMS.config.setup.forEach(function (section, i) {
+        const usedSetup = (setup) ? setup : FORMS.config.setup;
+        usedSetup.forEach(function (section, i) {
             if (section.id === id) elementData = section;
 
             section.elements.forEach(function (element, i) {

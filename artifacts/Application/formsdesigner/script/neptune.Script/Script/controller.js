@@ -392,6 +392,9 @@ const controller = {
                 });
             }
 
+            // Applies backward compatibility
+            controller.applyBackwardCompatibility(req);
+
             controller.tableReset = true;
             modeloPageDetail.setData(req);
             modelpanTopProperties.setData({});
@@ -1144,6 +1147,10 @@ const controller = {
         } else {
             diaInfoButton.open();
         }
+    },
+    applyBackwardCompatibility: (data) => {
+        if (!data.setup) {return;}
+        FORMS.applyBackwardCompatibility(data.setup);
     },
     getElementType: (elemType) => controller.elementTypes.find(
             element=>element.type.toLocaleLowerCase("en") === elemType.toLocaleLowerCase("en")

@@ -28,7 +28,7 @@ type TyFormatter = {
 type TyFormatterArray = TyFormatter[];
 type TyOldConditionCodeParcels = { logicGate:string, code:string};
 type TyOldConditionalVisibility = {
-    "id"?: string, // this instance id
+    "id": string, // this instance id
     "visibleFieldName": string, // variable's UUID
     "visibleCondition": string, // initially only "===" || "!=="
     "visibleSep"?: string, // "and"|"or"
@@ -284,6 +284,7 @@ class BindingWrapper {
                     // let formatterConfig = (elementConfig.enableVisibleCondAdvanced) ? elementConfig.advancedVisibility : undefined;
                     if (elementConfig.enableVisibleCond && !elementConfig.visibility?.length) {
                         formatterConfig = this.Advanced.Configuration.convertFromNocodeConditions([{
+                            id: ModelData.genID(),
                             visibleCondition: elementConfig.visibleCondition,
                             visibleValue: elementConfig.visibleValue,
                             visibleFieldName: elementConfig.visibleFieldName
@@ -314,7 +315,7 @@ class BindingWrapper {
                     if (result) {return result;}
                 }
                 return null;
-            }
+            },
         },
         Generator: {
             emptyFormatterConfig: (): TyFormatterConfiguration => {
@@ -751,6 +752,7 @@ class BindingWrapper {
                         if (elementConfig.enableVisibleCond && !elementConfig.visibility?.length) {
                             // old model is being used
                             formatterConfig = this.Advanced.Configuration.convertFromNocodeConditions([{
+                                id: ModelData.genID(),
                                 visibleCondition: elementConfig.visibleCondition,
                                 visibleValue: elementConfig.visibleValue,
                                 visibleFieldName: elementConfig.visibleFieldName
