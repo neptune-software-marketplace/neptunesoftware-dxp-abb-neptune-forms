@@ -30,6 +30,8 @@ const cockpitUtils = {
 
         // Required Fieldnames for data validation
         cockpitUtils.requiredFields = ["informDetailName"];
+
+        Loader.markDone("cockpitUtils"); // #57 #58
     },
 
     toggleEdit: function (editable) {
@@ -53,6 +55,9 @@ const cockpitUtils = {
         // Cockpit Action
         sap.n.Planet9.setToolbarButton(editable);
         sap.n.Planet9.requiredFieldsClear(cockpitUtils.requiredFields);
+
+        Loader.onLoad() // #57 #58
+            .then(() => Array.isArray(modeloPageDetail.getData()?.setup) && controller.preview());
     },
 
     toggleCreate: function () {

@@ -92,6 +92,8 @@ const controller = {
 
         // prepares the monaco code editor
         controller.setMonacoEditor();
+
+        Loader.markDone("controller"); // #57 #58
     },
 
     setMonacoEditor: () => {

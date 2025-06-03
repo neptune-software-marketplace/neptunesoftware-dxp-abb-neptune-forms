@@ -60,6 +60,7 @@ formatterConfig.paramList.push({
     variable,
     varType,
     enableDuplicate: oDraggedData.enableDuplicate,
+    type: oDraggedData.type, // #57 #58
     "fieldId": oDraggedData.id
 });
 FORMS.bindingWrapper.Advanced.Configuration.setFormatterConfig(oDroppedData, formatterConfig); // bug prevention
@@ -69,3 +70,6 @@ if (!modelappControl.getData().topEditorParametersExpanded) {
     modelappControl.getData().topEditorParametersExpanded = true;
     modelappControl.refresh();
 }
+
+// @ts-ignore
+controller.preview(); // #57 #58

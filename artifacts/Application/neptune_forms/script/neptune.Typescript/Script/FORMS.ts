@@ -39,7 +39,7 @@ namespace FORMS {
             { icon: "sap-icon://calendar",                text: "Date Picker",        type: "DatePicker",       parent: false, table: true,  parameter: true,  paramType: 'string', },
             { icon: "sap-icon://date-time",               text: "Date Time Picker",   type: "DateTimePicker",   parent: false, table: true,  parameter: true,  paramType: 'string', },
             { icon: "sap-icon://fa-regular/check-square", text: "Check Box",          type: "CheckBox",         parent: false, table: true,  parameter: true,  paramType: 'boolean', },
-            { icon: "sap-icon://checklist",               text: "Check List",         type: "CheckList",        parent: false, table: true,  parameter: true,  paramType: 'boolean[]', },
+            { icon: "sap-icon://checklist",               text: "Check List",         type: "CheckList",        parent: false, table: true,  parameter: true,  paramType: 'any[]', }, // #57 #58
             { icon: "sap-icon://request",                 text: "Input",              type: "Input",            parent: false, table: true,  parameter: true,  paramType: 'string', },
             { icon: "sap-icon://fa-regular/file-image",   text: "Image Upload",       type: "Image",            parent: false, table: true,  parameter: true,  paramType: 'string', },
             { icon: "sap-icon://add-document",            text: "File Upload",        type: "File",             parent: false, table: false, parameter: true,  paramType: 'any', },
@@ -3122,6 +3122,7 @@ namespace FORMS {
         colAnswer.setHeader(new sap.m.Text({ text: element.answerTitle }));
 
         // Items
+        const {model} = FORMS.bindingWrapper; // #57 #58
         element.items.forEach(function (item, index) {
             const itemCheckList = new sap.m.ColumnListItem("field" + item.id);
 
@@ -3133,44 +3134,80 @@ namespace FORMS {
             );
 
             let itemAnswer;
-
+            const {itemValue, itemPath} = (function () { // #57 #58
+                const result = {itemValue:"", itemPath: ""};
+                if (element.fieldName) {
+                    result.itemPath = `/${element.fieldName}/${index}`;
+                }
+                else {
+                    result.itemPath = `/${item.id}`;
+                }
+                result.itemValue = `{${result.itemPath}}`;
+                return result;
+            })();
+            const config={property:''}; // #57 #58
+            const fnOnChangeEvent = function(oEvent) { // #57 #58
+                const value = oEvent.getParameter(config.property);
+                const thisData = model.getData();
+                if (element.fieldName) {
+                    let arrayData = thisData[element.fieldName];
+                        arrayData = Array.isArray(arrayData) ? arrayData : [];
+                    thisData[element.fieldName] = arrayData;
+                }
+                model.setProperty(itemPath, !!value);
+                model.refresh();
+            }
             switch (item.type) {
                 case "Input":
                     itemAnswer = new sap.m.Input({
-                        value: "{/" + item.id + "}",
+                        value: `${itemValue}`, // #57 #58 
                         editable: "{appControl>/formControl/formEditable}",
+                        change: fnOnChangeEvent, // #57 #58 
                         // editable: FORMS.editable,
                     });
+                    config.property = "value"; // #57 #58
                     break;
 
                 case "AcceptReject":
                     // @ts-ignore (ADD #1)
                     itemAnswer = new sap.m.Switch({
-                        state: "{/" + item.id + "}",
+                        state: `${itemValue}`, // #57 #58 
                         enabled: "{appControl>/formControl/formEditable}",
+                        change: fnOnChangeEvent, // #57 #58 
                         // enabled: FORMS.editable,
                         type:sap.m.SwitchType.AcceptReject, // "AcceptReject",
                     });
+                    config.property = "state"; // #57 #58
                     break;
 
                 case "CheckBox":
                     // @ts-ignore (ADD #1)
                     itemAnswer = new sap.m.CheckBox({
-                        selected: "{/" + item.id + "}",
+                        selected: `${itemValue}`, // #57 #58
                         editable: "{appControl>/formControl/formEditable}",
+                        select: fnOnChangeEvent, // #57 #58 
                         // editable: FORMS.editable,
                     });
+                    config.property = "selected"; // #57 #58
                     break;
 
                 default:
                     // @ts-ignore (ADD #1)
                     itemAnswer = new sap.m.Switch({
-                        state: "{/" + item.id + "}",
+                        state: `${itemValue}`, // #57 #58
                         enabled: "{appControl>/formControl/formEditable}",
+                        change: fnOnChangeEvent, // #57 #58 
                         // enabled: FORMS.editable,
                     });
+                    config.property = "state"; // #57 #58
                     break;
             }
+            itemAnswer.bindProperty(config.property, { // #57 #58
+                path: itemPath,
+                formatter: (item.type === "Input") 
+                            ? (value) => value
+                            : (value) => !!value
+            })
 
             itemCheckList.addCell(itemAnswer);
             tabCheckList.addItem(itemCheckList);
@@ -3204,11 +3241,16 @@ namespace FORMS {
                     break;
 
                 case "CheckList":
-                    element.items.forEach(function (item) {
-                        if (formModel.oData[item.id]) {                    
-                            outputData[item.id] = formModel.oData[item.id];
-                        }                                                  
-                    });
+                    if (element.fieldName) { // #57 #58
+                        outputData[element.fieldName] = formModel.getData()[element.fieldName]; // #57 #58
+                    } // #57 #58
+                    else { // #57 #58
+                        element.items.forEach(function (item) {
+                            if (formModel.oData[item.id]) {                    
+                                outputData[item.id] = formModel.oData[item.id];
+                            }                                                  
+                        });
+                    } // #57 #58
                     break;
 
                 default:

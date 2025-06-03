@@ -13,6 +13,7 @@ type TyParameterMetadata = {
     variable: string,
     varType: string,
     enableDuplicate: boolean,
+    id: string|string[], // #57
     path: string|string[],
     type: string,
 };
@@ -363,12 +364,12 @@ class BindingWrapper {
                                     result = `((conditionValues)=>{for(let index in conditionValues){if (conditionValues[index] && !${variable}[index]){return false;}};return true;})([${conditionValues}])`;
                                     break;
                                 case this.FORMS.CONDITION_OPERATOR.CONTAINS_ANY.key:
-                                    result = `((conditionValues)=>{for(let index in conditionValues){if (conditionValues[index] && ${variable}[index]){return true;}};return false;})([${conditionValues}])`;
+                                    result = `((conditionValues)=>{for(let index in conditionValues){if (conditionValues[index] && !!${variable}[index]){return true;}};return false;})([${conditionValues}])`; // #57 #58
                                     break;
                                 case this.FORMS.CONDITION_OPERATOR.EQUAL.key:
                                     isEqual = true;
                                 case this.FORMS.CONDITION_OPERATOR.NOT_EQUAL.key:
-                                    result = `((conditionValues)=>{for(let index in conditionValues){if (conditionValues[index] !== ${variable}[index]){return false;}};return true;})([${conditionValues}])`;
+                                    result = `((conditionValues)=>{for(let index in conditionValues){if (conditionValues[index] !== !!${variable}[index]){return false;}};return true;})([${conditionValues}])`; // #57 #58
                                     if (!isEqual) {result = `!${result}`;}
                                     break;
                             }
@@ -549,17 +550,6 @@ class BindingWrapper {
                 // Collects the values before executting the formatter
                 for (let param of paramMetadata.values()) {
                     values.push(this.Advanced.Form.getDataOf(param));
-                    // console.log("param:", param);
-                    // if (param.enableDuplicate) {
-                    //     const value: any = [];
-                    //     for (let uuid of param.path) {
-                    //         value.push(conformToType(this.model.getProperty(`/${uuid}`),param.varType));
-                    //     }
-                    //     values.push(value);
-                    // }
-                    // else {
-                    //     values.push(conformToType(this.model.getProperty(`/${param.path}`),param.varType));
-                    // }
                 }
                 let result:any;
                 try {
@@ -587,21 +577,22 @@ class BindingWrapper {
             createWatchdogs: (includeDisabled = false, includeNoCode = false) => {
                 const watchdogIds: string[] = [];
                 const now = new Date().getTime();
-                const _attachUi5Watchdog = function (id, ui5Type, formatters, parent) {
+                const _attachUi5Watchdog = function (id, path, ui5Type, formatters, parent) { // #57
                     const thisId =  this.FORMS.getView().createId(`watchdog--${id}.${now}`);
                     if (watchdogIds.includes(thisId)) { return; } // If the id has been processed before then exits
                     else { watchdogIds.push(thisId); } // otherwise registers it and continues
-                    let ui5Path = `/${id}`;
+                    let ui5Path = `/${path}`; // #57
                     let ui5Text = `{${ui5Path}}`;
                     switch (ui5Type) {
                         case "MultipleSelect":
                         case "MultipleChoice":
-                            ui5Path = `/${id}/length`;
+                            ui5Path = `/${path}/length`; // #57
                             ui5Text = `{${ui5Path}}`;
                             break;
                         case "File":
-                            ui5Path = `/${id}/src`;
+                            ui5Path = `/${path}/src`; // #57
                             ui5Text = `{${ui5Path}}`;
+                            break; // #57
                     }
                     let newWatchdog = new sap.m.Text(thisId, {
                         visible: false,
@@ -629,17 +620,43 @@ class BindingWrapper {
                         const uuidMetadata = FORMS.getObjectFromId(uuidBinding.id);
                         switch (uuidMetadata.type) {
                             case "CheckList":
-                                for (let item of uuidMetadata.items) {
-                                    attachUi5Watchdog(item.id, uuidMetadata.type, uuidBinding.formatters, this.FORMS.formParent);
+                                if (!uuidMetadata.fieldName) { // #57
+                                    for (let item of uuidMetadata.items) {
+                                        attachUi5Watchdog( // #57
+                                            item.id, 
+                                            item.id, 
+                                            uuidMetadata.type, 
+                                            uuidBinding.formatters, 
+                                            this.FORMS.formParent
+                                        );
+                                    }
+                                }
+                                else {
+                                    // TODO: CheckList... many instead of 1/length
+                                    for (let index in uuidMetadata.items) { // #57 #58
+                                        attachUi5Watchdog( // #57 #58
+                                            `${uuidMetadata.fieldName}_${index}_${uuidMetadata.id}`, 
+                                            `${uuidMetadata.fieldName}/${index}`, 
+                                            uuidMetadata.type, 
+                                            uuidBinding.formatters, 
+                                            this.FORMS.formParent
+                                        );
+                                    }
                                 }
                                 break;
                             default:
-                                attachUi5Watchdog(uuidBinding.id, uuidMetadata.type, uuidBinding.formatters, this.FORMS.formParent);
+                                attachUi5Watchdog( // #57
+                                    uuidMetadata.id, 
+                                    uuidMetadata.fieldName ? uuidMetadata.fieldName: uuidMetadata.id, 
+                                    uuidMetadata.type, 
+                                    uuidBinding.formatters, 
+                                    this.FORMS.formParent
+                                );
                         }
                     }
                 }                
             },
-            getDataOf: (parameter: TyParameterMetadata|string, varType?:string, ui5Type?: string):any => {
+            getDataOf: (parameter: TyParameterMetadata|string, parameterPath?: string, varType?:string, ui5Type?: string):any => { // #57
                 function _conformToType(value, varType) {
                     // Converts any to number if varType.startsWith("number")
                     //      rules: string => empty is 0, otherwise Number.parseFloat
@@ -694,10 +711,18 @@ class BindingWrapper {
                     }
                     return value;
                 }
-                function _getSingleValueOf(uuid, varType, ui5Type) {
+                function _getSingleValueOf(uuid, path, varType, ui5Type) { // #57
                     switch(ui5Type) {
                         case "CheckList":
                             let checkList = FORMS.getObjectFromId(uuid);
+                            if (checkList?.fieldName) { // #57 #58
+                                let values = this.model.getProperty(`/${path}`);
+                                    values = Array.isArray(values) ? values : [];
+                                if (values.length < checkList.items.length) {
+                                    values = values.concat(new Array(checkList.items.length - values.length));
+                                }
+                                return values.map(value=>conformToType(value, varType));
+                            }
                             if (!Array.isArray(checkList.items)) { return [];}
                             const values = [];
                             checkList.items.forEach(item=>{
@@ -705,12 +730,12 @@ class BindingWrapper {
                             })
                             return values;
                         case "File":
-                            return conformToType(this.FORMS.getData().data?.[uuid], varType);
+                            return conformToType(this.FORMS.getData().data?.[path], varType); // #57
                         case "DatePicker":
                         case "DateTimePicker":
-                            return conformToType(this.FORMS.getLocaleIsoString(this.model.getProperty(`/${uuid}`)),varType);
+                            return conformToType(this.FORMS.getLocaleIsoString(this.model.getProperty(`/${path}`)),varType); // #57
                         default:
-                            return conformToType(this.model.getProperty(`/${uuid}`),varType);
+                            return conformToType(this.model.getProperty(`/${path}`),varType); // #57
                     }
                 }
                 const conformToType = _conformToType.bind(this);
@@ -726,17 +751,18 @@ class BindingWrapper {
                         console.warn(`getDataOf@BindingWrapper: "${parameter}" has no type of UI5 object associated. Returning undefined.`);
                         return;
                     }
-                    return getSingleValueOf(parameter, varType, ui5Type);
+                    return getSingleValueOf(parameter, parameterPath, varType, ui5Type); // #57
                 }
                 if (parameter.enableDuplicate) {
                     const values = [];
-                    for (let path of parameter.path) {
-                        values.push(getSingleValueOf(path, parameter.varType, parameter.type));
+                    const arrayOfIds = (Array.isArray(parameter.id)) ? parameter.id : []; // #57
+                    for (let index in arrayOfIds) { // #57
+                        values.push(getSingleValueOf(parameter.id[index], parameter.path[index], parameter.varType, parameter.type)); // #57
                     }
                     return values;
                 }
                 else {
-                    return getSingleValueOf(parameter.path, parameter.varType, parameter.type)
+                    return getSingleValueOf(parameter.id, parameter.path, parameter.varType, parameter.type) // #57
                 }
             },
             createBindingFor: (elementConfig:TyGenericObject, property:string="visible", includeDisabled = false, includeNoCode = false) => {
@@ -793,11 +819,28 @@ class BindingWrapper {
                 paramList.forEach(param=>{
                     const uuidConfig:TyUuidBindingContext[] = this.Advanced.Configuration.collectUuidBindingContext(param.fieldId, includeDisabled, includeNoCode); // array
                     const enableDuplicate = this.FORMS.getElementFromId(param.fieldId)?.enableDuplicate;
+                    const {id,path} = (function (enableDuplicate, uuidConfig, instance) { // #57
+                            const result = {id:[], path:[]};
+                            if (enableDuplicate) {
+                                for (let item of uuidConfig) {
+                                    const objMetadata = instance.FORMS.getElementFromId(item.id);
+                                    result.id.push(objMetadata.id);
+                                    result.path.push((objMetadata.fieldName) ? objMetadata.fieldName : objMetadata.id);
+                                }
+                            }
+                            else {
+                                const objMetadata = instance.FORMS.getElementFromId(uuidConfig[0].id);
+                                result.id = objMetadata.id;
+                                result.path = (objMetadata.fieldName) ? objMetadata.fieldName : objMetadata.id;
+                            }
+                            return result;
+                        })(enableDuplicate, uuidConfig, this);
                     paramMetadata.set(param.variable, {
                         variable: param.variable,
                         varType: param.varType,
                         enableDuplicate,
-                        path: (enableDuplicate) ? uuidConfig.map(item=>item.id) : param.fieldId,
+                        id, // #57
+                        path,
                         type: param.type
                     });
                     // If it is !enableDuplicate, it should only contain 1 entry

@@ -2,7 +2,7 @@
 	{
 		"id": "584a308b-21ef-47e0-93e5-b6ec64474087",
 		"createdAt": "1745591758085",
-		"updatedAt": "1747734369967",
+		"updatedAt": "1748332733337",
 		"createdBy": "admin",
 		"updatedBy": "admin",
 		"nameSpace": "demo",
@@ -26,7 +26,7 @@
 		},
 		"appName": "2ndcopyof_formsrenderer_freestepwizard",
 		"appType": "application",
-		"active": true
+		"active": false
 	},
 	{
 		"id": "456f7cfe-d68b-4ae6-b3ab-b1966d3450b6",

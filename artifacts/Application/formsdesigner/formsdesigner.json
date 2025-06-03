@@ -32770,6 +32770,18 @@
 							"data": []
 						},
 						{
+							"fieldNo": "88a9db9b-aa83-4189-ebb8-8a88bdf42edb",
+							"fieldName": "Loader",
+							"fieldParent": "9a908f5d-5422-474e-adc2-0b14d7e5d638",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/Loader.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
 							"fieldNo": "44fd8d64-f069-4ba3-8e81-91e0bcf61052",
 							"fieldName": "formsHandler",
 							"fieldParent": "9a908f5d-5422-474e-adc2-0b14d7e5d638",
@@ -32852,6 +32864,18 @@
 							"response": [],
 							"attributes": [],
 							"data": []
+						},
+						{
+							"fieldNo": "3242af79-0921-4ee1-8cb8-981ff63bbf22",
+							"fieldName": "EndOfScript",
+							"fieldParent": "9a908f5d-5422-474e-adc2-0b14d7e5d638",
+							"fieldType": "neptune.Typescript",
+							"script": "Loader.markDone(\"EndOfScript\"); // #57 #58",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
 						}
 					]
 				}
@@ -32863,7 +32887,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.05.20.2342",
+	"ver": "25.05.28.1122",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

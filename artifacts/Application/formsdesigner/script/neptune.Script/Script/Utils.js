@@ -126,3 +126,5 @@ for (const t of Utils.fileTypes) {
     mcbElementFormFileType.addItem(new sap.ui.core.Item({key: t.title, text: t.title}));
 }
 // modelmcbElementFormFileType.setData(Utils.fileTypes);
+
+Loader.markDone("Utils"); // #57 #58

@@ -17,6 +17,7 @@ if (visibleField.items) {
 switch (visibleField.type) {
     case "MultipleChoice":
     case "MultipleSelect":
+    case "CheckList": // #57 #58
         listVisibilityValue.setMode("MultiSelect");
         break;
 
