@@ -178,6 +178,10 @@ function fnBuildCompositeIdForFomatterEngine(element, poConfig, poUuidMaps) { //
             } 
         }
     }
+    if (Array.isArray(element.elements) && element.elements.length) { // #59
+        element.elements.forEach(childElement=>
+            fnBuildCompositeIdForFomatterEngine(childElement, poConfig, poUuidMaps));
+    }
 }
 function fnApplyNewIdForFomatterEngine(element, poConfig, poUuidMaps) { // #48
     // Applies the new Id connecte to the sfId|elId uuid pair that exists in all parameters
