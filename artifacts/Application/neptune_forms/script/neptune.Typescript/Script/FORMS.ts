@@ -3857,6 +3857,11 @@ namespace FORMS {
                 // }
             }
         }
+        else if (!!(dependentElement.useFormatterConfig?.visible  // #60
+                    || 
+                   ((dependentElement.enableVisibleCond && Array.isArray(dependentElement.visibility) && dependentElement.visibility.length)))) {
+            visible = !!FORMS.bindingWrapper.model.getData()?.visible?.[dependentElement.id];
+        }
 
         return visible;
     }
