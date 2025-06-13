@@ -8,7 +8,7 @@
 	},
 	"name": "neptunesoftware-dxp-abb-neptune-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "25.06.03.1639",
+	"ver": "25.06.13.0447",
 	"enableCICD": true,
 	"internalReadOnly": false,
 	"oeVersion": "24.11.0-rc.6",

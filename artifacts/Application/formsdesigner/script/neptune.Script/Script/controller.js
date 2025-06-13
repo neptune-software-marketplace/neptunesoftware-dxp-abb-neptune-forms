@@ -245,6 +245,8 @@ const controller = {
                 break;
         }
 
+        controller.checkDuplicateGroupsValidation(); // #54
+        controller.checkVisCondParamValidation(); // #54
         modeloPageDetail.refresh(true);
     },
 
@@ -434,7 +436,8 @@ const controller = {
                     break;
                 }
             }
-        }            
+        }
+        canSave = canSave && controller.checkDuplicateGroupsValidation(); // #54
         if (!canSave) {
             tabDetail.setSelectedItem(tabDetailDesigner);
             sap.m.MessageBox.error("Please check the elements in the outline\nand related errors.", {title: 'Errors detected'});          
@@ -1279,20 +1282,63 @@ const controller = {
             }
             // Check function creation
             const errorReturn = {};
+            if (!((typeof condition.error === "object") && (condition.error !== null))) { condition.error = {}; } // #54
             const fnFormatter = FORMS.bindingWrapper.Advanced.Generator.formatterFunction(formatterConfig, false, errorReturn);
             if (!fnFormatter) {
                 errorFound = true;
                 entry.hasErrors = errorFound;
                 entry.error.code = errorReturn.text ?? "Activation error";
-                condition.codeError = entry.error.code;
+                // condition.codeError = entry.error.code; // #54
+                condition.error.code = entry.error.code; // #54
             }
-            else {delete condition.codeError};
-            condition.hasErrors = errorFound;
+            // else {delete condition.codeError}; // #54
+            // condition.hasErrors = errorFound; // #54
+            else {delete condition.error.code}; // #54
+            condition.hasErrors = Object.getOwnPropertyNames(condition.error).some(property=>!!condition.error[property]); // #54
             result.push(entry);
         }
         modelpanTopEditor.refresh();
         modeloPageDetail.refresh();
         return result;
+    },
+    checkDuplicateGroupsValidation: function (value=undefined) { // #54
+        const groupElements = FORMS.bindingWrapper.Advanced.Configuration.collectOriginalDuplicateGroupsAndElements(modeloPageDetail.getData().setup, value, true);
+        const groupNames = groupElements.reduce((bag,group)=>((bag.includes(group.groupName) || bag.push(group.groupName)) || true) && bag, []);
+        // Gets existing nodes with errors;
+        const nodesWithErrors = FORMS.bindingWrapper.Advanced.Configuration.getNodesWithErrors(modeloPageDetail.getData().setup, true).sort((previous,next) =>
+            (previous.id < next.id) ?-1 :((previous.id === next.id) ?0 :1));
+        // console.log(nodesWithErrors);
+        let allDuplicationGroupsOk = true;
+        for (let groupName of groupNames) {
+            const sameGroupElements = groupElements.filter(group => group.groupName === groupName); 
+            let errorFound = sameGroupElements.filter(group => group.statusAll !== ALL_GROUP_ELEMENTS_STATE.DISABLED).length > 1;
+            allDuplicationGroupsOk = allDuplicationGroupsOk && !errorFound;
+            for (let group of sameGroupElements) {
+                for (let element of group.elements) {
+                    let foundOldWithError = nodesWithErrors.findIndex(withError=>withError.id === element.id);
+                    if (foundOldWithError >= 0) {
+                        // Removes it if it is being processed
+                        nodesWithErrors.splice(foundOldWithError,1);
+                    }
+                    const outlineObj = controller.getOutlineElementById(element.id);
+                    if (!((typeof outlineObj.error === "object") && outlineObj.error)) { outlineObj.error = {}; }
+                    if (errorFound) {
+                        outlineObj.error.duplicateGroup = `Another duplicate group for ${groupName} was detected!`;
+                        outlineObj.hasErrors = true;
+                    }
+                    else {
+                        delete outlineObj.error.duplicateGroup;
+                        outlineObj.hasErrors = Object.getOwnPropertyNames(outlineObj.error).some(property=>!!condition.error[property]);
+                    }
+                }
+            }
+        }
+        // The remaining items are no longer part of the duplication processes, so that error is removed
+        for (let node of nodesWithErrors) {
+            delete node?.error?.duplicateGroup;
+            node.hasErrors = Object.getOwnPropertyNames(node.error).some(property=>!!node.error[property]); // #54
+        }
+        return allDuplicationGroupsOk;
     }
 
 };

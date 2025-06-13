@@ -14794,6 +14794,103 @@
 																													]
 																												},
 																												{
+																													"fieldNo": "991ba3f9-cd65-4ea8-8c5f-be458a9ec95b",
+																													"fieldName": "lblElementFormDuplicateGroup",
+																													"fieldParent": "6ee1a5c2-bf4b-4291-fe8f-c97dbc149763",
+																													"fieldType": "sap.m.Label",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableDuplicate} ? true : false}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Duplicate Group Name",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "cd066519-3f3a-4989-c6bb-3cc9967d74ed",
+																													"fieldName": "inElementFormDuplicateGroup",
+																													"fieldParent": "6ee1a5c2-bf4b-4291-fe8f-c97dbc149763",
+																													"fieldType": "sap.m.Input",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableDuplicate} ? true : false}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "valueStateText",
+																															"grouping": "Properties",
+																															"value": "{/error/duplicateGroup}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "valueState",
+																															"grouping": "Properties",
+																															"value": "{= ${/error/duplicateGroup} ? 'Error' : 'None' }",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "value",
+																															"grouping": "Properties",
+																															"value": "{/duplicateGroup}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "tooltip",
+																															"grouping": "Properties",
+																															"value": "If specified, it duplicates together with others on the same group",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "placeholder",
+																															"grouping": "Properties",
+																															"value": "Group Name",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "{appControl>/enableEdit}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "change",
+																															"grouping": "Events",
+																															"value": "Anonymous Function",
+																															"script": "file://event/sap.m.Input/inElementFormDuplicateGroup/change.ts",
+																															"language": "typescript",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
 																													"fieldNo": "c195de8a-187c-48d7-82a8-2397f3226826",
 																													"fieldName": "lblElementFormLog",
 																													"fieldParent": "6ee1a5c2-bf4b-4291-fe8f-c97dbc149763",
@@ -32887,7 +32984,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.05.28.1122",
+	"ver": "25.06.13.0411",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

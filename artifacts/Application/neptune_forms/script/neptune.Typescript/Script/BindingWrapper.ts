@@ -52,6 +52,9 @@ type TyFormatterConfiguration = {
     paramList: TyFormatterParameterConfiguration[],
     code: string|null
 }
+
+const ALL_GROUP_ELEMENTS_STATE = Object.freeze({ENABLED: "Enabled", DISABLED: "Disabled", MIXED: "Mixed"});
+
 class BindingWrapper {
     private FORMS:any;
     private setup;
@@ -61,6 +64,8 @@ class BindingWrapper {
     public minTimeout = 250;
     public maxTimeout = 500;
     public formatters: TyFormatterArray;
+
+
     constructor (FORMS) {
         if (!FORMS.formParent) throw "Invalid form";
         this.FORMS = FORMS;
@@ -316,6 +321,171 @@ class BindingWrapper {
                     if (result) {return result;}
                 }
                 return null;
+            },
+            collectOriginalDuplicateGroupsAndElements: function (setup:any[], groupNameToValidate: string, includesDisabled: boolean) { // #54
+                function collectDuplicateGroupElements(elements, parentPath, collection) {
+                    elements.forEach((element, index) => {
+                        if (includesDisabled || !element.disabled) {
+                            if (element.enableDuplicate && element.duplicateGroup && !element.isDuplicate) {
+                                if (groupNameToValidate && (element.duplicateGroup !== groupNameToValidate)) {
+                                    // a group name was chosen for the validation.
+                                    // Skips this grouped duplication check, since it is from a different group name
+                                }
+                                else {
+                                    collection.push({
+                                        id: element.id,
+                                        parentPath,
+                                        index,
+                                        groupName: element.duplicateGroup,
+                                        disabled: element.disabled
+                                    });
+                                }
+                            }
+                            if (Array.isArray(element.elements) && element.elements.length) {
+                                collectDuplicateGroupElements(element.elements, `${parentPath}/${element.id}`,collection);
+                            }
+                        }
+                    });
+                }
+                if (!(Array.isArray(setup) && setup.length)) {return [];}
+                const tempData = [];
+                for (let section of setup) {
+                    collectDuplicateGroupElements(section.elements, `/${section.id}`, tempData);
+                }
+                const groups = [];
+                //
+                // elementA := { id, parentPath, index, groupName, disabled }
+                // elementB := { id, parentPath, index, groupName, disabled, firstId }
+                // elementC := { groupName, elements: [ elementB ], statusAll }
+                // tempData := [ elementA ]
+                // result := [ elementC ]
+                // Reducing tempData to result
+                // Steps: 
+                // 1. Sort tempData by groupName, parentPath and index (all ASC)
+                // 2. apply reduction on the sorted data.
+                //
+                if (tempData.length) {
+                    const calculateStatusAll = function( groupElements ) {
+                        if (!(Array.isArray(groupElements) && groupElements.length)) {
+                            return;
+                        }
+                        let weight = 0;
+                        // disabled === true => (true || -1)*1 => 1
+                        // disabled === false => (false || -1)*1 => -1
+                        // -weight === groupElements => all enabled
+                        // weight === groupElements => all disabled
+                        for (let element of groupElements) { weight += (element.disabled || -1) * 1; }
+                        return (weight === groupElements.length)
+                            ? ALL_GROUP_ELEMENTS_STATE.DISABLED
+                            : (-weight === groupElements.length)
+                                ? ALL_GROUP_ELEMENTS_STATE.ENABLED
+                                : ALL_GROUP_ELEMENTS_STATE.MIXED
+                    }
+                    const buildGroupHead = function( element ) {
+                        element.firstId = element.id;
+                        const elements = [element];
+                        return { 
+                            groupName: element.groupName,
+                            elements,
+                            statusAll: calculateStatusAll(elements)
+                        }
+                    }
+                    const startNewGroup = function( groups, element ) {
+                        element.firstId = element.id;
+                        const head = buildGroupHead(element);
+                        groups.push(head);
+                        return head;
+                    }
+                    const onlyDisabledExistsInBetween = function (previous,current) {
+                        // Acquires parent object
+                        const pathParts = previous.parentPath.split("/");
+                        // @ts-ignore
+                        const parentObject = FORMS.getObjectFromId(pathParts[pathParts.length-1]);
+                        // Checks if all objects in between are disabled
+                        for (let index = previous.index+1; index < current.index; index++) {
+                            if (!parentObject.elements[index].disabled) {return false;}
+                        }
+                        return true;
+                    }
+                    const sortedData = tempData.sort((leftElement,rightElement)=>
+                        (leftElement.groupName<rightElement.groupName) ? -1
+                            : ((leftElement.groupName>rightElement.groupName) ? 1
+                                : ((leftElement.parentPath<rightElement.parentPath) ? -1
+                                    : ((leftElement.parentPath>rightElement.parentPath) ? 1 
+                                        : ((leftElement.index<rightElement.index) ? -1
+                                            : ((leftElement.index>rightElement.index) ? 1 : 0))))))
+                    // const groupNames = [ sortedData[0].groupName ];
+                    // const groupPathsInNames = {};
+                    //       groupPathsInNames[sortedData[0].groupName] = [sortedData[0].parentPath];
+                    groups.push(buildGroupHead(sortedData[0]));
+                    // const groups = [buildGroupHead(sortedData[0])];
+                    let head = groups[0];
+                    for (let index = 1; index<sortedData.length; index++) {
+                        const previous = sortedData[index-1];
+                        const current = sortedData[index];
+                        if (!((current.groupName === previous.groupName) && (current.parentPath === previous.parentPath))) {
+                            head = startNewGroup(groups, current);
+                        }
+                        else if (previous.index===current.index-1) {
+                            head.elements.push(current);
+                        }
+                        else {
+                            if (onlyDisabledExistsInBetween(previous,current)) {
+                                head.elements.push(current);
+                            }
+                            else {
+                                head = startNewGroup(groups, current);
+                            }
+                        }
+                    }
+                }
+                return groups;
+            },
+            getSameDuplicateGroupElements: function (element, FORMS) { // #54
+                if (!element.enableDuplicate) { return []; } // This is just for the duplicate engine
+                if (!element.duplicateGroup) { return [element]; } // This is a non-group duplicate
+                // If it is a duplicate then get siblings with the same duplicateGroup and duplicateId
+                const EXCLUDE_DISABLED = false;
+                const INCLUDE_NOCODE = true;
+                const parent = FORMS.getDuplicateParentFromId(element.id, FORMS);
+                const sameGroup = parent.elements.filter(member =>  member.duplicateGroup === element.duplicateGroup 
+                                                                    &&
+                                                                    member.duplicateId === element.duplicateId );
+                return sameGroup;
+            },
+            getElementVisibleBinding: function (element) { // #54
+                if (element.enableVisibleCond || element.useFormatterConfig?.visible) {
+                    return `{/visible/${element.id}}`;
+                }
+            },
+            isFirstDuplicateGroupElement: function (element, duplicateGroups) { // #54 
+                if (!element.duplicateGroup) { return false; }
+                const group = duplicateGroups.find(group => group.groupName === element.duplicateGroup);
+                if (!Array.isArray(group?.elements)) { return false; }
+                return ((element.isDuplicate)
+                        ? element.duplicatedFromId 
+                        : element.id) === group?.elements?.[0]?.id; 
+            },
+            isLastDuplicateGroupElement: function (element, duplicateGroups) { // #54
+                if (!element.duplicateGroup) { return true; }
+                const group = duplicateGroups.find(group => group.groupName === element.duplicateGroup);
+                if (!(Array.isArray(group?.elements) && group.elements.length)) { return false; }
+                return ((element.isDuplicate)
+                        ? element.duplicatedFromId 
+                        : element.id) === group.elements[group.elements.length-1]?.id;
+            },
+            getNodesWithErrors: function(nodes:any[], includesDisabled: boolean): any[] { // #54
+                if (!(Array.isArray(nodes) && nodes.length)) {return [];}
+                let result = [];
+                for (let node of nodes) {
+                    if (node.hasErrors || Object.getOwnPropertyNames(node?.error ?? {}).some(property=>!!node.error[property])) {
+                        result.push(node);
+                    }
+                    if (Array.isArray(node.elements) && node.elements.length) {
+                        result = result.concat(this.getNodesWithErrors(node.elements));
+                    }
+                }
+                return result;
             },
         },
         Generator: {

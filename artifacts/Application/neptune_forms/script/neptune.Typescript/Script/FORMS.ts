@@ -32,6 +32,7 @@ namespace FORMS {
         appControl: Partial<sap.ui.model.json.JSONModel> = {},
         revalidate = false,
         bindingWrapper,
+        duplicateGroups, // #54
         elementTypes = [
             { icon: "sap-icon://form",                    text: "Form",               type: "Form",             parent: true,  table: false, parameter: false, paramType: '', descripton: "Present the data in Form layout" },
             { icon: "sap-icon://table-view",              text: "Table",              type: "Table",            parent: true,  table: false, parameter: false, paramType: '', descripton: "Present the data in Table layout" },
@@ -169,7 +170,8 @@ namespace FORMS {
             formOptions = {};
         } else {
             formId = options.id;
-            formOptions = JSON.parse(JSON.stringify(options));
+            // formOptions = JSON.parse(JSON.stringify(options)); // #54
+            formOptions = safeClone(options); // #54
         }
 
         if (!parent) {
@@ -276,6 +278,14 @@ namespace FORMS {
         FORMS.bindingWrapper = new BindingWrapper(FORMS);
         const [DO_NOT_INCLUDE_DISABLED, INCLUDE_DISABLED] = [false, true];
         const [DO_NOT_INCLUDE_NOCODE,   INCLUDE_NOCODE  ] = [false, true];
+        // Get all grouped duplications & filter them by the latest // #54
+        FORMS.duplicateGroups = FORMS.bindingWrapper.Advanced.Configuration.collectOriginalDuplicateGroupsAndElements(FORMS.config.setup); // #54
+        const uniqueDuplicateGroups = FORMS.duplicateGroups.reduce((bag, element) => { // #54
+            bag.set(element.groupName, element);
+            return bag;
+        }, new Map());
+        FORMS.duplicateGroups = Array.from(uniqueDuplicateGroups.values()); // #54
+        // Continue with formatter engine (incl. conditional visibility) // #54
         const elementsConfig = FORMS.bindingWrapper.Advanced.Configuration.getAllConditions(DO_NOT_INCLUDE_DISABLED, INCLUDE_NOCODE);
         elementsConfig.forEach(elementConfig => 
             FORMS.bindingWrapper.Advanced.Form.createBindingFor(elementConfig, "visible", DO_NOT_INCLUDE_DISABLED, INCLUDE_NOCODE));
@@ -596,28 +606,118 @@ namespace FORMS {
             return;
         }
 
+        let isFirst = false; // #54
+        let isLast = false; // #54
+        const {
+            getSameDuplicateGroupElements, 
+            getElementVisibleBinding, 
+            isFirstDuplicateGroupElement, 
+            isLastDuplicateGroupElement} = FORMS.bindingWrapper.Advanced.Configuration; // #54
+        const isInDuplicateGroup = element.enableDuplicate && element.duplicateGroup; // #54
+        const CSS_DUPLICATE = Object.freeze({ // #54
+            TOP_LABEL: "nepGroupedDuplicateLabelTop",
+            TOP_BOX: "nepGroupedDuplicateBoxTop",
+            MIDDLE_LABEL: "nepGroupedDuplicateLabelMiddle",
+            MIDDLE_BOX: "nepGroupedDuplicateBoxMiddle",
+            BOTTOM_LABEL: "nepGroupedDuplicateLabelBottom",
+            BOTTOM_BOX: "nepGroupedDuplicateBoxBottom",
+            ONLY_LABEL: "nepGroupedDuplicateLabelTopBottom",
+            ONLY_BOX: "nepGroupedDuplicateBoxTopBottom"
+        });
+        const sameGroupElements = (element.enableDuplicate) ? getSameDuplicateGroupElements(element, FORMS) : []; // #54
+        const elementVisibleBinding = getElementVisibleBinding(element); // #54
+
         // Label
+        let elementLabel; // #54
         if (element.enableLabel) {
             
-            const elementLabel = new sap.m.Label({
+            elementLabel = new sap.m.Label({ // #54
                 text: element.title,
                 required: element.required,
-                design: sap.m.LabelDesign.Bold // "Bold",
+                design: sap.m.LabelDesign.Bold, // "Bold",
+                visible: elementVisibleBinding, // #54
             });
 
             if (section.labelLeftAlign) elementLabel.addStyleClass("nepLabelLeftAlign");
-            parent.addContent(elementLabel);
+            // parent.addContent(elementLabel); // #54
 
         } else {
-            parent.addContent(new sap.m.Label());
+            // parent.addContent(new sap.m.Label()); // #54
+            elementLabel = new sap.m.Label({visible: elementVisibleBinding}); // #54
         }
+        parent.addContent(elementLabel); // #54
 
         // Form Container
         const elementParent = new sap.m.VBox( undefined, {
             width: "100%",
             wrap: element.type == "SegmentedButton" ? sap.m.FlexWrap.NoWrap : sap.m.FlexWrap.Wrap, // "Wrap", // KW addition css fix for segmented button line beak
-            visible: FORMS.buildVisibleCond(element),
+            visible: elementVisibleBinding, // #54
+            // visible: FORMS.buildVisibleCond(element), // #54
         });
+
+        // CSS for grouped duplicates // #54
+        if (isInDuplicateGroup) { // #54
+            // ------------------------------
+            // CSS REARRANGE BLOCK - begin
+            if (element === sameGroupElements[0]) {
+                if (elementVisibleBinding) {
+                    // At least the first element has conditional visibility. Set it up
+                    sameGroupElements[0].duplicateGroupCss = [];
+                }
+                else {
+                    // The first element is always visible - DO NOT rearrange CSS - there is no need
+                    delete sameGroupElements[0].duplicateGroupCss;
+                }
+            }
+            if (Array.isArray(sameGroupElements[0].duplicateGroupCss)) {
+                // it's in a duplicate group and it has conditional visibility - Must rearrange CSS classes if top is invisible
+                sameGroupElements[0].duplicateGroupCss.push({id:element.id, label: elementLabel, box:elementParent});
+                if (elementVisibleBinding) {
+                    elementParent.bindProperty("visible", {
+                        parts: [elementVisibleBinding.slice(1,-1)], // .slice(1,-1) => removes "{" and "}"
+                        formatter: (isVisible) => {
+                            if (typeof isVisible === "undefined") { return; } // initialization
+                            const visibleElements = sameGroupElements.filter(elInGroup => 
+                                FORMS.bindingWrapper.model.getProperty(
+                                    (getElementVisibleBinding(elInGroup)??"").slice(1,-1)) !== false);
+                            const groupCss = sameGroupElements[0].duplicateGroupCss;
+                            if (visibleElements.length) {
+                                let topElement = groupCss.find(elInGroup => elInGroup.id === visibleElements[0].id);
+                                if (!topElement) {return isVisible;} // should not happen
+                                topElement.label.removeStyleClass(CSS_DUPLICATE.MIDDLE_LABEL);
+                                topElement.box.removeStyleClass(CSS_DUPLICATE.MIDDLE_BOX);
+                                topElement.label.addStyleClass(CSS_DUPLICATE.TOP_LABEL);
+                                topElement.box.addStyleClass(CSS_DUPLICATE.TOP_BOX);
+                                for (let index = 1; index < visibleElements.length; index++) {
+                                    let middleElement = groupCss.find(elInGroup => elInGroup.id === visibleElements[index].id);
+                                    if (!middleElement) {break;} // ui5 element may have not yet been created
+                                    middleElement.label.addStyleClass(CSS_DUPLICATE.MIDDLE_LABEL);
+                                    middleElement.box.addStyleClass(CSS_DUPLICATE.MIDDLE_BOX);
+                                    middleElement.label.removeStyleClass(CSS_DUPLICATE.TOP_LABEL);
+                                    middleElement.box.removeStyleClass(CSS_DUPLICATE.TOP_BOX);
+                                }
+                            }
+                            return isVisible;
+                        }
+                    })
+                }
+            }
+            // CSS REARRANGE BLOCK - end
+            // ------------------------------
+            isFirst = isFirstDuplicateGroupElement(element, FORMS.duplicateGroups);
+            isLast = isLastDuplicateGroupElement(element, FORMS.duplicateGroups);
+            
+            // The Add/Delete buttons become the last items of the group.
+            switch(true) {
+                case isFirst:
+                    elementLabel.addStyleClass(CSS_DUPLICATE.TOP_LABEL);
+                    elementParent.addStyleClass(CSS_DUPLICATE.TOP_BOX);
+                    break;
+                default:
+                    elementLabel.addStyleClass(CSS_DUPLICATE.MIDDLE_LABEL);
+                    elementParent.addStyleClass(CSS_DUPLICATE.MIDDLE_BOX);
+            }
+        } // #54
 
         elementParent.addItem(elementField);
 
@@ -649,12 +749,30 @@ namespace FORMS {
             );
         }
 
+        parent.addContent(elementParent); // #54
+
         // Duplicate
-        if (element.enableDuplicate/* && FORMS.editable*/) {
+        if (element.enableDuplicate && (!element.duplicateGroup || isLast)) { // #54
+            const isButtonVisible:`{${string}}` = sameGroupElements.some(elInGroup=>!getElementVisibleBinding(elInGroup)) // #54
+                ? "{appControl>/formControl/formEditable}"
+                : `{= !!(\${appControl>/formControl/formEditable} && (false${sameGroupElements.reduce((text, elInGroup) => {
+                    const visibleBindingPath = getElementVisibleBinding(elInGroup);
+                    if (visibleBindingPath) { text += ` || \$${visibleBindingPath}`}
+                    return text;
+                }, "")})) }`;
+            // @ts-ignore
+            const buttonLabel = new sap.m.Label ({visible: isButtonVisible}); // #54
+            // @ts-ignore
+            const buttonBox = new sap.m.VBox({ // #54
+                width: "100%",
+                visible: isButtonVisible
+            });
+        // if (element.enableDuplicate/* && FORMS.editable*/) { // #54
             if (element.isDuplicate) {
                 elementParent.addItem(
-                    new sap.m.Button({
-                        visible: "{appControl>/formControl/formEditable}",
+                    new sap.m.Button({  // #54
+                        visible: isButtonVisible, // #54
+                        // visible: "{appControl>/formControl/formEditable}", // #54
                         icon: "sap-icon://delete",
                         type: sap.m.ButtonType.Reject, // "Reject",
                         press: function (oEvent) {
@@ -662,7 +780,9 @@ namespace FORMS {
                             data.completed = false;
 
                             let parent = FORMS.getDuplicateParentFromId(element.id, data);
-                            parent.elements.splice(index, 1);
+                            // parent.elements.splice(index, 1); // #54
+                            const sameGroupElementsId = sameGroupElements.map(element => element.id); // #54
+                            parent.elements = parent.elements.filter(element => !sameGroupElementsId.includes(element.id)); // #54
 
                             FORMS.build(FORMS.customerParent, data);
                         },
@@ -670,8 +790,9 @@ namespace FORMS {
                 );
             } else {
                 elementParent.addItem(
-                    new sap.m.Button({
-                        visible: "{appControl>/formControl/formEditable}",
+                    new sap.m.Button({ // #54
+                        visible: isButtonVisible, // #54
+                        // visible: "{appControl>/formControl/formEditable}", // #54
                         text: element.duplicateButtonText,
                         type: element.duplicateButtonType,
                         icon: element.duplicateButtonIcon,
@@ -679,31 +800,42 @@ namespace FORMS {
                             let data: any = FORMS.getData();
                             data.completed = false;
 
-                            let newElement = JSON.parse(JSON.stringify(element));
-                            newElement.id = ModelData.genID();
-                            newElement.isDuplicate = true;
-                            newElement.duplicatedFromId = element.id;
+                            const duplicateId = ModelData.genID(); // #54
+                            sameGroupElements.forEach((elemInGroup, elIndex) => { // #54
+                                let element = FORMS.getObjectFromId(elemInGroup.id); // #54
+                                let newElement = safeClone(element); // #54
+                                newElement.id = ModelData.genID();
+                                newElement.isDuplicate = true;
+                                newElement.duplicatedFromId = element.id;
+                                newElement.duplicateId = duplicateId; // #54
 
-                            // Object Attribute
-                            if (newElement.fieldName) newElement.fieldName = newElement.fieldName + "_" + ModelData.genID();
+                                // Object Attribute
+                                if (newElement.fieldName) newElement.fieldName = newElement.fieldName + "_" + newElement.id; // #54
 
-                            if (newElement.items) {
-                                newElement.items.forEach(function (item) {
-                                    item.id = ModelData.genID();
-                                });
-                            }
+                                if (newElement.items) {
+                                    newElement.items.forEach(function (item) {
+                                        item.id = ModelData.genID();
+                                    });
+                                }
 
-                            let parent = FORMS.getDuplicateParentFromId(element.id, data);
-                            parent.elements.splice(index + 1, 0, newElement);
+                                let parent = FORMS.getDuplicateParentFromId(element.id, data);
+                                parent.elements.splice(index + elIndex + 1, 0, newElement); // #54
+                            }); // #54
 
                             FORMS.build(FORMS.customerParent, data);
                         },
                     }).addStyleClass("sapUiSizeCompact")
                 );
             }
+            if (element.duplicateGroup) { // #54
+                buttonLabel.addStyleClass(CSS_DUPLICATE.BOTTOM_LABEL);
+                buttonBox.addStyleClass(CSS_DUPLICATE.BOTTOM_BOX)
+            }
+            parent.addContent(buttonLabel); // #54
+            parent.addContent(buttonBox); // #54
         }
 
-        parent.addContent(elementParent);
+        // parent.addContent(elementParent); // #54
     }
 
     export function buildVisibleCondAdvanced (element): `{${string}}` {

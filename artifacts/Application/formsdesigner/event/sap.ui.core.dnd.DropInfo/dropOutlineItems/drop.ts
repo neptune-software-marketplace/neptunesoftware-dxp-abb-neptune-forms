@@ -83,5 +83,7 @@ if (!rootType.includes(oDraggedData.type) && !rootType.includes(oDroppedData.typ
     }
 }
 
+// @ts-ignore
+controller.checkDuplicateGroupsValidation(); // #54
 modeloPageDetail.refresh(true);
 selectObjectFromId(oDraggedData.id);

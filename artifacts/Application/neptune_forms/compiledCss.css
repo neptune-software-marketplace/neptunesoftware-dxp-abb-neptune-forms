@@ -189,3 +189,96 @@ segmentedNoDefault .invisibleLi {
   width: auto;
   min-width: 6.66%;
 }
+
+.sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTop) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelTop) {
+  border-style: dotted;
+  border-top-left-radius: 0.5rem;
+  border-width: medium;
+  border-bottom: 0;
+  border-right: 0;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxTop), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxTop) {
+  border-style: dotted;
+  border-top-right-radius: 0.5rem;
+  border-width: medium;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelMiddle), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelMiddle) {
+  border-style: dotted;
+  border-width: medium;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 0;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxMiddle), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxMiddle) {
+  border-style: dotted;
+  border-width: medium;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelBottom) {
+  border-style: dotted;
+  border-bottom-left-radius: 0.5rem;
+  border-width: medium;
+  border-top: 0;
+  border-right: 0;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxBottom) {
+  border-style: dotted;
+  border-bottom-right-radius: 0.5rem;
+  border-width: medium;
+  border-top: 0;
+  border-left: 0;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelTopBottom) {
+  border-style: dotted;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-width: medium;
+  border-right: 0;
+}
+
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxTopBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxTopBottom) {
+  border-style: dotted;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-width: medium;
+  border-left: 0;
+}
+
+.sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateLabelTop) {
+  border-style: dotted;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-width: medium;
+  border-bottom: 0;
+}
+
+.sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateLabelBottom), .sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateBoxMiddle), .sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateLabelMiddle), .sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateBoxTop) {
+  border-style: dotted;
+  border-width: medium;
+  border-bottom: 0;
+  border-top: 0;
+}
+
+.sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateBoxTopBottom), .sapUiRespGridMedia-Std-Phone div:has(> .nepGroupedDuplicateBoxBottom) {
+  border-style: dotted;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-width: medium;
+  border-top: 0;
+}

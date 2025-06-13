@@ -178,3 +178,133 @@ segmentedNoDefault .invisibleLi {
     width: auto;
     min-width: 6.66%;
 }
+
+// #54 - Grouped Duplicates CSS - Begin
+%duplicateGroupCss-gridMedia-DeskTopTablet {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+%duplicateGroupCss-labelTop-DesktopTablet {
+    border-style: dotted;
+    border-top-left-radius: 0.5rem;
+    border-width: medium;
+    border-bottom: 0;
+    border-right: 0;
+}
+%duplicateGroupCss-boxTop-DesktopTablet {
+    border-style: dotted;
+    border-top-right-radius: 0.5rem;
+    border-width: medium;
+    border-bottom: 0;
+    border-left: 0;
+}
+%duplicateGroupCss-labelMiddle-DesktopTablet {
+    border-style: dotted;
+    border-width: medium;
+    border-top: 0;
+    border-bottom: 0;
+	border-right: 0;
+}
+%duplicateGroupCss-boxMiddle-DesktopTablet {
+    border-style: dotted;
+    border-width: medium;
+    border-top: 0;
+    border-bottom: 0;
+	border-left: 0;
+}
+%duplicateGroupCss-labelBottom-DesktopTablet {
+    border-style: dotted;
+    border-bottom-left-radius: 0.5rem;
+    border-width: medium;
+    border-top: 0;
+    border-right: 0;
+}
+%duplicateGroupCss-boxBottom-DesktopTablet {
+    border-style: dotted;
+    border-bottom-right-radius: 0.5rem;
+    border-width: medium;
+    border-top: 0;
+    border-left: 0;
+}
+%duplicateGroupCss-labelTopBottom-DesktopTablet {
+    border-style: dotted;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-width: medium;
+    border-right: 0;
+}
+%duplicateGroupCss-boxTopBottom-DesktopTablet {
+    border-style: dotted;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-width: medium;
+    border-left: 0;
+}
+%duplicateGroupCss-top-Phone {
+    border-style: dotted;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border-width: medium;
+    border-bottom: 0;
+}
+%duplicateGroupCss-middle-Phone {
+    border-style: dotted;
+    border-width: medium;
+    border-bottom: 0;
+    border-top: 0;
+}
+%duplicateGroupCss-bottom-Phone {
+    border-style: dotted;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-width: medium;
+    border-top: 0;
+}
+
+@mixin hasExtended($prefix, $hasClause, $extendedRule) {
+    #{$prefix}:has(#{$hasClause}) {
+        @extend %#{$extendedRule};
+    }
+}
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop", " .nepGroupedDuplicateLabelTop", "duplicateGroupCss-gridMedia-DeskTopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet", " .nepGroupedDuplicateLabelTop", "duplicateGroupCss-gridMedia-DeskTopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop", " .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-gridMedia-DeskTopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet", " .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-gridMedia-DeskTopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelTop", "duplicateGroupCss-labelTop-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelTop", "duplicateGroupCss-labelTop-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxTop", "duplicateGroupCss-boxTop-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxTop", "duplicateGroupCss-boxTop-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelMiddle", "duplicateGroupCss-labelMiddle-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelMiddle", "duplicateGroupCss-labelMiddle-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxMiddle", "duplicateGroupCss-boxMiddle-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxMiddle", "duplicateGroupCss-boxMiddle-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelBottom", "duplicateGroupCss-labelBottom-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelBottom", "duplicateGroupCss-labelBottom-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxBottom", "duplicateGroupCss-boxBottom-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxBottom", "duplicateGroupCss-boxBottom-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-labelTopBottom-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-labelTopBottom-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxTopBottom", "duplicateGroupCss-boxTopBottom-DesktopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxTopBottom", "duplicateGroupCss-boxTopBottom-DesktopTablet");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateLabelTop", "duplicateGroupCss-top-Phone");
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-top-Phone");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateBoxTop", "duplicateGroupCss-middle-Phone");
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateLabelMiddle", "duplicateGroupCss-middle-Phone");
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateBoxMiddle", "duplicateGroupCss-middle-Phone");
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateLabelBottom", "duplicateGroupCss-middle-Phone");
+
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateBoxBottom", "duplicateGroupCss-bottom-Phone");
+@include hasExtended(".sapUiRespGridMedia-Std-Phone div", "> .nepGroupedDuplicateBoxTopBottom", "duplicateGroupCss-bottom-Phone");
+// #54 - Grouped Duplicates CSS - End
