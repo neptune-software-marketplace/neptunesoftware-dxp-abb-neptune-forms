@@ -672,7 +672,7 @@
 							"fieldName": "TestGeneratedCode",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
 							"fieldType": "neptune.Typescript",
-							"script": "",
+							"script": "// test",
 							"customComponent": false,
 							"request": [],
 							"response": [],
@@ -694,7 +694,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "25.06.13.0434",
+	"ver": "25.06.13.1116",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

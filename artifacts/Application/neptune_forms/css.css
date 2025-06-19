@@ -268,32 +268,42 @@ segmentedNoDefault .invisibleLi {
     }
 }
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop", " .nepGroupedDuplicateLabelTop", "duplicateGroupCss-gridMedia-DeskTopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop", " .nepGroupedDuplicateLabelTop", "duplicateGroupCss-gridMedia-DeskTopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet", " .nepGroupedDuplicateLabelTop", "duplicateGroupCss-gridMedia-DeskTopTablet");
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop", " .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-gridMedia-DeskTopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop", " .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-gridMedia-DeskTopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet", " .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-gridMedia-DeskTopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateLabelTop", "duplicateGroupCss-labelTop-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelTop", "duplicateGroupCss-labelTop-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelTop", "duplicateGroupCss-labelTop-DesktopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateBoxTop", "duplicateGroupCss-boxTop-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxTop", "duplicateGroupCss-boxTop-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxTop", "duplicateGroupCss-boxTop-DesktopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateLabelMiddle", "duplicateGroupCss-labelMiddle-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelMiddle", "duplicateGroupCss-labelMiddle-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelMiddle", "duplicateGroupCss-labelMiddle-DesktopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateBoxMiddle", "duplicateGroupCss-boxMiddle-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxMiddle", "duplicateGroupCss-boxMiddle-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxMiddle", "duplicateGroupCss-boxMiddle-DesktopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateLabelBottom", "duplicateGroupCss-labelBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelBottom", "duplicateGroupCss-labelBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelBottom", "duplicateGroupCss-labelBottom-DesktopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateBoxBottom", "duplicateGroupCss-boxBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxBottom", "duplicateGroupCss-boxBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxBottom", "duplicateGroupCss-boxBottom-DesktopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-labelTopBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-labelTopBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateLabelTopBottom", "duplicateGroupCss-labelTopBottom-DesktopTablet");
 
+@include hasExtended(".sapUiRespGridMedia-Std-LargeDesktop div", "> .nepGroupedDuplicateBoxTopBottom", "duplicateGroupCss-boxTopBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Desktop div", "> .nepGroupedDuplicateBoxTopBottom", "duplicateGroupCss-boxTopBottom-DesktopTablet");
 @include hasExtended(".sapUiRespGridMedia-Std-Tablet div", "> .nepGroupedDuplicateBoxTopBottom", "duplicateGroupCss-boxTopBottom-DesktopTablet");
 

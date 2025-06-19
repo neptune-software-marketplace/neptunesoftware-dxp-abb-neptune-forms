@@ -190,13 +190,13 @@ segmentedNoDefault .invisibleLi {
   min-width: 6.66%;
 }
 
-.sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTop) {
+.sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-LargeDesktop:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-LargeDesktop:has(.nepGroupedDuplicateLabelTop) {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelTop) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateLabelTop) {
   border-style: dotted;
   border-top-left-radius: 0.5rem;
   border-width: medium;
@@ -204,7 +204,7 @@ segmentedNoDefault .invisibleLi {
   border-right: 0;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxTop), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxTop) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxTop), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxTop), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateBoxTop) {
   border-style: dotted;
   border-top-right-radius: 0.5rem;
   border-width: medium;
@@ -212,7 +212,7 @@ segmentedNoDefault .invisibleLi {
   border-left: 0;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelMiddle), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelMiddle) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelMiddle), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelMiddle), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateLabelMiddle) {
   border-style: dotted;
   border-width: medium;
   border-top: 0;
@@ -220,7 +220,7 @@ segmentedNoDefault .invisibleLi {
   border-right: 0;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxMiddle), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxMiddle) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxMiddle), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxMiddle), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateBoxMiddle) {
   border-style: dotted;
   border-width: medium;
   border-top: 0;
@@ -228,7 +228,7 @@ segmentedNoDefault .invisibleLi {
   border-left: 0;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelBottom) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelBottom), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateLabelBottom) {
   border-style: dotted;
   border-bottom-left-radius: 0.5rem;
   border-width: medium;
@@ -236,7 +236,7 @@ segmentedNoDefault .invisibleLi {
   border-right: 0;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxBottom) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxBottom), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateBoxBottom) {
   border-style: dotted;
   border-bottom-right-radius: 0.5rem;
   border-width: medium;
@@ -244,7 +244,7 @@ segmentedNoDefault .invisibleLi {
   border-left: 0;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelTopBottom) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateLabelTopBottom) {
   border-style: dotted;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -252,7 +252,7 @@ segmentedNoDefault .invisibleLi {
   border-right: 0;
 }
 
-.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxTopBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxTopBottom) {
+.sapUiRespGridMedia-Std-Tablet div:has(> .nepGroupedDuplicateBoxTopBottom), .sapUiRespGridMedia-Std-Desktop div:has(> .nepGroupedDuplicateBoxTopBottom), .sapUiRespGridMedia-Std-LargeDesktop div:has(> .nepGroupedDuplicateBoxTopBottom) {
   border-style: dotted;
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
