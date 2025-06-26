@@ -205,6 +205,8 @@ FORMS.Renderer.subscribe(
                         }
 
                         sectionParent.bindAggregation("items", { path: "/", template: FORMS.columnTemplate, templateShareable: false });
+                        // AR Table post processing // #18 KM
+                        FORMS.tablePostProcessing(section, 0, section.rows); // #18 KM
                         break;
                 }
             },
@@ -215,7 +217,7 @@ FORMS.Renderer.subscribe(
 );
 
 apiGetAllRenderers({parameters: {onlyActive: true}}).then(result => {
-    console.log("FORMS: read all renderers");
+    // console.log("FORMS: read all renderers");
     let loadPromises = [];
     let now = new Date();
     let count = 0;
@@ -234,10 +236,10 @@ apiGetAllRenderers({parameters: {onlyActive: true}}).then(result => {
                 appGUID: `forms_renderer-${count++}.${now.getTime()}`
             });
             (loadOutcome?.then && loadOutcome?.then(result=>{
-                console.log(`${rendererInfo.appName} then with the result:`,result);
+                // console.log(`${rendererInfo.appName} then with the result:`,result);
             }));
             (loadOutcome?.catch && loadOutcome?.catch(reject=>console.log(`${rendererInfo.appName} catch. Error: ${reject}`)));
-            console.log(loadOutcome);
+            // console.log(loadOutcome);
         }
     }
     Promise.allSettled(loadPromises).then(()=>FORMS.Renderer.resolveLoaded());

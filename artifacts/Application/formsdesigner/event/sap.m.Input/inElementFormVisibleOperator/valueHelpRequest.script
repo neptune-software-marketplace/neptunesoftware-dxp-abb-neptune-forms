@@ -59,6 +59,8 @@ switch (visibleField.type) {
             FORMS.CONDITION_OPERATOR.LOWER_OR_EQUAL,
             FORMS.CONDITION_OPERATOR.LOWER_THAN,
             FORMS.CONDITION_OPERATOR.NOT_EQUAL,
+            FORMS.CONDITION_OPERATOR.BETWEEN,
+            FORMS.CONDITION_OPERATOR.NOT_BETWEEN,
         ].forEach(operation => {
             const {key,title} = operation;
             oper.push({key,title})

@@ -1,0 +1,10 @@
+// current element
+let cascSelect = modelpanTopProperties.oData;
+
+const elementAttribute = this.getCustomData().find((item) => item.getKey() === "element");
+if (typeof elementAttribute !== "undefined"){
+    cascSelect.parentSelectId = elementAttribute.getValue().id;
+    cascSelect.parentSelectTitle = elementAttribute.getValue().title;
+} 
+
+cascSelectController.consolidate();

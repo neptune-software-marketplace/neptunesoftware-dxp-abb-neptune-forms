@@ -821,6 +821,27 @@ const controller = {
                 newElement.dialogWidth = 900;
 
                 break;
+            // Map Custom Control
+            case "Map": // #18 KM
+                newElement.mapVisible = true;
+                newElement.width = "100";
+                newElement.widthMetric = "per";
+                newElement.height = "200";
+                newElement.heightMetric = "";
+
+                break;
+
+            // AR Calculation
+            case "Calc": // #18 KM
+                newElement.decimals = 2;
+                newElement.items = [{ id: ModelData.genID(), title: "", id: "", operator: "plus" }];
+
+            default: // #18 KM
+                // AR custom elements
+                if (typeof customFORMS !== "undefined") {
+                    customFORMS.setCustomElement(newElement);
+                }
+                break;
         }
 
         if (copy) {

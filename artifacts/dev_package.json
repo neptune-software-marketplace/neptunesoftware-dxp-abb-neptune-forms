@@ -8,7 +8,7 @@
 	},
 	"name": "neptunesoftware-dxp-abb-neptune-forms",
 	"description": "Neptune FORMS Solution",
-	"ver": "25.06.19.0848",
+	"ver": "25.06.27.0043",
 	"enableCICD": true,
 	"internalReadOnly": false,
 	"oeVersion": "24.11.0-rc.6",
@@ -40,6 +40,12 @@
 			"description": "Neptune FORMS"
 		},
 		{
+			"id": "8aab5143-3605-440a-b5db-5d944c5b5f7e",
+			"application": "neptune_formsadditionalelements",
+			"title": "",
+			"description": ""
+		},
+		{
 			"id": "836fbae4-6157-4829-bdeb-c4ab11710a70",
 			"application": "formsrenderer_freestepwizard",
 			"title": "",
@@ -50,6 +56,12 @@
 			"application": "formsdesigner",
 			"title": "Neptune FORMS",
 			"description": "Neptune FORMS"
+		},
+		{
+			"id": "585188c6-dd40-487e-99d6-3230481ab7ea",
+			"application": "neptune_formscachemanager",
+			"title": "",
+			"description": ""
 		},
 		{
 			"id": "4b507eda-02d6-4b00-ab00-c730a27c7ffd",
@@ -88,11 +100,22 @@
 			"name": "MediaLib",
 			"description": null,
 			"apiGroup": null
+		},
+		{
+			"id": "2550dd06-70bd-45c6-8fc2-9c30b124d57e",
+			"name": "forms_connectors_cache_conf",
+			"description": null,
+			"apiGroup": null
 		}
 	],
 	"odataSource": [],
 	"odataMock": [],
 	"dictionary": [
+		{
+			"id": "fd4cc886-6fe4-4fbf-bf0a-cf4db91d2ea9",
+			"name": "forms_connectors_cache_conf",
+			"description": "Cache Configuration"
+		},
 		{
 			"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
 			"name": "forms_attribute_group",

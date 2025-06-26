@@ -1,0 +1,14 @@
+//CE: Fix when control type was changed and outputItems is null
+if( !modelpanTopProperties.oData.outputItems ) {
+    modelpanTopProperties.oData.outputItems = [];
+}
+
+modelpanTopProperties.oData.outputItems.push({ 
+    id: ModelData.genID(), 
+    title: "", 
+    id: "", 
+    column: "" 
+});
+
+modelpanTopProperties.refresh();
+

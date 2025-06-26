@@ -1,0 +1,8 @@
+const context = this.getBindingContext();
+const data = context.getObject();
+
+CacheManager.clearCache(data.objectName);
+sap.m.MessageToast.show(TextSuccessClear.getText());
+
+
+

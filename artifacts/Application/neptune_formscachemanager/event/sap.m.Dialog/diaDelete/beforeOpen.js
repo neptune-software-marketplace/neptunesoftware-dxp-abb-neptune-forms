@@ -1,0 +1,1 @@
+ConfigUIController.setEditable(false);

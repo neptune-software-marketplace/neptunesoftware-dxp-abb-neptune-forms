@@ -1,0 +1,26 @@
+const context = oEvent.oSource.getBindingContext();
+const data = context.getObject();
+
+
+let caller = diaModelColumnSelect.getCustomData().find((item) => item.getKey() === "caller");
+if (typeof caller !== "undefined") {
+    const field = caller.getValue();
+    field.setValue(data.name);
+
+    //CE - Fix for modifying output items in the designer.
+    const bindingInfo = field.getParent().getParent().getBindingInfo('items');
+    if( !!bindingInfo?.path && bindingInfo.path.indexOf('outputItems') > -1 ) {
+        // Setting of an output item - so need to refresh the custom data for the control
+        const element = field.getParent().getParent().getModel().getData();
+
+        // Clear out the parentSelItems so that selGetItems(element) will build again with all Information Fields
+        const ndx = cascSelectController.parentSelItems.findIndex( i => { return i.objectName == element.objectName && i.key == element.key; } );
+        cascSelectController.parentSelItems.splice(ndx,1);
+
+        selGetItems(element);
+
+    }
+
+}
+
+diaModelColumnSelect.close();

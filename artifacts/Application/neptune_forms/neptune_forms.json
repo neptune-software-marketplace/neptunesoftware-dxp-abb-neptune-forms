@@ -107,6 +107,30 @@
 					"data": []
 				},
 				{
+					"fieldNo": "6c5f104e-77cb-46fe-8704-90082e57b5da",
+					"fieldName": "formscachemanager",
+					"fieldParent": 99999,
+					"fieldType": "neptune_formscachemanager",
+					"script": "",
+					"customComponent": true,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": []
+				},
+				{
+					"fieldNo": "6401e9f2-185f-4a00-89b8-c15cb73d586c",
+					"fieldName": "formsadditionalelements",
+					"fieldParent": 99999,
+					"fieldType": "neptune_formsadditionalelements",
+					"script": "",
+					"customComponent": true,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": []
+				},
+				{
 					"fieldNo": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
 					"fieldName": "Translation",
 					"fieldParent": 99999,
@@ -331,6 +355,46 @@
 									"attribute": "text",
 									"grouping": "Properties",
 									"value": "Ends With",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "302915a6-cd64-4555-fa14-53e025a906a1",
+							"fieldName": "i18nConditionOperatorBetween",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Between",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "563ba8a0-b040-4bfd-d1f8-018dcd873499",
+							"fieldName": "i18nConditionOperatorNotBetween",
+							"fieldParent": "4dc897b2-7dd3-441c-c5b2-643dda679cbf",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Not Between",
 									"script": "",
 									"translation": []
 								}
@@ -576,6 +640,18 @@
 							"data": []
 						},
 						{
+							"fieldNo": "1118eeda-1453-4f21-e560-b1718a785b73",
+							"fieldName": "connector",
+							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
+							"fieldType": "neptune.Script",
+							"script": "file://script/neptune.Script/Script/connector.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
 							"fieldNo": "415a019d-0c44-4fc0-8b3b-ce606f034cab",
 							"fieldName": "Signature",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
@@ -649,11 +725,12 @@
 						},
 						{
 							"fieldNo": "3a3be61d-e1a3-4ec1-af81-fe46ed6527a6",
-							"fieldName": "FORMS",
+							"fieldName": "FORMS.old",
 							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
 							"fieldType": "neptune.Typescript",
-							"script": "file://script/neptune.Typescript/Script/FORMS.ts",
+							"script": "file://script/neptune.Typescript/Script/FORMS.old.ts",
 							"customComponent": false,
+							"disabled": true,
 							"request": [],
 							"response": [],
 							"attributes": [
@@ -665,6 +742,18 @@
 									"translation": []
 								}
 							],
+							"data": []
+						},
+						{
+							"fieldNo": "9458660d-4868-482b-c90d-a777116d357f",
+							"fieldName": "FORMS.mergedWithKM",
+							"fieldParent": "46b533e6-0900-4ff9-93b9-ffaebbe06876",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Script/FORMS.mergedWithKM.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
 							"data": []
 						},
 						{
@@ -694,7 +783,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "25.06.13.1116",
+	"ver": "25.06.25.1544",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

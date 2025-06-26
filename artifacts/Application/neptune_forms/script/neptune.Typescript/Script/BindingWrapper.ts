@@ -33,7 +33,7 @@ type TyOldConditionalVisibility = {
     "visibleFieldName": string, // variable's UUID
     "visibleCondition": string, // initially only "===" || "!=="
     "visibleSep"?: string, // "and"|"or"
-    "visibleValue": string[] // note: "empty" => "". TODO: replace "empty" with "" in the FORMS code
+    "visibleValue": string|string[] // note: "empty" => "". TODO: replace "empty" with "" in the FORMS code
 }
 type TyFormatterParameterConfiguration = {
     fieldId: string,
@@ -510,7 +510,8 @@ class BindingWrapper {
                     switch(ui5Type) {
                         case "MultipleSelect":
                         case "MultipleChoice":
-                            conditionValues = condition.visibleValue.map(key=>`'${key}'`);
+                            // TODO: Re-test conditional visibility here
+                            conditionValues = Array.isArray(condition.visibleValue) ? condition.visibleValue.map(key=>`'${key}'`) : [`'${condition.visibleValue??''}'`];
                             switch(condition.visibleCondition) {
                                 case this.FORMS.CONDITION_OPERATOR.CONTAINS_ALL.key:
                                     result = `((conditionValues)=>{for(let key of conditionValues){if(!${variable}.includes(key)){return false;}};return true;})([${conditionValues}])`;
@@ -548,7 +549,8 @@ class BindingWrapper {
                         case "SingleSelectIcon":
                         case "SingleSelect":
                         case "SingleChoice":
-                            conditionValues = (condition.visibleValue??[]).map(key=>`'${key}'`);
+                            // TODO: Re-test conditional visibility here
+                            conditionValues = Array.isArray(condition.visibleValue) ? condition.visibleValue.map(key=>`'${key}'`) : [`'${condition.visibleValue??''}'`];
                             switch (condition.visibleCondition) {
                                 case this.FORMS.CONDITION_OPERATOR.CONTAINS_ANY.key:
                                     result = `([${conditionValues}].includes(${variable}))`;
@@ -591,8 +593,10 @@ class BindingWrapper {
                         case "Numeric":
                         case "Rating":
                         case "StepInput":
-                            // @ts-ignore
-                            conditionValues = conditionValues = isNaN(Number.parseFloat(condition.visibleValue)) ? 0 : Number.parseFloat(condition.visibleValue);;
+                            // TODO: Re-test conditional visibility here
+                            conditionValues = Array.isArray(condition.visibleValue) // #18 KM
+                                ? condition.visibleValue.map(value=>isNaN(Number.parseFloat(value)) && Number.parseFloat(value) || 0) 
+                                : isNaN(Number.parseFloat(condition.visibleValue)) && Number.parseFloat(condition.visibleValue) || 0;
                             switch(condition.visibleCondition) {
                                 case this.FORMS.CONDITION_OPERATOR.GREATER_THAN.key:
                                     result = `(${variable}>${conditionValues})`;
@@ -612,6 +616,12 @@ class BindingWrapper {
                                 case this.FORMS.CONDITION_OPERATOR.NOT_EQUAL.key:
                                     result = `(${variable}!==${conditionValues})`;
                                     break;
+                                case this.FORMS.CONDITION_OPERATOR.BETWEEN.key: // #18 KM
+                                    result = `(${conditionValues[0]}<=${variable}&&${variable}<=${conditionValues[1]})`; // #18 KM
+                                    break; // #18 KM
+                                case this.FORMS.CONDITION_OPERATOR.NOT_BETWEEN.key: // #18 KM
+                                    result = `(${variable}<${conditionValues[0]}||${conditionValues[1]}<${variable})`; // #18 KM
+                                    break; // #18 KM
                             }
                             break;
                         case "TextArea":

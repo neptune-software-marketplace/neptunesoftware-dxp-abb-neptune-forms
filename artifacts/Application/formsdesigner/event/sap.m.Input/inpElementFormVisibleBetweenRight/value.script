@@ -1,0 +1,3 @@
+if (!Array.isArray(visibleValue)) {return;}
+let number = Number.parseFloat(visibleValue[1]);
+return isNaN(number) ? undefined : number;

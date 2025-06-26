@@ -1,0 +1,1661 @@
+{
+	"id": "585188c6-dd40-487e-99d6-3230481ab7ea",
+	"createdAt": "2025-06-20T08:50:03.273Z",
+	"createdBy": "admin",
+	"objects": [
+		{
+			"fieldNo": 99999,
+			"data": [
+				{
+					"fieldNo": "fe4f26bf-6d7e-4c1c-9bd4-1668bc889d09",
+					"fieldName": "namespace",
+					"fieldParent": 99999,
+					"fieldType": "neptune.Typescript",
+					"script": "file://script/neptune.Typescript/namespace.ts",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": []
+				},
+				{
+					"fieldNo": "83481c47-ed91-49e8-c96c-627b7ea63e2e",
+					"fieldName": "APIs",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "e6bb7497-0956-4b7e-b087-7b40688148cd",
+							"fieldName": "CacheConfigGet",
+							"fieldParent": "83481c47-ed91-49e8-c96c-627b7ea63e2e",
+							"fieldType": "neptune.restapi",
+							"script": "",
+							"customComponent": false,
+							"restSource": "2550dd06-70bd-45c6-8fc2-9c30b124d57e",
+							"restOperation": "14f8d498-bf56-4c82-9487-bd7e1e421456",
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "ajaxSuccess",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/neptune.restapi/CacheConfigGet/ajaxSuccess.js",
+									"language": "javascript",
+									"translation": []
+								},
+								{
+									"attribute": "ajaxError",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "sap.m.MessageToast.show(TextErrorTechnical.getText());",
+									"language": "javascript",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "6f9d4626-131c-4421-c7dd-b221d4e076b3",
+							"fieldName": "CacheConfigSave",
+							"fieldParent": "83481c47-ed91-49e8-c96c-627b7ea63e2e",
+							"fieldType": "neptune.restapi",
+							"script": "",
+							"customComponent": false,
+							"restSource": "2550dd06-70bd-45c6-8fc2-9c30b124d57e",
+							"restOperation": "dbcbe569-4cbd-4467-8fc9-185a16747ec4",
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "ajaxSuccess",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/neptune.restapi/CacheConfigSave/ajaxSuccess.js",
+									"language": "javascript",
+									"translation": []
+								},
+								{
+									"attribute": "ajaxError",
+									"grouping": "Events",
+									"value": "sap.m.MessageToast.show(TextErrorTechnical.getText());",
+									"script": "sap.m.MessageToast.show(TextErrorTechnical.getText());",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+					"fieldName": "Data",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "6ecaf722-dd2c-4bd5-d391-dbfb21cbe26a",
+							"fieldName": "TextCacheObjectDelete",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Delete Cache Object",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "a956e5ca-9f91-4cda-c49c-b5bef6de28d5",
+							"fieldName": "TextErrorTechnical",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Technical Error",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "a298e702-5a32-4674-90a3-43bbe8943582",
+							"fieldName": "TextErrorRequired",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Maintain required fields",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "4618f71f-421c-4df7-a5f7-670660f9a209",
+							"fieldName": "TextErrorDuplicate",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Object already exists, select object instead",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "009fac80-c093-4f5c-8e0a-f25330f85ab2",
+							"fieldName": "TextPageReload",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Triggering page reload",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "a82910e1-bc26-4cc1-f029-ec6c3730ec16",
+							"fieldName": "TextPageReloadLong",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "For technical reasons, the Cache Manager will trigger a page reload when closing the app.",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "8d0d6f5e-7467-4e5a-8a7f-9c10e88730df",
+							"fieldName": "TextSuccessSave",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Configuration successfully saved",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "078a7d88-4269-4447-c80c-bc46bc23b6ba",
+							"fieldName": "TextSuccessLoad",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Cache loaded",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "9164ec2e-b51d-4e0e-de3e-3d7eb3052326",
+							"fieldName": "TextSuccessClear",
+							"fieldParent": "5ca347ce-9d88-4881-ae4b-35e17d7fffaa",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Cache cleared",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "a2e1cb9e-54b4-49a2-bb2f-914425f4f6b0",
+					"fieldName": "Scripts",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "95f3ed28-9266-44d1-f41f-1671315068b4",
+							"fieldName": "ConnectorAPI",
+							"fieldParent": "a2e1cb9e-54b4-49a2-bb2f-914425f4f6b0",
+							"fieldType": "neptune.Script",
+							"script": "file://script/neptune.Script/Scripts/ConnectorAPI.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "b27fb19e-7c1f-4fb9-d1eb-2788cdc5a537",
+							"fieldName": "CacheManagement",
+							"fieldParent": "a2e1cb9e-54b4-49a2-bb2f-914425f4f6b0",
+							"fieldType": "neptune.Script",
+							"script": "file://script/neptune.Script/Scripts/CacheManagement.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "ce853bf7-6714-4a1a-a858-be01bda42633",
+							"fieldName": "OfflineDB",
+							"fieldParent": "a2e1cb9e-54b4-49a2-bb2f-914425f4f6b0",
+							"fieldType": "neptune.Script",
+							"script": "file://script/neptune.Script/Scripts/OfflineDB.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "290c3b90-ad2d-4078-9bdf-f59f65029744",
+							"fieldName": "UIController",
+							"fieldParent": "a2e1cb9e-54b4-49a2-bb2f-914425f4f6b0",
+							"fieldType": "neptune.Script",
+							"script": "file://script/neptune.Script/Scripts/UIController.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "9dcfa56f-4855-4d8c-93a3-cee48c974d41",
+					"fieldName": "UIElements",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "2d134666-28f8-4942-cb2c-62c876d78b8f",
+							"fieldName": "butCacheConfig",
+							"fieldParent": "9dcfa56f-4855-4d8c-93a3-cee48c974d41",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Cache Configuration",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "icon",
+									"grouping": "Properties",
+									"value": "sap-icon://tnt/data-store",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableCompactMode",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Button/butCacheConfig/press.js",
+									"language": "javascript",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "d27133a8-ceb9-4fa2-aac4-9e81849918fe",
+							"fieldName": "diaCacheConfigClose",
+							"fieldParent": "9dcfa56f-4855-4d8c-93a3-cee48c974d41",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "type",
+									"grouping": "Properties",
+									"value": "Transparent",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Close",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableCompactMode",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Button/diaCacheConfigClose/press.js",
+									"language": "javascript",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "0ceea68b-223e-40e8-963a-b4b727f28ff6",
+							"fieldName": "diaCacheConfig",
+							"fieldParent": "9dcfa56f-4855-4d8c-93a3-cee48c974d41",
+							"fieldType": "sap.m.Dialog",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "title",
+									"grouping": "Properties",
+									"value": "Cache Objects",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "resizable",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "draggable",
+									"grouping": "Properties",
+									"value": "true",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "contentWidth",
+									"grouping": "Properties",
+									"value": "800px",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "contentHeight",
+									"grouping": "Properties",
+									"value": "600px",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "beforeOpen",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Dialog/diaCacheConfig/beforeOpen.js",
+									"language": "javascript",
+									"translation": []
+								},
+								{
+									"attribute": "endButton",
+									"grouping": "Associations",
+									"value": "diaCacheConfigClose",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "titleAlignment",
+									"grouping": "Properties",
+									"value": "Center",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": [
+								{
+									"fieldNo": "e7167f49-6228-4fae-9cb1-53057b8685c5",
+									"fieldName": "tabCacheConfig",
+									"fieldParent": "0ceea68b-223e-40e8-963a-b4b727f28ff6",
+									"fieldType": "sap.m.Table",
+									"script": "",
+									"customComponent": false,
+									"bindingValue": "Generic Array",
+									"bindingType": "h",
+									"bindingSource": "P9",
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "noDataText",
+											"grouping": "Properties",
+											"value": "no objects defined yet",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "mode",
+											"grouping": "Properties",
+											"value": "Delete",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "delete",
+											"grouping": "Events",
+											"value": "Anonymous Function",
+											"script": "file://event/sap.m.Table/tabCacheConfig/delete.js",
+											"language": "javascript",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "58a8e48a-841b-4002-a015-18cd4ceae1a3",
+											"fieldName": "colCacheConfigObjectName",
+											"fieldParent": "e7167f49-6228-4fae-9cb1-53057b8685c5",
+											"fieldType": "sap.m.Column",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [],
+											"data": [
+												{
+													"fieldNo": "8c3266fa-aeff-41f2-a4d9-7cd3737a2f3a",
+													"fieldName": "txtICacheConfigObjectName",
+													"fieldParent": "58a8e48a-841b-4002-a015-18cd4ceae1a3",
+													"fieldType": "sap.m.Text",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "Name",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										},
+										{
+											"fieldNo": "f06a3c0d-584f-4ce0-8ad2-91b40b8d990e",
+											"fieldName": "colCacheConfigDataSource",
+											"fieldParent": "e7167f49-6228-4fae-9cb1-53057b8685c5",
+											"fieldType": "sap.m.Column",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [],
+											"data": [
+												{
+													"fieldNo": "3e3fc94c-6e8b-47a8-e68e-96528771c692",
+													"fieldName": "txtCacheConfigDataSource",
+													"fieldParent": "f06a3c0d-584f-4ce0-8ad2-91b40b8d990e",
+													"fieldType": "sap.m.Text",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "Source",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										},
+										{
+											"fieldNo": "54f74b6e-4875-4d6e-bdca-fd238ecded8a",
+											"fieldName": "colCacheConfigManager",
+											"fieldParent": "e7167f49-6228-4fae-9cb1-53057b8685c5",
+											"fieldType": "sap.m.Column",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [],
+											"data": [
+												{
+													"fieldNo": "180123fa-ee45-47f3-c227-9863c6566c0e",
+													"fieldName": "txtCacheConfigManager",
+													"fieldParent": "54f74b6e-4875-4d6e-bdca-fd238ecded8a",
+													"fieldType": "sap.m.Text",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "Cache",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										},
+										{
+											"fieldNo": "00b1aa48-4db3-429c-e223-1c71e928886d",
+											"fieldName": "itemCacheConfig",
+											"fieldParent": "e7167f49-6228-4fae-9cb1-53057b8685c5",
+											"fieldType": "sap.m.ColumnListItem",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "type",
+													"grouping": "Properties",
+													"value": "Active",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.ColumnListItem/itemCacheConfig/press.js",
+													"language": "javascript",
+													"translation": []
+												}
+											],
+											"data": [
+												{
+													"fieldNo": "346d61d3-0f0c-4c26-eb47-8e9ee6c5388f",
+													"fieldName": "txtItemCacheConfigObjectName",
+													"fieldParent": "00b1aa48-4db3-429c-e223-1c71e928886d",
+													"fieldType": "sap.m.Text",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "{objectName}",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												},
+												{
+													"fieldNo": "0874bf4a-c300-4a41-faa8-d7e1b758360c",
+													"fieldName": "txtItemCacheConfigDataSource",
+													"fieldParent": "00b1aa48-4db3-429c-e223-1c71e928886d",
+													"fieldType": "sap.m.Text",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "{dataSource}",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												},
+												{
+													"fieldNo": "3c0eb0bc-443a-41c4-a0f5-399a0799142e",
+													"fieldName": "contCacheConfigManager",
+													"fieldParent": "00b1aa48-4db3-429c-e223-1c71e928886d",
+													"fieldType": "sap.m.HBox",
+													"script": "",
+													"customComponent": false,
+													"request": [],
+													"response": [],
+													"attributes": [],
+													"data": [
+														{
+															"fieldNo": "5328570d-0389-4678-828a-82ecc098061b",
+															"fieldName": "FileUploader",
+															"fieldParent": "3c0eb0bc-443a-41c4-a0f5-399a0799142e",
+															"fieldType": "sap.ui.unified.FileUploader",
+															"script": "",
+															"customComponent": false,
+															"bindingType": "h",
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "visible",
+																	"grouping": "Properties",
+																	"value": "{=${dataSource} === 'tsvFile'}",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "styleClassMargin",
+																	"grouping": "Properties",
+																	"value": "sapUiTinyMarginEnd",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "mimeType",
+																	"grouping": "Properties",
+																	"value": "[\"text/csv\",\"text/plain\"]",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "buttonText",
+																	"grouping": "Properties",
+																	"value": "Load",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "buttonOnly",
+																	"grouping": "Properties",
+																	"value": "true",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "change",
+																	"grouping": "Events",
+																	"value": "Anonymous Function",
+																	"script": "file://event/sap.ui.unified.FileUploader/FileUploader/change.js",
+																	"language": "javascript",
+																	"translation": []
+																}
+															],
+															"data": []
+														},
+														{
+															"fieldNo": "4eb8e55d-ecf3-4a13-e108-e68587a6e37f",
+															"fieldName": "butCacheLoadConnector",
+															"fieldParent": "3c0eb0bc-443a-41c4-a0f5-399a0799142e",
+															"fieldType": "sap.m.Button",
+															"script": "",
+															"customComponent": false,
+															"bindingType": "h",
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "visible",
+																	"grouping": "Properties",
+																	"value": "{=${dataSource} === 'Connector'}",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "text",
+																	"grouping": "Properties",
+																	"value": "Load",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "styleClassMargin",
+																	"grouping": "Properties",
+																	"value": "sapUiTinyMarginEnd",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "press",
+																	"grouping": "Events",
+																	"value": "Anonymous Function",
+																	"script": "file://event/sap.m.Button/butCacheLoadConnector/press.script",
+																	"translation": []
+																}
+															],
+															"data": []
+														},
+														{
+															"fieldNo": "feeaf63d-47cc-4aa7-b442-0717986f6159",
+															"fieldName": "butCacheClear",
+															"fieldParent": "3c0eb0bc-443a-41c4-a0f5-399a0799142e",
+															"fieldType": "sap.m.Button",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "text",
+																	"grouping": "Properties",
+																	"value": "Clear",
+																	"script": "",
+																	"translation": []
+																},
+																{
+																	"attribute": "press",
+																	"grouping": "Events",
+																	"value": "Anonymous Function",
+																	"script": "file://event/sap.m.Button/butCacheClear/press.script",
+																	"translation": []
+																}
+															],
+															"data": []
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"fieldNo": "8670080d-bcd8-490a-e565-09ae07797fb5",
+									"fieldName": "contCacheConfigAdd",
+									"fieldParent": "0ceea68b-223e-40e8-963a-b4b727f28ff6",
+									"fieldType": "sap.m.HBox",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "width",
+											"grouping": "Properties",
+											"value": "100%",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "styleClassMargin",
+											"grouping": "Properties",
+											"value": "sapUiSmallMarginBottom",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "justifyContent",
+											"grouping": "Properties",
+											"value": "End",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "956b8076-034c-410b-bce7-2d82fb518116",
+											"fieldName": "butCacheConfigAdd",
+											"fieldParent": "8670080d-bcd8-490a-e565-09ae07797fb5",
+											"fieldType": "sap.m.Button",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "styleClassMargin",
+													"grouping": "Properties",
+													"value": "sapUiSmallMarginEnd",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "icon",
+													"grouping": "Properties",
+													"value": "sap-icon://add",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.Button/butCacheConfigAdd/press.js",
+													"language": "javascript",
+													"translation": []
+												}
+											],
+											"data": []
+										}
+									]
+								},
+								{
+									"fieldNo": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+									"fieldName": "SFCacheConfig",
+									"fieldParent": "0ceea68b-223e-40e8-963a-b4b727f28ff6",
+									"fieldType": "sap.ui.layout.form.SimpleForm",
+									"script": "",
+									"customComponent": false,
+									"bindingValue": "Generic Object",
+									"bindingType": "u",
+									"bindingSource": "P9",
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "editable",
+											"grouping": "Properties",
+											"value": "true",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "35a08b16-df2c-4fb8-a1c1-863097ef6620",
+											"fieldName": "lblSFCacheConfigObjectName",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.Label",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Name",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "12be591b-f055-47dd-ef24-d94f5d4ca2c0",
+											"fieldName": "inpSFCacheConfigObjectName",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.Input",
+											"script": "",
+											"customComponent": false,
+											"bindingType": "h",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "value",
+													"grouping": "Properties",
+													"value": "{/objectName}",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "dc4095fa-fa35-493b-ec6a-c93c90ae48c5",
+											"fieldName": "lblSFCacheConfigDataSource",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.Label",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Data Source",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "5acfa722-9413-4b4d-f0df-4ca8a21a8852",
+											"fieldName": "inSFCacheConfigDataSource",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.Select",
+											"script": "",
+											"customComponent": false,
+											"bindingType": "h",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "selectedKey",
+													"grouping": "Properties",
+													"value": "{/dataSource}",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": [
+												{
+													"fieldNo": "cd8f8032-6253-4be7-bf3c-6db18c71688a",
+													"fieldName": "inSFCacheConfigDataSourceTsvFile",
+													"fieldParent": "5acfa722-9413-4b4d-f0df-4ca8a21a8852",
+													"fieldType": "sap.ui.core.Item",
+													"script": "",
+													"customComponent": false,
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "tsvFile",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "key",
+															"grouping": "Properties",
+															"value": "tsvFile",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												},
+												{
+													"fieldNo": "ac06658f-5946-4018-ec94-226fc11249f0",
+													"fieldName": "inSFCacheConfigDataSourceConnector",
+													"fieldParent": "5acfa722-9413-4b4d-f0df-4ca8a21a8852",
+													"fieldType": "sap.ui.core.Item",
+													"script": "",
+													"customComponent": false,
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "Connector",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "key",
+															"grouping": "Properties",
+															"value": "Connector",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										},
+										{
+											"fieldNo": "a5feaac5-4938-4a57-9a5e-9d98bb0851da",
+											"fieldName": "lblSFCacheConfigConnector",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.Label",
+											"script": "",
+											"customComponent": false,
+											"bindingType": "h",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "visible",
+													"grouping": "Properties",
+													"value": "{= ${/dataSource} === 'Connector'}",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Connector",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "required",
+													"grouping": "Properties",
+													"value": "true",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "70b75615-fc95-4490-d751-c2dfba0c568d",
+											"fieldName": "cboxConnectors",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.ComboBox",
+											"script": "",
+											"customComponent": false,
+											"bindingType": "h",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "visible",
+													"grouping": "Properties",
+													"value": "{= ${/dataSource} === 'Connector'}",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "selectedKey",
+													"grouping": "Properties",
+													"value": "{/connectorID}",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "1093ec2c-6139-4af0-8d4b-b1b86627a223",
+											"fieldName": "lblSFCacheConfigFrequency",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.Label",
+											"script": "",
+											"customComponent": false,
+											"bindingType": "h",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "visible",
+													"grouping": "Properties",
+													"value": "{= ${/dataSource} === 'Connector'}",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "text",
+													"grouping": "Properties",
+													"value": "Refresh Frequency",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "required",
+													"grouping": "Properties",
+													"value": "true",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "967d2c19-92b0-4b00-b0d1-f34bb774f8c1",
+											"fieldName": "HBox",
+											"fieldParent": "09debc16-2fb1-4426-e20e-63b1b51e73f7",
+											"fieldType": "sap.m.HBox",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "width",
+													"grouping": "Properties",
+													"value": "100%",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "fitContainer",
+													"grouping": "Properties",
+													"value": "true",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "alignItems",
+													"grouping": "Properties",
+													"value": "Stretch",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": [
+												{
+													"fieldNo": "d8126156-a9b3-4594-ec3f-dac3fd8e129f",
+													"fieldName": "inpSFCacheConfigFrequencyHours",
+													"fieldParent": "967d2c19-92b0-4b00-b0d1-f34bb774f8c1",
+													"fieldType": "sap.m.Input",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "visible",
+															"grouping": "Properties",
+															"value": "{= ${/dataSource} === 'Connector'}",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "value",
+															"grouping": "Properties",
+															"value": "{/refreshFrequencyHours}",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "type",
+															"grouping": "Properties",
+															"value": "Number",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "tooltip",
+															"grouping": "Properties",
+															"value": "Hours",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "placeholder",
+															"grouping": "Properties",
+															"value": "hours",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "liveChange",
+															"grouping": "Events",
+															"value": "Anonymous Function",
+															"script": "file://event/sap.m.Input/inpSFCacheConfigFrequencyHours/liveChange.js",
+															"language": "javascript",
+															"translation": []
+														}
+													],
+													"data": []
+												},
+												{
+													"fieldNo": "fb5c62b1-1522-4f2b-ffa9-f5c288db390d",
+													"fieldName": "inpSFCacheConfigFrequencyMinutes",
+													"fieldParent": "967d2c19-92b0-4b00-b0d1-f34bb774f8c1",
+													"fieldType": "sap.m.Input",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "visible",
+															"grouping": "Properties",
+															"value": "{= ${/dataSource} === 'Connector'}",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "value",
+															"grouping": "Properties",
+															"value": "{/refreshFrequencyMinutes}",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "type",
+															"grouping": "Properties",
+															"value": "Number",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "tooltip",
+															"grouping": "Properties",
+															"value": "Minutes",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "styleClassMargin",
+															"grouping": "Properties",
+															"value": "sapUiTinyMarginBegin",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "placeholder",
+															"grouping": "Properties",
+															"value": "minutes",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "liveChange",
+															"grouping": "Events",
+															"value": "Anonymous Function",
+															"script": "file://event/sap.m.Input/inpSFCacheConfigFrequencyMinutes/liveChange.js",
+															"language": "javascript",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										}
+									]
+								},
+								{
+									"fieldNo": "14cbcce7-364a-41fc-f606-9aa86dc0da71",
+									"fieldName": "contCacheConfigToolbar",
+									"fieldParent": "0ceea68b-223e-40e8-963a-b4b727f28ff6",
+									"fieldType": "sap.m.HBox",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "width",
+											"grouping": "Properties",
+											"value": "100%",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "justifyContent",
+											"grouping": "Properties",
+											"value": "End",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "938d4b3b-5dc0-4b44-b01c-fa18117fa489",
+											"fieldName": "butCacheConfigSave",
+											"fieldParent": "14cbcce7-364a-41fc-f606-9aa86dc0da71",
+											"fieldType": "sap.m.Button",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "tooltip",
+													"grouping": "Properties",
+													"value": "Save",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "styleClassMargin",
+													"grouping": "Properties",
+													"value": "sapUiSmallMarginEnd",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "icon",
+													"grouping": "Properties",
+													"value": "sap-icon://save",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.Button/butCacheConfigSave/press.js",
+													"language": "javascript",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "34ffbaac-d2d3-4625-a974-b55cce74ac7b",
+											"fieldName": "butCacheConfigRefresh",
+											"fieldParent": "14cbcce7-364a-41fc-f606-9aa86dc0da71",
+											"fieldType": "sap.m.Button",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "tooltip",
+													"grouping": "Properties",
+													"value": "Cancel",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "styleClassMargin",
+													"grouping": "Properties",
+													"value": "sapUiSmallMarginEnd",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "icon",
+													"grouping": "Properties",
+													"value": "sap-icon://sys-cancel",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "CacheManager.getConfig();",
+													"translation": []
+												}
+											],
+											"data": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"fieldNo": "bb317559-d8ac-455a-b1f6-852bd687dbf8",
+							"fieldName": "butDiaDeleteOk",
+							"fieldParent": "9dcfa56f-4855-4d8c-93a3-cee48c974d41",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "icon",
+									"grouping": "Properties",
+									"value": "sap-icon://accept",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Button/butDiaDeleteOk/press.js",
+									"language": "javascript",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "827a7099-7d91-4ac4-eef7-e8ad95719c86",
+							"fieldName": "butDiaDeleteCancel",
+							"fieldParent": "9dcfa56f-4855-4d8c-93a3-cee48c974d41",
+							"fieldType": "sap.m.Button",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "icon",
+									"grouping": "Properties",
+									"value": "sap-icon://sys-cancel",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "press",
+									"grouping": "Events",
+									"value": "diaDelete.close();",
+									"script": "diaDelete.close();",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "ba290e59-5b9f-422e-d875-3586c17f6255",
+							"fieldName": "diaDelete",
+							"fieldParent": "9dcfa56f-4855-4d8c-93a3-cee48c974d41",
+							"fieldType": "sap.m.Dialog",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "title",
+									"grouping": "Properties",
+									"value": "Delete Cache Object",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "beforeOpen",
+									"grouping": "Events",
+									"value": "Anonymous Function",
+									"script": "file://event/sap.m.Dialog/diaDelete/beforeOpen.js",
+									"language": "javascript",
+									"translation": []
+								},
+								{
+									"attribute": "endButton",
+									"grouping": "Associations",
+									"value": "butDiaDeleteCancel",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "beginButton",
+									"grouping": "Associations",
+									"value": "butDiaDeleteOk",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "8de936c2-1b31-4164-df52-8cf65bba956e",
+					"fieldName": "Events",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "d2a22ce0-ee88-4b5d-a9e4-1d81e1393580",
+							"fieldName": "onBeforeClose",
+							"fieldParent": "8de936c2-1b31-4164-df52-8cf65bba956e",
+							"fieldType": "neptune.event.onbeforeclose",
+							"script": "file://script/neptune.event.onbeforeclose/Events/onBeforeClose.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						},
+						{
+							"fieldNo": "feed3b69-a469-4e01-fd43-2edb106f2cf6",
+							"fieldName": "onInit",
+							"fieldParent": "8de936c2-1b31-4164-df52-8cf65bba956e",
+							"fieldType": "neptune.event.oninit",
+							"script": "file://script/neptune.event.oninit/Events/onInit.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"fieldNo": 99998,
+			"data": []
+		}
+	],
+	"componentInterface": {
+		"icon": null,
+		"documentation": "",
+		"containerId": null,
+		"attributes": [],
+		"topLevelObjects": []
+	},
+	"ver": "25.06.20.1050",
+	"application": "neptune_formscachemanager",
+	"title": "",
+	"description": "",
+	"enableFileStorage": false,
+	"enableManifest": false,
+	"enableStylesheet": false,
+	"enableObfuscate": false,
+	"onlyRunLaunchpad": false,
+	"disabled": false,
+	"loadLaunchpadCode": null,
+	"loadApplicationCode": null,
+	"appType": "E",
+	"ui5_m": true,
+	"ui5_f": false,
+	"ui5_table": false,
+	"ui5_tnt": false,
+	"ui5_uxap": false,
+	"ui5_chart": false,
+	"ui5_theme": "sap_horizon",
+	"ui5_version": "",
+	"ui5_language": null,
+	"ui5_url": "",
+	"cus_theme": "",
+	"css": "",
+	"compiledCss": null,
+	"header": "",
+	"manifest": "",
+	"globalScript": null,
+	"deleted": false,
+	"libHighchart": false,
+	"libHighmap": false,
+	"publicAccess": false,
+	"ui5_bootstrap": false,
+	"ui5_ionic": false,
+	"useV2AppHandler": false,
+	"compilerTarget": 3,
+	"tabWidth": null,
+	"printWidth": null,
+	"generateVersionOnActivation": false,
+	"activationHistoryCount": 0,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"apis": [
+		{
+			"id": "2550dd06-70bd-45c6-8fc2-9c30b124d57e",
+			"name": "forms_connectors_cache_conf",
+			"ver": "25.06.19.0851"
+		}
+	]
+}

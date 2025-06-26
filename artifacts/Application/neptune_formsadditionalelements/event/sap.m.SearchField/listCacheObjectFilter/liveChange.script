@@ -1,0 +1,4 @@
+const binding = listCacheObjectSelect.getBinding("items");
+
+const filter = new sap.ui.model.Filter("objectName", "Contains", this.getValue());
+binding.filter([filter]);

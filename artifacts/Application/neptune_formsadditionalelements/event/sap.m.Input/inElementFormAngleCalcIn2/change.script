@@ -1,0 +1,8 @@
+// current element
+let angleCalculator = modelpanTopProperties.oData;
+
+const element = controller.attachListener(this, angleCalculator);
+if (typeof element !== "undefined") {
+    angleCalculator.inpCrossingDistance2Id = element.id;
+    angleCalculator.inpCrossingDistance2Title = element.title;
+}

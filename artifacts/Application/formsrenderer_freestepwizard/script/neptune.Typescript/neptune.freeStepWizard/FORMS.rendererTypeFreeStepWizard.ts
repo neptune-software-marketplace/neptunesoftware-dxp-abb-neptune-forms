@@ -278,6 +278,8 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                             }
 
                             sectionParent.bindAggregation("items", { path: "/", template: FORMS.columnTemplate, templateShareable: false });
+                            // AR Table post processing // #18 KM
+                            FORMS.tablePostProcessing(section, 0, section.rows); // #18 KM
                             break;
                     }
                 },

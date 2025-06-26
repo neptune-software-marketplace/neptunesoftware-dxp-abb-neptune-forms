@@ -1,0 +1,2 @@
+CacheManager.getConfig();
+cm.getConnectorList();

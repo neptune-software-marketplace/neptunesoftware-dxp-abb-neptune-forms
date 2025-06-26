@@ -1,0 +1,14 @@
+const context = this.getBindingContext();
+const data = context.getObject();
+
+sap.ui.core.BusyIndicator.show(0);
+CacheManager.loadCacheFromConnector(data.objectName)
+    .then(() => {
+        sap.ui.core.BusyIndicator.hide();
+        sap.m.MessageToast.show(TextSuccessLoad.getText());
+    })
+    .catch((error) => {
+        console.log(error);
+        sap.ui.core.BusyIndicator.hide();
+    });
+//if (typeof controller !== "undefined") controller.preview(); //Rebuild forms

@@ -1,0 +1,19 @@
+if (typeof visibleFieldName === "undefined" || visibleFieldName === null || visibleFieldName === "") { return false; }  
+
+const object = controller.getObjectFromId(visibleFieldName);
+if (!object) return false;
+
+switch (object.type) {
+    case "Numeric":
+    case "Rating":
+    case "StepInput":
+        switch(visibleCondition) {
+            case FORMS.CONDITION_OPERATOR.BETWEEN.key:
+            case FORMS.CONDITION_OPERATOR.NOT_BETWEEN.key:
+                return true;
+            default:
+                return false;
+        }
+    default:
+        return false;
+}

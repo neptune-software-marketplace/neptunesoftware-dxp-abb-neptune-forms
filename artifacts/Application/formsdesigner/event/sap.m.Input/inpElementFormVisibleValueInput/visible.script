@@ -16,7 +16,16 @@ switch (object.type) {
     case "Image":
     case "File":
         return false;
-
+    case "Numeric":
+    case "Rating":
+    case "StepInput":
+        switch(visibleCondition) {
+            case FORMS.CONDITION_OPERATOR.BETWEEN.key:
+            case FORMS.CONDITION_OPERATOR.NOT_BETWEEN.key:
+                return false;
+            default:
+                return true;
+        }
     default:
         return true;
 }

@@ -1,0 +1,6 @@
+// AC: Pre Populated Values
+let data = modelpanTopProperties.getData();
+
+if (data.type === 'Numeric') {
+    this.setValue(FORMS.parseFloat(this.getValue(), data.decimals))
+}
