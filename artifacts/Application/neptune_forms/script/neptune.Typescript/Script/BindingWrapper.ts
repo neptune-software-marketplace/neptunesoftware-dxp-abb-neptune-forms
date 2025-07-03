@@ -856,6 +856,11 @@ class BindingWrapper {
                                     return value ? 1 : 0;
                                 case "number":
                                     break; // executes: return value;
+                                case "object":
+                                    if (Array.isArray(value)) {
+                                        return value.map(val => conformToType(val, varType));
+                                    }
+                                    return NaN;
                                 default:
                                     return NaN;
                             }
@@ -868,6 +873,11 @@ class BindingWrapper {
                                     break;
                                 case "undefined":
                                     return false;
+                                case "object":
+                                    if (Array.isArray(value)) {
+                                        return value.map(val => conformToType(val, varType));
+                                    }
+                                    return true;
                                 case "boolean":
                                     break;
                                 case "number":
@@ -880,7 +890,11 @@ class BindingWrapper {
                         case varType.startsWith("string"):
                             switch(typeof value) {
                                 case "undefined":
+                                    return "";
                                 case "object":
+                                    if (Array.isArray(value)) {
+                                        return value.map(val => conformToType(val, varType));
+                                    }
                                     return "";
                                 case "number":
                                 case "boolean":

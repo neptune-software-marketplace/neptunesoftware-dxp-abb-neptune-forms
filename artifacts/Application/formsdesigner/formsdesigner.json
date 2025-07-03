@@ -34671,24 +34671,11 @@
 							"data": []
 						},
 						{
-							"fieldNo": "4ada19cf-46e9-4246-8be7-e9204cf9a428",
+							"fieldNo": "c76e1dc0-5319-489a-c139-650b71fdb955",
 							"fieldName": "controller",
 							"fieldParent": "9a908f5d-5422-474e-adc2-0b14d7e5d638",
 							"fieldType": "neptune.Script",
 							"script": "file://script/neptune.Script/Script/controller.js",
-							"customComponent": false,
-							"disabled": true,
-							"request": [],
-							"response": [],
-							"attributes": [],
-							"data": []
-						},
-						{
-							"fieldNo": "c76e1dc0-5319-489a-c139-650b71fdb955",
-							"fieldName": "controller.mergedWithKM",
-							"fieldParent": "9a908f5d-5422-474e-adc2-0b14d7e5d638",
-							"fieldType": "neptune.Script",
-							"script": "file://script/neptune.Script/Script/controller.mergedWithKM.js",
 							"customComponent": false,
 							"request": [],
 							"response": [],
@@ -34741,7 +34728,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.03.1119",
+	"ver": "25.07.03.1642",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

@@ -699,7 +699,7 @@ namespace FORMS {
         if (isInDuplicateGroup) { // #54
             // ------------------------------
             // CSS REARRANGE BLOCK - begin
-            if (element === sameGroupElements[0]) {
+            if (element.id === sameGroupElements[0].id) {
                 if (elementVisibleBinding) {
                     // At least the first element has conditional visibility. Set it up
                     sameGroupElements[0].duplicateGroupCss = [];
@@ -2695,7 +2695,8 @@ namespace FORMS {
                 let result = 0;
                 let operator = "plus";
                 for (let i = 0; i < element.items.length; i++) {
-                    const arg = Number.parseFloat(parseFloat(getInputValue(element.items[i].id)));
+                    let arg = Number.parseFloat(parseFloat(getInputValue(element.items[i].id)));
+                        arg = isNaN(arg) ? 0 : arg;
                     switch (operator) {
                         case "plus":
                             result += arg;
