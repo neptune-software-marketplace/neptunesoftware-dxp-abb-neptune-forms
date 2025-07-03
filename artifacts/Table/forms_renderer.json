@@ -79,7 +79,7 @@
 	"foreignKeys": [],
 	"name": "forms_renderer",
 	"description": "Renderers' property customization for Composer and ",
-	"ver": "25.04.15.0837",
+	"ver": "25.07.03.1454",
 	"enableAudit": false,
 	"includeDataInPackage": true,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",

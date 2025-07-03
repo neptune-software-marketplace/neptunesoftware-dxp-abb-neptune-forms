@@ -9555,7 +9555,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.05.20.1050",
+	"ver": "25.07.03.1524",
 	"application": "formscomposerdesigner",
 	"title": "Forms Composer",
 	"description": "Forms Composer",
@@ -9602,6 +9602,16 @@
 			"id": "d5bc31e5-8726-409e-8987-65088dc3a2d1",
 			"name": "FormsClient",
 			"ver": "24.11.11.1030"
+		},
+		{
+			"id": "c90193d2-e3e9-4b9a-a6ae-ec6720d42ad5",
+			"name": "FormsRenderer",
+			"ver": "25.04.05.0436"
+		},
+		{
+			"id": "9ecf7b8e-40c0-4484-9cb6-a22997013950",
+			"name": "FormsComposerDesigner",
+			"ver": "25.04.22.0449"
 		}
 	]
 }

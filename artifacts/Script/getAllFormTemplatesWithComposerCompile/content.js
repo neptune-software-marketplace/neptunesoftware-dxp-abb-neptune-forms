@@ -26,7 +26,8 @@ const userRoleIds = await gatherRoleIds(req?.user?.id);
 
 /** / // <- Join "* /" together to enable the test data
 // loData = {retrieve_all: true}; // All
-loData = {id_form:"7ac89f1e-a847-4a78-8237-76c38a79ce04", retrieve_all: true}; // Compounded
+loData = {id_form:"b7d4120a-c9d1-4206-bd05-702673284fed", retrieve_all: true}; // Compounded
+// loData = {id_form:"7ac89f1e-a847-4a78-8237-76c38a79ce04", retrieve_all: true}; // Compounded
 // loData = {id_form:"F41E49CF-CF5E-EF11-991A-000D3AB5734C", retrieve_all: true}; // Compounded
 /**/
 // Single templates
@@ -66,8 +67,8 @@ if (loData && loData.id_form) {
     }
 }
 
-loChecklistTemplatesReq.orderBy("updatedAt");
-loChecklistCompoundedReq.orderBy("updatedAt");
+// loChecklistTemplatesReq.orderBy("updatedAt");
+// loChecklistCompoundedReq.orderBy("updatedAt");
 
 const loChecklistTemplates = await loChecklistTemplatesReq.getMany();
 const loChecklistCompounded = await loChecklistCompoundedReq.getMany();

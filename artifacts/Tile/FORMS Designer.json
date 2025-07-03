@@ -83,7 +83,7 @@
 	"cockpitTile": true,
 	"cardImageDarkNone": false,
 	"imageDarkNone": false,
-	"noInheritTileLayout": null,
+	"noInheritTileLayout": false,
 	"imageType": null,
 	"FIORI_STYLE": null,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",

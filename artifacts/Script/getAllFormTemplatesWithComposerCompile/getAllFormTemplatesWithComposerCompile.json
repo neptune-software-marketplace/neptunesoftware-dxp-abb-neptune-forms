@@ -24,7 +24,7 @@
 	],
 	"apis": [],
 	"name": "getAllFormTemplatesWithComposerCompile",
-	"ver": "25.06.03.1721",
+	"ver": "25.07.02.1629",
 	"description": "Gets all forms (Single and Compounded) ready to use",
 	"folder": "",
 	"content": "file:///content.js",
