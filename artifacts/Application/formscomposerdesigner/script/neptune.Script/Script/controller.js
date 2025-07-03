@@ -1079,7 +1079,9 @@ const controller = {
         const binding = informDetailSubGroup.getBinding("items");
 
         const filter = new sap.ui.model.Filter({
-            filters: [new sap.ui.model.Filter("groupid", "EQ", modeloPageDetail.oData.groupid), new sap.ui.model.Filter("name", "EQ", "")],
+            filters: [
+                new sap.ui.model.Filter("groupid", "EQ", modeloPageDetail.oData.groupid??""), //JS #18 merge KM
+                new sap.ui.model.Filter("name", "EQ", "")],
             and: false,
         });
 
