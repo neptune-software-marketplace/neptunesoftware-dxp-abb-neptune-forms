@@ -1,0 +1,20 @@
+{
+	"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+	"createdAt": "2025-04-15T21:30:41.000Z",
+	"createdBy": "admin",
+	"globalScripts": [],
+	"externalModules": [],
+	"entitySets": [],
+	"apis": [],
+	"name": "FormsAuthorizationGlobal",
+	"ver": "25.04.16.0059",
+	"description": null,
+	"folder": "",
+	"content": "file:///content.ts",
+	"useAsGlobalScript": true,
+	"lastRunSuccessful": false,
+	"isTypescript": false,
+	"language": "typescript",
+	"jsscriptGroup": "167edf10-fe2b-4cd4-a1f9-b7107d95acf0",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

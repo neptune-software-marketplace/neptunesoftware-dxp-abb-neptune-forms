@@ -14041,6 +14041,392 @@
 																											]
 																										},
 																										{
+																											"fieldNo": "0b37a4b1-f9c2-49fd-db2b-161b0f005d16",
+																											"fieldName": "elementSettingsCalc",
+																											"fieldParent": "b5680927-eb06-4f8e-8f0a-d6bb8e27eb3e",
+																											"fieldType": "sap.ui.layout.form.SimpleForm",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/type} === 'Calc' ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "maxContainerCols",
+																													"grouping": "Properties",
+																													"value": "3",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "layout",
+																													"grouping": "Properties",
+																													"value": "ResponsiveGridLayout",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "labelSpanM",
+																													"grouping": "Properties",
+																													"value": "12",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "labelSpanL",
+																													"grouping": "Properties",
+																													"value": "12",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "editable",
+																													"grouping": "Properties",
+																													"value": "true",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "columnsM",
+																													"grouping": "Properties",
+																													"value": "2",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": [
+																												{
+																													"fieldNo": "da72a3bc-c73b-4016-c248-071c91a5ec7a",
+																													"fieldName": "elementSettingsCalcTitle",
+																													"fieldParent": "0b37a4b1-f9c2-49fd-db2b-161b0f005d16",
+																													"fieldType": "sap.ui.core.Title",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Settings Calculation",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "154a0868-7b00-41db-c414-7f61eaf212ba",
+																													"fieldName": "elemenSettingsCalcLabel",
+																													"fieldParent": "0b37a4b1-f9c2-49fd-db2b-161b0f005d16",
+																													"fieldType": "sap.m.Label",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																													"fieldName": "boxElementCalcSettings",
+																													"fieldParent": "0b37a4b1-f9c2-49fd-db2b-161b0f005d16",
+																													"fieldType": "sap.m.VBox",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [],
+																													"data": [
+																														{
+																															"fieldNo": "eb82ccf8-8ec1-49e0-9545-34eeac21fb28",
+																															"fieldName": "inElementCalcRequired",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"disabled": true,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Required",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/required}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "2fc93ccd-8e58-44f6-cb0a-03e08abb8c7c",
+																															"fieldName": "inElementCalcLabel",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Show Label",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/enableLabel}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "b9a346bd-968b-4eba-cc0d-ae9ee57a5996",
+																															"fieldName": "inElementCalcDescription",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Enable Description",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/enableDescription}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "3db686e4-568e-4a70-ebb4-f614b5337f32",
+																															"fieldName": "inElementCalcPlaceholder",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"disabled": true,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Enable Placeholder",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/enablePlaceholder}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "1ff3b5a4-7454-403d-908b-54f78b3d43b2",
+																															"fieldName": "inElementCalcDuplicate",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"disabled": true,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Enable Duplicate Button",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/enableDuplicate}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "05f5df70-847b-4365-e304-254eef6e876c",
+																															"fieldName": "inElementCalcVisibleCond",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Enable Conditional Visibility",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/enableVisibleCond}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "6308f2cd-777e-49a6-99a7-966a1c7c38d0",
+																															"fieldName": "inElementCalcEnableLog",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Enable Log",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/enableLog}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "bddd62cc-026e-4080-e8ab-b3ad37b9cae8",
+																															"fieldName": "inElementCalcPrePopulate",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"disabled": true,
+																															"bindingType": "h",
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Enable Pre-Populate",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/enablePrePopulated}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
+																												}
+																											]
+																										},
+																										{
 																											"fieldNo": "6ee1a5c2-bf4b-4291-fe8f-c97dbc149763",
 																											"fieldName": "elementFormGeneral",
 																											"fieldParent": "b5680927-eb06-4f8e-8f0a-d6bb8e27eb3e",
@@ -27693,6 +28079,654 @@
 																											]
 																										},
 																										{
+																											"fieldNo": "34fa1db4-5f1b-4bdc-ed67-693b00cd53e3",
+																											"fieldName": "contElementCalc",
+																											"fieldParent": "b5680927-eb06-4f8e-8f0a-d6bb8e27eb3e",
+																											"fieldType": "sap.m.VBox",
+																											"script": "",
+																											"customComponent": false,
+																											"bindingType": "h",
+																											"request": [],
+																											"response": [],
+																											"attributes": [
+																												{
+																													"attribute": "visible",
+																													"grouping": "Properties",
+																													"value": "{= ${/type} === 'Calc' ? true:false }",
+																													"script": "",
+																													"translation": []
+																												},
+																												{
+																													"attribute": "styleClass",
+																													"grouping": "Properties",
+																													"value": "sapUiContentPadding",
+																													"script": "",
+																													"translation": []
+																												}
+																											],
+																											"data": [
+																												{
+																													"fieldNo": "0acd1130-55cd-46a0-dd06-a28e48e9266e",
+																													"fieldName": "elementCalcForm",
+																													"fieldParent": "34fa1db4-5f1b-4bdc-ed67-693b00cd53e3",
+																													"fieldType": "sap.ui.layout.form.SimpleForm",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "styleClass",
+																															"grouping": "Properties",
+																															"value": "formSettings",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "maxContainerCols",
+																															"grouping": "Properties",
+																															"value": "3",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "layout",
+																															"grouping": "Properties",
+																															"value": "ResponsiveGridLayout",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "labelSpanM",
+																															"grouping": "Properties",
+																															"value": "12",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "labelSpanL",
+																															"grouping": "Properties",
+																															"value": "12",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "editable",
+																															"grouping": "Properties",
+																															"value": "true",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "columnsL",
+																															"grouping": "Properties",
+																															"value": "1",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": [
+																														{
+																															"fieldNo": "3be9918c-c5c3-497a-9b56-d7726dc11119",
+																															"fieldName": "lblElementFormCalcDecimals",
+																															"fieldParent": "0acd1130-55cd-46a0-dd06-a28e48e9266e",
+																															"fieldType": "sap.m.Label",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Decimals ",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "ec10aea1-e9a6-4b3a-9812-7394a122d817",
+																															"fieldName": "inElementFormCalcDecimals",
+																															"fieldParent": "0acd1130-55cd-46a0-dd06-a28e48e9266e",
+																															"fieldType": "sap.m.StepInput",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "value",
+																																	"grouping": "Properties",
+																																	"value": "{/decimals}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "min",
+																																	"grouping": "Properties",
+																																	"value": "0",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "max",
+																																	"grouping": "Properties",
+																																	"value": "10",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "change",
+																																	"grouping": "Events",
+																																	"value": "Anonymous Function",
+																																	"script": "file://event/sap.m.StepInput/inElementFormCalcDecimals/change.js",
+																																	"language": "javascript",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
+																												},
+																												{
+																													"fieldNo": "dd5b3b17-aaab-4431-9f44-794f3d45626a",
+																													"fieldName": "elementCalcItems",
+																													"fieldParent": "34fa1db4-5f1b-4bdc-ed67-693b00cd53e3",
+																													"fieldType": "sap.m.Title",
+																													"script": "",
+																													"customComponent": false,
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "text",
+																															"grouping": "Properties",
+																															"value": "Operations",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClassMargin",
+																															"grouping": "Properties",
+																															"value": "sapUiSmallMargin",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "styleClass",
+																															"grouping": "Properties",
+																															"value": "titleItems",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": []
+																												},
+																												{
+																													"fieldNo": "018dde7f-4f18-4303-e5f4-b7febad98453",
+																													"fieldName": "tabCalc",
+																													"fieldParent": "34fa1db4-5f1b-4bdc-ed67-693b00cd53e3",
+																													"fieldType": "sap.m.Table",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"modelPath": "/items",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableConnector} !== true}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "showSeparators",
+																															"grouping": "Properties",
+																															"value": "None",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "showNoData",
+																															"grouping": "Properties",
+																															"value": "false",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "mode",
+																															"grouping": "Properties",
+																															"value": "{= ${appControl>/enableEdit} ? 'Delete':'None'}",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "delete",
+																															"grouping": "Events",
+																															"value": "Anonymous Function",
+																															"script": "file://event/sap.m.Table/tabCalc/delete.script",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "contextualWidth",
+																															"grouping": "Properties",
+																															"value": "Auto",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "autoPopinMode",
+																															"grouping": "Properties",
+																															"value": "true",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": [
+																														{
+																															"fieldNo": "603045b9-2d87-4b1d-8dee-0d3d283b8730",
+																															"fieldName": "colCalcDnD",
+																															"fieldParent": "018dde7f-4f18-4303-e5f4-b7febad98453",
+																															"fieldType": "sap.m.Column",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "width",
+																																	"grouping": "Properties",
+																																	"value": "40px",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "hAlign",
+																																	"grouping": "Properties",
+																																	"value": "Center",
+																																	"script": "",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "e23d01b2-1f2c-48fd-a8f1-2d16779b25f6",
+																															"fieldName": "colCalcTitle",
+																															"fieldParent": "018dde7f-4f18-4303-e5f4-b7febad98453",
+																															"fieldType": "sap.m.Column",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "4f38012f-a4c9-4eea-f894-4f46f6242860",
+																															"fieldName": "colCalcOperation",
+																															"fieldParent": "018dde7f-4f18-4303-e5f4-b7febad98453",
+																															"fieldType": "sap.m.Column",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [],
+																															"data": []
+																														},
+																														{
+																															"fieldNo": "8a4b4b4e-0c4a-4b64-9b48-8611bc19599a",
+																															"fieldName": "itemCalc",
+																															"fieldParent": "018dde7f-4f18-4303-e5f4-b7febad98453",
+																															"fieldType": "sap.m.ColumnListItem",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [],
+																															"data": [
+																																{
+																																	"fieldNo": "28165739-e901-4be5-e2a2-30f3f09a3a4d",
+																																	"fieldName": "itemCalcDnD",
+																																	"fieldParent": "8a4b4b4e-0c4a-4b64-9b48-8611bc19599a",
+																																	"fieldType": "sap.ui.core.Icon",
+																																	"script": "",
+																																	"customComponent": false,
+																																	"request": [],
+																																	"response": [],
+																																	"attributes": [
+																																		{
+																																			"attribute": "styleClass",
+																																			"grouping": "Properties",
+																																			"value": "formDnDIcon",
+																																			"script": "",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "src",
+																																			"grouping": "Properties",
+																																			"value": "sap-icon://menu2",
+																																			"script": "",
+																																			"translation": []
+																																		}
+																																	],
+																																	"data": []
+																																},
+																																{
+																																	"fieldNo": "911af759-f88c-420a-8be9-967864053eca",
+																																	"fieldName": "itemCalcTitle",
+																																	"fieldParent": "8a4b4b4e-0c4a-4b64-9b48-8611bc19599a",
+																																	"fieldType": "sap.m.Input",
+																																	"script": "",
+																																	"customComponent": false,
+																																	"request": [],
+																																	"response": [],
+																																	"attributes": [
+																																		{
+																																			"attribute": "valueHelpOnly",
+																																			"grouping": "Properties",
+																																			"value": "true",
+																																			"script": "",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "value",
+																																			"grouping": "Properties",
+																																			"value": "{title}",
+																																			"script": "",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "showValueHelp",
+																																			"grouping": "Properties",
+																																			"value": "true",
+																																			"script": "",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "placeholder",
+																																			"grouping": "Properties",
+																																			"value": "Input field",
+																																			"script": "",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "editable",
+																																			"grouping": "Properties",
+																																			"value": "{appControl>/enableEdit}",
+																																			"script": "",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "valueHelpRequest",
+																																			"grouping": "Events",
+																																			"value": "Anonymous Function",
+																																			"script": "file://event/sap.m.Input/itemCalcTitle/valueHelpRequest.js",
+																																			"language": "javascript",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "change",
+																																			"grouping": "Events",
+																																			"value": "Anonymous Function",
+																																			"script": "file://event/sap.m.Input/itemCalcTitle/change.js",
+																																			"language": "javascript",
+																																			"translation": []
+																																		}
+																																	],
+																																	"data": []
+																																},
+																																{
+																																	"fieldNo": "6a54af21-b126-41a3-804f-1d4eec232997",
+																																	"fieldName": "inItemCalcOperator",
+																																	"fieldParent": "8a4b4b4e-0c4a-4b64-9b48-8611bc19599a",
+																																	"fieldType": "sap.m.Select",
+																																	"script": "",
+																																	"customComponent": false,
+																																	"bindingType": "h",
+																																	"request": [],
+																																	"response": [],
+																																	"attributes": [
+																																		{
+																																			"attribute": "selectedKey",
+																																			"grouping": "Properties",
+																																			"value": "{operator}",
+																																			"script": "",
+																																			"translation": []
+																																		},
+																																		{
+																																			"attribute": "editable",
+																																			"grouping": "Properties",
+																																			"value": "{appControl>/enableEdit}",
+																																			"script": "",
+																																			"translation": []
+																																		}
+																																	],
+																																	"data": [
+																																		{
+																																			"fieldNo": "54f0752f-1938-4e7a-e156-d1fa3a8a2d78",
+																																			"fieldName": "inItemCalcOperatorEmpty",
+																																			"fieldParent": "6a54af21-b126-41a3-804f-1d4eec232997",
+																																			"fieldType": "sap.ui.core.Item",
+																																			"script": "",
+																																			"customComponent": false,
+																																			"request": [],
+																																			"response": [],
+																																			"attributes": [],
+																																			"data": []
+																																		},
+																																		{
+																																			"fieldNo": "b203bf99-bcd6-4cbd-8432-5800066aae09",
+																																			"fieldName": "inItemCalcOperatorPlus",
+																																			"fieldParent": "6a54af21-b126-41a3-804f-1d4eec232997",
+																																			"fieldType": "sap.ui.core.Item",
+																																			"script": "",
+																																			"customComponent": false,
+																																			"request": [],
+																																			"response": [],
+																																			"attributes": [
+																																				{
+																																					"attribute": "text",
+																																					"grouping": "Properties",
+																																					"value": "+",
+																																					"script": "",
+																																					"translation": []
+																																				},
+																																				{
+																																					"attribute": "key",
+																																					"grouping": "Properties",
+																																					"value": "plus",
+																																					"script": "",
+																																					"translation": []
+																																				}
+																																			],
+																																			"data": []
+																																		},
+																																		{
+																																			"fieldNo": "48c0d0c3-3af3-4047-c62e-eae8fb57a3b9",
+																																			"fieldName": "inItemCalcOperatorMinus",
+																																			"fieldParent": "6a54af21-b126-41a3-804f-1d4eec232997",
+																																			"fieldType": "sap.ui.core.Item",
+																																			"script": "",
+																																			"customComponent": false,
+																																			"request": [],
+																																			"response": [],
+																																			"attributes": [
+																																				{
+																																					"attribute": "text",
+																																					"grouping": "Properties",
+																																					"value": "-",
+																																					"script": "",
+																																					"translation": []
+																																				},
+																																				{
+																																					"attribute": "key",
+																																					"grouping": "Properties",
+																																					"value": "minus",
+																																					"script": "",
+																																					"translation": []
+																																				}
+																																			],
+																																			"data": []
+																																		},
+																																		{
+																																			"fieldNo": "d004afa2-4578-408a-d15c-3714c5fc366e",
+																																			"fieldName": "inItemCalcOperatorMultiply",
+																																			"fieldParent": "6a54af21-b126-41a3-804f-1d4eec232997",
+																																			"fieldType": "sap.ui.core.Item",
+																																			"script": "",
+																																			"customComponent": false,
+																																			"request": [],
+																																			"response": [],
+																																			"attributes": [
+																																				{
+																																					"attribute": "text",
+																																					"grouping": "Properties",
+																																					"value": "*",
+																																					"script": "",
+																																					"translation": []
+																																				},
+																																				{
+																																					"attribute": "key",
+																																					"grouping": "Properties",
+																																					"value": "multiply",
+																																					"script": "",
+																																					"translation": []
+																																				}
+																																			],
+																																			"data": []
+																																		},
+																																		{
+																																			"fieldNo": "bd9859b1-fbdd-42f5-8c72-82584e98449d",
+																																			"fieldName": "inItemCalcOperatorDivide",
+																																			"fieldParent": "6a54af21-b126-41a3-804f-1d4eec232997",
+																																			"fieldType": "sap.ui.core.Item",
+																																			"script": "",
+																																			"customComponent": false,
+																																			"request": [],
+																																			"response": [],
+																																			"attributes": [
+																																				{
+																																					"attribute": "text",
+																																					"grouping": "Properties",
+																																					"value": "/",
+																																					"script": "",
+																																					"translation": []
+																																				},
+																																				{
+																																					"attribute": "key",
+																																					"grouping": "Properties",
+																																					"value": "divide",
+																																					"script": "",
+																																					"translation": []
+																																				}
+																																			],
+																																			"data": []
+																																		}
+																																	]
+																																}
+																															]
+																														}
+																													]
+																												},
+																												{
+																													"fieldNo": "f056d076-85ac-4a1b-94a8-e37a34432e4a",
+																													"fieldName": "contElementCalcAddOperation",
+																													"fieldParent": "34fa1db4-5f1b-4bdc-ed67-693b00cd53e3",
+																													"fieldType": "sap.m.HBox",
+																													"script": "",
+																													"customComponent": false,
+																													"bindingType": "h",
+																													"request": [],
+																													"response": [],
+																													"attributes": [
+																														{
+																															"attribute": "wrap",
+																															"grouping": "Properties",
+																															"value": "Wrap",
+																															"script": "",
+																															"translation": []
+																														},
+																														{
+																															"attribute": "visible",
+																															"grouping": "Properties",
+																															"value": "{= ${/enableConnector} !== true}",
+																															"script": "",
+																															"translation": []
+																														}
+																													],
+																													"data": [
+																														{
+																															"fieldNo": "e1c98955-3796-455a-ec5b-b6f7864661b4",
+																															"fieldName": "elementCalcItemsToolbarAdd",
+																															"fieldParent": "f056d076-85ac-4a1b-94a8-e37a34432e4a",
+																															"fieldType": "sap.m.Button",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "type",
+																																	"grouping": "Properties",
+																																	"value": "Emphasized",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Add",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "styleClassMargin",
+																																	"grouping": "Properties",
+																																	"value": "sapUiSmallMargin",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "enabled",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "enableCompactMode",
+																																	"grouping": "Properties",
+																																	"value": "true",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "press",
+																																	"grouping": "Events",
+																																	"value": "Anonymous Function",
+																																	"script": "file://event/sap.m.Button/elementCalcItemsToolbarAdd/press.script",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														}
+																													]
+																												}
+																											]
+																										},
+																										{
 																											"fieldNo": "9064831b-8c84-4c29-bbb4-e827799a8c8e",
 																											"fieldName": "contElementFormVisibility",
 																											"fieldParent": "b5680927-eb06-4f8e-8f0a-d6bb8e27eb3e",
@@ -29900,6 +30934,224 @@
 					"response": [],
 					"attributes": [],
 					"data": [
+						{
+							"fieldNo": "a07185e9-56e4-4e50-e642-7d043c04f99f",
+							"fieldName": "diaNumSelect",
+							"fieldParent": "d62c1c7e-da1b-426d-e178-73a78781e887",
+							"fieldType": "neptune.folder",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": [
+								{
+									"fieldNo": "82f427f2-13b6-4b54-9a6f-102cc78e3139",
+									"fieldName": "diaNumSelectClose",
+									"fieldParent": "a07185e9-56e4-4e50-e642-7d043c04f99f",
+									"fieldType": "sap.m.Button",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "type",
+											"grouping": "Properties",
+											"value": "Transparent",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "text",
+											"grouping": "Properties",
+											"value": "Close",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "enableCompactMode",
+											"grouping": "Properties",
+											"value": "true",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "press",
+											"grouping": "Events",
+											"value": "diaNumSelect.close();",
+											"script": "diaNumSelect.close();",
+											"translation": []
+										}
+									],
+									"data": []
+								},
+								{
+									"fieldNo": "84f3654a-fa05-475f-82de-c9a5f953c47a",
+									"fieldName": "diaNumSelect",
+									"fieldParent": "a07185e9-56e4-4e50-e642-7d043c04f99f",
+									"fieldType": "sap.m.Dialog",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "title",
+											"grouping": "Properties",
+											"value": "Choose field",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "draggable",
+											"grouping": "Properties",
+											"value": "true",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "contentWidth",
+											"grouping": "Properties",
+											"value": "400px",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "contentHeight",
+											"grouping": "Properties",
+											"value": "600px",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "beforeOpen",
+											"grouping": "Events",
+											"value": "Anonymous Function",
+											"script": "file://event/sap.m.Dialog/diaNumSelect/beforeOpen.js",
+											"language": "javascript",
+											"translation": []
+										},
+										{
+											"attribute": "afterOpen",
+											"grouping": "Events",
+											"value": "listNumSelectFilter.focus();",
+											"script": "listNumSelectFilter.focus();",
+											"translation": []
+										},
+										{
+											"attribute": "endButton",
+											"grouping": "Associations",
+											"value": "diaNumSelectClose",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "a2af6062-0e04-49d6-ab11-f90dca10997b",
+											"fieldName": "listNumSelect",
+											"fieldParent": "84f3654a-fa05-475f-82de-c9a5f953c47a",
+											"fieldType": "sap.m.List",
+											"script": "",
+											"customComponent": false,
+											"bindingValue": "Generic Array",
+											"bindingType": "h",
+											"bindingSource": "P9",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "sticky",
+													"grouping": "Properties",
+													"value": "[\"ColumnHeaders\",\"HeaderToolbar\"]",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": [
+												{
+													"fieldNo": "e0aac628-0658-4f56-8431-46a4da13c9da",
+													"fieldName": "listNumSelectToolbar",
+													"fieldParent": "a2af6062-0e04-49d6-ab11-f90dca10997b",
+													"fieldType": "sap.m.Toolbar",
+													"script": "",
+													"customComponent": false,
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "position",
+															"grouping": "Parent",
+															"value": "HeaderToolbar",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": [
+														{
+															"fieldNo": "ee93ef28-e7fa-4ae2-b07a-57f17641fc88",
+															"fieldName": "listNumSelectFilter",
+															"fieldParent": "e0aac628-0658-4f56-8431-46a4da13c9da",
+															"fieldType": "sap.m.SearchField",
+															"script": "",
+															"customComponent": false,
+															"request": [],
+															"response": [],
+															"attributes": [
+																{
+																	"attribute": "liveChange",
+																	"grouping": "Events",
+																	"value": "Anonymous Function",
+																	"script": "file://event/sap.m.SearchField/listNumSelectFilter/liveChange.script",
+																	"translation": []
+																}
+															],
+															"data": []
+														}
+													]
+												},
+												{
+													"fieldNo": "d746d913-0820-4a86-b03e-1d4361bb4548",
+													"fieldName": "listNumSelectItem",
+													"fieldParent": "a2af6062-0e04-49d6-ab11-f90dca10997b",
+													"fieldType": "sap.m.StandardListItem",
+													"script": "",
+													"customComponent": false,
+													"bindingType": "h",
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "type",
+															"grouping": "Properties",
+															"value": "Active",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "title",
+															"grouping": "Properties",
+															"value": "{title}",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "press",
+															"grouping": "Events",
+															"value": "Anonymous Function",
+															"script": "file://event/sap.m.StandardListItem/listNumSelectItem/press.script",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										}
+									]
+								}
+							]
+						},
 						{
 							"fieldNo": "41564b6f-2b84-4305-e62c-a60e17cc2265",
 							"fieldName": "diaChangeParameterName",
@@ -33489,7 +34741,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.06.25.0920",
+	"ver": "25.07.03.1119",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

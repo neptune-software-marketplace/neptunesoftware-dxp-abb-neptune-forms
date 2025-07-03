@@ -16,10 +16,8 @@
 	"configMessage": {
 		"type": "None"
 	},
-	"lightGroupLayouts": [],
-	"darkGroupLayouts": [],
-	"lightTileLayouts": [],
-	"darkTileLayouts": [],
+	"navbarGroupOrder": null,
+	"sidebarGroupOrder": null,
 	"title": "Neptune FORMS",
 	"subTitle": null,
 	"menuText": null,
@@ -94,9 +92,18 @@
 	"imageDarkNone": false,
 	"imageTabletDarkNone": false,
 	"imageMobileDarkNone": false,
-	"oneGroupLayout": false,
-	"oneTileLayout": false,
+	"noInheritGroupLayout": null,
+	"noInheritTileLayout": null,
+	"navbarWidth": null,
+	"sidebarWidth": null,
+	"navbarFit": null,
+	"sidebarFit": null,
+	"FIORI_STYLE": null,
 	"roles": [],
+	"lightGroupLayouts": [],
+	"darkGroupLayouts": [],
+	"lightTileLayouts": [],
+	"darkTileLayouts": [],
 	"tiles": [
 		{
 			"id": "d832bb94-ec3a-4f59-8f1a-bab662c6a4d6",
@@ -141,5 +148,7 @@
 			"ver": "25.04.08.0941"
 		}
 	],
-	"tilegroups": []
+	"tilegroups": [],
+	"navbarGroups": [],
+	"sidebarGroups": []
 }

@@ -68,6 +68,12 @@
 			"application": "planet9_adaptive_forms",
 			"title": "Adaptive FORMS",
 			"description": "Adaptive FORMS"
+		},
+		{
+			"id": "0f841666-2457-4c72-b74b-5126e28256b5",
+			"application": "formsrenderer_selectionwizard",
+			"title": "",
+			"description": ""
 		}
 	],
 	"api": [
@@ -519,5 +525,6 @@
 	],
 	"wf_determination": [],
 	"wf_taskaction": [],
-	"theme_ui5": []
+	"theme_ui5": [],
+	"webapp": []
 }

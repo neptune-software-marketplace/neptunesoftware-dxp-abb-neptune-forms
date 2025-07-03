@@ -1,0 +1,16 @@
+const context = oEvent.oSource.getBindingContext();
+const data = context.getObject();
+
+//modelpanTopProperties.oData.visibleFieldName = data.id;
+
+let caller = diaNumSelect.getCustomData().find((item) => item.getKey() === "caller");
+if (typeof caller !== "undefined") {
+    const field = caller.getValue();
+    field.setValue(data.title);
+
+    field.destroyCustomData();
+    field.addCustomData(new sap.ui.core.CustomData({ key: "element", value: data }));
+    field.fireChange();
+}
+
+diaNumSelect.close();

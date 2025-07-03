@@ -2,8 +2,6 @@
 	"id": "addd10c1-98b5-4899-bf76-05ff73202391",
 	"createdAt": "2025-03-31T10:32:42.000Z",
 	"createdBy": "admin",
-	"lightTileLayouts": [],
-	"darkTileLayouts": [],
 	"translation": [],
 	"storeItem": {},
 	"settings": null,
@@ -85,7 +83,11 @@
 	"cockpitTile": true,
 	"cardImageDarkNone": false,
 	"imageDarkNone": false,
-	"oneTileLayout": false,
+	"noInheritTileLayout": null,
+	"imageType": null,
+	"FIORI_STYLE": null,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
-	"roles": []
+	"roles": [],
+	"lightTileLayouts": [],
+	"darkTileLayouts": []
 }

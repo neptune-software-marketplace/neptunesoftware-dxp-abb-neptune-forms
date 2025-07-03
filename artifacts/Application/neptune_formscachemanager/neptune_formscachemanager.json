@@ -343,6 +343,18 @@
 							"response": [],
 							"attributes": [],
 							"data": []
+						},
+						{
+							"fieldNo": "5653d539-a0b6-4be5-bfa0-2485c0bfc065",
+							"fieldName": "TestOnInit",
+							"fieldParent": "a2e1cb9e-54b4-49a2-bb2f-914425f4f6b0",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Scripts/TestOnInit.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
 						}
 					]
 				},
@@ -1609,7 +1621,7 @@
 		"attributes": [],
 		"topLevelObjects": []
 	},
-	"ver": "25.06.20.1050",
+	"ver": "25.06.27.0747",
 	"application": "neptune_formscachemanager",
 	"title": "",
 	"description": "",

@@ -1,0 +1,26 @@
+{
+	"id": "33703733-f41e-4cd9-a0c1-983d66e13463",
+	"createdAt": "2025-03-26T13:26:36.000Z",
+	"createdBy": "admin",
+	"globalScripts": [],
+	"externalModules": [],
+	"entitySets": [
+		{
+			"id": "7c35f34a-4a8d-498d-8366-684cdf4c791f",
+			"name": "forms_data",
+			"contextname": "forms_data"
+		}
+	],
+	"apis": [],
+	"name": "formGetLogComposer",
+	"ver": "25.04.15.0813",
+	"description": null,
+	"folder": "",
+	"content": "file:///content.js",
+	"useAsGlobalScript": false,
+	"lastRunSuccessful": false,
+	"isTypescript": false,
+	"language": "javascript",
+	"jsscriptGroup": "9c09bf80-d732-4968-8d64-9c01cf20caf9",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

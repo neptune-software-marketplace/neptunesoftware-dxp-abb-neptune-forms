@@ -1,0 +1,26 @@
+{
+	"id": "9b120056-15b3-4faa-a84c-1b833f5a09a5",
+	"createdAt": "2025-04-05T02:33:59.000Z",
+	"createdBy": "admin",
+	"globalScripts": [],
+	"externalModules": [],
+	"entitySets": [
+		{
+			"id": "2c64ca07-8c95-43e3-86d0-948b206f5488",
+			"name": "forms_renderer",
+			"contextname": "forms_renderer"
+		}
+	],
+	"apis": [],
+	"name": "getAllRenderers",
+	"ver": "25.04.05.0445",
+	"description": null,
+	"folder": "",
+	"content": "file:///content.ts",
+	"useAsGlobalScript": false,
+	"lastRunSuccessful": true,
+	"isTypescript": false,
+	"language": "typescript",
+	"jsscriptGroup": "ab252cb5-f1a4-45e6-bd24-5ed2d540d228",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

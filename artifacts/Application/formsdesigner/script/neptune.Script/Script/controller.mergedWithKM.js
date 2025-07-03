@@ -102,26 +102,26 @@ const controller = {
     setMonacoEditor: () => {
         let parentId = htmlTopCodeEditor.getId();
         let editorId = `${parentId}--core`;
-        htmlTopCodeEditor
-            .setContent(`<div id='${parentId}' style='height:calc(100% - 2rem)'><div id='${editorId}' style='height:100%'/></div>`);
-        neptune.Utils.waitForElement(editorId)
-            .then(() => {
-                MonacoEditor.instance = monaco.editor.create(document.getElementById(editorId),{
+        htmlTopCodeEditor.setContent(`<div id='${parentId}' style='height:calc(100% - 2rem)'><div id='${editorId}' style='height:100%'/></div>`);
+        neptune.Utils.waitForElement(editorId).then(() => {
+            if (!MonacoEditor.instance) {
+                MonacoEditor.instance = monaco.editor.create(document.getElementById(editorId), {
                     value: "",
                     automaticLayout: true,
                     readOnly: true,
-                    language: "javascript"
+                    language: "javascript",
                 });
-                MonacoEditor.instance.getModel().onDidChangeContent(function() {
+                MonacoEditor.instance.getModel().onDidChangeContent(function () {
                     let data = modelpanTopProperties.getData();
                     if (!data.formatterConfig?.visible) {
-                        FORMS.bindingWrapper.Advanced.Configuration.setFormatterConfig( data );
-                        data.formatterConfig.visible = {paramList:[], code: ''}
+                        FORMS.bindingWrapper.Advanced.Configuration.setFormatterConfig(data);
+                        data.formatterConfig.visible = { paramList: [], code: "" };
                     }
                     data.formatterConfig.visible.code = MonacoEditor.instance.getValue();
                 });
-                MonacoEditor.fulfillMonacoCreated(MonacoEditor.instance);
-            });
+            }
+            MonacoEditor.fulfillMonacoCreated(MonacoEditor.instance);
+        });
     },
 
     buildContextMenu: function () {
@@ -208,7 +208,8 @@ const controller = {
         return outlineMenu;
     },
 
-    validateItemForAddCopy: function (item) { // #18 KM
+    validateItemForAddCopy: function (item) {
+        // #18 KM
         // Map Custom Control - Ensure only one map is added
         if (item.type == "Map") {
             var setup = modeloPageDetail.getData().setup;
@@ -244,8 +245,9 @@ const controller = {
             case "copy":
                 // Validate control is valid for copy (Map Control) // #18 KM
                 const currentlySelectedItem = modelpanTopProperties.oData; // #18 KM
-                if (controller.validateItemForAddCopy(currentlySelectedItem)) // #18 KM controller.objectCopy();
-                break;
+                if (controller.validateItemForAddCopy(currentlySelectedItem))
+                    // #18 KM controller.objectCopy();
+                    break;
 
             case "delete":
                 controller.objectDelete();
@@ -278,7 +280,7 @@ const controller = {
 
     objectCopy: function () {
         const parent = controller.getParentFromId(modelpanTopProperties.oData.id);
-		// TODO: Review the object copy with safeClone // #18 KM
+        // TODO: Review the object copy with safeClone // #18 KM
         const newElement = safeClone(modelpanTopProperties.oData);
         // const newElement = JSON.parse(JSON.stringify(modelpanTopProperties.oData));
         let elementIndex = 0;
@@ -290,13 +292,13 @@ const controller = {
                 if (section.id === modelpanTopProperties.oData.id) elementIndex = i + 1;
             });
 
-            newElement.id    = ModelData.genID();
+            newElement.id = ModelData.genID();
             newElement.title = newElement.title + " (COPY)";
 
             newElement.elements.forEach(function (element, i) {
                 element.originId = element.id;
-                element.id       = ModelData.genID();
-                element.title    = element.title + (isFormTitle ? "" : " (COPY)");
+                element.id = ModelData.genID();
+                element.title = element.title + (isFormTitle ? "" : " (COPY)");
 
                 if (element.items) {
                     element.items.forEach(function (items) {
@@ -308,18 +310,19 @@ const controller = {
             // KW #22271 - if a whole section is being copied, the conditional visiblity inside of it should reference
             // to the also copied field. Not the original one.
             newElement.elements.forEach(function (element) {
-                
                 delete element.fieldName;
                 delete element.fieldId;
 
                 if (element.enableVisibleCond && element.visibleFieldName && element.visibleFieldName != "") {
-                    let iCondElement = newElement.elements.findIndex(e => e.originId == element.visibleFieldName);
+                    let iCondElement = newElement.elements.findIndex((e) => e.originId == element.visibleFieldName);
                     if (iCondElement >= 0) {
                         element.visibleFieldName = newElement.elements[iCondElement].id;
                     }
                 }
             });
-            newElement.elements.forEach(function (element) {delete element.originId;});
+            newElement.elements.forEach(function (element) {
+                delete element.originId;
+            });
 
             if (isFormTitle) {
                 parent.elements.forEach(function (element, i) {
@@ -329,7 +332,6 @@ const controller = {
             } else {
                 modeloPageDetail.oData.setup.splice(elementIndex, 0, newElement);
             }
-
         } else {
             parent.elements.forEach(function (element, i) {
                 if (element.id === modelpanTopProperties.oData.id) elementIndex = i + 1;
@@ -377,7 +379,9 @@ const controller = {
         });
 
         // Recheck if used in an advanced conditional visibility (report error/warning, but does not delete)
-        if (controller.getAllVisibilityConditionsById(id).length) { controller.checkVisCondParamValidation(); }
+        if (controller.getAllVisibilityConditionsById(id).length) {
+            controller.checkVisCondParamValidation();
+        }
 
         modelpanTopProperties.setData({});
         modelpanTopProperties.refresh();
@@ -471,7 +475,7 @@ const controller = {
         canSave = canSave && controller.checkDuplicateGroupsValidation(); // #54
         if (!canSave) {
             tabDetail.setSelectedItem(tabDetailDesigner);
-            sap.m.MessageBox.error("Please check the elements in the outline\nand related errors.", {title: 'Errors detected'});          
+            sap.m.MessageBox.error("Please check the elements in the outline\nand related errors.", { title: "Errors detected" });
             return;
         }
 
@@ -511,19 +515,18 @@ const controller = {
 
             apiDelete({
                 parameters: { id: modeloPageDetail.oData.id },
-            }).then(function (req) {
-                sap.m.MessageToast.show("Form Deleted");
-                controller.list();
-                oApp.setBusy(false);
-                oApp.back();
             })
-            // PRR - forms/#17 - role access to forms (ADD - Begin)
-            .catch(function (result) {
-                oApp.setBusy(false);
-                sap.m.MessageToast.show( result?.responseJSON?.status 
-                                            ? result.responseJSON.status 
-                                            : `Error deleting form.`);
-            });
+                .then(function (req) {
+                    sap.m.MessageToast.show("Form Deleted");
+                    controller.list();
+                    oApp.setBusy(false);
+                    oApp.back();
+                })
+                // PRR - forms/#17 - role access to forms (ADD - Begin)
+                .catch(function (result) {
+                    oApp.setBusy(false);
+                    sap.m.MessageToast.show(result?.responseJSON?.status ? result.responseJSON.status : `Error deleting form.`);
+                });
             // PRR - forms/#17 - role access to forms (ADD - End)
         }, "FORM");
     },
@@ -710,10 +713,10 @@ const controller = {
             description: "",
             required: false,
             items: [],
-            useFormatterConfig:{},
+            useFormatterConfig: {},
             formatterConfig: {},
             hasInfoButton: false,
-            sectionType: parentType
+            sectionType: parentType,
         };
 
         switch (elementData.type) {
@@ -966,24 +969,25 @@ const controller = {
 
             // Navigate to Element
             if (!controller.pressedPreview) {
-                
                 // Start: If the control is in an Expandable Panel that is not Expanded, Expand the panel // #18 KM
-                function findPanel(ctrl) { // #18 KM
+                function findPanel(ctrl) {
+                    // #18 KM
                     var parent = ctrl; // #18 KM
-                    do { // #18 KM
+                    do {
+                        // #18 KM
                         parent = parent.getParent(); // #18 KM
                     } while (!!parent && parent.getMetadata()._sClassName != "sap.m.Panel"); // Why doesn't getClass() work? // #18 KM
                     return parent; // #18 KM
                 } // #18 KM
 
                 const parentPanel = findPanel(elementPreview); // #18 KM
-                if( !!parentPanel && parentPanel.getExpandable() && !parentPanel.getExpanded() ) // #18 KM
-                { // #18 KM
+                if (!!parentPanel && parentPanel.getExpandable() && !parentPanel.getExpanded()) {
+                    // #18 KM
+                    // #18 KM
                     return; // Do Nothing // #18 KM
                     // Alternatively we could expand the panel - parentPanel.setExpanded(true); // #18 KM
                 } // #18 KM
                 // End: If the control is in an Expandable Panel that is not Expanded, Expand the panel // #18 KM
-
 
                 scrollPreview.scrollToElement(elementPreview, 0);
 
@@ -1137,11 +1141,11 @@ const controller = {
         // controller.visibleCondValue(); // #18 KM
     },
 
-	// TODO: Review this function towards the existing Conditional Visibility
-    visibleCondValue: function () { // #18 KM
-		// This is now handled in a different way with the new conditional visibility
+    // TODO: Review this function towards the existing Conditional Visibility
+    visibleCondValue: function () {
+        // #18 KM
+        // This is now handled in a different way with the new conditional visibility
     },
-
 
     importPicture: function (oEvent) {
         try {
@@ -1204,9 +1208,7 @@ const controller = {
         // });
         // MOD #(20250319-1114) ---
         const filter = new sap.ui.model.Filter({
-            filters: [
-                new sap.ui.model.Filter("groupid", "EQ", modeloPageDetail.getData()?.groupid ?? null), 
-                new sap.ui.model.Filter("name", "EQ", "")],
+            filters: [new sap.ui.model.Filter("groupid", "EQ", modeloPageDetail.getData()?.groupid ?? null), new sap.ui.model.Filter("name", "EQ", "")],
             and: false,
         });
         // MOD #(20250319-1114) end
@@ -1281,45 +1283,65 @@ const controller = {
         }
     },
     applyBackwardCompatibility: (data) => {
-        if (!data.setup) {return;}
+        if (!data.setup) {
+            return;
+        }
         FORMS.applyBackwardCompatibility(data.setup);
     },
-    getElementType: (elemType) => controller.elementTypes.find(
-            element=>element.type.toLocaleLowerCase("en") === elemType.toLocaleLowerCase("en")
-    ),
+    getElementType: (elemType) => controller.elementTypes.find((element) => element.type.toLocaleLowerCase("en") === elemType.toLocaleLowerCase("en")),
     getVisCondParamTypeOf: function (elementData) {
         let elementConfig = controller.getElementType(elementData.type);
-        if (!elementConfig?.parameter) {return "undefined";}
+        if (!elementConfig?.parameter) {
+            return "undefined";
+        }
         return elementConfig.paramType + (elementData.enableDuplicate ? "[]" : "");
     },
     getVisCondParamFieldIdsOf: function (elementData) {
         return elementData.id;
     },
-    getOutlineElementById: id => {
+    getOutlineElementById: (id) => {
         function findItem(items) {
-            if (!(Array.isArray(items)&&items.length)) {return {};}
+            if (!(Array.isArray(items) && items.length)) {
+                return {};
+            }
             for (let item of items) {
-                if (item.id === id) {return item;}
+                if (item.id === id) {
+                    return item;
+                }
             }
             return {};
         }
         function findElement(elements) {
-            if (!(Array.isArray(elements)&&elements.length)) {return {};}
+            if (!(Array.isArray(elements) && elements.length)) {
+                return {};
+            }
             for (let element of elements) {
-                if (element.id === id) {return element;}
+                if (element.id === id) {
+                    return element;
+                }
                 let childElement = findElement(element.elements);
-                if (childElement.id === id) {return childElement;}
+                if (childElement.id === id) {
+                    return childElement;
+                }
                 let itemElement = findItem(element.items);
-                if (itemElement.id === id) {return element;}
+                if (itemElement.id === id) {
+                    return element;
+                }
             }
             return {};
         }
         for (let section of modeloPageDetail.getData().setup) {
-            if (section.id === id) {return section;}
+            if (section.id === id) {
+                return section;
+            }
             let childElement = findElement(section.elements);
-            if (childElement.id === id) {return childElement;}
+            if (childElement.id === id) {
+                return childElement;
+            }
             let itemElement = findItem(section.items);
-            if (itemElement.id === id) {return section;}
+            if (itemElement.id === id) {
+                return section;
+            }
         }
         return null;
     },
@@ -1328,54 +1350,56 @@ const controller = {
         // copy all the code except for lines that end with /* ADAPT FROM COPY */ which you must adapt to the designer's reality
         const thisInstance = FORMS.bindingWrapper; /* ADAPT FROM COPY */
         function reduceElements(elements) {
-            if (!(Array.isArray(elements) && elements.length)) {return [];}
+            if (!(Array.isArray(elements) && elements.length)) {
+                return [];
+            }
             return elements.reduce((bag, element) => {
                 let newElBag = bag;
                 if (includeNoCode && element.enableVisibleCond && (includeDisabled || !element.disabled)) {
                     newElBag.push(element);
-                }
-                else if (includeDisabled || !element.disabled) {
+                } else if (includeDisabled || !element.disabled) {
                     const formatterConfigList = thisInstance.Advanced.Configuration.getFormatterConfigList(element);
                     if (Array.isArray(formatterConfigList) && formatterConfigList.length) {
                         newElBag.push(element);
                     }
                 }
                 return newElBag.concat(reduceElements(element.elements)); // considers applications where elements aggregate elementss
-            },[]);
-        };
-        return reduceElements(modeloPageDetail.getData().setup);  /* ADAPT FROM COPY */
+            }, []);
+        }
+        return reduceElements(modeloPageDetail.getData().setup); /* ADAPT FROM COPY */
     },
     getAllVisibilityConditionsById: function (id, includeDisabled = false, includeNoCode = false) {
         // THIS IS CODE COPIED from BindingWrapper.Advanced.Configuration.getAllConditionsWithParamId
         // copy all the code except for lines that end with /* ADAPT FROM COPY */ which you must adapt to the designer's reality
         const thisInstance = FORMS.bindingWrapper; /* ADAPT FROM COPY */
         function reduceElements(elements) {
-            if (!(Array.isArray(elements) && elements.length)) {return [];}
+            if (!(Array.isArray(elements) && elements.length)) {
+                return [];
+            }
             return elements.reduce((bag, element) => {
                 let newElBag = bag;
                 if (includeNoCode && element.enableVisibleCond && (includeDisabled || !element.disabled)) {
                     if (element?.visibility?.length) {
-                        let foundMatch = element.visibility.find(item=>item.visibleFieldName === id);
+                        let foundMatch = element.visibility.find((item) => item.visibleFieldName === id);
+                        if (foundMatch) {
+                            newElBag.push(element);
+                        }
+                    } else if (element.visibleFieldName === id) {
+                        newElBag.push(element);
+                    }
+                } else if (includeDisabled || !element.disabled) {
+                    const formatterConfigList = thisInstance.Advanced.Configuration.getFormatterConfigList(element);
+                    const { getFormatterConfig } = thisInstance.Advanced.Configuration;
+                    if (Array.isArray(formatterConfigList) && formatterConfigList.length && (includeDisabled || !element.disabled)) {
+                        let foundMatch = formatterConfigList.some((property) => getFormatterConfig(element, property).paramList.some((param) => param.fieldId === id));
                         if (foundMatch) {
                             newElBag.push(element);
                         }
                     }
-                    else if (element.visibleFieldName === id) {
-                        newElBag.push(element);
-                    }
-                }
-                else if (includeDisabled || !element.disabled) {
-                    const formatterConfigList = thisInstance.Advanced.Configuration.getFormatterConfigList(element);
-                    const {getFormatterConfig} = thisInstance.Advanced.Configuration;
-                    if (Array.isArray(formatterConfigList) && formatterConfigList.length && (includeDisabled || !element.disabled)) {
-                        let foundMatch = formatterConfigList.some(property => 
-                            getFormatterConfig(element, property).paramList.some(param=>param.fieldId === id));
-                        if (foundMatch) {newElBag.push(element);}
-                    }
                 }
                 return newElBag.concat(reduceElements(element.elements)); // considers applications where elements aggregate elementss
-            },[]);
-        };
+            }, []);
+        }
         return reduceElements(modeloPageDetail.getData().setup); /* ADAPT FROM COPY */
     },
     checkVisCondParamValidation: function (property = "visible") {
@@ -1383,7 +1407,7 @@ const controller = {
         let allConditions = controller.getAllVisibilityConditions();
         for (let condition of allConditions) {
             let variables = [];
-            let entry = {fieldId: condition.id, hasErrors: false, error:{}};
+            let entry = { fieldId: condition.id, hasErrors: false, error: {} };
             let errorFound = false;
             // Check parameters
             const formatterConfig = FORMS.bindingWrapper.Advanced.Configuration.getFormatterConfig(condition, property);
@@ -1396,8 +1420,9 @@ const controller = {
                     entry.hasErrors = true;
                     entry.error[param.fieldId].duplicated = true;
                     param.error.duplicated = true;
+                } else {
+                    variables.push(param.variable);
                 }
-                else { variables.push(param.variable); }
                 let sourceObject = controller.getOutlineElementById(param.fieldId);
                 if (!sourceObject) {
                     param.hasErrors = true;
@@ -1409,7 +1434,9 @@ const controller = {
             }
             // Check function creation
             const errorReturn = {};
-            if (!((typeof condition.error === "object") && (condition.error !== null))) { condition.error = {}; } // #54
+            if (!(typeof condition.error === "object" && condition.error !== null)) {
+                condition.error = {};
+            } // #54
             const fnFormatter = FORMS.bindingWrapper.Advanced.Generator.formatterFunction(formatterConfig, false, errorReturn);
             if (!fnFormatter) {
                 errorFound = true;
@@ -1420,42 +1447,47 @@ const controller = {
             }
             // else {delete condition.codeError}; // #54
             // condition.hasErrors = errorFound; // #54
-            else {delete condition.error.code}; // #54
-            condition.hasErrors = Object.getOwnPropertyNames(condition.error).some(property=>!!condition.error[property]); // #54
+            else {
+                delete condition.error.code;
+            } // #54
+            condition.hasErrors = Object.getOwnPropertyNames(condition.error).some((property) => !!condition.error[property]); // #54
             result.push(entry);
         }
         modelpanTopEditor.refresh();
         modeloPageDetail.refresh();
         return result;
     },
-    checkDuplicateGroupsValidation: function (value=undefined) { // #54
+    checkDuplicateGroupsValidation: function (value = undefined) {
+        // #54
         const groupElements = FORMS.bindingWrapper.Advanced.Configuration.collectOriginalDuplicateGroupsAndElements(modeloPageDetail.getData().setup, value, true);
-        const groupNames = groupElements.reduce((bag,group)=>((bag.includes(group.groupName) || bag.push(group.groupName)) || true) && bag, []);
+        const groupNames = groupElements.reduce((bag, group) => (bag.includes(group.groupName) || bag.push(group.groupName) || true) && bag, []);
         // Gets existing nodes with errors;
-        const nodesWithErrors = FORMS.bindingWrapper.Advanced.Configuration.getNodesWithErrors(modeloPageDetail.getData().setup, true).sort((previous,next) =>
-            (previous.id < next.id) ?-1 :((previous.id === next.id) ?0 :1));
+        const nodesWithErrors = FORMS.bindingWrapper.Advanced.Configuration.getNodesWithErrors(modeloPageDetail.getData().setup, true).sort((previous, next) =>
+            previous.id < next.id ? -1 : previous.id === next.id ? 0 : 1
+        );
         // console.log(nodesWithErrors);
         let allDuplicationGroupsOk = true;
         for (let groupName of groupNames) {
-            const sameGroupElements = groupElements.filter(group => group.groupName === groupName); 
-            let errorFound = sameGroupElements.filter(group => group.statusAll !== ALL_GROUP_ELEMENTS_STATE.DISABLED).length > 1;
+            const sameGroupElements = groupElements.filter((group) => group.groupName === groupName);
+            let errorFound = sameGroupElements.filter((group) => group.statusAll !== ALL_GROUP_ELEMENTS_STATE.DISABLED).length > 1;
             allDuplicationGroupsOk = allDuplicationGroupsOk && !errorFound;
             for (let group of sameGroupElements) {
                 for (let element of group.elements) {
-                    let foundOldWithError = nodesWithErrors.findIndex(withError=>withError.id === element.id);
+                    let foundOldWithError = nodesWithErrors.findIndex((withError) => withError.id === element.id);
                     if (foundOldWithError >= 0) {
                         // Removes it if it is being processed
-                        nodesWithErrors.splice(foundOldWithError,1);
+                        nodesWithErrors.splice(foundOldWithError, 1);
                     }
                     const outlineObj = controller.getOutlineElementById(element.id);
-                    if (!((typeof outlineObj.error === "object") && outlineObj.error)) { outlineObj.error = {}; }
+                    if (!(typeof outlineObj.error === "object" && outlineObj.error)) {
+                        outlineObj.error = {};
+                    }
                     if (errorFound) {
                         outlineObj.error.duplicateGroup = `Another duplicate group for ${groupName} was detected!`;
                         outlineObj.hasErrors = true;
-                    }
-                    else {
+                    } else {
                         delete outlineObj.error.duplicateGroup;
-                        outlineObj.hasErrors = Object.getOwnPropertyNames(outlineObj.error).some(property=>!!condition.error[property]);
+                        outlineObj.hasErrors = Object.getOwnPropertyNames(outlineObj.error).some((property) => !!condition.error[property]);
                     }
                 }
             }
@@ -1463,13 +1495,14 @@ const controller = {
         // The remaining items are no longer part of the duplication processes, so that error is removed
         for (let node of nodesWithErrors) {
             delete node?.error?.duplicateGroup;
-            node.hasErrors = Object.getOwnPropertyNames(node.error).some(property=>!!node.error[property]); // #54
+            node.hasErrors = Object.getOwnPropertyNames(node.error).some((property) => !!node.error[property]); // #54
         }
         return allDuplicationGroupsOk;
     },
 
-	// AC: Fill Pre Populated Value options // #18 KM
-    fillPrePopulated: function (element) { // #18 KM
+    // AC: Fill Pre Populated Value options // #18 KM
+    fillPrePopulated: function (element) {
+        // #18 KM
         inElementFormPrePopulateValues.removeAllItems();
         inElementFormPrePopulateValues.addItem(new sap.ui.core.Item({ key: "", text: "Custom Value" }));
         switch (element.type) {
@@ -1496,7 +1529,8 @@ const controller = {
     },
 
     // AR: update refernce field names // #18 KM
-    updateReferenceFieldName: function (element) { // #18 KM
+    updateReferenceFieldName: function (element) {
+        // #18 KM
         function getTitle(id) {
             const refElement = FORMS.getObjectFromId(id);
             if (refElement !== null) {
@@ -1524,7 +1558,8 @@ const controller = {
     },
 
     // AR // #18 KM
-    attachListener: function (configField, listener) { // #18 KM
+    attachListener: function (configField, listener) {
+        // #18 KM
         const elementAttribute = configField.getCustomData().find((item) => item.getKey() === "element");
         if (typeof elementAttribute === "undefined") return;
         const element = elementAttribute.getValue();

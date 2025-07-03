@@ -1,0 +1,57 @@
+{
+	"id": "8451fdc0-46ea-4f35-bcf9-e3ebcdd0c79b",
+	"createdAt": "2023-01-13T06:42:08.000Z",
+	"createdBy": "ole-andre.haugen@neptune-software.com",
+	"globalScripts": [
+		{
+			"id": "26376e0a-d4d2-483b-9da8-224651e7fbf0",
+			"name": "FormsAuthorization - FormsAuthorizationGlobal",
+			"contextname": "FormsAuthorizationGlobal"
+		}
+	],
+	"externalModules": [],
+	"entitySets": [
+		{
+			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
+			"name": "forms_attribute_fields",
+			"contextname": "forms_attribute_fields"
+		},
+		{
+			"id": "2e3d2b75-db26-438a-8bff-ba72399fead8",
+			"name": "forms_attribute_fields",
+			"contextname": "forms_attribute_fields"
+		},
+		{
+			"id": "de90511f-f1cd-49ad-bb20-07f4c879cf3f",
+			"name": "forms_attribute_group",
+			"contextname": "forms_attribute_group"
+		},
+		{
+			"id": "29f811fe-1310-4769-a00f-c27cd73d7f21",
+			"name": "forms_design",
+			"contextname": "forms_design"
+		},
+		{
+			"id": "4a9e3232-70e5-4f49-9b63-4104044f5642",
+			"name": "forms_group",
+			"contextname": "forms_group"
+		},
+		{
+			"id": "78f60bae-e2ca-4d4a-ae6e-170ac0f67296",
+			"name": "forms_subgroup",
+			"contextname": "forms_subgroup"
+		}
+	],
+	"apis": [],
+	"name": "formList",
+	"ver": "25.05.20.1617",
+	"description": null,
+	"folder": null,
+	"content": "file:///content.js",
+	"useAsGlobalScript": false,
+	"lastRunSuccessful": true,
+	"isTypescript": false,
+	"language": "javascript",
+	"jsscriptGroup": "7eaba72b-740a-4676-aaa6-1c43a35732b3",
+	"package": "a313322e-f024-45f1-960f-b90081757b85"
+}

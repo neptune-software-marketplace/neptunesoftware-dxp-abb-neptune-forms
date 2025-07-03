@@ -2,8 +2,6 @@
 	"id": "538e3ef8-0493-4f9e-a738-a231db3e8c01",
 	"createdAt": "2023-01-23T19:10:26.000Z",
 	"createdBy": "ole-andre.haugen@neptune-software.com",
-	"lightTileLayouts": [],
-	"darkTileLayouts": [],
 	"translation": [],
 	"storeItem": {},
 	"settings": null,
@@ -85,7 +83,11 @@
 	"cockpitTile": true,
 	"cardImageDarkNone": false,
 	"imageDarkNone": false,
-	"oneTileLayout": false,
+	"noInheritTileLayout": null,
+	"imageType": null,
+	"FIORI_STYLE": null,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",
-	"roles": []
+	"roles": [],
+	"lightTileLayouts": [],
+	"darkTileLayouts": []
 }

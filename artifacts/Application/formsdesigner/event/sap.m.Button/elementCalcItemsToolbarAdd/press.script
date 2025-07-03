@@ -1,0 +1,7 @@
+modelpanTopProperties.oData.items.push({ 
+    id: "", 
+    title: "", 
+    operator: "" 
+});
+
+modelpanTopProperties.refresh();

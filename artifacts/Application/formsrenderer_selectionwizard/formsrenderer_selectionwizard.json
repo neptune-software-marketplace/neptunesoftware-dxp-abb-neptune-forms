@@ -1,0 +1,489 @@
+{
+	"id": "0f841666-2457-4c72-b74b-5126e28256b5",
+	"createdAt": "2025-07-01T16:30:49.411Z",
+	"createdBy": "admin",
+	"objects": [
+		{
+			"fieldNo": "d0272b3b-dd75-4a6c-a499-d1de6846259c",
+			"fieldName": "invisibleBox",
+			"fieldParent": 0,
+			"fieldType": "sap.m.FlexBox",
+			"script": "",
+			"customComponent": false,
+			"request": [],
+			"response": [],
+			"attributes": [
+				{
+					"attribute": "visible",
+					"grouping": "Properties",
+					"value": "false",
+					"script": "",
+					"translation": []
+				}
+			],
+			"data": []
+		},
+		{
+			"fieldNo": 99999,
+			"data": [
+				{
+					"fieldNo": "85cf2477-52b1-4a48-b9c4-9e194960e2c8",
+					"fieldName": "Translation",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "040a7f59-0fac-4a04-83ca-ffc34281157a",
+							"fieldName": "i18nLabel",
+							"fieldParent": "85cf2477-52b1-4a48-b9c4-9e194960e2c8",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "Select wizard",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						},
+						{
+							"fieldNo": "d30f1a38-ac8b-412a-9f22-9fec6be5839a",
+							"fieldName": "i18nDescription",
+							"fieldParent": "85cf2477-52b1-4a48-b9c4-9e194960e2c8",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "This renderer builds a wizard that allows for arbitrary section selection. The form is fully built at load time.",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "6318fdfe-755a-4ee4-80a7-76e5815cffc8",
+					"fieldName": "UI",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "87582b0b-dc83-4efa-d7b9-f0d018ce493f",
+							"fieldName": "formTop",
+							"fieldParent": "6318fdfe-755a-4ee4-80a7-76e5815cffc8",
+							"fieldType": "sap.m.Page",
+							"script": "",
+							"customComponent": false,
+							"bindingValue": "Generic Object",
+							"bindingType": "u",
+							"bindingSource": "P9",
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "showHeader",
+									"grouping": "Properties",
+									"value": "false",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "showSubHeader",
+									"grouping": "Properties",
+									"value": "false",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "enableScrolling",
+									"grouping": "Properties",
+									"value": "false",
+									"script": "",
+									"translation": []
+								},
+								{
+									"attribute": "showFooter",
+									"grouping": "Properties",
+									"value": "false",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": [
+								{
+									"fieldNo": "e66784d4-2328-4919-a3df-a5b6c21dee29",
+									"fieldName": "pnlNavigation",
+									"fieldParent": "87582b0b-dc83-4efa-d7b9-f0d018ce493f",
+									"fieldType": "sap.m.Panel",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "expanded",
+											"grouping": "Properties",
+											"value": "true",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": [
+										{
+											"fieldNo": "97988a40-8654-42b1-c42a-31dd3a9843e5",
+											"fieldName": "btnPrevious",
+											"fieldParent": "e66784d4-2328-4919-a3df-a5b6c21dee29",
+											"fieldType": "sap.m.Button",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.Button/btnPrevious/press.js",
+													"language": "javascript",
+													"translation": []
+												},
+												{
+													"attribute": "enabled",
+													"grouping": "Properties",
+													"value": "false",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "icon",
+													"grouping": "Properties",
+													"value": "sap-icon://navigation-left-arrow",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										},
+										{
+											"fieldNo": "d3ab36c5-b6e2-450f-dbfa-40d94e2bcfbe",
+											"fieldName": "selSections",
+											"fieldParent": "e66784d4-2328-4919-a3df-a5b6c21dee29",
+											"fieldType": "sap.m.Select",
+											"script": "",
+											"customComponent": false,
+											"bindingValue": "Generic Array",
+											"bindingType": "h",
+											"bindingSource": "P9",
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "change",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.Select/selSections/change.js",
+													"language": "javascript",
+													"translation": []
+												},
+												{
+													"attribute": "styleClassMargin",
+													"grouping": "Properties",
+													"value": "sapUiSmallMarginBeginEnd",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": [
+												{
+													"fieldNo": "2c33a223-c3ed-4ab4-df0c-19f2a2281c1b",
+													"fieldName": "ListItem",
+													"fieldParent": "d3ab36c5-b6e2-450f-dbfa-40d94e2bcfbe",
+													"fieldType": "sap.ui.core.ListItem",
+													"script": "",
+													"customComponent": false,
+													"request": [],
+													"response": [],
+													"attributes": [
+														{
+															"attribute": "text",
+															"grouping": "Properties",
+															"value": "{section}",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "enabled",
+															"grouping": "Properties",
+															"value": "{active}",
+															"script": "",
+															"translation": []
+														},
+														{
+															"attribute": "key",
+															"grouping": "Properties",
+															"value": "{section}",
+															"script": "",
+															"translation": []
+														}
+													],
+													"data": []
+												}
+											]
+										},
+										{
+											"fieldNo": "19e64cac-9253-4e73-8f2a-bdaf9285a401",
+											"fieldName": "btnNext",
+											"fieldParent": "e66784d4-2328-4919-a3df-a5b6c21dee29",
+											"fieldType": "sap.m.Button",
+											"script": "",
+											"customComponent": false,
+											"request": [],
+											"response": [],
+											"attributes": [
+												{
+													"attribute": "press",
+													"grouping": "Events",
+													"value": "Anonymous Function",
+													"script": "file://event/sap.m.Button/btnNext/press.js",
+													"language": "javascript",
+													"translation": []
+												},
+												{
+													"attribute": "enabled",
+													"grouping": "Properties",
+													"value": "false",
+													"script": "",
+													"translation": []
+												},
+												{
+													"attribute": "icon",
+													"grouping": "Properties",
+													"value": "sap-icon://navigation-right-arrow",
+													"script": "",
+													"translation": []
+												}
+											],
+											"data": []
+										}
+									]
+								},
+								{
+									"fieldNo": "3f5b1792-fadf-450b-f184-020528937a84",
+									"fieldName": "pageEndScrollContainer",
+									"fieldParent": "87582b0b-dc83-4efa-d7b9-f0d018ce493f",
+									"fieldType": "sap.m.ScrollContainer",
+									"script": "",
+									"customComponent": false,
+									"request": [],
+									"response": [],
+									"attributes": [
+										{
+											"attribute": "width",
+											"grouping": "Properties",
+											"value": "100%",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "height",
+											"grouping": "Properties",
+											"value": "calc(100% - 4rem)",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "horizontal",
+											"grouping": "Properties",
+											"value": "false",
+											"script": "",
+											"translation": []
+										},
+										{
+											"attribute": "vertical",
+											"grouping": "Properties",
+											"value": "true",
+											"script": "",
+											"translation": []
+										}
+									],
+									"data": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"fieldNo": "e376bccf-6712-4355-9810-3c52e0b087b2",
+					"fieldName": "CustomComponents",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "58ac7c0b-5873-4b06-d367-f01738ccc373",
+							"fieldName": "formsdeclare",
+							"fieldParent": "e376bccf-6712-4355-9810-3c52e0b087b2",
+							"fieldType": "neptune_formsdeclare",
+							"script": "",
+							"customComponent": true,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "b1330691-6aa5-4e23-9806-79ee2079ceb9",
+					"fieldName": "Scripts",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "4d5cc3c5-db8d-4d89-9ab6-19cec10e749b",
+							"fieldName": "SectionFunctions",
+							"fieldParent": "b1330691-6aa5-4e23-9806-79ee2079ceb9",
+							"fieldType": "neptune.Script",
+							"script": "file://script/neptune.Script/Scripts/SectionFunctions.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "36604209-1eb9-4fe5-857b-1cfc2cd6b87f",
+					"fieldName": "Init",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "a69eeea5-e6a1-451d-b6e5-b0939b6bf145",
+							"fieldName": "Init",
+							"fieldParent": "36604209-1eb9-4fe5-857b-1cfc2cd6b87f",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/Init/Init.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				},
+				{
+					"fieldNo": "21d03b79-9b0c-4e6c-8838-ee63e4662d15",
+					"fieldName": "neptune.freeStepWizard",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "d99c8d0f-5119-4ae4-d2e8-51143b480da4",
+							"fieldName": "FORMS.rendererTypeSelectionWizard",
+							"fieldParent": "21d03b79-9b0c-4e6c-8838-ee63e4662d15",
+							"fieldType": "neptune.Typescript",
+							"script": "file://script/neptune.Typescript/neptune.freeStepWizard/FORMS.rendererTypeSelectionWizard.ts",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"fieldNo": 99998,
+			"data": []
+		}
+	],
+	"componentInterface": [],
+	"ver": "25.07.02.0329",
+	"application": "formsrenderer_selectionwizard",
+	"title": "",
+	"description": "",
+	"enableFileStorage": false,
+	"enableManifest": false,
+	"enableStylesheet": false,
+	"enableObfuscate": false,
+	"onlyRunLaunchpad": false,
+	"disabled": false,
+	"loadLaunchpadCode": null,
+	"loadApplicationCode": null,
+	"appType": "A",
+	"ui5_m": true,
+	"ui5_f": false,
+	"ui5_table": false,
+	"ui5_tnt": false,
+	"ui5_uxap": false,
+	"ui5_chart": false,
+	"ui5_theme": "sap_horizon",
+	"ui5_version": "",
+	"ui5_language": null,
+	"ui5_url": "",
+	"cus_theme": "",
+	"css": "",
+	"compiledCss": null,
+	"header": "",
+	"manifest": "",
+	"globalScript": null,
+	"deleted": false,
+	"libHighchart": false,
+	"libHighmap": false,
+	"publicAccess": false,
+	"ui5_bootstrap": false,
+	"ui5_ionic": false,
+	"useV2AppHandler": false,
+	"compilerTarget": 3,
+	"tabWidth": null,
+	"printWidth": null,
+	"generateVersionOnActivation": false,
+	"activationHistoryCount": 0,
+	"package": "a313322e-f024-45f1-960f-b90081757b85",
+	"apis": []
+}
