@@ -596,7 +596,7 @@ class BindingWrapper {
                             // TODO: Re-test conditional visibility here
                             conditionValues = Array.isArray(condition.visibleValue) // #18 KM
                                 ? condition.visibleValue.map(value=>isNaN(Number.parseFloat(value)) && Number.parseFloat(value) || 0) 
-                                : isNaN(Number.parseFloat(condition.visibleValue)) && Number.parseFloat(condition.visibleValue) || 0;
+                                : (!isNaN(Number.parseFloat(condition.visibleValue))) && Number.parseFloat(condition.visibleValue) || 0;
                             switch(condition.visibleCondition) {
                                 case this.FORMS.CONDITION_OPERATOR.GREATER_THAN.key:
                                     result = `(${variable}>${conditionValues})`;

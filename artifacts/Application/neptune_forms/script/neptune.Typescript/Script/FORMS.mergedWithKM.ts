@@ -813,65 +813,64 @@ namespace FORMS {
                 visible: isButtonVisible
             });
         // if (element.enableDuplicate/* && FORMS.editable*/) { // #54
+            let buttonAddRemove;
             if (element.isDuplicate) {
-                elementParent.addItem(
-                    new sap.m.Button({  // #54
-                        visible: isButtonVisible, // #54
-                        // visible: "{appControl>/formControl/formEditable}", // #54
-                        icon: "sap-icon://delete",
-                        type: sap.m.ButtonType.Reject, // "Reject",
-                        press: function (oEvent) {
-                            let data: any = FORMS.getData();
-                            data.completed = false;
+                buttonAddRemove = new sap.m.Button({  // #54
+                    visible: isButtonVisible, // #54
+                    // visible: "{appControl>/formControl/formEditable}", // #54
+                    icon: "sap-icon://delete",
+                    type: sap.m.ButtonType.Reject, // "Reject",
+                    press: function (oEvent) {
+                        let data: any = FORMS.getData();
+                        data.completed = false;
+
+                        let parent = FORMS.getDuplicateParentFromId(element.id, data);
+                        // parent.elements.splice(index, 1); // #54
+                        const sameGroupElementsId = sameGroupElements.map(element => element.id); // #54
+                        parent.elements = parent.elements.filter(element => !sameGroupElementsId.includes(element.id)); // #54
+
+                        FORMS.build(FORMS.customerParent, data);
+                    },
+                }).addStyleClass("sapUiSizeCompact")
+            } else {
+                buttonAddRemove = new sap.m.Button({ // #54
+                    visible: isButtonVisible, // #54
+                    // visible: "{appControl>/formControl/formEditable}", // #54
+                    text: element.duplicateButtonText,
+                    type: element.duplicateButtonType,
+                    icon: element.duplicateButtonIcon,
+                    press: function (oEvent) {
+                        let data: any = FORMS.getData();
+                        data.completed = false;
+
+                        const duplicateId = ModelData.genID(); // #54
+                        sameGroupElements.forEach((elemInGroup, elIndex) => { // #54
+                            let element = FORMS.getObjectFromId(elemInGroup.id); // #54
+                            let newElement = safeClone(element); // #54
+                            newElement.id = ModelData.genID();
+                            newElement.isDuplicate = true;
+                            newElement.duplicatedFromId = element.id;
+                            newElement.duplicateId = duplicateId; // #54
+
+                            // Object Attribute
+                            if (newElement.fieldName) newElement.fieldName = newElement.fieldName + "_" + newElement.id; // #54
+
+                            if (newElement.items) {
+                                newElement.items.forEach(function (item) {
+                                    item.id = ModelData.genID();
+                                });
+                            }
 
                             let parent = FORMS.getDuplicateParentFromId(element.id, data);
-                            // parent.elements.splice(index, 1); // #54
-                            const sameGroupElementsId = sameGroupElements.map(element => element.id); // #54
-                            parent.elements = parent.elements.filter(element => !sameGroupElementsId.includes(element.id)); // #54
+                            parent.elements.splice(index + elIndex + 1, 0, newElement); // #54
+                        }); // #54
 
-                            FORMS.build(FORMS.customerParent, data);
-                        },
-                    }).addStyleClass("sapUiSizeCompact")
-                );
-            } else {
-                elementParent.addItem(
-                    new sap.m.Button({ // #54
-                        visible: isButtonVisible, // #54
-                        // visible: "{appControl>/formControl/formEditable}", // #54
-                        text: element.duplicateButtonText,
-                        type: element.duplicateButtonType,
-                        icon: element.duplicateButtonIcon,
-                        press: function (oEvent) {
-                            let data: any = FORMS.getData();
-                            data.completed = false;
-
-                            const duplicateId = ModelData.genID(); // #54
-                            sameGroupElements.forEach((elemInGroup, elIndex) => { // #54
-                                let element = FORMS.getObjectFromId(elemInGroup.id); // #54
-                                let newElement = safeClone(element); // #54
-                                newElement.id = ModelData.genID();
-                                newElement.isDuplicate = true;
-                                newElement.duplicatedFromId = element.id;
-                                newElement.duplicateId = duplicateId; // #54
-
-                                // Object Attribute
-                                if (newElement.fieldName) newElement.fieldName = newElement.fieldName + "_" + newElement.id; // #54
-
-                                if (newElement.items) {
-                                    newElement.items.forEach(function (item) {
-                                        item.id = ModelData.genID();
-                                    });
-                                }
-
-                                let parent = FORMS.getDuplicateParentFromId(element.id, data);
-                                parent.elements.splice(index + elIndex + 1, 0, newElement); // #54
-                            }); // #54
-
-                            FORMS.build(FORMS.customerParent, data);
-                        },
-                    }).addStyleClass("sapUiSizeCompact")
-                );
+                        FORMS.build(FORMS.customerParent, data);
+                    },
+                }).addStyleClass("sapUiSizeCompact")
             }
+            buttonBox.addItem(buttonAddRemove);
+
             if (element.duplicateGroup) { // #54
                 buttonLabel.addStyleClass(CSS_DUPLICATE.BOTTOM_LABEL);
                 buttonBox.addStyleClass(CSS_DUPLICATE.BOTTOM_BOX)
