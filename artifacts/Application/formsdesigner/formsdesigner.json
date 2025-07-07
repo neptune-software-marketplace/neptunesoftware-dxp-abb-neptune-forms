@@ -2348,6 +2348,40 @@
 																		}
 																	],
 																	"data": []
+																},
+																{
+																	"fieldNo": "5b8bccc9-d3df-4320-f1ae-3a3a1b3995de",
+																	"fieldName": "informDetailReportSession",
+																	"fieldParent": "bb4af5a2-b9d6-4555-bc27-8ec08d504fca",
+																	"fieldType": "sap.m.CheckBox",
+																	"script": "",
+																	"customComponent": false,
+																	"request": [],
+																	"response": [],
+																	"attributes": [
+																		{
+																			"attribute": "text",
+																			"grouping": "Properties",
+																			"value": "Show Log per Session",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "selected",
+																			"grouping": "Properties",
+																			"value": "{/enablesession}",
+																			"script": "",
+																			"translation": []
+																		},
+																		{
+																			"attribute": "editable",
+																			"grouping": "Properties",
+																			"value": "{appControl>/enableEdit}",
+																			"script": "",
+																			"translation": []
+																		}
+																	],
+																	"data": []
 																}
 															]
 														}
@@ -34728,7 +34762,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.03.1642",
+	"ver": "25.07.04.1629",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
