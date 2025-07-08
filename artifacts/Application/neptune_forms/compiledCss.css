@@ -190,6 +190,10 @@ segmentedNoDefault .invisibleLi {
   min-width: 6.66%;
 }
 
+.nepFullPage {
+  height: 100% !important;
+}
+
 .sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-LargeDesktop:has(.nepGroupedDuplicateLabelTopBottom), .sapUiRespGridMedia-Std-Tablet:has(.nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-Desktop:has(.nepGroupedDuplicateLabelTop), .sapUiRespGridMedia-Std-LargeDesktop:has(.nepGroupedDuplicateLabelTop) {
   display: flex;
   flex-wrap: wrap;

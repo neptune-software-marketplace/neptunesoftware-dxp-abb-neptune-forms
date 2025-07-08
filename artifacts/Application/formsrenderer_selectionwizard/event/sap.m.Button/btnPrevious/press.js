@@ -1,2 +1,2 @@
 //Previous Press
-performPreviousNext(oEvent.getSource());
+performPreviousNext(C_BUTTON_PREVIOUS, oEvent.getSource());

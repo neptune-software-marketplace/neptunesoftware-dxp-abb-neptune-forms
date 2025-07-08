@@ -245,8 +245,8 @@ const controller = {
             case "copy":
                 // Validate control is valid for copy (Map Control) // #18 KM
                 const currentlySelectedItem = modelpanTopProperties.oData; // #18 KM
-                if (controller.validateItemForAddCopy(currentlySelectedItem))
-                    // #18 KM controller.objectCopy();
+                if (controller.validateItemForAddCopy(currentlySelectedItem)) // #18 KM 
+                    controller.objectCopy();
                     break;
 
             case "delete":

@@ -258,10 +258,18 @@ namespace FORMS {
 
         // Parent
         if (!FORMS.formParent) {
-            FORMS.formParent = new sap.m.Panel("_nepFormParent", {
+            FORMS.formParent = new sap.m.Page("_nepFormParent", {
+                showHeader: false,
+                showSubHeader: false,
+                showFooter: false,
                 // @ts-ignore (ADD #1)
                 backgroundDesign: "Transparent",
-            }).addStyleClass("sapUiNoContentPadding");
+            }).addStyleClass("sapUiNoContentPadding").addStyleClass("nepFullPage");
+            // // PRR #18 Merge KM (commented code)
+            // FORMS.formParent = new sap.m.Panel("_nepFormParent", {
+            //     // @ts-ignore (ADD #1)
+            //     backgroundDesign: "Transparent",
+            // }).addStyleClass("sapUiNoContentPadding");
 
             FORMS.formParent.onAfterRendering = function (oEvent) {
                 FORMS.formTitleHide.forEach(function (fieldID) {
@@ -559,24 +567,18 @@ namespace FORMS {
     export function sortArray (jsonArray, field, numeric = false, sortOrder = "Ascending") {
 
         const sortNumeric = (a,b) => {
-            // @ts-ignore // TODO: remove @ts-ignore
-            const la = parseFloat(sortOrder === "Ascending" ? a[field] : b[field]);
-            // @ts-ignore // TODO: remove @ts-ignore
-            const lb = parseFloat(sortOrder === "Ascending" ? b[field] : a[field]);
+            const la = Number.parseFloat(parseFloat(sortOrder === "Ascending" ? a[field] : b[field]));
+            const lb = Number.parseFloat(parseFloat(sortOrder === "Ascending" ? b[field] : a[field]));
 
-            // @ts-ignore // TODO: remove @ts-ignore
             if (isNaN(la) && isNaN(lb)) {
                 return 0;
             }
-            // @ts-ignore // TODO: remove @ts-ignore
             if (isNaN(la)) {
                 return 1;
             }
-            // @ts-ignore // TODO: remove @ts-ignore
             if (isNaN(lb)) {
                 return -1;
             }
-            // @ts-ignore // TODO: remove @ts-ignore
             return la - lb;
         };
 
@@ -1468,7 +1470,7 @@ namespace FORMS {
     }
 
     export function handleColumnSorting (table, bindingField, sortModelOrder, type?) {
-		// TODO: check the code in KM's counterpart, in case the column sort malfunctions
+		// REVIEW: code in KM's counterpart, in case the column sort malfunctions
         const model = table.getModel();
         model.oData = FORMS.sortArray(model.oData, bindingField, type && type == "Numeric", sortModelOrder ? "Descending" : "Ascending");
         FORMS.tableAddRowNumber(model.oData);
@@ -2886,7 +2888,7 @@ namespace FORMS {
             },
         });
 
-		// TODO: compare code added against commented code (#18 KM)
+		// REVIEW: code added against commented code (#18 KM)
 		// --- code block added due to #18 KM - begin
         // AC: - "Contains" for Single Select Filter
         newField.setFilterFunction(function (sTerm, oItem) {
@@ -4759,7 +4761,103 @@ namespace FORMS {
             }
         }
         return;
-    }
+    };
+
+    export function validateSection (section, process) { // #18 KM - begin of validateSection
+        if (!section) return;
+        var validSection = true;
+        if (section.type === "Table") {
+            const validTable = FORMS.validateTableContentRequired(section, process);
+            if (!validTable) validSection = false;
+        } else {
+            section.elements.forEach(function (element) {
+                // @ts-ignore
+                validSection = FORMS.validateElement(element, process) && validSection;
+
+                if (element.elements) {
+                    element.elements.forEach(function (subElement) {
+                        // @ts-ignore
+                        validSection = FORMS.validateElement(element, process) && validSection;
+                    });
+                }
+            });
+        }
+        return validSection;
+    }; // #18 KM - end of validateSection
+
+    export function validateElement (element, process) { // #18 KM - begin of validateElement
+        var validField = true;
+        const formModel = FORMS.formParent.getModel();
+        const field = sap.ui.getCore().byId("field" + element.id);
+        const bindingField = element.fieldName ? element.fieldName : element.id;
+
+        // Disabled Field
+        if (element.disabled) {
+            return true;
+        }
+
+        // Field not visible -> Do not show value
+        if (!field?.getDomRef()) {
+            delete formModel.oData[bindingField];
+            return true;
+        }
+
+        // If field is required, check value and mark if not valid
+        if (element.required) {
+            validField = formModel.oData[bindingField] ? true : false;
+            FORMS.validateMarkField(element.id, validField, process);
+        }
+
+        // MultipleSelect/MultipleChoice
+        if (formModel.oData[element.id] && element.validationType !== "noLimit" && (element.type === "MultipleChoice" || element.type === "MultipleSelect")) {
+            switch (element.validationType) {
+                case "equalTo":
+                    if (formModel.oData[element.id].length !== parseInt(element.validationParam)) {
+                        FORMS.validateMarkField(element.id, false, process);
+                        validField = false;
+                    }
+                    break;
+
+                case "atMost":
+                    if (formModel.oData[element.id].length > parseInt(element.validationParam)) {
+                        FORMS.validateMarkField(element.id, false, process);
+                        validField = false;
+                    }
+                    break;
+
+                case "atLeast":
+                    if (formModel.oData[element.id].length < parseInt(element.validationParam)) {
+                        FORMS.validateMarkField(element.id, false, process);
+                        validField = false;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        if (element.type === "CheckList") {
+            element.items.forEach(function (item, i) {
+                if (item.required) {
+                    validField = formModel.oData[item.id] ? true : false;
+                    FORMS.validateMarkField(item.id, validField, process);
+                }
+            });
+        }
+
+        // Validate Min / Max limits
+        if (element.enableLimits) {
+            const isBetweenExclusive = function (value, min, max) {
+                return value >= min && value <= max;
+            };
+            validField = isBetweenExclusive(formModel.oData[element.id], element.numericMin, element.numericMax);
+            FORMS.validateMarkField(element.id, validField, process);
+        }
+
+        return validField;
+    }; // #18 KM - end of validateElement
+
 
 };
 

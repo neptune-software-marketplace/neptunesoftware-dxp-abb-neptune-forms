@@ -33,7 +33,7 @@ type TyOldConditionalVisibility = {
     "visibleFieldName": string, // variable's UUID
     "visibleCondition": string, // initially only "===" || "!=="
     "visibleSep"?: string, // "and"|"or"
-    "visibleValue": string|string[] // note: "empty" => "". TODO: replace "empty" with "" in the FORMS code
+    "visibleValue": string|string[] // note: "empty" => "". 
 }
 type TyFormatterParameterConfiguration = {
     fieldId: string,
@@ -252,10 +252,6 @@ class BindingWrapper {
             },
             collectUuidBindingContext: (id:string, includeDisabled = false, includeNoCode = false): TyUuidBindingContext[] => {
                 const reduceElementAndDuplicate = (nodes: TyGenericObject, matchId) => (Array.isArray(nodes)) 
-                    // TODO: remake function
-                    //  - must make sure that only elements imediatelly below the main id are selected, AND they must be connected
-                    //  - it currently just assumes that everything is correct
-                    // TODO: consider grouped duplicates
                     ? nodes.reduce((bag,node)=>(node.id===matchId||node.duplicatedFromId===matchId)
                             ? bag.concat(node).concat(reduceElementAndDuplicate(node.elements, matchId)) 
                             : bag.concat(reduceElementAndDuplicate(node.elements, matchId))
@@ -510,7 +506,7 @@ class BindingWrapper {
                     switch(ui5Type) {
                         case "MultipleSelect":
                         case "MultipleChoice":
-                            // TODO: Re-test conditional visibility here
+                            // REVIEW: Re-test conditional visibility here
                             conditionValues = Array.isArray(condition.visibleValue) ? condition.visibleValue.map(key=>`'${key}'`) : [`'${condition.visibleValue??''}'`];
                             switch(condition.visibleCondition) {
                                 case this.FORMS.CONDITION_OPERATOR.CONTAINS_ALL.key:
@@ -549,7 +545,7 @@ class BindingWrapper {
                         case "SingleSelectIcon":
                         case "SingleSelect":
                         case "SingleChoice":
-                            // TODO: Re-test conditional visibility here
+                            // REVIEW: Re-test conditional visibility here
                             conditionValues = Array.isArray(condition.visibleValue) ? condition.visibleValue.map(key=>`'${key}'`) : [`'${condition.visibleValue??''}'`];
                             switch (condition.visibleCondition) {
                                 case this.FORMS.CONDITION_OPERATOR.CONTAINS_ANY.key:
@@ -593,9 +589,9 @@ class BindingWrapper {
                         case "Numeric":
                         case "Rating":
                         case "StepInput":
-                            // TODO: Re-test conditional visibility here
+                            // REVIEW: Re-test conditional visibility here
                             conditionValues = Array.isArray(condition.visibleValue) // #18 KM
-                                ? condition.visibleValue.map(value=>isNaN(Number.parseFloat(value)) && Number.parseFloat(value) || 0) 
+                                ? condition.visibleValue.map(value=>(!isNaN(Number.parseFloat(value))) && Number.parseFloat(value) || 0) 
                                 : (!isNaN(Number.parseFloat(condition.visibleValue))) && Number.parseFloat(condition.visibleValue) || 0;
                             switch(condition.visibleCondition) {
                                 case this.FORMS.CONDITION_OPERATOR.GREATER_THAN.key:
@@ -812,7 +808,6 @@ class BindingWrapper {
                                     }
                                 }
                                 else {
-                                    // TODO: CheckList... many instead of 1/length
                                     for (let index in uuidMetadata.items) { // #57 #58
                                         attachUi5Watchdog( // #57 #58
                                             `${uuidMetadata.fieldName}_${index}_${uuidMetadata.id}`, 

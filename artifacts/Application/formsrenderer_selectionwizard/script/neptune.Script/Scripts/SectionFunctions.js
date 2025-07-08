@@ -1,19 +1,23 @@
-function performPreviousNext(oSource) {
+const Cfg = { FORMS: {}};
+
+const C_BUTTON_PREVIOUS = 0;
+const C_BUTTON_NEXT = 1;
+function performPreviousNext(who, oSource) {
     var previousEnabled = false;
     var nextEnabled = false;
 
     const currentIndex = selSections.getSelectedIndex();
 
-    const currentSectionValid = FORMS.validateSection(FORMS.config.setup[currentIndex], false);
+    const currentSectionValid = Cfg.FORMS.validateSection(Cfg.FORMS.config.setup[currentIndex], false);
 
     // Validate on Next button when WizardNavigation is true
-    if( oSource == btnNext && !currentSectionValid && modelFormDefinition.getData().WizardNavigation ) {
+    if( (who === C_BUTTON_NEXT) && !currentSectionValid && modelFormDefinition.getData().WizardNavigation ) {
         sap.m.MessageBox.error("Please fix validation errors before continuing.");
         return;
     }
 
-    if( oSource == btnNext ) selSections.setSelectedIndex(currentIndex+1);
-    if( oSource == btnPrevious  ) selSections.setSelectedIndex(currentIndex-1);
+    if( who === C_BUTTON_NEXT ) selSections.setSelectedIndex(currentIndex+1);
+    if( who === C_BUTTON_PREVIOUS  ) selSections.setSelectedIndex(currentIndex-1);
 
     const itemCount = selSections.getItems().length;
     const newIndex = selSections.getSelectedIndex();
@@ -23,8 +27,7 @@ function performPreviousNext(oSource) {
 
     selSections.rerender();
 
-    btnPrevious.setEnabled(previousEnabled);
-    btnNext.setEnabled(nextEnabled);
+    modelCcControl.setData({ previousEnabled, nextEnabled });
 
     scrollToSection(selSections.getSelectedItem().getText(), true);
 }
@@ -66,9 +69,10 @@ function performPreviousNext(oSource) {
 
 function scrollToSection(sectionText, collapseOtherSections) {
     var match = false;
-    var thisView = AppCache.View.KINDERMORGAN_SHELL.sId;
 
-    var scrollContainer = "#" + thisView + "--pageEndScrollContainer";
+    // var thisView = AppCache.View.KINDERMORGAN_SHELL.sId; // PRR #18 Merge KM - commented
+    // var scrollContainer = "#" + thisView + "--pageEndScrollContainer"; // PRR #18 Merge KM - commented
+    var scrollContainer = `#${Cfg.FORMS.scrollParent}`;
 
     for (i = 0; i < document.getElementsByClassName("sapMPanelHdr").length; i++) {
         if (

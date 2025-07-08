@@ -11,17 +11,22 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
             {
                 getData: ()=>{},
                 prepareData: (options, repository) => {
-                    const copyOfFormTop = formTop.clone();
-                    copyOfFormTop.setModel(FORMS.formParent.getModel());
-                    for (let element of FORMS.formParent.getContent()) {
-                        copyOfFormTop.addContent(element);
+                    const copyOfFormTop = formTop.clone(); 
+                    for (let element of copyOfFormTop.getContent()) {
+                        FORMS.formParent.addContent(element);
+                        FORMS.scrollParent = element; // last element is pageEndScrollContainer
                     }
-                    const formContainer = FORMS.formParent.getParent();
-                    formContainer.removeContent(FORMS.formParent);
-                    FORMS.formParent = copyOfFormTop;
-                    formContainer.addContent(FORMS.formParent);
-                    pageEndScrollContainer.destroyContent();
-                    FORMS.scrollParent = pageEndScrollContainer;
+                    // const copyOfFormTop = formTop.clone();
+                    // copyOfFormTop.setModel(FORMS.formParent.getModel());
+                    // for (let element of FORMS.formParent.getContent()) {
+                    //     copyOfFormTop.addContent(element);
+                    // }
+                    // const formContainer = FORMS.formParent.getParent();
+                    // formContainer.removeContent(FORMS.formParent);
+                    // FORMS.formParent = copyOfFormTop;
+                    // formContainer.addContent(FORMS.formParent);
+                    // pageEndScrollContainer.destroyContent();
+                    // FORMS.scrollParent = pageEndScrollContainer;
                 },
                 bundleRenderedData: () => {},
                 applyStyles: (uiElement) => {},
@@ -146,6 +151,10 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                     }
 
                     modelselSections.setData(data);
+                    modelCcControl.setData({
+                        previousEnabled: false,
+                        nextEnabled: config.setup.length>1
+                    });
 
                     return data;
                 }

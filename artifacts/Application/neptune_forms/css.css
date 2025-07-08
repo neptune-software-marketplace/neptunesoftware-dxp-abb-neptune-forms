@@ -179,6 +179,10 @@ segmentedNoDefault .invisibleLi {
     min-width: 6.66%;
 }
 
+// #18 Merge KM
+.nepFullPage {
+    height: 100%!important
+}
 // #54 - Grouped Duplicates CSS - Begin
 %duplicateGroupCss-gridMedia-DeskTopTablet {
     display: flex;

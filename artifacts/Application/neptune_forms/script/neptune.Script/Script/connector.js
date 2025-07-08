@@ -123,7 +123,7 @@ function Connector(id) {
         return await ajax("FieldCatalog", data);
     };
 
-    // TODO - Auto create Table ?
+    // REVIEW - Auto create Table ? <-- TODO left from the original code
 
     this.enablePagination = function (options) {
         this.paginationSetup.enabled = true;
