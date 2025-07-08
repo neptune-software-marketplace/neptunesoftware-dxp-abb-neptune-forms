@@ -4602,6 +4602,13 @@
 																							"value": "100%",
 																							"script": "",
 																							"translation": []
+																						},
+																						{
+																							"attribute": "styleClass",
+																							"grouping": "Properties",
+																							"value": "scrollPreviewFull",
+																							"script": "",
+																							"translation": []
 																						}
 																					],
 																					"data": [
@@ -34762,7 +34769,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.07.2340",
+	"ver": "25.07.08.1506",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

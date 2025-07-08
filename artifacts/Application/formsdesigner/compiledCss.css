@@ -93,10 +93,18 @@
   margin-right: auto;
 }
 
+.scrollPreviewFull .sapMScrollContScroll {
+  height: 100%;
+}
+
 .formPreviewFull {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.formPreviewFull > [id$=content] {
+  height: 100%;
 }
 
 .nepPanContentHeightMinus3Rem > .sapMPanelContent {
