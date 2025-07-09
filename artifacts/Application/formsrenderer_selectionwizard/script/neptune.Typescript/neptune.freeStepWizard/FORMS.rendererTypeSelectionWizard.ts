@@ -139,9 +139,9 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                     if (typeof config.setup == "object") {
                         for (const st of config.setup) {
                             if (st.title) {
-                                data.push({ section: st.title });
+                                data.push({ key: st.key, section: st.title });
                                 if (!i) {
-                                    selSections.setSelectedKey(st.title);
+                                    selSections.setSelectedKey(st.key);
                                     // @ts-ignore
                                     expandFormSection(st.title, true);
                                 }

@@ -290,7 +290,7 @@
 														{
 															"attribute": "key",
 															"grouping": "Properties",
-															"value": "{section}",
+															"value": "{key}",
 															"script": "",
 															"translation": []
 														}
@@ -489,7 +489,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.08.1324",
+	"ver": "25.07.09.1709",
 	"application": "formsrenderer_selectionwizard",
 	"title": "",
 	"description": "",

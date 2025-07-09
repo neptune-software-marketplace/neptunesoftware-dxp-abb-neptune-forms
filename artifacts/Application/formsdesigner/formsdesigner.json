@@ -2328,7 +2328,7 @@
 																		{
 																			"attribute": "text",
 																			"grouping": "Properties",
-																			"value": "Enable Reporting",
+																			"value": "Enable Reporting and Log",
 																			"script": "",
 																			"translation": []
 																		},
@@ -34769,7 +34769,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.08.1506",
+	"ver": "25.07.09.1519",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
