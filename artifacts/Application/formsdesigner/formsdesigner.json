@@ -14394,6 +14394,48 @@
 																															"data": []
 																														},
 																														{
+																															"fieldNo": "7c11942e-b2ae-4b4a-8cd4-e7ac2bc80ff3",
+																															"fieldName": "inElementCalcVisibleCondAdv",
+																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
+																															"fieldType": "sap.m.CheckBox",
+																															"script": "",
+																															"customComponent": false,
+																															"request": [],
+																															"response": [],
+																															"attributes": [
+																																{
+																																	"attribute": "text",
+																																	"grouping": "Properties",
+																																	"value": "Enable Conditional Visibility (Advanced)",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "selected",
+																																	"grouping": "Properties",
+																																	"value": "{/useFormatterConfig/visible}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "editable",
+																																	"grouping": "Properties",
+																																	"value": "{appControl>/enableEdit}",
+																																	"script": "",
+																																	"translation": []
+																																},
+																																{
+																																	"attribute": "select",
+																																	"grouping": "Events",
+																																	"value": "Anonymous Function",
+																																	"script": "file://event/sap.m.CheckBox/inElementCalcVisibleCondAdv/select.ts",
+																																	"language": "typescript",
+																																	"translation": []
+																																}
+																															],
+																															"data": []
+																														},
+																														{
 																															"fieldNo": "6308f2cd-777e-49a6-99a7-966a1c7c38d0",
 																															"fieldName": "inElementCalcEnableLog",
 																															"fieldParent": "d643a2f6-eb30-4ae4-c5f9-4079c15d36a6",
@@ -34769,7 +34811,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.09.1519",
+	"ver": "25.07.10.1605",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",
