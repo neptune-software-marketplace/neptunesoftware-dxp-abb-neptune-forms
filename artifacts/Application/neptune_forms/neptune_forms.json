@@ -95,6 +95,18 @@
 			"fieldNo": 99999,
 			"data": [
 				{
+					"fieldNo": "0643e48c-6697-48f6-fba0-759284a3178e",
+					"fieldName": "DeclareForms",
+					"fieldParent": 99999,
+					"fieldType": "neptune.Typescript",
+					"script": "file://script/neptune.Typescript/DeclareForms.ts",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": []
+				},
+				{
 					"fieldNo": "0cadc807-4a8b-487d-f7f6-b6fb4d10f293",
 					"fieldName": "formsdeclare",
 					"fieldParent": 99999,
@@ -783,7 +795,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "25.07.08.1315",
+	"ver": "25.07.25.1500",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

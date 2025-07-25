@@ -53,13 +53,13 @@ function performPreviousNext(who, oSource) {
     const previousEnabled = newIndex > 0;
     const nextEnabled = newIndex < items.length - 1;
 
-    modelCcControl.setData({
+    modelpnlNavigation.setData({
         previousEnabled,
         nextEnabled,
     });
 
-    console.log("modelCcControl")
-    console.log(modelCcControl)
+    console.log("modelpnlNavigation");
+    console.log(modelpnlNavigation);
 
     // Rerender the dropdown
     selSections.rerender();

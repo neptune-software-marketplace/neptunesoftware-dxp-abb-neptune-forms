@@ -2576,31 +2576,6 @@
 					]
 				},
 				{
-					"fieldNo": "377789ae-64bf-4f9b-9c46-7d6ca576c06a",
-					"fieldName": "Events",
-					"fieldParent": 99999,
-					"fieldType": "neptune.folder",
-					"script": "",
-					"customComponent": false,
-					"request": [],
-					"response": [],
-					"attributes": [],
-					"data": [
-						{
-							"fieldNo": "ebed2438-397c-4565-a39d-426f66383955",
-							"fieldName": "onInit",
-							"fieldParent": "377789ae-64bf-4f9b-9c46-7d6ca576c06a",
-							"fieldType": "neptune.event.oninit",
-							"script": "file://script/neptune.event.oninit/Events/onInit.js",
-							"customComponent": false,
-							"request": [],
-							"response": [],
-							"attributes": [],
-							"data": []
-						}
-					]
-				},
-				{
 					"fieldNo": "fc7ac8d0-3fe8-4c38-95cb-74f5b7708383",
 					"fieldName": "Scripts",
 					"fieldParent": 99999,
@@ -2672,6 +2647,31 @@
 							"data": []
 						}
 					]
+				},
+				{
+					"fieldNo": "377789ae-64bf-4f9b-9c46-7d6ca576c06a",
+					"fieldName": "Events",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "ebed2438-397c-4565-a39d-426f66383955",
+							"fieldName": "onInit",
+							"fieldParent": "377789ae-64bf-4f9b-9c46-7d6ca576c06a",
+							"fieldType": "neptune.event.oninit",
+							"script": "file://script/neptune.event.oninit/Events/onInit.js",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [],
+							"data": []
+						}
+					]
 				}
 			]
 		},
@@ -2684,7 +2684,7 @@
 		"attributes": [],
 		"topLevelObjects": []
 	},
-	"ver": "25.07.10.1606",
+	"ver": "25.07.25.1729",
 	"application": "neptune_formsadditionalelements",
 	"title": "",
 	"description": "",

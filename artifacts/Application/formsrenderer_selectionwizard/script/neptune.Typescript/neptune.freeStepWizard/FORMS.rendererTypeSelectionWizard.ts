@@ -151,7 +151,7 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                     }
 
                     modelselSections.setData(data);
-                    modelCcControl.setData({
+                    modelpnlNavigation.setData({
                         previousEnabled: false,
                         nextEnabled: config.setup.length>1
                     });

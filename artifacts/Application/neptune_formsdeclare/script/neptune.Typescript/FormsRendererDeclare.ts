@@ -71,4 +71,8 @@ class FormRenderer {
 type TyGrowableConstant<T> = {
     [k:string]: T
 }
+namespace FORMS { // KM #18 - FIX - Cannot access 'FORMS' before initialization - begin
+    export const FORMS_DECLARE_COMPONENT = true;
+    // Added by forms declare
+}; // KM #18 - FIX - Cannot access 'FORMS' before initialization - end
 // ADD end

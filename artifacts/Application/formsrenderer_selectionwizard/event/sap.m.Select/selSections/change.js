@@ -36,14 +36,14 @@ if (selectedIndex >= 0) {
     console.log("Previous enabled:", previousEnabled);
     console.log("Next enabled:", nextEnabled);
 
-    if (modelCcControl) {
-        modelCcControl.setData({
+    if (modelpnlNavigation) {
+        modelpnlNavigation.setData({
             previousEnabled,
             nextEnabled,
         });
-        console.log("modelCcControl data after update:", modelCcControl.getData());
+        console.log("modelpnlNavigation data after update:", modelpnlNavigation.getData());
     } else {
-        console.error("modelCcControl is not defined");
+        console.error("modelpnlNavigation is not defined");
     }
 }
 

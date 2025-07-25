@@ -80,52 +80,6 @@
 					]
 				},
 				{
-					"fieldNo": "436aec7b-8d8d-4f77-e255-395ad5990b30",
-					"fieldName": "Model",
-					"fieldParent": 99999,
-					"fieldType": "neptune.folder",
-					"script": "",
-					"customComponent": false,
-					"request": [],
-					"response": [],
-					"attributes": [],
-					"data": [
-						{
-							"fieldNo": "2be58fd5-2709-4d4b-dbdf-8979f46c2fa5",
-							"fieldName": "CcControl",
-							"fieldParent": "436aec7b-8d8d-4f77-e255-395ad5990b30",
-							"fieldType": "neptune.model",
-							"script": "",
-							"customComponent": false,
-							"bindingValue": "Generic Array",
-							"bindingType": "h",
-							"bindingSource": "P9",
-							"dataModel": [
-								{
-									"id": "8c456e37-7067-45a3-d018-4aa4cc42c6b6",
-									"parent": "",
-									"name": "previousEnabled",
-									"objectType": "boolean",
-									"description": "",
-									"isParent": false
-								},
-								{
-									"id": "1c8ffd9c-56f8-4f13-c4f0-a576ae9cabf8",
-									"parent": "",
-									"name": "nextEnabled",
-									"objectType": "string",
-									"description": "",
-									"isParent": false
-								}
-							],
-							"request": [],
-							"response": [],
-							"attributes": [],
-							"data": []
-						}
-					]
-				},
-				{
 					"fieldNo": "6318fdfe-755a-4ee4-80a7-76e5815cffc8",
 					"fieldName": "UI",
 					"fieldParent": 99999,
@@ -186,6 +140,9 @@
 									"fieldType": "sap.m.Panel",
 									"script": "",
 									"customComponent": false,
+									"bindingValue": "Generic Object",
+									"bindingType": "u",
+									"bindingSource": "P9",
 									"request": [],
 									"response": [],
 									"attributes": [
@@ -219,7 +176,7 @@
 												{
 													"attribute": "enabled",
 													"grouping": "Properties",
-													"value": "{CcControl>/previousEnabled}",
+													"value": "{/previousEnabled}",
 													"script": "",
 													"translation": []
 												},
@@ -320,7 +277,7 @@
 												{
 													"attribute": "enabled",
 													"grouping": "Properties",
-													"value": "{CcControl>/nextEnabled}",
+													"value": "{/nextEnabled}",
 													"script": "",
 													"translation": []
 												},
@@ -489,7 +446,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.09.1709",
+	"ver": "25.07.25.1820",
 	"application": "formsrenderer_selectionwizard",
 	"title": "",
 	"description": "",

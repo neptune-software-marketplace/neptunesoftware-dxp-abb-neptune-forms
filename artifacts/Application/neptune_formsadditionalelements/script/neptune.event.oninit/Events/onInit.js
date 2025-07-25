@@ -1,24 +1,44 @@
-if (typeof controller !== "undefined" || typeof FORMS !== "undefined") {
 
-// Some UI elements need the binding path to be reset
-    if (typeof controller !== "undefined") {
-        customFORMS.resetBindingPath();
+(function (inheritedThis, startParams) {
+    const data = {};
+    debounceInit();
 
-        customPanel.getContent().forEach((item) => {
-            panElements.addContent(item);
-        });
+    function debounceInit() {
+        if (data.handle) {
+            clearTimeout(data.handle);
+            delete data.handle
+        }
+        data.handle = setTimeout(doInit, 125);
+    };
+
+    function doInit() {
+        try {
+            if (typeof controller !== "undefined" || typeof FORMS !== "undefined") {
+
+            // Some UI elements need the binding path to be reset
+                if (typeof controller !== "undefined") {
+                    customFORMS.resetBindingPath();
+
+                    customPanel.getContent().forEach((item) => {
+                        panElements.addContent(item);
+                    });
+                }
+
+                customFORMS.elementTypes.forEach((item) => {
+                    FORMS.elementTypes.push(item);
+                    // controller.elementTypes.push(item);
+                });
+                
+                if (typeof controller !== "undefined") {
+                    // console.log(">> additional elements: ", controller.elementTypes);
+                    controller.init();
+                }
+
+            }
+        } catch (e) {
+            console.warn(e);
+            debounceInit();
+        }
     }
-
-    customFORMS.elementTypes.forEach((item) => {
-        FORMS.elementTypes.push(item);
-        // controller.elementTypes.push(item);
-    });
-    
-    if (typeof controller !== "undefined") {
-        // console.log(">> additional elements: ", controller.elementTypes);
-        controller.init();
-    }
-
-}
-
+})(this, data);
 
