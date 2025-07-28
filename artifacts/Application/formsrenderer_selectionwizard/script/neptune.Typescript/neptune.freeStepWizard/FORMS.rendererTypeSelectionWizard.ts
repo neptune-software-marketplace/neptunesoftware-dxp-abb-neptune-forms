@@ -3,15 +3,15 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
     // @ts-ignore
     FORMS.Renderer.subscribe(
         new FormRenderer(
-            FORMS.NAMESPACE.NEPTUNE, 
-            FORMS.RENDERER.SELECT_WIZARD, 
+            FORMS.NAMESPACE.NEPTUNE,
+            FORMS.RENDERER.SELECT_WIZARD,
             rendererInfo,
             i18nLabel.getText(),
-            i18nDescription.getText(), 
+            i18nDescription.getText(),
             {
-                getData: ()=>{},
+                getData: () => {},
                 prepareData: (options, repository) => {
-                    const copyOfFormTop = formTop.clone(); 
+                    const copyOfFormTop = formTop.clone();
                     for (let element of copyOfFormTop.getContent()) {
                         FORMS.formParent.addContent(element);
                         FORMS.scrollParent = element; // last element is pageEndScrollContainer
@@ -32,14 +32,17 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                 applyStyles: (uiElement) => {},
                 clearStyles: (uiElement) => {},
                 buildObjectsAndEvents: (parent, options, repository) => {},
-                getMatchingData: () => {return {
-                    displayType: FORMS.RENDERER.SELECT_WIZARD,
-                    nameSpace: FORMS.NAMESPACE.NEPTUNE
-                };},
+                getMatchingData: () => {
+                    return {
+                        displayType: FORMS.RENDERER.SELECT_WIZARD,
+                        nameSpace: FORMS.NAMESPACE.NEPTUNE,
+                    };
+                },
                 foundMatchingData: (options: any, renderer: FormRenderer) => {
-                    return ((options.renderer?.displayType === renderer.displayType) 
-                            && 
-                            ((options.renderer?.nameSpace ?? renderer.nameSpace) === renderer.nameSpace));
+                    return (
+                        options.renderer?.displayType === renderer.displayType &&
+                        (options.renderer?.nameSpace ?? renderer.nameSpace) === renderer.nameSpace
+                    );
                 },
                 processSection: (section, index, repository, selectedRenderer) => {
                     if (!section) return;
@@ -60,8 +63,6 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
 
                     // Elements
                     section.elements.forEach(function (element, i) {
-                    
-
                         FORMS.buildElement(sectionParent, element, section, i);
 
                         if (element.elements) {
@@ -83,7 +84,11 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                             sectionParent.setModel(tabModel);
 
                             const bindingField = section.fieldName ? section.fieldName : section.id;
-                            if (options.data && options.data[bindingField] && options.data[bindingField].length) {
+                            if (
+                                options.data &&
+                                options.data[bindingField] &&
+                                options.data[bindingField].length
+                            ) {
                                 // KW addition (add init. sort value) // 28.11.2023
                                 var i: any = 0;
                                 for (const bv of options.data[bindingField]) {
@@ -118,7 +123,11 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                                 tabModel.setData(modelData);
                             }
 
-                            sectionParent.bindAggregation("items", { path: "/", template: FORMS.columnTemplate, templateShareable: false });
+                            sectionParent.bindAggregation("items", {
+                                path: "/",
+                                template: FORMS.columnTemplate,
+                                templateShareable: false,
+                            });
                             // AR Table post processing // #18 KM
                             FORMS.tablePostProcessing(section, 0, section.rows); // #18 KM
                             break;
@@ -127,7 +136,7 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                 executeFirstRendering: function () {
                     const options = FORMS.getData();
                     this.populateSections(options.config);
-                }, 
+                },
                 applyValidationStyle: () => {},
                 /*
                     INSERT AUXILIARY METHODS BELOW
@@ -144,6 +153,8 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                                     selSections.setSelectedKey(st.key);
                                     // @ts-ignore
                                     expandFormSection(st.title, true);
+                                    // @ts-ignore
+                                    currentSectionIndex = 0;
                                 }
                             }
                             ++i;
@@ -153,11 +164,11 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                     modelselSections.setData(data);
                     modelpnlNavigation.setData({
                         previousEnabled: false,
-                        nextEnabled: config.setup.length>1
+                        nextEnabled: config.setup.length > 1,
                     });
 
                     return data;
-                }
+                },
             }
         )
     );

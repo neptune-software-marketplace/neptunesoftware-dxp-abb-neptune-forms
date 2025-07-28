@@ -4,69 +4,47 @@ const C_BUTTON_PREVIOUS = 0;
 const C_BUTTON_NEXT = 1;
 
 function performPreviousNext(who, oSource) {
-    const items = selSections.getItems();
+    var previousEnabled = false;
+    var nextEnabled = false;
 
-    // Get current index from the dropdown's selected index (not key)
-    const currentIndex = selSections.getSelectedIndex();
+    // USE THE SHARED VARIABLE instead of selSections.getSelectedIndex()
+    const currentIndex = currentSectionIndex;
 
-    // Validate that currentIndex is valid
-    if (currentIndex < 0 || currentIndex >= items.length) {
-        console.error("Invalid current index:", currentIndex);
-        return;
-    }
+    const currentSectionValid = Cfg.FORMS.validateSection(Cfg.FORMS.config.setup[currentIndex], false);
 
-    // Validate current section using the correct index
-    const currentSectionValid = Cfg.FORMS.validateSection(
-        Cfg.FORMS.config.setup[currentIndex],
-        false
-    );
-
-    // Check validation on Next button when WizardNavigation is true
-    if (
-        who === C_BUTTON_NEXT &&
-        !currentSectionValid &&
-        modelFormDefinition.getData().WizardNavigation
-    ) {
+    // Validate on Next button when WizardNavigation is true
+    if( (who === C_BUTTON_NEXT) && !currentSectionValid && modelFormDefinition.getData().WizardNavigation ) {
         sap.m.MessageBox.error("Please fix validation errors before continuing.");
         return;
     }
 
-    // Calculate new index
-    let newIndex = currentIndex;
+    const allItems = selSections.getItems();
 
-    if (who === C_BUTTON_NEXT && currentIndex < items.length - 1) {
-        newIndex = currentIndex + 1;
-    } else if (who === C_BUTTON_PREVIOUS && currentIndex > 0) {
-        newIndex = currentIndex - 1;
+    // Calculate new index and update shared variable
+    if (who === C_BUTTON_NEXT && currentIndex < allItems.length - 1) {
+        currentSectionIndex = currentIndex + 1;
+    }
+    if (who === C_BUTTON_PREVIOUS && currentIndex > 0) {
+        currentSectionIndex = currentIndex - 1;
     }
 
-    // If no change needed, return early
-    if (newIndex === currentIndex) {
-        return;
-    }
 
-    // Update the dropdown selection using index (not key)
-    selSections.setSelectedIndex(newIndex);
-    selSections.fireChange({ selectedItem: selSections.getItems()[newIndex] });
+    // Update the dropdown to match
+    selSections.setSelectedIndex(currentSectionIndex);
 
-    // Update button states
-    const previousEnabled = newIndex > 0;
-    const nextEnabled = newIndex < items.length - 1;
+    // Calculate button states using shared variable
+    const previousEnabledCalc = currentSectionIndex > 0;
+    const nextEnabledCalc = currentSectionIndex < allItems.length - 1;
 
-    modelpnlNavigation.setData({
-        previousEnabled,
-        nextEnabled,
-    });
-
-    console.log("modelpnlNavigation");
-    console.log(modelpnlNavigation);
-
-    // Rerender the dropdown
     selSections.rerender();
 
-    // Scroll to the new section
-    const sectionText = items[newIndex].getText();
-    scrollToSection(sectionText, true, newIndex);
+    // Update navigation model
+    modelpnlNavigation.setData({ 
+        previousEnabled: previousEnabledCalc, 
+        nextEnabled: nextEnabledCalc 
+    });
+
+    scrollToSection(selSections.getSelectedItem().getText(), true, currentSectionIndex);
 }
 
 function scrollToSection(sectionText, collapseOtherSections, targetIndex = 0) {
@@ -119,9 +97,9 @@ function scrollToSection(sectionText, collapseOtherSections, targetIndex = 0) {
 
             if (typeof seamless !== "undefined" && seamless.scrollIntoView) {
                 seamless.scrollIntoView(scrollTo, {
-                    behavior: "smooth",
-                    block: "center",
-                    inline: "center",
+                    behavior: "auto",  // Changed from "smooth" to "auto" for instant scroll
+                    block: "start",    // Changed from "center" to "start"
+                    inline: "start",   // Changed from "center" to "start"
                 });
             } else {
                 scrollTo.scrollIntoView(true);
@@ -134,39 +112,34 @@ function scrollToSection(sectionText, collapseOtherSections, targetIndex = 0) {
     expandFormSection(sectionText, collapseOtherSections, targetIndex);
 }
 
-function expandFormSection(headerText, collapseOthers, targetIndex = -1) {
-    const sections = pageEndScrollContainer.getContent();
-
+function expandFormSection(headerText, collapseOthers, targetIndex = -1) {    
+    // Use FORMS.scrollParent instead of pageEndScrollContainer
+    const sections = Cfg.FORMS.scrollParent.getContent();
+    
     for (let i = 0; i < sections.length; i++) {
         let sectionText = sections[i].getHeaderText();
-
-        // Handle sections with toolbar titles
-        if (
-            sectionText === "" &&
-            sections[i].getHeaderToolbar() &&
-            sections[i].getHeaderToolbar().getTitleControl()
-        ) {
+        
+        // For Tables
+        if (sectionText === "" && 
+            sections[i].getHeaderToolbar() && 
+            sections[i].getHeaderToolbar().getTitleControl()) {
             sectionText = sections[i].getHeaderToolbar().getTitleControl().getText();
         }
-
-        // If we have a specific target index, use it
-        if (targetIndex >= 0) {
-            if (i === targetIndex) {
-                sections[i].setVisible(true);
-                sections[i].setExpanded(true);
-            } else if (collapseOthers) {
-                sections[i].setExpanded(false);
+        
+        if (sectionText === headerText) {
+            // If we have a specific target index, only expand that one
+            if (targetIndex >= 0 && i !== targetIndex) {
+                continue;
             }
-        } else {
-            // Original logic for text-based matching
-            if (sectionText !== headerText && collapseOthers) {
-                sections[i].setExpanded(false);
-            }
-
-            if (sectionText === headerText) {
-                sections[i].setVisible(true);
-                sections[i].setExpanded(true);
-            }
+            
+            // Make visible and expand the target section
+            sections[i].setVisible(true);
+            sections[i].setExpanded(true);
+        } else if (collapseOthers) {
+            // Collapse other sections
+            sections[i].setExpanded(false);
         }
     }
 }
+
+

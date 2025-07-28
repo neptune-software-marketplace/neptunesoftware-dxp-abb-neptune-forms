@@ -6,7 +6,6 @@
 
 console.log("Dropdown change event fired");
 
-// Use the parameter from the event instead of this.getSelectedIndex()
 const selectedItem = oEvent.getParameter("selectedItem");
 const allItems = this.getItems();
 
@@ -20,15 +19,12 @@ for (let i = 0; i < allItems.length; i++) {
 }
 
 console.log("Selected index from drop down:", selectedIndex);
+
+// UPDATE THE SHARED VARIABLE
+currentSectionIndex = selectedIndex;
+
 console.log("Total items:", allItems.length);
 
-// ADD THESE DEBUG LOGS:
-console.log("selectedIndex > 0:", selectedIndex > 0);
-console.log("selectedIndex < allItems.length - 1:", selectedIndex < (allItems.length - 1));
-console.log("allItems.length - 1 =", allItems.length - 1);
-
-// Only update button states if this was a manual selection (not from button press)
-// We can detect this by checking if the event has the right parameters
 if (selectedIndex >= 0) {
     const previousEnabled = selectedIndex > 0;
     const nextEnabled = selectedIndex < allItems.length - 1;
@@ -47,5 +43,4 @@ if (selectedIndex >= 0) {
     }
 }
 
-// scrollToSection(this.getSelectedItem().getText(), true);
 scrollToSection(selectedItem.getText(), true, selectedIndex);
