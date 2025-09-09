@@ -253,8 +253,19 @@ const report = {
             }
 
             // Date Format
+            // if (["DatePicker", "DateTimePicker"].includes(type)) {
+            //     if (data[name]) data[name] = sap.n.Adaptive.getDate(data[name]);
+            // }
+
             if (["DatePicker", "DateTimePicker"].includes(type)) {
-                if (data[name]) data[name] = sap.n.Adaptive.getDate(data[name]);
+                if (data[name]) {
+                    // Handle both timestamp (number) and other date formats
+                    if (typeof data[name] === "number") {
+                        data[name] = new Date(data[name]);
+                    } else {
+                        data[name] = sap.n.Adaptive.getDate(data[name]);
+                    }
+                }
             }
 
             // MultiSelect Parser
@@ -354,6 +365,17 @@ const report = {
         modelAppData.refresh();
 
         oApp.setBusy(false);
+
+        if (!report._afterRunSecondCall) {
+            report._afterRunSecondCall = true;
+            setTimeout(function () {
+                console.log("Forcing second afterRun call");
+                report.afterRun(data);
+            }, 50);
+        } else {
+            // Reset flag for next form
+            report._afterRunSecondCall = false;
+        }
     },
 
     save: function (complete) {
@@ -370,7 +392,14 @@ const report = {
                 if (!modelAppData.oData[f.name]) modelAppData.oData[f.name] = false;
             }
 
-            saveData[f.name] = modelAppData.oData[f.name];
+            if (["DatePicker", "DateTimePicker"].includes(f.type) && modelAppData.oData[f.name]) {
+                const dateValue = new Date(modelAppData.oData[f.name]);
+                if (!isNaN(dateValue)) {
+                    saveData[f.name] = dateValue.getTime();
+                }
+            } else {
+                saveData[f.name] = modelAppData.oData[f.name];
+            }
         });
 
         // Form Validation

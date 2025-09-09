@@ -62,7 +62,7 @@ function Connector(id) {
         if (this.paginationSetup.enabled) {
             paginationHandle(response, this.paginationSetup);
         }
-        
+
         return response;
     };
 

@@ -207,7 +207,7 @@ namespace FORMS {
         // This prevents lingering CSS while switching between renderers
         FORMS.Renderer.clearAllStyles(FORMS.customerParent);
         // Determines which renderer to use
-        FORMS.Renderer.determineRenderer(options);
+        FORMS.Renderer.determineRenderer(formOptions);
         // Renderer Framework - }
 
         if (!formOptions.config) {
@@ -217,9 +217,11 @@ namespace FORMS {
             Promise.all(actions).then(function (values) {
                 formOptions.config = values[0];
                 FORMS.buildForm(parent, formOptions);
+                FORMS.Renderer.determineRenderer(formOptions);
             });
         } else {
             FORMS.buildForm(parent, formOptions);
+            FORMS.Renderer.determineRenderer(formOptions);
         }
     }
 
