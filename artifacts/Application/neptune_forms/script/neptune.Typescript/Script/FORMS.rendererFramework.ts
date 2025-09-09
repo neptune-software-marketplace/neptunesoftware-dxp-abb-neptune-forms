@@ -110,10 +110,9 @@ namespace FORMS {
             let resolvedOptions: any;
 
             if (typeof options === "string") {
-                console.warn("determineRenderer received formId instead of options object:", options);
                 resolvedOptions = {
                     formId: options,
-                    config: { setup: [] }, // safe default
+                    config: { setup: [] }, 
                     data: {},
                 };
             }
@@ -125,7 +124,6 @@ namespace FORMS {
                 };
             }
             else {
-                console.error("determineRenderer received invalid options:", options);
                 resolvedOptions = { config: { setup: [] }, data: {} };
             }
 

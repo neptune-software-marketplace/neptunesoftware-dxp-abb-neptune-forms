@@ -369,7 +369,6 @@ const report = {
         if (!report._afterRunSecondCall) {
             report._afterRunSecondCall = true;
             setTimeout(function () {
-                console.log("Forcing second afterRun call");
                 report.afterRun(data);
             }, 50);
         } else {
