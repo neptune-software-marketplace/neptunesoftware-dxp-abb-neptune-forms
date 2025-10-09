@@ -1,0 +1,30 @@
+var deleteItem = oEvent.getParameter("listItem");
+var context = deleteItem.getBindingContext();
+var file = context.getObject();
+
+sap.m.MessageBox.show('Do you want to delete this file ? ', {
+    title: 'Delete',
+    icon: sap.m.MessageBox.Icon.ERROR,
+    actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.CANCEL],
+    onClose: function (oAction) {
+
+        if (oAction === 'YES') {
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/api/functions/Gos/Delete",
+                data: JSON.stringify(file),
+                success: function (data) {
+                    ModelData.Delete(tabAttachment, "id", file.id);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+
+        }
+
+    }
+});
+

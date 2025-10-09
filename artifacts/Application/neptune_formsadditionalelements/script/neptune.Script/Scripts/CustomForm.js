@@ -1,13 +1,15 @@
 const customFORMS = {
     elementTypes: [
+        // #70 - 2.1. - Begin
         {
             icon: "sap-icon://project-definition-triangle",
             text: "Crossing Angle Calculator",
             type: "AngleCalc",
             parent: false,
             table: true,
-            parameter: false, // value can't be used for conditional visibility
-            paramType: '',
+            parameter: true, // value can be used for conditional visibility
+            // parameter: false, // value can't be used for conditional visibility
+            paramType: 'number',
         },
         {
             icon: "sap-icon://collapse-group",
@@ -15,8 +17,9 @@ const customFORMS = {
             type: "CascSelect",
             parent: false,
             table: true,
-            parameter: false, // value can't be used for conditional visibility
-            paramType: '',
+            parameter: true, // value can be used for conditional visibility
+            // parameter: false, // value can't be used for conditional visibility
+            paramType: 'string',
         },
         {
             icon: "sap-icon://information",
@@ -24,18 +27,21 @@ const customFORMS = {
             type: "Information",
             parent: false,
             table: true,
-            parameter: false, // value can't be used for conditional visibility
-            paramType: '',
+            parameter: true, // value can be used for conditional visibility
+            // parameter: false, // value can't be used for conditional visibility
+            paramType: 'string',
         },
-        {
-            icon: "sap-icon://locked",
-            text: "Non-Editable Input",
-            type: "NonEditInp",
-            parent: false,
-            table: true,
-            parameter: false, // value can't be used for conditional visibility
-            paramType: '',
-        }
+        //       This was commented because it was a test done by KM. It was not an official Neptune change
+        // {
+        //     icon: "sap-icon://locked",
+        //     text: "Non-Editable Input",
+        //     type: "NonEditInp",
+        //     parent: false,
+        //     table: true,
+        //     parameter: false, // value can't be used for conditional visibility
+        //     paramType: '',
+        // }
+        // #70 - 2.1. - End
     ],
 
     initialData: {},

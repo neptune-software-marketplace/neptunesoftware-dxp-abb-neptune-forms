@@ -31,7 +31,7 @@ function performPreviousNext(who, oSource) {
 
     // Update the dropdown to match
     selSections.setSelectedIndex(currentSectionIndex);
-
+    
     // Calculate button states using shared variable
     const previousEnabledCalc = currentSectionIndex > 0;
     const nextEnabledCalc = currentSectionIndex < allItems.length - 1;
@@ -41,7 +41,8 @@ function performPreviousNext(who, oSource) {
     // Update navigation model
     modelpnlNavigation.setData({ 
         previousEnabled: previousEnabledCalc, 
-        nextEnabled: nextEnabledCalc 
+        nextEnabled: nextEnabledCalc,
+        selectedKey: selSections.getItems()[currentSectionIndex].getKey()
     });
 
     scrollToSection(selSections.getSelectedItem().getText(), true, currentSectionIndex);

@@ -13250,6 +13250,7 @@
 																											"fieldName": "elementSettingsSingleSelect",
 																											"fieldParent": "b5680927-eb06-4f8e-8f0a-d6bb8e27eb3e",
 																											"fieldType": "sap.ui.layout.form.SimpleForm",
+																											"description": "// #70 1.5.2.",
 																											"script": "",
 																											"customComponent": false,
 																											"request": [],
@@ -13258,7 +13259,7 @@
 																												{
 																													"attribute": "visible",
 																													"grouping": "Properties",
-																													"value": "{= ${/type} === 'SingleSelect' || ${/type} === 'SingleChoice' ? true:false }",
+																													"value": "{= ${/type} === 'SingleSelect' || ${/type} === 'SingleSelectIcon' || ${/type} === 'SingleChoice' ? true:false }",
 																													"script": "",
 																													"translation": []
 																												},
@@ -30930,6 +30931,39 @@
 			"fieldNo": 99999,
 			"data": [
 				{
+					"fieldNo": "2ff98a1a-964c-4e65-addb-6ec6c7155fb1",
+					"fieldName": "Translations",
+					"fieldParent": 99999,
+					"fieldType": "neptune.folder",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": [
+						{
+							"fieldNo": "cad73c0c-fcb5-4b75-fcab-79e886e12def",
+							"fieldName": "i18nCv_NoCondElementFound",
+							"fieldParent": "2ff98a1a-964c-4e65-addb-6ec6c7155fb1",
+							"fieldType": "sap.m.Text",
+							"script": "",
+							"customComponent": false,
+							"request": [],
+							"response": [],
+							"attributes": [
+								{
+									"attribute": "text",
+									"grouping": "Properties",
+									"value": "The element of this condition was not found!",
+									"script": "",
+									"translation": []
+								}
+							],
+							"data": []
+						}
+					]
+				},
+				{
 					"fieldNo": "c57c9805-784c-4f2d-9aea-70dee241ef14",
 					"fieldName": "Data",
 					"fieldParent": 99999,
@@ -34811,7 +34845,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.10.1605",
+	"ver": "25.09.29.1211",
 	"application": "formsdesigner",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

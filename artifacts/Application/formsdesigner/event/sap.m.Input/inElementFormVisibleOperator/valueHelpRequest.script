@@ -6,6 +6,13 @@ const oper = [];
 // Get VisibleField
 const visibleField = controller.getObjectFromId(currentObject.visibleFieldName);
 
+// If the element is not valid then aborts
+// #70 - 1.5.3. - Begin
+if (!visibleField) {
+    sap.m.MessageToast.show(i18nCv_NoCondElementFound.getText());
+    return;
+}
+// #70 - 1.5.3. - End
 // Visibility
 switch (visibleField.type) {
     case "MultipleChoice":
@@ -52,6 +59,8 @@ switch (visibleField.type) {
     case "Numeric":
     case "Rating":
     case "StepInput":
+    case "Calc": // #70 - 2.2.
+    case "AngleCalc": // #70 - 2.2.
         [
             FORMS.CONDITION_OPERATOR.GREATER_THAN,
             FORMS.CONDITION_OPERATOR.GREATER_OR_EQUAL,

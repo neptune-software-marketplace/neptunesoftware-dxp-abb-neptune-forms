@@ -18,6 +18,7 @@
  *        same after the first compilation.
  */
 let loData = req.query;
+const _acquiredElements = new Map(); // #70 2.5.
 
 // PRR - forms/#20 - role access to forms (ADD - Begin) 
 let {gatherRoleIds, getAuthorizedDataWithFormData} = globals.FormsAuthorizationGlobal; 
@@ -26,7 +27,7 @@ const userRoleIds = await gatherRoleIds(req?.user?.id);
 
 /** / // <- Join "* /" together to enable the test data
 // loData = {retrieve_all: true}; // All
-loData = {id_form:"b7d4120a-c9d1-4206-bd05-702673284fed", retrieve_all: true}; // Compounded
+loData = {id_form:"b6eaa1af-29c6-4e0a-bbaa-d41f83373d70", retrieve_all: true}; // Compounded
 // loData = {id_form:"7ac89f1e-a847-4a78-8237-76c38a79ce04", retrieve_all: true}; // Compounded
 // loData = {id_form:"F41E49CF-CF5E-EF11-991A-000D3AB5734C", retrieve_all: true}; // Compounded
 /**/
@@ -91,6 +92,8 @@ for (let index = loChecklistCompounded.length-1; index >= 0; index--) {
 if (Array.isArray(loChecklistCompounded) && loChecklistCompounded.length) {
 
     for (let loCompoundedForm of loChecklistCompounded) {
+        /* FOR EACH COMPOUNDED FORM FOUND ... */
+
         // Acquires the source forms
         let loFormIds = (typeof loCompoundedForm.setup === "object") 
                             ? loCompoundedForm.setup.forms
@@ -116,8 +119,10 @@ if (Array.isArray(loChecklistCompounded) && loChecklistCompounded.length) {
         if (typeof loCompoundedForm.config !== "object") {
             loCompoundedForm.config = JSON.parse(loCompoundedForm.config);
         }
-        loCompoundedForm.config.wizardPagination = [];
+        loCompoundedForm.config.wizardPagination = []; // legacy
         loCompoundedForm.config.renderers = {};
+        const loUuidMaps = loCompoundedForm.config.idMapPool = {_deleted:[]}; // #70 2.5.
+        loCompoundedForm.config.tempSingleForms = [];
         for (let loSingleForm of loReducedOrderedForms) {
             // Get the config for this single form
             let loSFConfig = loCompoundedForm.config;
@@ -125,9 +130,10 @@ if (Array.isArray(loChecklistCompounded) && loChecklistCompounded.length) {
                 // Makes sure that if it is indeed an object. If it is, copy it so it does not affect the source
                 loSFConfig = (!Array.isArray(loSFConfig) && typeof loSFConfig === "object") ? JSON.parse(JSON.stringify(loSFConfig)) : {};
                 loSFConfig.sfId = loSingleForm.id; // Keeps the single form ID in the configuration
-           
-            const loUuidMaps = {_deleted:[]};
+                loSFConfig.cfId = loCompoundedForm.id; // Keeps the compounded form ID in the configuration
             let loTempSetup = (typeof loSingleForm.setup === "string") ? JSON.parse(loSingleForm.setup) : loSingleForm.setup;
+                // the function fnGetElement requires this information // #70 2.5.
+                loCompoundedForm.config.tempSingleForms.push({id: loSFConfig.sfId, setup: loTempSetup}) // #70 2.5.
                 loTempSetup = fnTraverseArray( loTempSetup, loSFConfig, loCompoundedForm.config, loUuidMaps ); // loCompoundedForm.config.wizardPagination );
                 // #48 - The advanced visibility condition needs a new loop to remove invalid references, since
                 //       all parameters can come from any point of the configured elements
@@ -138,6 +144,7 @@ if (Array.isArray(loChecklistCompounded) && loChecklistCompounded.length) {
             }
         }
         loCompoundedForm.setup = JSON.stringify(loCompoundedForm.setup);
+        delete loCompoundedForm.config.tempSingleForms;
     }
 }
 
@@ -147,6 +154,30 @@ complete();
 // ---------------------- FUNCTIONS ---------------------- //
 // ---------------------- FUNCTIONS ---------------------- //
 // ---------------------- FUNCTIONS ---------------------- //
+
+function fnGetElement(poId, poConfig) { // #70 2.5. - Begin
+    // Finds an element.
+    // The first time, it traverses the whole config to find it, and saves it in a map
+    // Next times, it gets it from the map. It may occur twice, as it may look for the composite id
+    function _findElement(poId, poElements) {
+        for (let element of poElements) { 
+            if (element.id === poId) { return element; }
+            if (Array.isArray(element.elements) && element.elements.length) {
+                const foundSubElement = _findElement(poId, element.elements);
+                if (foundSubElement) { return foundSubElement; }
+            }
+        }
+    }
+    loChecklistCompounded;
+    const loCompoundedForm = loChecklistCompounded.find(cf => cf.id === poConfig.cfId);
+    if (!loCompoundedForm) { return; } 
+    const singleForm = loCompoundedForm.config.tempSingleForms.find(sf => sf.id === poConfig.sfId);
+    if (!singleForm) { return; }
+    if (!_acquiredElements.get(poId)) {
+        _acquiredElements.set(poId, _findElement(poId, singleForm.setup));
+    }
+    return _acquiredElements.get(poId);
+} // #70 2.5. - End ( fnGetElement )
 
 function fnTraverseArrayForFormatterEngine(poArrayElements, poConfig, poCompoundedConfig, poUuidMaps) { // #48
     function _applyNewIdsToFormatterEngine(arrayElement, poUuidMaps) {
@@ -158,15 +189,46 @@ function fnTraverseArrayForFormatterEngine(poArrayElements, poConfig, poCompound
     _applyNewIdsToFormatterEngine(poArrayElements, poUuidMaps);
     return poArrayElements;
 }
+function fnBuildCompositeIdForFomatterEngine_OldCondition(condition, element, poConfig, poUuidMaps) { // #70 2.5. - Begin
+    let compositeId;
+    const originalId = condition.visibleFieldName;
+    if (isValidUuid(condition.visibleFieldName)) {
+        condition.visibleFieldName = compositeId = `${poConfig.sfId}|${condition.visibleFieldName}`;
+        if (!poUuidMaps[condition.visibleFieldName]) {poUuidMaps[condition.visibleFieldName] = fnGenerateUuid();}
+    }
+    // Handles specific cases for different elements 
+    let referredElement; // may look for both as the compositeId of the mentioned element may not exist yet
+    if (compositeId) { referredElement= fnGetElement(compositeId, poConfig) };
+    if (!referredElement) { referredElement= fnGetElement(originalId, poConfig) };
+
+    switch (referredElement?.type) {
+        case "CheckList":
+            if (Array.isArray(condition.visibleValue)) {
+                for (let index in condition.visibleValue) {
+                    if (isValidUuid(condition.visibleValue[index])) {
+                        condition.visibleValue[index] = `${poConfig.sfId}|${condition.visibleValue[index]}`;
+                        if (!poUuidMaps[condition.visibleValue[index]]) {poUuidMaps[condition.visibleValue[index]] = fnGenerateUuid();}
+                    }
+                }
+            }
+            else if (isValidUuid(condition.visibleValue)) {
+                condition.visibleValue = `${poConfig.sfId}|${condition.visibleValue}`;
+                if (!poUuidMaps[condition.visibleValue]) {poUuidMaps[condition.visibleValue] = fnGenerateUuid();}
+            }
+            break;
+    }
+} // #70 2.5. - End ( fnBuildCompositeIdForFomatterEngine_OldCondition )
+
 function fnBuildCompositeIdForFomatterEngine(element, poConfig, poUuidMaps) { // #48
     // Builds the sfId|elId uuid pair for all parameters
     if (element?.enableVisibleCond && Array.isArray(element.visibility) && element.visibility.length) {
         for (let condition of element.visibility) {
-            if (!isValidUuid(condition.visibleFieldName)) {continue;}
-            condition.visibleFieldName = `${poConfig.sfId}|${condition.visibleFieldName}`;
-            if (!poUuidMaps[condition.visibleFieldName]) {poUuidMaps[condition.visibleFieldName] = fnGenerateUuid();}
+            fnBuildCompositeIdForFomatterEngine_OldCondition(condition, element, poConfig, poUuidMaps) // #70 2.5.
         }
     }
+    else if (element?.enableVisibleCond && element.visibleFieldName) { // #70 2.5.
+        fnBuildCompositeIdForFomatterEngine_OldCondition(element, element, poConfig, poUuidMaps) // #70 2.5.
+    } // #70 2.5.
     if ((typeof element?.useFormatterConfig === "object") && (element?.useFormatterConfig !== null)) {
         const configNames = Object.getOwnPropertyNames(element?.useFormatterConfig);
         for (let property of configNames) {
@@ -184,14 +246,45 @@ function fnBuildCompositeIdForFomatterEngine(element, poConfig, poUuidMaps) { //
             fnBuildCompositeIdForFomatterEngine(childElement, poConfig, poUuidMaps));
     }
 }
+function fnApplyNewIdForFomatterEngine_OldCondition(condition, element, poConfig, poUuidMaps) { // #70 2.5. - Begin
+    if (!isValidUuid(condition.visibleFieldName)) {
+        condition.visibleFieldName = poUuidMaps[condition.visibleFieldName];
+    }
+    // Handles specific cases for different elements
+    const referredElement = fnGetElement(condition.visibleFieldName, poConfig);
+    let splitIds;
+    switch (referredElement?.type) {
+        case "CheckList": // #70 2.5.1.
+            if (Array.isArray(condition.visibleValue)) {
+                for (let index in condition.visibleValue) {
+                    splitIds = condition.visibleValue[index].split('|');
+                    if (isValidUuid(splitIds[0]) && isValidUuid(splitIds[0])) {
+                        condition.visibleValue[index] = poUuidMaps[condition.visibleValue[index]];
+                    }
+                }
+            }
+            else {
+                splitIds = condition.visibleValue.split('|');
+                if (isValidUuid(splitIds[0]) && isValidUuid(splitIds[0])) {
+                    condition.visibleValue = poUuidMaps[condition.visibleValue];
+                }
+            }
+            break;
+    }
+} // #70 2.5. - End ( fnApplyNewIdForFomatterEngine_OldCondition )
+
 function fnApplyNewIdForFomatterEngine(element, poConfig, poUuidMaps) { // #48
     // Applies the new Id connecte to the sfId|elId uuid pair that exists in all parameters
     if (element?.enableVisibleCond && Array.isArray(element.visibility) && element.visibility.length) {
         for (let condition of element.visibility) {
-            if (isValidUuid(condition.visibleFieldName)) {continue;}
-            condition.visibleFieldName = poUuidMaps[condition.visibleFieldName];
+            fnApplyNewIdForFomatterEngine_OldCondition(condition, element, poConfig, poUuidMaps); // #70 2.5.
         }
     }
+    else if (element?.enableVisibleCond && element.visibleFieldName) { // #70 2.5.
+        // The very first format of the conditional visibility only had one condition and its properties
+        // where at the element root level 
+        fnApplyNewIdForFomatterEngine_OldCondition(element, element, poUuidMaps); // #70 2.5.
+    } // #70 2.5.
     if ((typeof element?.useFormatterConfig === "object") && (element?.useFormatterConfig !== null)) {
         const configNames = Object.getOwnPropertyNames(element?.useFormatterConfig);
         for (let property of configNames) {
@@ -264,10 +357,32 @@ function fnTraverseArray(poArrayElements, poConfig, poCompoundedConfig, poUuidMa
     return loResult;
 };
 
+function fnApplyNewIdForSpecialFields(poElement, poUuidMaps) { // #70 2.5. - Begin
+    switch (poElement.type) {
+        case "AngleCalc": // #70 2.5.2.
+            if (poUuidMaps[poElement.inpCrossingDistance1Id]) {poElement.inpCrossingDistance1Id = poUuidMaps[poElement.inpCrossingDistance1Id];}
+            if (poUuidMaps[poElement.inpCrossingDistance2Id]) {poElement.inpCrossingDistance2Id = poUuidMaps[poElement.inpCrossingDistance2Id];}
+            if (poUuidMaps[poElement.inpPipelineDistanceId]) {poElement.inpPipelineDistanceId = poUuidMaps[poElement.inpPipelineDistanceId];}            
+            break;
+
+        case "CascSelect": // #70 2.5.3.
+            if (poUuidMaps[poElement.parentSelectId]) {poElement.parentSelectId = poUuidMaps[poElement.parentSelectId];} // #70 2.5.3.1.
+            
+            if (Array.isArray(poElement.outputItems) && poElement.outputItems.length) {
+                for (let outputItem of poElement.outputItems) {
+                    if (poUuidMaps[outputItem.id]) {outputItem.id = poUuidMaps[outputItem.id];}
+                }
+            }
+            break;
+    }
+} // #70 2.5. - End ( fnApplyNewIdForSpecialFields )
+
 function fnApplyNewUuid( poObject, poUuidMaps ) {
 	if (poUuidMaps[poObject.id]) { poObject.id = poUuidMaps[poObject.id]; }
     // handles id for conditional visibility
     if (poUuidMaps[poObject.visibleFieldName]) { poObject.visibleFieldName = poUuidMaps[poObject.visibleFieldName]; }
+
+    fnApplyNewIdForSpecialFields(poObject, poUuidMaps) // #70 2.5.
 
 	if (Array.isArray(poObject.elements) && poObject.elements.length) {
 		for (let loElement of poObject.elements) { fnApplyNewUuid( loElement, poUuidMaps ); }
@@ -279,6 +394,33 @@ function fnApplyNewUuid( poObject, poUuidMaps ) {
 
 function fnGenerateUuid() {return (typeof uuid !== "undefined") ? uuid() : crypto.randomUUID();}
 
+function fnBuildCompositeIdForSpecialFields(poElement, poConfig, poUuidMaps) { // #70 2.5. - Begin
+    switch (poElement.type) {
+        case "AngleCalc": // #70 2.5.2.
+            poElement.inpCrossingDistance1Id = `${poConfig.sfId}|${poElement.inpCrossingDistance1Id.toLocaleLowerCase()}`;
+            if (!poUuidMaps[poElement.inpCrossingDistance1Id]) {poUuidMaps[poElement.inpCrossingDistance1Id] = fnGenerateUuid();}
+            poElement.inpCrossingDistance2Id = `${poConfig.sfId}|${poElement.inpCrossingDistance2Id.toLocaleLowerCase()}`;
+            if (!poUuidMaps[poElement.inpCrossingDistance2Id]) {poUuidMaps[poElement.inpCrossingDistance2Id] = fnGenerateUuid();}
+            poElement.inpPipelineDistanceId = `${poConfig.sfId}|${poElement.inpPipelineDistanceId.toLocaleLowerCase()}`;
+            if (!poUuidMaps[poElement.inpPipelineDistanceId]) {poUuidMaps[poElement.inpPipelineDistanceId] = fnGenerateUuid();}
+            break;
+        case "CascSelect": // #70 2.5.3.
+            if (isValidUuid(poElement.parentSelectId)) { // #70 2.5.3.1.
+                poElement.parentSelectId = `${poConfig.sfId}|${poElement.parentSelectId.toLocaleLowerCase()}`; 
+                if (!poUuidMaps[poElement.parentSelectId]) {poUuidMaps[poElement.parentSelectId] = fnGenerateUuid();}
+            }
+            if (Array.isArray(poElement.outputItems) && poElement.outputItems.length) {
+                for (let outputItem of poElement.outputItems) {
+                    if (isValidUuid(outputItem.id)) {
+                        outputItem.id = `${poConfig.sfId}|${outputItem.id.toLocaleLowerCase()}`; 
+                        if (!poUuidMaps[outputItem.id]) {poUuidMaps[outputItem.id] = fnGenerateUuid();}
+                    }
+                }
+            }
+            break;
+    }
+} // #70 2.5. - End ( fnBuildCompositeIdForSpecialFields )
+
 function fnTraverseElement(poElement, poConfig, poUuidMaps, pvLevel) {
 	let lvTempId = `${poConfig.sfId}|${poElement.id.toLocaleLowerCase()}`; // Makes the temp ID as <sf uuid>|<el uuid>
     if (poConfig[poElement.id]) {poConfig[lvTempId] = poConfig[poElement.id];} // Makes sure that the config works with the temp ID
@@ -286,6 +428,7 @@ function fnTraverseElement(poElement, poConfig, poUuidMaps, pvLevel) {
     if (poConfig[poElement.id]?.overridesTitle) {poElement.title = poConfig[poElement.id].title};
 	if (!poUuidMaps[poElement.id]) {poUuidMaps[poElement.id] = fnGenerateUuid();}
     
+    fnBuildCompositeIdForSpecialFields(poElement, poConfig, poUuidMaps); // #70 2.5.
     fnBuildCompositeIdForFomatterEngine(poElement, poConfig, poUuidMaps); // #48 - handles formatter engine visibility - create composite id
     
     if (isValidUuid(poElement.visibleFieldName)) {

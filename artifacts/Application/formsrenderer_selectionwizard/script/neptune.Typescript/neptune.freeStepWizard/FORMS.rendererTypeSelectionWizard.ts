@@ -148,9 +148,11 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                     if (typeof config.setup == "object") {
                         for (const st of config.setup) {
                             if (st.title) {
-                                data.push({ key: st.key, section: st.title });
+                                data.push({ key: st.id, section: st.title }); // #70 1.5.8.
+                                // data.push({ key: st.key, section: st.title }); // #70 1.5.8.
                                 if (!i) {
-                                    selSections.setSelectedKey(st.key);
+                                    selSections.setSelectedKey(st.id); // #70 1.5.8.
+                                    // selSections.setSelectedKey(st.key); // #70 1.5.8.
                                     // @ts-ignore
                                     expandFormSection(st.title, true);
                                     // @ts-ignore
@@ -165,6 +167,7 @@ function subscribeFormsRenderer(FORMS: any, rendererInfo: object, onLoad: Functi
                     modelpnlNavigation.setData({
                         previousEnabled: false,
                         nextEnabled: config.setup.length > 1,
+                        selectedKey: selSections.getItems()[0].getKey(),
                     });
 
                     return data;

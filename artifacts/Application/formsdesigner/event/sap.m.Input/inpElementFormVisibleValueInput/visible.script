@@ -19,6 +19,8 @@ switch (object.type) {
     case "Numeric":
     case "Rating":
     case "StepInput":
+    case "Calc": // #70 - 2.2.
+    case "AngleCalc": // #70 - 2.2.
         switch(visibleCondition) {
             case FORMS.CONDITION_OPERATOR.BETWEEN.key:
             case FORMS.CONDITION_OPERATOR.NOT_BETWEEN.key:

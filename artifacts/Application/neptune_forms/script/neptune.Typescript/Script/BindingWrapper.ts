@@ -483,6 +483,32 @@ class BindingWrapper {
                 }
                 return result;
             },
+            // #70 2.4. - Begin
+            applyDefaultValuesToElements: function (setup, model) { 
+                const applyDefault = function(element) {
+                    if (element.noDefault) { return; }
+                    if (!["SegmentedButton", "SingleChoice", "SingleSelectIcon"].includes(element.type)) {
+                        return;
+                    }
+                    if (Array.isArray(element.items) && element.items.length) {
+                        const field = element.fieldName || element.id;
+                        model.getData()[field] = element.items[0].key;
+                    }
+                }
+                const traverseElements = function(node) {
+                    if (Array.isArray(node.elements) && node.elements.length) {
+                        for (let element of node.elements) {
+                            applyDefault(element);
+                            traverseElements(element);
+                        }
+                    }
+                }
+                for (let element of setup ?? []) {
+                    traverseElements(element);
+                }
+                model.refresh();
+            }
+            // #70 2.4. - End
         },
         Generator: {
             emptyFormatterConfig: (): TyFormatterConfiguration => {
@@ -589,6 +615,8 @@ class BindingWrapper {
                         case "Numeric":
                         case "Rating":
                         case "StepInput":
+                        case "Calc": // #70 - 2.2.
+                        case "AngleCalc": // #70 - 2.2.
                             // REVIEW: Re-test conditional visibility here
                             conditionValues = Array.isArray(condition.visibleValue) // #18 KM
                                 ? condition.visibleValue.map(value=>(!isNaN(Number.parseFloat(value))) && Number.parseFloat(value) || 0) 
@@ -920,9 +948,32 @@ class BindingWrapper {
                             return values;
                         case "File":
                             return conformToType(this.FORMS.getData().data?.[path], varType); // #57
+                        // #70 - 2.3. - Begin
                         case "DatePicker":
+                            const dpResult = conformToType(this.FORMS.getLocaleIsoString(this.model.getProperty(`/${path}`)), varType); // #57
+                            if (typeof dpResult === "string") { return dpResult.slice(0,10); }
+                            return dpResult;
                         case "DateTimePicker":
-                            return conformToType(this.FORMS.getLocaleIsoString(this.model.getProperty(`/${path}`)),varType); // #57
+                            const dtpResult = conformToType(this.FORMS.getLocaleIsoString(this.model.getProperty(`/${path}`)),varType); // #57
+                            if (typeof dtpResult !== "string") { return dtpResult; }
+                            const dtpElement = FORMS.getObjectFromId(uuid);
+                            const dtpDisplayFormat = dtpElement?.displayFormat ?? "dd.MM.yyyy HH:mm";
+                            const dtpTimeIndexOf = dtpDisplayFormat.indexOf("HH");
+                            const dtpTimeLength = (dtpTimeIndexOf < 0) ? 0 : dtpDisplayFormat.length - dtpTimeIndexOf;
+                            if (dtpTimeLength === 2) {
+                                // If the displayFormat only has HH, then the result only returns the hours
+                                return dtpResult.slice(0, -6);
+                            }
+                            else if (dtpTimeLength === 5) {
+                                // If the displayFormat has HH:mm, then the result only returns the hours and minutes
+                                return dtpResult.slice(0, -3);
+                            }
+                            // If the displayFormat has everything, then it returns the result
+                            return dtpResult;
+                        // case "DatePicker":
+                        // case "DateTimePicker":
+                        //     return conformToType(this.FORMS.getLocaleIsoString(this.model.getProperty(`/${path}`)),varType); // #57
+                        // #70 - 2.3. - End
                         default:
                             return conformToType(this.model.getProperty(`/${path}`),varType); // #57
                     }

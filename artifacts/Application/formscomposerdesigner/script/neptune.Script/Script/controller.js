@@ -1369,26 +1369,46 @@ const controller = {
                 focus: ()=>{}
             }; 
         }
-        let loCounterpartDOM = loCounterpart.getDomRef();
+        let loCounterpartData = { dom: loCounterpart.getDomRef() }; // #70 2.5.
+        const _fnIfDomExists = async function () { // #70 2.5. - Begin
+            // NOTE: at initialization it may be that the dom ref is not yet built
+            //       in such a case build it and save it on loCounterpartData
+            if (!loCounterpartData?.dom) { loCounterpartData.dom = loCounterpart.getDomRef(); }
+            return new Promise((ok, error) => loCounterpartData?.dom && (ok(loCounterpartData?.dom) || true) || error(null) );
+        } // #70 2.5. - End ( _fnIfDomExists )
+        // let loCounterpartDOM = loCounterpart.getDomRef(); // #70 2.5.
         return {
             self: loCounterpart,
             addStyleClass: (className) => {
                 loCounterpart.addStyleClass(className);
-                loCounterpartDOM.classList.add(className);
+                _fnIfDomExists().then(dom => dom.classList.add(className))// #70 2.5.
+                // loCounterpartDOM.classList.add(className); // #70 2.5.
                 return loCounterpart;
             },
             removeStyleClass: (className) => {
                 loCounterpart.removeStyleClass(className);
-                loCounterpartDOM.classList.remove(className);
+                _fnIfDomExists().then(dom => dom.classList.remove(className))// #70 2.5.
+                // loCounterpartDOM.classList.remove(className); // #70 2.5.
                 return loCounterpart;
             },
-            hasStyleClass: (className) => loCounterpartDOM.classList.contains(className),
+            hasStyleClass: (className) => { // #70 2.5. - Begin
+                // NOTE: can't use _fnIfDomExists because this function must return True/False/undefined
+                if (!loCounterpartData?.dom) { loCounterpartData.dom = loCounterpart.getDomRef(); } // #70 2.5.
+                if (loCounterpartData?.dom) { return loCounterpartDOM.classList.contains(className); }
+            }, // #70 2.5. - End ( hasStyleClass )
+            // hasStyleClass: (className) => loCounterpartDOM.classList.contains(className), // #70 2.5.
             toggleStyleClass: (className) => {
                 loCounterpart.toggleStyleClass(className);
-                loCounterpartDOM.classList.toggle(className);
+                _fnIfDomExists().then(dom => dom.classList.toggle(className))// #70 2.5.
+                // loCounterpartDOM.classList.toggle(className); // #70 2.5.
                 return loCounterpart;
             },
-            focus: () => loCounterpartDOM.focus()
+            focus: () => { // #70 2.5. - Begin
+                // NOTE: now return loCounterPart for consistency with add/remove/toggleStyleClass
+                _fnIfDomExists().then(dom => dom.focus());
+                return loCounterpart;
+            } // #70 2.5. - End ( focus )
+            // focus: () => loCounterpartDOM.focus() // #70 2.5.
         }
     },
     setSelectedItemSingleForm: function( ui5Item, ignoreWrapper = false ) {

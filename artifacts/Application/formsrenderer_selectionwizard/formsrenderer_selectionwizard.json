@@ -217,6 +217,13 @@
 													"value": "sapUiSmallMarginBeginEnd",
 													"script": "",
 													"translation": []
+												},
+												{
+													"attribute": "selectedKey",
+													"grouping": "Properties",
+													"value": "{/selectedKey}",
+													"script": "",
+													"translation": []
 												}
 											],
 											"data": [
@@ -446,7 +453,7 @@
 		}
 	],
 	"componentInterface": [],
-	"ver": "25.07.28.1515",
+	"ver": "25.09.30.0909",
 	"application": "formsrenderer_selectionwizard",
 	"title": "",
 	"description": "",

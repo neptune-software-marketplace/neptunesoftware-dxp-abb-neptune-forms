@@ -87,8 +87,24 @@ namespace FORMS {
 
     export function getView(): sap.ui.core.mvc.View {
         // WISH: check if there is another way to obtain the view, without using sap.n.currentView.
+        let viewFound: sap.ui.core.mvc.View;
+        if (typeof FORMS?.customerParent?.sId === "string") {
+            const RegexViewId = /(.*)--((?:.(?!--))*)$/;
+            const matchedData = FORMS.customerParent.sId.match(RegexViewId);
+            if (matchedData[1]) {
+                // @ts-ignore
+                viewFound = sap.ui.getCore().byId(matchedData[1]);
+            }
+        }
         // @ts-ignore
-        return sap.n.currentView;
+        if (!viewFound) { viewFound = sap.n.currentView; }
+        if (!viewFound) {
+            // Creates a bogus view. When creating ids it uses the view's CreateId method
+            // @ts-ignore
+            viewFound = new sap.ui.core.mvc.View();
+            viewFound.setViewName("NEPTUNE_FORMS");
+        }
+        return viewFound;
     }
 
     export function initAppControl () {
@@ -140,6 +156,8 @@ namespace FORMS {
                 case "Numeric": // #18 KM
                 case "Rating": // #18 KM
                 case "StepInput": // #18 KM
+                case "Calc": // #70 - 2.2.
+                case "AngleCalc": // #70 - 2.2.
                     if ([ // #18 KM
                         FORMS.CONDITION_OPERATOR.BETWEEN.key,  // #18 KM
                         FORMS.CONDITION_OPERATOR.NOT_BETWEEN.key].includes(visibility.visibleCondition)) { // #18 KM
@@ -182,6 +200,8 @@ namespace FORMS {
         let formOptions;
         let formId;
 
+        FORMS.customerParent = parent; // #70 1.5.6.
+
         FORMS.initAppControl();
         FORMS.initAdvanceFormatterConfig(options);
         FORMS.revalidate = false;
@@ -200,7 +220,7 @@ namespace FORMS {
             return;
         }
 
-        FORMS.customerParent = parent;
+        // FORMS.customerParent = parent; // #70 1.5.6.
 
         // Renderer Framework - {
         // Loops through all renderers and clears all styles
@@ -323,6 +343,7 @@ namespace FORMS {
         elementsConfig.forEach(elementConfig => 
             FORMS.bindingWrapper.Advanced.Form.createBindingFor(elementConfig, "visible", DO_NOT_INCLUDE_DISABLED, INCLUDE_NOCODE));
         FORMS.bindingWrapper.Advanced.Form.createWatchdogs(DO_NOT_INCLUDE_DISABLED, INCLUDE_NOCODE);
+        FORMS.bindingWrapper.Advanced.Configuration.applyDefaultValuesToElements(FORMS.config.setup, formModel); // #70 2.4.
 
         // Renderer Framework - {
         let repository = FORMS.Renderer.getRepository(FORMS.Renderer.selected());
@@ -475,7 +496,10 @@ namespace FORMS {
         if (sort && sortField) {
             // KW addition (Sort numerically, not only alphabetically) // 23.05.2024
             let iSect          = section.elements.findIndex(e => e.fieldName && e.fieldName == sortField);
-            let numericSorting = iSect >= 0 && section.elements[iSect].type == "Numeric";
+            // #70 - 2.2. - Begin
+            let numericSorting = (iSect >= 0) && ["Numeric","Calc","AngleCalc"].includes(section.elements[iSect].type);
+            // let numericSorting = iSect >= 0 && section.elements[iSect].type == "Numeric";
+            // #70 - 2.2. - End
             filterData = FORMS.sortArray(filterData, sortField, numericSorting, FORMS.paginationSetup[section.id].sortOrder);
         }
 
@@ -1474,7 +1498,10 @@ namespace FORMS {
     export function handleColumnSorting (table, bindingField, sortModelOrder, type?) {
 		// REVIEW: code in KM's counterpart, in case the column sort malfunctions
         const model = table.getModel();
-        model.oData = FORMS.sortArray(model.oData, bindingField, type && type == "Numeric", sortModelOrder ? "Descending" : "Ascending");
+        // #70 - 2.2. - Begin
+        model.oData = FORMS.sortArray(model.oData, bindingField, type && ["Numeric", "Calc", "AngleCalc"].includes(type), sortModelOrder ? "Descending" : "Ascending");
+        // model.oData = FORMS.sortArray(model.oData, bindingField, type && type == "Numeric", sortModelOrder ? "Descending" : "Ascending");
+        // #70 - 2.2. - End
         FORMS.tableAddRowNumber(model.oData);
         model.refresh();
     }
@@ -2414,18 +2441,27 @@ namespace FORMS {
 
                 if (posC === -1) {
                     //No commas found, treat as float
-                    resNum = Number.parseFloat(parseFloat(float)).toFixed(decimals); // #18 KM
+                    // #70 - 1.5.4. - Begin
+                    resNum = isNaN(float) ? Number(0).toFixed(decimals) : Number.parseFloat(float).toFixed(decimals);
+                    // resNum = Number.parseFloat(parseFloat(float)).toFixed(decimals); // #18 KM
+                    // #70 - 1.5.4. - End
                 } else {
                     //Index of first full stop
                     const posFS = float.indexOf(".");
 
                     if (posFS === -1) {
                         //Uses commas and not full stops - swap them (e.g. 1,23 --> 1.23)
-                        resNum = Number.parseFloat(parseFloat(float.replace(/\,/g, "."))).toFixed(decimals); // #18 KM
+                        // #70 - 1.5.4. - Begin
+                        resNum = Number.parseFloat(parseFloat(float.replace(/\,/g, "."), decimals)).toFixed(decimals); // #18 KM
+                        // resNum = Number.parseFloat(parseFloat(float.replace(/\,/g, "."))).toFixed(decimals); // #18 KM
+                        // #70 - 1.5.4. - End
                     } else {
                         //Uses both commas and full stops - ensure correct order and remove 1000s separators
                         // @ts-ignore (ADD #1)
-                        resNum = (posC < posFS ? parseFloat(float.replace(/\,/g, "")).toFixed(decimals) : parseFloat(float.replace(/\./g, "").replace(",", "."))).toFixed(decimals);
+                        // #70 - 1.5.4. - Begin
+                        resNum = Number.parseFloat(posC < posFS ? parseFloat(float.replace(/\,/g, ""), decimals).toFixed(decimals) : parseFloat(float.replace(/\./g, "").replace(",", "."), decimals)).toFixed(decimals);
+                        // resNum = (posC < posFS ? parseFloat(float.replace(/\,/g, "")).toFixed(decimals) : parseFloat(float.replace(/\./g, "").replace(",", "."))).toFixed(decimals);
+                        // #70 - 1.5.4. - End
                     }
                 }
             }
@@ -3774,7 +3810,42 @@ namespace FORMS {
         return FORMS.validate("OnlyCheck");
     }
 
-    export function getData (complete?, isDesigner?, bUploadFiles?) {
+    // #70 1.5.7. - Begin
+    // export function getData (complete?, isDesigner?, bUploadFiles?) {
+    export function getData () {
+        //
+        // This new form allows us to call getData both through separate parameters or a bundle of options
+        // The bundle of options is preferrable as we can specify only the ones we want, and make it more readable
+        // {
+        //     // It seems to be used to manage required fields. 
+        //     // For example 'OnlyCheck' will declare a required field as invalid when getData is called
+        //     complete: true | '' | 'Reset' | 'OnlyCheck',
+        //
+        //     // If it is called from the designer then session logs are not written
+        //     isDesigner: true | false
+        //
+        //     // It seems to check if the files are to be uploaded (Viking's mechanic?)
+        //     bUploadFiles: true | false,
+        //
+        //     // Controls which data is returned.
+        //     // isDataToSave = false => all data is returned including the data from invisible fields
+        //     //                         this is important during usage. The data someone filled in before hiding a field
+        //     //                         should still be there while the session is ongoing
+        //     // isDataToSave = true => data from hidden fields is removed from the outpur
+        //     isDataToSave: true | false
+        // }
+        let complete, isDesigner, bUploadFiles, isDataToSave;
+        const args = Array.from(arguments);
+        if (typeof args[0] === "object") {
+            complete = args[0]?.complete;
+            isDesigner = args[0]?.isDesigner;
+            bUploadFiles = args[0]?.bUploadFiles;
+            isDataToSave = args[0]?.isDataToSave;
+        }
+        else {
+            [complete, isDesigner, bUploadFiles, isDataToSave] = args;
+        }
+    // #70 1.5.7. - End
         if (!FORMS.formParent) return null;
         const formModel = FORMS.formParent.getModel();
         const outputData = {};
@@ -3787,40 +3858,42 @@ namespace FORMS {
         if (complete && valid) completed = true;
 
         const getElementData = function (element) {
-            switch (element.type) {
-                case "Signature":
-                    if (FORMS.signatures[element.id]) {
-                        outputData[element.id] = FORMS.signatures[element.id].toDataURL();
-                    }
-                    break;
-
-                case "CheckList":
-                    if (element.fieldName) { // #57 #58
-                        outputData[element.fieldName] = formModel.getData()[element.fieldName]; // #57 #58
-                    } // #57 #58
-                    else { // #57 #58
-                        element.items.forEach(function (item) {
-                            if (formModel.oData[item.id]) {                    
-                                outputData[item.id] = formModel.oData[item.id];
-                            }                                                  
-                        });
-                    } // #57 #58
-                    break;
-
-                default:
-                    // KW addition (bug when checking getMonth in object -> null is also an object though..) // 13.05.2024
-                    if (element.fieldName && formModel.oData[element.fieldName]) {
-                        if (typeof formModel.oData[element.fieldName] == "object" && typeof formModel.oData[element.fieldName].getMonth == "function") {
-                            outputData[element.fieldName] = formModel.oData[element.fieldName].toString();
-                        // KW addition (post false boolean values) // 13.11.2023
-                        } else if (typeof formModel.oData[element.fieldName] == "boolean" || formModel.oData[element.fieldName]) {
-                            outputData[element.fieldName] = formModel.oData[element.fieldName];
+            if ((!isDataToSave) || FORMS.isElementVisible(element, FORMS.config.setup, formModel.getData())) { // #70 1.5.7.
+                switch (element.type) {
+                    case "Signature":
+                        if (FORMS.signatures[element.id]) {
+                            outputData[element.id] = FORMS.signatures[element.id].toDataURL();
                         }
-                    } else {
-                        if (formModel.oData[element.id]) outputData[element.id] = formModel.oData[element.id];
-                    }
-                    break;
-            }
+                        break;
+
+                    case "CheckList":
+                        if (element.fieldName) { // #57 #58
+                            outputData[element.fieldName] = formModel.getData()[element.fieldName]; // #57 #58
+                        } // #57 #58
+                        else { // #57 #58
+                            element.items.forEach(function (item) {
+                                if (formModel.oData[item.id]) {                    
+                                    outputData[item.id] = formModel.oData[item.id];
+                                }                                                  
+                            });
+                        } // #57 #58
+                        break;
+
+                    default:
+                        // KW addition (bug when checking getMonth in object -> null is also an object though..) // 13.05.2024
+                        if (element.fieldName && formModel.oData[element.fieldName]) {
+                            if (typeof formModel.oData[element.fieldName] == "object" && typeof formModel.oData[element.fieldName].getMonth == "function") {
+                                outputData[element.fieldName] = formModel.oData[element.fieldName].toString();
+                            // KW addition (post false boolean values) // 13.11.2023
+                            } else if (typeof formModel.oData[element.fieldName] == "boolean" || formModel.oData[element.fieldName]) {
+                                outputData[element.fieldName] = formModel.oData[element.fieldName];
+                            }
+                        } else {
+                            if (formModel.oData[element.id]) outputData[element.id] = formModel.oData[element.id];
+                        }
+                        break;
+                }
+            } // #70 1.5.7.
         };
 
         FORMS.config.setup.forEach(function (section) {
@@ -4724,45 +4797,78 @@ namespace FORMS {
     } // #18 KM - end of parseFloat
 
     export function getLocaleIsoString (input:string|Date|number) {
-        // @ts-ignore
-        if ((typeof input === "string") || (input instanceof Date) || !isNaN(Number.parseInt(input))) {
-            try {
-                const dateObj = (input instanceof Date) ? input : new Date(input);
-                const C_REGEX = /(\d+)\/(\d+)\/(\d+),\s*(\d+)\:(\d+)\:(\d+)[^P]*(PM)?/;
-                const match = C_REGEX.exec(dateObj.toLocaleString("iso"));
-                if (!match) {return;}
-                if (match[7] === "PM") {
-                    if (match[4] === "12") {
-                        const nextDay = new Date(dateObj.getTime()+1000*60*60*24);
-                        const nextStr = nextDay.toISOString();
-                        match[3] = nextStr.slice(0,4);
-                        match[1] = nextStr.slice(5,7);
-                        match[2] = nextStr.slice(8,10);
-                        match[4] = "00";
-                    }
-                    else {
-                        match[4] = `${Number.parseInt(match[4]) + 12}`;
-                    }
-                }
-                else {
-                    if (match[4] === "12") {
-                        match[4] = "00";
-                    }
-                    else {
-                        match[4] = `0${match[4]}`.slice(-2);                   
-                    }
-                }
-                return  `${match[3]}-` + // year
-                        `0${match[1]}-`.slice(-3) + // month
-                        `0${match[2]}`.slice(-2) + // day
-                        ` ${match[4]}:` + //hour
-                        `0${match[5]}:`.slice(-3) + // minutes
-                        `0${match[6]}`.slice(-2) // seconds
-            }
-            catch(e) {
-            }
+        // #70 - 2.3. - Begin
+        let localDate: Date;
+        if (input instanceof Date) {
+            localDate = input;
         }
-        return;
+        else if ((typeof input === "string") && (input.length === 10)) {
+            // it is a string with just the date on it
+            localDate = new Date(`${input} 00:00:00`);
+        }
+        else {
+            // any other input variations
+            localDate = new Date(input);
+        }
+
+        if (isNaN(localDate.getTime())) {
+            // Invalid date
+            return;
+        }
+
+        const optionsDate = {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false };
+        // @ts-ignore
+        const localeDate = localDate.toLocaleString("pt", optionsDate);
+        const [matchInput, day, month, year] = localeDate.slice(0,10).match(/(\d*).(\d*).(\d*)/);
+
+        return `${year}-${month}-${day} ${localeDate.slice(-8)}`;
+        // // @ts-ignore
+        // if ((typeof input === "string") || (input instanceof Date) || !isNaN(Number.parseInt(input))) {
+        //     try {
+        //         const dateObj = (input instanceof Date) ? input : new Date(input);
+        //         const C_REGEX = /(\d+)\/(\d+)\/(\d+),\s*(\d+)\:(\d+)\:(\d+)[^P]*(PM)?/;
+        //         const match = C_REGEX.exec(dateObj.toLocaleString("iso"));
+        //         if (!match) {return;}
+        //         if (match[7] === "PM") {
+        //             if (match[4] === "12") {
+        //                 const nextDay = new Date(dateObj.getTime()+1000*60*60*24);
+        //                 const nextStr = nextDay.toISOString();
+        //                 match[3] = nextStr.slice(0,4);
+        //                 match[1] = nextStr.slice(5,7);
+        //                 match[2] = nextStr.slice(8,10);
+        //                 match[4] = "00";
+        //             }
+        //             else {
+        //                 match[4] = `${Number.parseInt(match[4]) + 12}`;
+        //             }
+        //         }
+        //         else {
+        //             if (match[4] === "12") {
+        //                 match[4] = "00";
+        //             }
+        //             else {
+        //                 match[4] = `0${match[4]}`.slice(-2);                   
+        //             }
+        //         }
+        //         return  `${match[3]}-` + // year
+        //                 `0${match[1]}-`.slice(-3) + // month
+        //                 `0${match[2]}`.slice(-2) + // day
+        //                 ` ${match[4]}:` + //hour
+        //                 `0${match[5]}:`.slice(-3) + // minutes
+        //                 `0${match[6]}`.slice(-2) // seconds
+        //     }
+        //     catch(e) {
+        //     }
+        // }
+        // return;
+        // #70 - 2.3. - End
     };
 
     export function validateSection (section, process) { // #18 KM - begin of validateSection
