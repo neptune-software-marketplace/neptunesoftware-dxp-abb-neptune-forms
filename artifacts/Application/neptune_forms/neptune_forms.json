@@ -95,6 +95,18 @@
 			"fieldNo": 99999,
 			"data": [
 				{
+					"fieldNo": "dfb906bd-a988-436c-e7f4-3f4e55502364",
+					"fieldName": "GlobalFunctions",
+					"fieldParent": 99999,
+					"fieldType": "neptune.Script",
+					"script": "",
+					"customComponent": false,
+					"request": [],
+					"response": [],
+					"attributes": [],
+					"data": []
+				},
+				{
 					"fieldNo": "0643e48c-6697-48f6-fba0-759284a3178e",
 					"fieldName": "DeclareForms",
 					"fieldParent": 99999,
@@ -795,7 +807,7 @@
 			"sap.m.Panel"
 		]
 	},
-	"ver": "25.09.30.2155",
+	"ver": "25.12.12.1529",
 	"application": "neptune_forms",
 	"title": "Neptune FORMS",
 	"description": "Neptune FORMS",

@@ -37,6 +37,7 @@ namespace FORMS {
         revalidate = false,
         bindingWrapper,
         duplicateGroups, // #54
+        mapDuplicateGroupCss: Map<any, Array<any>> = null, // #71
         elementTypes = [
             { icon: "sap-icon://form",                    text: "Form",               type: "Form",             parent: true,  table: false, parameter: false, paramType: '', descripton: "Present the data in Form layout" },
             { icon: "sap-icon://table-view",              text: "Table",              type: "Table",            parent: true,  table: false, parameter: false, paramType: '', descripton: "Present the data in Table layout" },
@@ -189,6 +190,7 @@ namespace FORMS {
                 if (Array.isArray(node.elements)) {traverseNodes(node.elements);}
             }
         };
+        FORMS.mapDuplicateGroupCss = new Map(); // #71
         if (Array.isArray(options?.config?.setup)) {
             traverseNodes(options.config.setup);
             FORMS.applyBackwardCompatibility(options.config.setup);
@@ -730,16 +732,19 @@ namespace FORMS {
             if (element.id === sameGroupElements[0].id) {
                 if (elementVisibleBinding) {
                     // At least the first element has conditional visibility. Set it up
-                    sameGroupElements[0].duplicateGroupCss = [];
+                    FORMS.mapDuplicateGroupCss.set(sameGroupElements[0], []); // #71
+                    // sameGroupElements[0].duplicateGroupCss = []; // #71
                 }
                 else {
                     // The first element is always visible - DO NOT rearrange CSS - there is no need
-                    delete sameGroupElements[0].duplicateGroupCss;
+                    FORMS.mapDuplicateGroupCss.delete(sameGroupElements[0]); // #71
+                    // delete sameGroupElements[0].duplicateGroupCss; // #71
                 }
             }
             if (Array.isArray(sameGroupElements[0].duplicateGroupCss)) {
                 // it's in a duplicate group and it has conditional visibility - Must rearrange CSS classes if top is invisible
-                sameGroupElements[0].duplicateGroupCss.push({id:element.id, label: elementLabel, box:elementParent});
+                FORMS.mapDuplicateGroupCss.get(sameGroupElements[0]).push({ id: element.id, label: elementLabel, box: elementParent }); // #71
+                // sameGroupElements[0].duplicateGroupCss.push({id:element.id, label: elementLabel, box:elementParent}); // #71
                 if (elementVisibleBinding) {
                     elementParent.bindProperty("visible", {
                         parts: [elementVisibleBinding.slice(1,-1)], // .slice(1,-1) => removes "{" and "}"
@@ -748,7 +753,8 @@ namespace FORMS {
                             const visibleElements = sameGroupElements.filter(elInGroup => 
                                 FORMS.bindingWrapper.model.getProperty(
                                     (getElementVisibleBinding(elInGroup)??"").slice(1,-1)) !== false);
-                            const groupCss = sameGroupElements[0].duplicateGroupCss;
+                            const groupCss = FORMS.mapDuplicateGroupCss.get(sameGroupElements[0]); // #71
+                            // const groupCss = sameGroupElements[0].duplicateGroupCss; // #71
                             if (visibleElements.length) {
                                 let topElement = groupCss.find(elInGroup => elInGroup.id === visibleElements[0].id);
                                 if (!topElement) {return isVisible;} // should not happen
@@ -4337,22 +4343,9 @@ namespace FORMS {
         }
     }
 
-    export function getElementFromId (id) {
-        let elementFound = null;
-
-        FORMS.config.setup.forEach(function (section) {
-            if (section.id === id) elementFound = section;
-            section.elements.forEach(function (element) {
-                if (element.id === id) elementFound = element;
-                if (element.elements) {
-                    element.elements.forEach(function (subElement) {
-                        if (subElement.id === id) elementFound = subElement;
-                    });
-                }
-            });
-        });
-
-        return elementFound;
+    export function getElementFromId (id) { 
+        const usedSetup = FORMS.config.setup; // PRR - #72/#73
+        return FORMS.traverseElementsAndFind(usedSetup, element => element.id === id); // PRR - #72/#73
     }
 
     export function getDuplicateParentFromId (id, data) {
@@ -4502,77 +4495,40 @@ namespace FORMS {
         return visible;
     }
 
+    export function traverseElementsAndFind ( elements, findPredicate ) { // PRR - #72/#73 (whole function traverseElementsAndFind)
+        if (!(Array.isArray(elements) && elements)) {
+            return null;
+        }
+        for( let element of elements ) {
+            if (findPredicate(element)) {
+                return element;
+            }
+            const foundInChildren = traverseElementsAndFind( element?.elements, findPredicate );
+            if (foundInChildren) {
+                return foundInChildren
+            };
+        }
+        return null;
+    }
     // KW new Function to get an Object by the field-name or ID // 10.07.2024
     export function getObjectFromFieldNameOrID (fieldNameOrID, setup, data) {
-        let elementData = null;
-        
-        if (setup && Symbol.iterator in Object(setup)) {
-            setup.forEach(function (section, i) {
-                if ((section.fieldName && section.fieldName === fieldNameOrID) || section.id === fieldNameOrID)
-                    elementData = section;
-
-                section.elements.forEach(function (element, i) {
-                    if ((element.fieldName && element.fieldName === fieldNameOrID) || element.id === fieldNameOrID)
-                        elementData = element;
-
-                    if (element.elements) {
-                        element.elements.forEach(function (element, i) {
-                            if ((element.fieldName && element.fieldName === fieldNameOrID) || element.id === fieldNameOrID)
-                                elementData = element;
-                        });
-                    }
-                });
-            });
-        }
+        const usedSetup = FORMS.config.setup; // PRR - #72/#73
+        const elementData = FORMS.traverseElementsAndFind(usedSetup, element => element.fieldName === fieldNameOrID || element.id === fieldNameOrID); // PRR - #72/#73
         if (elementData && elementData.visibleValue) {
             elementData.isVisible = FORMS.isElementVisible(/*elementData.visibleFieldName,*/ elementData, setup, data);
         }
-
         return elementData;
     }
 
     // KW new Function to get an Object by the field-name // 11.03.2024
     export function getObjectFromFieldName (fieldName, setup) {
-        let elementData = null;
-        
-        if (setup && Symbol.iterator in Object(setup)) {
-            setup.forEach(function (section, i) {
-                if (section.fieldName === fieldName) elementData = section;
-
-                section.elements.forEach(function (element, i) {
-                    if (element.fieldName === fieldName) elementData = element;
-
-                    if (element.elements) {
-                        element.elements.forEach(function (element, i) {
-                            if (element.fieldName === fieldName) elementData = element;
-                        });
-                    }
-                });
-            });
-        }
-
-        return elementData;
+        const usedSetup = setup || FORMS.config.setup; // PRR - #72/#73
+        return FORMS.traverseElementsAndFind(usedSetup, element => element.fieldName === fieldName); // PRR - #72/#73
     }
 
     export function getObjectFromId (id, setup?) {
-        let elementData = null;
-
-        const usedSetup = (setup) ? setup : FORMS.config.setup;
-        usedSetup.forEach(function (section, i) {
-            if (section.id === id) elementData = section;
-
-            section.elements.forEach(function (element, i) {
-                if (element.id === id) elementData = element;
-
-                if (element.elements) {
-                    element.elements.forEach(function (element, i) {
-                        if (element.id === id) elementData = element;
-                    });
-                }
-            });
-        });
-
-        return elementData;
+        const usedSetup = setup || FORMS.config.setup; // PRR - #72/#73
+        return FORMS.traverseElementsAndFind(usedSetup, element => element.id === id); // PRR - #72/#73
     }
 
     export function openFile (blobUrl) {
