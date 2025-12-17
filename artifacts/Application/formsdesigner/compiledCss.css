@@ -81,16 +81,31 @@
   margin-right: auto;
 }
 
+/* 74 */
+.formPreviewMobile > [id$=content] {
+  height: 100%;
+}
+
 .formPreviewTablet {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
 
+/* 74 */
+.formPreviewTablet > [id$=content] {
+  height: 100%;
+}
+
 .formPreviewDesktop {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* 74 */
+.formPreviewDesktop > [id$=content] {
+  height: 100%;
 }
 
 .scrollPreviewFull .sapMScrollContScroll {
