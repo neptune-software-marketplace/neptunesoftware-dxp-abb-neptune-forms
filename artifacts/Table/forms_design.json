@@ -36,6 +36,22 @@
 			"isNullable": true
 		},
 		{
+			"id": "e3cde399-0bd1-475d-f679-ee957650c67f",
+			"fieldName": "savedata",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Enable Reporting",
+			"isNullable": true
+		},
+		{
+			"id": "27ada6cb-8c17-4a46-9c2d-22fd9aaf6cdc",
+			"fieldName": "enablesession",
+			"fieldType": "boolean",
+			"isUnique": false,
+			"description": "Show Log per Session",
+			"isNullable": true
+		},
+		{
 			"id": "bc67111e-a433-4a57-eee9-22e18b7263d1",
 			"fieldName": "groupid",
 			"fieldType": "smalltext",
@@ -52,14 +68,6 @@
 			"description": "Classification Sub Group"
 		},
 		{
-			"id": "e3cde399-0bd1-475d-f679-ee957650c67f",
-			"fieldName": "savedata",
-			"fieldType": "boolean",
-			"isUnique": false,
-			"description": "Enable Reporting",
-			"isNullable": true
-		},
-		{
 			"id": "274393da-7bfb-41a4-ed1e-92a383754a21",
 			"fieldName": "roles",
 			"fieldType": "json",
@@ -72,7 +80,7 @@
 	"foreignKeys": [],
 	"name": "forms_design",
 	"description": "FORMS: Design",
-	"ver": "25.04.15.1702",
+	"ver": "25.12.17.1446",
 	"enableAudit": true,
 	"includeDataInPackage": false,
 	"package": "a313322e-f024-45f1-960f-b90081757b85",

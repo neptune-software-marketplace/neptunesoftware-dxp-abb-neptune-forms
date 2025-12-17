@@ -229,21 +229,21 @@ namespace FORMS {
         // This prevents lingering CSS while switching between renderers
         FORMS.Renderer.clearAllStyles(FORMS.customerParent);
         // Determines which renderer to use
-        FORMS.Renderer.determineRenderer(formOptions);
+        // FORMS.Renderer.determineRenderer(formOptions); // #77 // being called below before each buildForm
         // Renderer Framework - }
 
-        if (!formOptions.config) {
+        if (!formOptions?.config) {
             var actions = [];
             actions.push(FORMS.apiGetForm(formId));
 
             Promise.all(actions).then(function (values) {
                 formOptions.config = values[0];
+                FORMS.Renderer.determineRenderer(formOptions); // #77
                 FORMS.buildForm(parent, formOptions);
-                FORMS.Renderer.determineRenderer(formOptions);
             });
         } else {
+            FORMS.Renderer.determineRenderer(formOptions); // #77
             FORMS.buildForm(parent, formOptions);
-            FORMS.Renderer.determineRenderer(formOptions);
         }
     }
 
