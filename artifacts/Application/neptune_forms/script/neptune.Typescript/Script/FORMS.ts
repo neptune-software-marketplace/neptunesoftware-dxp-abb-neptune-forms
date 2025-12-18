@@ -836,7 +836,7 @@ namespace FORMS {
                 ? "{appControl>/formControl/formEditable}"
                 : `{= !!(\${appControl>/formControl/formEditable} && (false${sameGroupElements.reduce((text, elInGroup) => {
                     const visibleBindingPath = getElementVisibleBinding(elInGroup);
-                    if (visibleBindingPath) { text += ` || \$${visibleBindingPath}`}
+                    if (visibleBindingPath) { text += ` || \$${visibleBindingPath} !== false`} // #75
                     return text;
                 }, "")})) }`;
             // @ts-ignore
